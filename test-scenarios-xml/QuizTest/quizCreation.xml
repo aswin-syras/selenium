@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Suite">
+  <test name="CreateQuizTest">
+  	<classes>
+      <class name="com.yuja.evp.testclasses.QuizTest">
+	      <methods>
+	          <include name="Create_quiz_test">
+			      <!-- <parameter name="Browser" value="IE" /> -->
+			      <parameter name="TestName" value="CreateQuizTest" />
+			  </include> 
+	        </methods>
+        </class>
+    </classes>
+  </test>
+ 
+</suite> <!-- Suite -->

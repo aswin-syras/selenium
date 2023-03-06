@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Suite">
+  <parameter name="TestName" value="TestValue" />
+  <test name="Create_new_folder_test">
+  	<classes>
+  		
+      	<class name="com.yuja.evp.testclasses.AdminPanelPlatformTest">
+	      	<methods>
+	      		<include name="Add_and_delete_string_metadata_test" />
+	      		<include name="Add_and_delete_list_metadata_test" />
+	      		<include name="Add_and_delete_date_metadata_test" />
+	      		<include name="Add_and_delete_time_metadata_test" />
+	      		
+	      		<include name="Add_and_delete_required_string_metadata_test" />
+	      		<include name="Add_and_delete_required_list_metadata_test" />
+	      		<include name="Add_and_delete_required_date_metadata_test" />
+	      		<include name="Add_and_delete_required_time_metadata_test" />		
+	       	</methods>
+        </class>
+        
+    </classes>
+  </test>
+</suite> <!-- Suite -->

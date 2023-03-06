@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Suite">
+  <test name="Create_and_delete_student_User_test">
+  	<classes>
+      <class name="com.yuja.evp.testclasses.AdminPanelRosterTest">
+	      <methods>
+	          <include name="Create_and_delete_student_User_test">
+			      <!-- <parameter name="Browser" value="IE" /> -->
+			      <parameter name="TestName" value="Create_and_delete_student_User_test" />
+			  </include> 
+	        </methods>
+        </class>
+    </classes>
+  </test>
+ 
+</suite> <!-- Suite -->

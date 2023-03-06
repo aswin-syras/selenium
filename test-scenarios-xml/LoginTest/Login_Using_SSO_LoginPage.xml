@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Suite">
+  <test name="Login_Using_SSO_LoginPage">
+  	<classes>
+      <class name="com.yuja.evp.testclasses.GeneralPlatformTest">
+	      <methods>
+	          <include name="Login_Using_SSO_LoginPage">
+			      <!-- <parameter name="Browser" value="IE" /> -->
+			      <parameter name="TestName" value="Login_Using_SSO_LoginPage" />
+			  </include> 
+	        </methods>
+        </class>
+    </classes>
+  </test>
+ 
+</suite> <!-- Suite -->

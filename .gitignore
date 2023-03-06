@@ -1,0 +1,7 @@
+/target/
+/reports/
+/test-output/
+*.MF
+*.html
+target/classes/META-INF/maven/com.yuja/evp-automated-test/pom.properties
+target/classes/META-INF/maven/com.yuja/evp-automated-test/pom.xml

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Suite">
+<<<<<<<< HEAD:test-scenarios-xml/AdminPanelRosterTest/AddStudentToCourse.xml
+  <test name="AddStudentToCourse">
+  	<classes>
+      <class name="com.yuja.evp.testclasses.AdminPanelRosterTest">
+	      <methods>
+	          <include name="AddStudentToCourse">
+			      <!-- <parameter name="Browser" value="IE" /> -->
+			      <parameter name="TestName" value="AddStudentToCourse" />
+========
+  <test name="Act_as_student_test">
+  	<classes>
+      <class name="com.yuja.evp.testclasses.AdminPanelRosterTest">
+	      <methods>
+	          <include name="Act_as_student_test">
+			      <!-- <parameter name="Browser" value="IE" /> -->
+			      <parameter name="TestName" value="Act_as_student_test" />
+>>>>>>>> main:test-scenarios-xml/AdminPanelRosterTest/Act_as_student_test.xml
+			  </include> 
+	        </methods>
+        </class>
+    </classes>
+  </test>
+ 
+</suite> <!-- Suite -->

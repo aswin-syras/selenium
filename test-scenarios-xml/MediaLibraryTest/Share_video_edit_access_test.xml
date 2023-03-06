@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Suite">
+<parameter name="TestName" value="valueName" />
+  <test name="Share_video_edit_access_manager_test">
+  	<classes>
+      <class name="com.yuja.evp.testclasses.MediaLibraryTest">
+	      <methods>
+	          <include name="Share_video_edit_access_manager_test" />
+	        </methods>
+        </class>
+    </classes>
+  </test>
+ 
+</suite> <!-- Suite -->

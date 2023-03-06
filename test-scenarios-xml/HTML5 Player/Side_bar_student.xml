@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Suite">
+  <test name="Side_bar_student">
+  	<classes>
+      <class name="com.yuja.evp.testclasses.HTML5PlayerTest">
+	      <methods>
+	          <include name="Side_bar_student">
+			      <!-- <parameter name="Browser" value="IE" /> -->
+			      <parameter name="TestName" value="Side_bar_student" />
+			  </include> 
+	        </methods>
+        </class>
+    </classes>
+  </test>
+ 
+</suite> <!-- Suite -->

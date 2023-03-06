@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Suite">
+  <parameter name="TestName" value="TestValue" />
+  <test name="Create_new_folder_test">
+  	<classes>
+      	<class name="com.yuja.evp.testclasses.MediaLibraryTest">
+	      	<methods>
+	      		<include name="Video_upload_manager_test" />
+	      		<include name="Video_upload_instructor_test" />
+	      		<include name="Video_upload_student_test" />
+	          
+	          	<include name="Video_quality_upload_manager_test" />
+	          	<include name="Video_quality_upload_instructor_test" />
+	          	<include name="Video_quality_upload_student_test" />
+	          
+	          	<include name="Audio_upload_manager_test" />
+	          	<include name="Audio_upload_instructor_test" />
+	          	<include name="Audio_upload_student_test" />
+	          
+	          	<include name="Document_upload_manager_test" />
+	          	<include name="Document_upload_instructor_test" />
+	          	<include name="Document_upload_student_test" />
+	          
+	          	<include name="Share_video_full_access_manager_test" />
+	          	<include name="Share_video_edit_access_manager_test" />
+	          	<include name="Share_video_read_only_manager_test" />
+	          
+	          	<include name="Share_video_full_access_instructor_test" />
+	          	<include name="Share_video_edit_access_instructor_test" />
+	          	<include name="Share_video_read_only_instructor_test" />
+	          
+	          	<include name="Share_video_full_access_student_test" />
+	          	<include name="Share_video_edit_access_student_test" />
+	          	<include name="Share_video_read_only_student_test" />
+	          
+	          	<include name="Create_delete_folder_manager_test" />
+	          	<include name="Create_delete_folder_instructor_test" />
+	          	<include name="Create_delete_folder_student_test" />
+	          	
+	          	<include name="Delete_media_manager_test" />
+	          	<include name="Delete_media_instructor_test" />
+	          	<include name="Delete_media_student_test" />
+	          
+	          	<include name="Bulkfavorite_manager_Succesful_test" />
+	          	<include name="Bulkfavorite_instructor_Succesful_test" />
+	          	<include name="Bulkfavorite_student_Succesful_test" />
+	          	
+	          	<include name="Replace_media_test" />
+	          	
+	          	<include name="Publish_and_unpublish_media_Manager_test" />
+	          	<include name="Publish_and_unpublish_media_Instructor_test" />
+	          	
+	          	
+	          	
+	       	</methods>
+        </class>
+        
+        <class name="com.yuja.evp.testclasses.AdminPanelRosterTest">
+        	<methods>
+        		<include name="Create_and_delete_student_User_test" />
+	      		<include name="Create_and_delete_instructor_User_test" />
+	      		<include name="Create_and_delete_manager_User_test" />
+	      		<include name="Create_and_delete_subadmin_User_test" />
+	      		
+	      		<include name="Act_as_student_test" />
+	      		<include name="Act_as_instructor_test" />
+	      		<include name="Act_as_subadmin_test" />
+	      		
+	      		<include name="Reset_password_for_student_test" />
+	      		<include name="Reset_password_for_instructor_test" />     	
+	      		<include name="Reset_password_for_manager_test" />	
+	        	<include name="Reset_password_for_subadmin_test" />	
+	        		      		  
+	      		<include name="Add_instructor_to_course_test" /> 
+	      		<include name="Add_manager_to_course_test" /> 
+	      		<include name="Add_subadmin_to_course_test" /> 
+	      		<include name="Add_student_to_course_test" /> 
+	      		
+	      		<include name="Delete_button_for_instructor_test" /> 
+	      		<include name="Delete_button_for_manager_test" /> 
+	      		<include name="Delete_button_for_student_test" /> 
+	      		<include name="Delete_button_for_subadmin_test" /> 	
+	      		
+	      		<include name="Media_library_button_for_instructor_test" /> 
+	      		<include name="Media_library_button_for_manager_test" /> 
+	      		<include name="Media_library_button_for_subadmin_test" /> 
+	      		<include name="Media_library_button_for_student_test" /> 
+        	</methods>
+        </class>
+        
+        <class name="com.yuja.evp.testclasses.AdminPanelPlatformTest">
+	      	<methods>
+	      		<include name="Add_and_delete_string_metadata_test" />
+	      		<include name="Add_and_delete_list_metadata_test" />
+	      		<include name="Add_and_delete_date_metadata_test" />
+	      		<include name="Add_and_delete_time_metadata_test" />
+	      		
+	      		<include name="Add_and_delete_required_string_metadata_test" />
+	      		<include name="Add_and_delete_required_list_metadata_test" />
+	      		<include name="Add_and_delete_required_date_metadata_test" />
+	      		<include name="Add_and_delete_required_time_metadata_test" />		
+	       	</methods>
+        </class>
+        
+        <class name="com.yuja.evp.testclasses.HTML5PlayerTest">
+        	<methods>
+        		<include name="Sidebar_manager_test" />
+	      		<include name="Sidebar_instructor_test" />
+	      		<include name="Sidebar_student_test" />
+        	</methods>
+        </class>
+        
+        <class name="com.yuja.evp.testclasses.MoodleQuizTest">
+        	<methods>
+        		<include name="Moodle_create_publish_attend_gradebook_administrator_test" />
+        		<include name="Moodle_create_publish_attend_gradebook_instructor_test" />
+        		
+        		<include name="Moodle_create_playback_attend_gradebook_administrator_test" />
+        		<include name="Moodle_create_playback_attend_gradebook_instructor_test" />
+        		
+        		<include name="Moodle_embed_video_as_instructor_check_accessible_by_student_test" />
+        		<include name="Moodle_embed_video_as_administrator_check_accessible_by_student_test" />
+        		
+        		<include name="Moodle_embed_audio_as_instructor_check_accessible_by_student_test" />
+        		<include name="Moodle_embed_audio_as_administrator_check_accessible_by_student_test" />
+        		
+        		<include name="Moodle_embed_document_as_instructor_check_accessible_by_student_test" />
+        		<include name="Moodle_embed_document_as_administrator_check_accessible_by_student_test" />
+        		
+        		<include name="Moodle_upload_video_as_administrator_check_in_media_library_test" />
+        		<include name="Moodle_upload_video_as_instuctor_check_in_media_library_test" />
+        		
+        		<include name="Moodle_upload_audio_as_administrator_check_in_media_library_test" />
+        		<include name="Moodle_upload_audio_as_instuctor_check_in_media_library_test" />
+        		
+        		<include name="Moodle_upload_doc_as_administrator_check_in_media_library_test" />
+        		<include name="Moodle_upload_doc_as_instuctor_check_in_media_library_test" />
+        	</methods>
+        </class>
+        
+        <class name="com.yuja.evp.testclasses.AdminPanelAccessiblityTest">
+        	<methods>
+        		<include name="Check_humancaption_button_update" />
+        		
+        		<include name="Edit_humancaption_permissions_for_Specific_user_captionSync_test" />
+        		
+        		<include name="Edit_autocaption_permissions_for_all_instructors_test" />
+        		<include name="Edit_autocaption_permissions_for_all_students_test" />
+        		<include name="Edit_autocaption_permissions_for_ITManager_test" />
+        		<include name="Edit_autocaption_permissions_for_Specific_user_test" />
+        		
+        		<include name="Edit_humancaption_permissions_for_all_instructors_allcaptionproviders_test" />
+        		<include name="Edit_humancaption_permissions_for_all_instructors_rev_test" />
+        		<include name="Edit_humancaption_permissions_for_all_instructors_3playmedia_test" />
+        		<include name="Edit_humancaption_permissions_for_all_instructors_Cielo24_test" />
+        		<include name="Edit_humancaption_permissions_for_all_instructors_yujaprocaptioning_test" />
+        		<include name="Edit_humancaption_permissions_for_all_instructors_captionSync_test" />
+        		
+        		<include name="Edit_humancaption_permissions_for_ITManager_allcaptionproviders_test" />
+        		<include name="Edit_humancaption_permissions_for_ITManager_rev_test" />
+        		<include name="Edit_humancaption_permissions_for_ITManager_3playmedia_test" />
+        		<include name="Edit_humancaption_permissions_for_ITManager_Cielo24_test" />
+        		<include name="Edit_humancaption_permissions_for_ITManager_yujaprocaptioning_test" />
+        		<include name="Edit_humancaption_permissions_for_ITManager_captionSync_test" />
+        		
+        		<include name="Edit_humancaption_permissions_for_all_students_allcaptionproviders_test" />
+        		<include name="Edit_humancaption_permissions_for_all_students_rev_test" />
+        		<include name="Edit_humancaption_permissions_for_all_students_3playmedia_test" />
+        		<include name="Edit_humancaption_permissions_for_all_students_Cielo24_test" />
+        		<include name="Edit_humancaption_permissions_for_all_students_yujaprocaptioning_test" />
+        		<include name="Edit_humancaption_permissions_for_all_students_captionSync_test" />
+        		
+        		<include name="Edit_humancaption_permissions_for_Specific_users_allcaptionproviders_test" />
+        		<include name="Edit_humancaption_permissions_for_Specific_user_rev_test" />
+        		<include name="Edit_humancaption_permissions_for_Specific_user_3playmedia_test" />
+        		<include name="Edit_humancaption_permissions_for_Specific_user_Cielo24_test" />
+        		<include name="Edit_humancaption_permissions_for_Specific_user_yujaprocaptioning_test" />
+        	</methods>
+        </class>
+        
+        <class name="com.yuja.evp.testclasses.QuizTest">
+        	<methods>
+        		<include name="Create_quiz_test" />
+    
+        		<include name="Check_student_gradebook_test" />
+        		
+        		<include name="Check_instructor_gradebook_test" />
+        		
+        		<include name="Check_unauthenticated_user_quiz_test" />
+        		
+        		<include name="Check_Unauthenticated_user_embedded_quiz_test" />
+        		
+        		<include name="Check_delete_quiz_test" />
+        	</methods>
+        </class>
+        
+        
+        
+    </classes>
+  </test>
+</suite> <!-- Suite -->

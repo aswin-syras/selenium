@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Suite">
+  <parameter name="TestName" value="TestValue" />
+  <test name="Create_new_folder_test">
+  	<classes>
+  		
+      	<class name="com.yuja.evp.testclasses.AdminPanelRosterTest">
+	      	<methods>
+	      		<include name="Create_and_delete_student_User_test" />
+	      		<include name="Create_and_delete_instructor_User_test" />
+	      		<include name="Create_and_delete_manager_User_test" />
+	      		<include name="Create_and_delete_subadmin_User_test" />
+	      		<include name="Act_as_student_test" />
+	      		<include name="Act_as_instructor_test" />
+	      		<include name="Act_as_subadmin_test" />
+	      		<include name="Reset_password_for_student_test" />
+	      		<include name="Reset_password_for_instructor_test" />     	
+	      		<include name="Reset_password_for_manager_test" />	
+	        	<include name="Reset_password_for_subadmin_test" />		      		  
+	      		<include name="Add_instructor_to_course_test" /> 
+	      		<include name="Add_manager_to_course_test" /> 
+	      		<include name="Add_subadmin_to_course_test" /> 
+	      		<include name="Add_student_to_course_test" /> 
+	      		<include name="Delete_button_for_instructor_test" /> 
+	      		<include name="Delete_button_for_manager_test" /> 
+	      		<include name="Delete_button_for_student_test" /> 
+	      		<include name="Delete_button_for_subadmin_test" /> 	
+	      		<include name="Media_library_button_for_instructor_test" /> 
+	      		<include name="Media_library_button_for_manager_test" /> 
+	      		<include name="Media_library_button_for_subadmin_test" /> 
+	      		<include name="Media_library_button_for_student_test" /> 
+	      		
+	      		
+	      		   		
+	       
+	       	</methods>
+        </class>
+        
+    </classes>
+  </test>
+</suite> <!-- Suite -->

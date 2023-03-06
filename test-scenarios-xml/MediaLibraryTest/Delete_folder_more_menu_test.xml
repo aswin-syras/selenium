@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Suite">
+  <test name="Delete_folder_more_menu_test">
+  	<classes>
+      <class name="com.yuja.evp.testclasses.MediaLibraryTest">
+	      <methods>
+	          <include name="Delete_folder_more_menu_test">
+			      <!-- <parameter name="Browser" value="IE" /> -->
+			      <parameter name="TestName" value="Delete_folder_more_menu_test" />
+			  </include> 
+	        </methods>
+        </class>
+    </classes>
+  </test>
+ 
+</suite> <!-- Suite -->
