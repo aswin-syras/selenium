@@ -5,7 +5,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import com.yuja.evp.utilities.Helpers;
 
-public class AdminPanelPlatformPageHelpers extends Helpers {
+import helperinterfaces.UICheck;
+
+public class AdminPanelPlatformPageHelpers extends Helpers implements UICheck {
 
 	private SignInPageHelpers signInPage = new SignInPageHelpers();
 	public void navigateToAdminPanelPlatformPageUserLogin(String userName, String password){
@@ -104,4 +106,18 @@ public class AdminPanelPlatformPageHelpers extends Helpers {
 		}
 		}	
 		}
+	
+	public void CheckPageUI() {
+		URL = "https://staging-demo.yuja.com/P/Institution/MenuManagement/";
+		launchUrl(URL, "Xavier University Enterprise Video Platform");
+		String sectionTitle = driver.findElement(By.id("secondPartText")).getText();
+		boolean check  = waitForElement(By.id("di_masterContainer"),10).isDisplayed();
+		if(check && sectionTitle.equals("Platform")) {
+			reportStep(sectionTitle + " Page loaded successfully", "PASS", false);
+			System.out.println(sectionTitle);
 		}
+		else
+			reportStep(sectionTitle + "failed to load", "fail", true);	
+	}
+}
+

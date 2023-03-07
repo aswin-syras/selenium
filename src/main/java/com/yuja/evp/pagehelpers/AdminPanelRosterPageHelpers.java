@@ -7,9 +7,12 @@ import org.openqa.selenium.interactions.Actions;
 import com.yuja.evp.modalhelpers.AddMediaModalHelperMethods;
 import com.yuja.evp.modalhelpers.FolderDetailsModalHelperMethods;
 import com.yuja.evp.utilities.Helpers;
+
+import helperinterfaces.UICheck;
+
 import java.util.HashMap;
 
-	public class RosterPageHelpers extends Helpers {
+	public class AdminPanelRosterPageHelpers extends Helpers implements UICheck {
 	
 	private SignInPageHelpers signInPage = new SignInPageHelpers();
 	public void navigateToAdminPanelRosterPageUserLogin(String userName, String password){
@@ -137,6 +140,20 @@ import java.util.HashMap;
 		WebElement moveMediaCollectionModal= modalList2.get(modalList2.size()-1);
 		clickElement(moveMediaCollectionModal, "No Button", By.cssSelector("[title=\"No\"]"), 3); 
 	}
+	
+	public void CheckPageUI() {
+		URL = "https://staging-demo.yuja.com/P/Institution/TypeRoster/";
+		launchUrl(URL, "Xavier University Enterprise Video Platform");
+		String sectionTitle = driver.findElement(By.id("secondPartText")).getText();
+		boolean check  = waitForElement(By.id("rosterContent"),10).isDisplayed();
+		if(check && sectionTitle.equals("Roster")) {
+			reportStep(sectionTitle + " Page loaded successfully", "PASS", false);
+			System.out.println(sectionTitle);
+		}
+		else
+			reportStep(sectionTitle + "failed to load", "fail", true);	
 	}
+	
+}
 		
 		
