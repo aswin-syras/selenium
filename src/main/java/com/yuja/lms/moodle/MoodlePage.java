@@ -61,6 +61,7 @@ public class MoodlePage extends QuizPageHelpers {
 		String URL = "https://tmoodle2.yuja.com/course/view.php?id=142";
 		launchUrl(URL, "Moodle automation course page");
 	}
+	
 	public void selectCourseFromSiteHome(String courseName) {
 		clickElement("site home", By.xpath("//a[@href=\"https://tmoodle2.yuja.com/?redirect=0\"]"));
 		List<WebElement> courseList= getElementList(By.xpath("//a[@class='aalink']"));
@@ -70,8 +71,8 @@ public class MoodlePage extends QuizPageHelpers {
 			if(obtainedCourseName.equals(courseName)) {
 				clickElement("click on given course",element);
 				break;
-			}
-			}
+			    }
+			  }
 	}
 	
 	public void createMoodleCourse(String adminUserName, String adminPassword, String courseName, String courseShortName) throws InterruptedException{
@@ -86,8 +87,8 @@ public class MoodlePage extends QuizPageHelpers {
 		sendKeys("Enter course short name", By.xpath("//input[@name='shortname']"),courseShortName+getRandomInteger(1000));
 		clickElement("save and display button", By.xpath("//input[@name='saveanddisplay']"));
 		clickElement("Course media page", By.xpath("//a[@data-key='coursehome']"));
-		
 	}
+	
 	public String createMoodleUser(String adminUserName, String adminPassword,  String email, String newUsername, String newUserPassword) throws InterruptedException{
 		navigateToLoginPage();
 		driver.manage().window().maximize();
@@ -106,13 +107,11 @@ public class MoodlePage extends QuizPageHelpers {
 		sendKeys("Enter email", By.xpath("//input[@name='email']"),email+getRandomInteger(10000));
 		clickElement("save and display button", By.xpath("//input[@name='submitbutton']"));
 		return newUserNameRandom;
-		
 	}
 	
 	public void NavigateToLTI(String embedMediaTitle){
 		clickEmbedMediaMoodle(embedMediaTitle);
 		switchToIframe("switch to lti frame", By.id("contentframe"), 10);
-		
 	}
 	
 	public void moodleGradebook(){
@@ -252,9 +251,7 @@ public class MoodlePage extends QuizPageHelpers {
 		}	
 	}
 	
-
-	
-	public void setStartPageOptionAsMediaChannel() {
+    public void setStartPageOptionAsMediaChannel() {
         URL = "https://staging-demo.yuja.com/P/Institution/MenuManagement/";
         launchUrl(URL, "Xavier University Enterprise Video Platform");
         Select startPageOptionITManager = new Select(driver.findElement(By.id("select_defaultLandingPageIT")));
@@ -281,7 +278,7 @@ public class MoodlePage extends QuizPageHelpers {
 		} else {
 			reportStep("The moodle course is not successfully autoprovisioned in yuja", "FAIL", true);
 		}	
-	}
+	 }
 	// Method directly used in test class.
 	public void checkManualprovisionOfNewCourse(String adminUserName, String adminPassword, String courseName, String courseShortName, String externalToolCustomName, String externalToolVisibleName, String userName, String password ) throws InterruptedException {
 		setAndResetAutomaticProvision(userName,password,"course",false);
@@ -369,15 +366,13 @@ public class MoodlePage extends QuizPageHelpers {
 			if(obtainedmemberFirstname.equals(studentUserName) && obtainedmemberFirstname.equals(myaccountStudentName)){
 				reportStep("The moodle user is enrolled to  course in yuja", "PASS", false);
 				break;
-				
-			}}
+				}
+		    }
 	
 		if(obtainedmemberFirstname.equals(myaccountStudentName) && obtainedmemberFirstname.equals(studentUserName)){
 			System.out.println(myaccountStudentName+" "+studentUserName + " "+obtainedmemberFirstname );
 			reportStep("The moodle user is successfully provisioned  and enrolled to  course in yuja", "PASS", false);
-		}
-	
-		else {
+			}else {
 			reportStep("The moodle user is  not successfully provisioned  and enrolled to  course in yuja", "FAIL", true);
 			}
 	}
