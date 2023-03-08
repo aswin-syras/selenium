@@ -73,7 +73,7 @@ public class MoodlePage extends QuizPageHelpers {
 	public void loginCreateandPublishEmbedQuiz(String userName, String password,String embedMediaTitle,String mediaTitle,String name,String question,String option1, String option2,String possibleans1, String possibleans2,String hint,String stuserName, String stpassword, String sa,String fitbans,String courseName,String marks,String studentFullName, String studentNameinActivitylog) throws Exception {
 		navigateToCourse(userName,password);
 		NavigateToLTI(embedMediaTitle);
-		
+		Thread.sleep(3000);
 		String quizNewName=createandPublishQuiz(mediaTitle,name,question, option1,  option2, possibleans1, possibleans2, hint);
 		String quizFinalName="'"+quizNewName+"'";
 		driver.switchTo().defaultContent();
@@ -94,6 +94,7 @@ public class MoodlePage extends QuizPageHelpers {
 		logout();
 		navigateToCourse(userName,password);
 		NavigateToLTI(embedMediaTitle);
+		Thread.sleep(3000);
 		checkGradebookTestafterLoginforMultiple(mediaTitle, courseName,name, marks,studentFullName );
 		clickElement("Click Manage Media",By.xpath("//span[@id='topBarTabName3']"),10);
 		Thread.sleep(2000);
@@ -131,6 +132,7 @@ public class MoodlePage extends QuizPageHelpers {
 		logout();
 		navigateToCourse(userName,password);
 		NavigateToLTI(embedMediaTitle);
+		Thread.sleep(3000);
 		checkGradebookforPlaybackQuiz(videoNameforPlaybackquiz, courseName, quizNewName, marks, studentFullName);
 		clickElement("Click Manage Media",By.xpath("//span[@id='topBarTabName3']"),10);
 		Thread.sleep(2000);

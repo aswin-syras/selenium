@@ -233,8 +233,20 @@ public class QuizPageHelpers extends Helpers {
 	}
 	
 	protected void clickPlaybutton() {
-		clickElement("Play button", By.id("previewPlay"));
-    }
+		boolean check = verifyElementExist("play button",By.id("previewPlay"));
+		if(check) {
+			clickElement("Play button", By.id("previewPlay"));
+             }
+		else {
+			boolean check1 = verifyElementExist("Play from beginning",By.id("previewPlayButton"));
+			if(check1) {
+				clickElement("Play from beginning", By.id("previewPlayButton"));
+			}
+			else {
+				reportStep("both play buttons" + " element not exist method - thrown Exception", "FAIL", true);
+			}
+		}
+       }
     
 	private void clickHintbutton() {
 		clickElement("Hint button", By.xpath("//img[@src=\"/Dashboard/icons/polls/hint.svg\"]"));
@@ -291,14 +303,14 @@ public class QuizPageHelpers extends Helpers {
 		 Thread.sleep(3000);
 		 int d = gradeBookUserIndex + 1;
 		 String expectedCorrectness="Used Hint : Yes, Status: Answered";
-			
+	
 	        String question1correctness= driver.findElement(By.xpath("(//table/tbody/tr["+d+"]/td[@class='general-entry'])[1]")).getAttribute("title");
 			String question2correctness= driver.findElement(By.xpath("(//table/tbody/tr["+d+"]/td[@class='general-entry'])[2]")).getAttribute("title");
 			String question3correctness= driver.findElement(By.xpath("(//table/tbody/tr["+d+"]/td[@class='general-entry'])[3]")).getAttribute("title");
 			String question4correctness= driver.findElement(By.xpath("(//table/tbody/tr["+d+"]/td[@class='general-entry'])[4]")).getAttribute("title");
 			String question5correctness= driver.findElement(By.xpath("(//table/tbody/tr["+d+"]/td[@class='general-entry'])[5]")).getAttribute("title");
 			String question6correctness= driver.findElement(By.xpath("(//table/tbody/tr["+d+"]/td[@class='general-entry'])[6]")).getAttribute("title");
-			
+			 
 			if(grade.equals(marks)&&question1correctness.contains(expectedCorrectness)&&question2correctness.contains(expectedCorrectness)&&question3correctness.contains(expectedCorrectness)&&question4correctness.contains(expectedCorrectness)&&question5correctness.contains("Used Hint : N/A, Status: N/A")&&question6correctness.contains(expectedCorrectness) ){
 				reportStep("The student grade is displayed correctly ", "PASS", false);
 			} else {
