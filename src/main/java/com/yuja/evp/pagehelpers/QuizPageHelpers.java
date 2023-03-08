@@ -23,7 +23,7 @@ public class QuizPageHelpers extends Helpers {
 	
 	public void createDraftQuiz(String mediaTitle, String name,String question,String option1, String option2,String possibleans1, String possibleans2,String hint) throws Exception{
 		clickElement("Click Manage Media",By.xpath("//span[@id='topBarTabName3']"),10);
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		mediaLibrary.accessMediaMoreMenu(mediaTitle);
 		mediaDetailsModal.clickQuizzes();
 		clickElement("Create Video Quiz", By.id("createVideoQuizBtn"));

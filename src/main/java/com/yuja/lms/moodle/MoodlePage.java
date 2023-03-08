@@ -225,7 +225,7 @@ public class MoodlePage extends QuizPageHelpers {
 		clickElement("Turn Editing on button", By.cssSelector("button[id^=\"single_button\"]"));
 		clickElement("add activity or resource button", By.cssSelector("span[class=\"section-modchooser-text\"]"));
 		Thread.sleep(3000);
-		clickElement("cim mediachooser button", By.xpath("//a[@href='https://tmoodle2.yuja.com/course/modedit.php?add=lti&return=0&course=142&sr&typeid=68&section=0&sr=0']"));
+		clickElement("cim mediachooser button", By.xpath("//a[@href='https://tmoodle2.yuja.com/course/modedit.php?add=lti&return=0&course=142&sr&typeid=50&section=0&sr=0']"));
 		clickElement("select content", By.cssSelector("button[name=\"selectcontent\"]"));
         Thread.sleep(3000);
 		switchToIframe("switch to mediachooser frame", By.id("contentitem-page-iframe"), 10);
