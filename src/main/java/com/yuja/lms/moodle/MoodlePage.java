@@ -19,6 +19,7 @@ import com.yuja.evp.modalhelpers.AddMediaModalHelperMethods;
 import com.yuja.evp.pagehelpers.MediaLibraryPageHelpers;
 import com.yuja.evp.pagehelpers.NavigationBarHelpers;
 import com.yuja.evp.pagehelpers.QuizPageHelpers;
+import com.yuja.evp.pagehelpers.RosterPageHelpers;
 import com.yuja.evp.pagetestmethods.MediaLibraryPageTestMethods;
 import com.yuja.evp.utilities.Helpers;
 
@@ -29,6 +30,7 @@ public class MoodlePage extends QuizPageHelpers {
 	
 	MediaLibraryPageHelpers mediaLibrary = new MediaLibraryPageHelpers();
 	NavigationBarHelpers navbar=new NavigationBarHelpers();
+	RosterPageHelpers roster=new RosterPageHelpers();
 	
 	private void setMediaUploadModal() {
 		System.out.println("Fetching Media Upload modal...");
@@ -376,6 +378,69 @@ public class MoodlePage extends QuizPageHelpers {
 			reportStep("The moodle user is  not successfully provisioned  and enrolled to  course in yuja", "FAIL", true);
 			}
 	}
+	
+public void checkAutoprovisionOfUserinMultipleCourses(String adminUserName, String adminPassword, String userName, String password, String email, String newUsername, String newUserPassword, String[] courseName, String role, String courserole ) throws InterruptedException {
+		
+		HashMap<String, String> CourseRoleType = new HashMap<String, String>();
+		CourseRoleType.put("GroupMember", "//div[@data-automation=\"divGroupMembers\"]//div[@class=\"user-list-item\"]");
+		CourseRoleType.put("GroupOwner", "//div[@data-aitomation=\"divGroupOwners\"]//div[@class=\"user-list-item\"]");
+		
+		setAndResetAutomaticProvision(userName,password,"user",true);
+		String studentUserName=createMoodleUser(adminUserName, adminPassword,email,newUsername,newUserPassword);
+		String myaccountStudentName=null;
+		for(String course:courseName) {
+		selectCourseFromSiteHome(course);
+		clickElement("participants", By.xpath("//a[@data-key=\"participants\"]"));
+		clickElement("enroll users", By.xpath("//input[@value=\"Enrol users\"]"));
+		sendKeys("Enter username", By.xpath("(//input[@class=\"form-control\" and contains(id,form_autocomplete_input-1677790244437)])[2]"),studentUserName);
+		clickElement("click from Dropdown", By.xpath("//ul[@class=\"form-autocomplete-suggestions\"]//li"));
+		
+		Select assignRoledropdown = new Select(driver.findElement(By.id("id_roletoassign")));
+		assignRoledropdown.selectByVisibleText(role);
+		clickElement("enroll selected users button", By.xpath("//button[text()=\"Enrol selected users and cohorts\"]"));}
+		
+		logout();
+		navigateToLoginPage();
+		driver.manage().window().maximize();
+		loginFast(studentUserName, newUserPassword);
+		for(String course:courseName) {
+		selectCourseFromSiteHome(course);
+		NavigateToLTI("'XAVIER 1.3'");
+		waitForElement(By.xpath("//*[@id=\"bi_userInfoDropdown\"]"),15);
+		navbar.clickMyAccountButton();
+		navbar.clickMyAccountDropdownOption();
+		
+		myaccountStudentName=driver.findElement(By.xpath("//input[@id='firstName']")).getAttribute("value");
+		navbar.clickCoursesAndGroups();
+		sendKeys("enter course name",By.xpath("//input[@class=\"group-management-inputbox form-control search-box\"]"),course);
+		clickElement("choose course after search",By.xpath("//ul[@id=\"courses-and-groups\"]//li"));
+		List<WebElement> memberList= getElementList(By.xpath(CourseRoleType.get(courserole)));
+		String obtainedmemberFirstname=null;
+		for(int i=0;i<memberList.size();i++) {
+			WebElement element=memberList.get(i);
+			String obtainedmemberName = element.getText();
+			String obtainedmembersplitFirstname[]=obtainedmemberName.split(" ",2);
+		    obtainedmemberFirstname=obtainedmembersplitFirstname[0];
+		    System.out.println(obtainedmemberFirstname);
+			if(obtainedmemberFirstname.equals(studentUserName) && obtainedmemberFirstname.equals(myaccountStudentName)){
+				reportStep("The moodle user is enrolled to  course in yuja", "PASS", false);
+				break;
+				}
+		    }
+		driver.switchTo().defaultContent();
+		clickElement("Moodle Title", By.xpath("//a[@href='https://tmoodle2.yuja.com']"));
+		}
+		logout();
+		roster.navigateToAdminPanelRosterPageUserLogin(userName,password);
+		roster.rosterButtons(myaccountStudentName);
+		List<WebElement> rowList=getElementList(By.xpath("//table[@id=\"rosterTable\"]//tr"));
+		if(rowList.size()==2){
+			reportStep("A single moodle user is successfully provisioned when enrolled to multiple courses", "PASS", false);
+		}else {
+		    reportStep("A single moodle user is successfully provisioned when enrolled to multiple courses", "FAIL", true);
+			}
+	}
+
 
 
 	
