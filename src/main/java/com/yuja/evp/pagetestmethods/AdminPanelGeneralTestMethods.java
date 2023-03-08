@@ -3,8 +3,6 @@ package com.yuja.evp.pagetestmethods;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -51,11 +49,9 @@ public class AdminPanelGeneralTestMethods extends AdminPanelGeneralPageHelpers{
 			clickElement(title,eachElement);	
 			Thread.sleep(2000);
 		}
-		//OverViewPage();
 	}
 	
 	public void AdminPanelCheckPageUI(String userName, String Password) throws InterruptedException {
-		
 		UICheck temp;
 		navigatetoAdminPanelUserLogin(userName,Password);
 		Map<Integer, UICheck> adminpanelPages = new HashMap<Integer, UICheck>();
@@ -68,8 +64,9 @@ public class AdminPanelGeneralTestMethods extends AdminPanelGeneralPageHelpers{
 		adminpanelPages.put(6, branding);
 		adminpanelPages.put(7, accessibility);
 		adminpanelPages.put(8, storagequota);
-		adminpanelPages.put(8, storagequota);
-
+		adminpanelPages.put(9, datamanagement);
+		adminpanelPages.put(10, rtmp);
+		adminpanelPages.put(11, organization);
 
 		for (int i = 0; i < adminpanelPages.size(); i++) {
 			try {
@@ -80,24 +77,8 @@ public class AdminPanelGeneralTestMethods extends AdminPanelGeneralPageHelpers{
 			System.out.println(ex.toString());
 
 		}
-		
 		}
 		}
 	}
 	
-//	public void OverViewPage() {
-//		AdminPanelOverViewUI();
-//		AdminPanelNotificationsUI();
-//		AdminPanelDevicesUI();
-//		AdminPanelRosterUI();
-//		AdminPanelIntegrationUI();
-//		AdminPanelPlatformUI();
-//		AdminPanelBrandingUI();
-//		AdminPanelAccessibilityUI();
-//		AdminPanelStorageQuotaUI();
-//		AdminPanelDataManagementUI();
-//		AdminPanelRtmpStreamUI();
-//		AdminPanelOrganizationUI();
-//	}
-
 	
