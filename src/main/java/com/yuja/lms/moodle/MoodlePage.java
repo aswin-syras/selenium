@@ -274,8 +274,8 @@ public class MoodlePage extends QuizPageHelpers {
 		addExternalTool(externalToolCustomName,externalToolVisibleName);
 		NavigateToLTI("'XAVIER 1.3'");
 		String provisionedCourseName=driver.findElement(By.xpath("//li[@class='nav-item active']")).getAttribute("title");
-		
-       if(provisionedCourseName.contains(moodleCourseName)){
+	
+		if(provisionedCourseName.contains(moodleCourseName)){
 			reportStep("The moodle course is successfully autoprovisioned in yuja", "PASS", false);
 		} else {
 			reportStep("The moodle course is not successfully autoprovisioned in yuja", "FAIL", true);
@@ -324,7 +324,7 @@ public class MoodlePage extends QuizPageHelpers {
 			reportStep("The moodle course is not successfully manuallyprovisioned connected to existing course in yuja", "FAIL", true);
 		}	
 	}
-	
+	// Method directly used in test class.
 	public void checkAutoprovisionOfUser(String adminUserName, String adminPassword, String userName, String password, String email, String newUsername, String newUserPassword, String courseName, String role, String courserole ) throws InterruptedException {
 		
 		HashMap<String, String> CourseRoleType = new HashMap<String, String>();
@@ -378,8 +378,9 @@ public class MoodlePage extends QuizPageHelpers {
 			reportStep("The moodle user is  not successfully provisioned  and enrolled to  course in yuja", "FAIL", true);
 			}
 	}
+	// Method directly used in test class.
 	
-public void checkAutoprovisionOfUserinMultipleCourses(String adminUserName, String adminPassword, String userName, String password, String email, String newUsername, String newUserPassword, String[] courseName, String role, String courserole ) throws InterruptedException {
+  public void checkAutoprovisionOfUserinMultipleCourses(String adminUserName, String adminPassword, String userName, String password, String email, String newUsername, String newUserPassword, String[] courseName, String role, String courserole ) throws InterruptedException {
 		
 		HashMap<String, String> CourseRoleType = new HashMap<String, String>();
 		CourseRoleType.put("GroupMember", "//div[@data-automation=\"divGroupMembers\"]//div[@class=\"user-list-item\"]");
@@ -388,6 +389,7 @@ public void checkAutoprovisionOfUserinMultipleCourses(String adminUserName, Stri
 		setAndResetAutomaticProvision(userName,password,"user",true);
 		String studentUserName=createMoodleUser(adminUserName, adminPassword,email,newUsername,newUserPassword);
 		String myaccountStudentName=null;
+		
 		for(String course:courseName) {
 		selectCourseFromSiteHome(course);
 		clickElement("participants", By.xpath("//a[@data-key=\"participants\"]"));
@@ -397,19 +399,19 @@ public void checkAutoprovisionOfUserinMultipleCourses(String adminUserName, Stri
 		
 		Select assignRoledropdown = new Select(driver.findElement(By.id("id_roletoassign")));
 		assignRoledropdown.selectByVisibleText(role);
-		clickElement("enroll selected users button", By.xpath("//button[text()=\"Enrol selected users and cohorts\"]"));}
-		
+		clickElement("enroll selected users button", By.xpath("//button[text()=\"Enrol selected users and cohorts\"]"));
+		}
 		logout();
 		navigateToLoginPage();
 		driver.manage().window().maximize();
 		loginFast(studentUserName, newUserPassword);
+		
 		for(String course:courseName) {
 		selectCourseFromSiteHome(course);
 		NavigateToLTI("'XAVIER 1.3'");
 		waitForElement(By.xpath("//*[@id=\"bi_userInfoDropdown\"]"),15);
 		navbar.clickMyAccountButton();
 		navbar.clickMyAccountDropdownOption();
-		
 		myaccountStudentName=driver.findElement(By.xpath("//input[@id='firstName']")).getAttribute("value");
 		navbar.clickCoursesAndGroups();
 		sendKeys("enter course name",By.xpath("//input[@class=\"group-management-inputbox form-control search-box\"]"),course);
@@ -440,7 +442,87 @@ public void checkAutoprovisionOfUserinMultipleCourses(String adminUserName, Stri
 		    reportStep("A single moodle user is successfully provisioned when enrolled to multiple courses", "FAIL", true);
 			}
 	}
+//Method directly used in test class.
 
+public void checkManualprovisionOfUser(String adminUserName, String adminPassword, String userName, String password, String email, String newUsername, String newUserPassword, String courseName, String role, String courserole, String type, String existingStudentUsername ) throws InterruptedException {
+	
+	HashMap<String, String> CourseRoleType = new HashMap<String, String>();
+	CourseRoleType.put("GroupMember", "//div[@data-automation=\"divGroupMembers\"]//div[@class=\"user-list-item\"]");
+	CourseRoleType.put("GroupOwner", "//div[@data-aitomation=\"divGroupOwners\"]//div[@class=\"user-list-item\"]");
+	
+	setAndResetAutomaticProvision(userName,password,"user",false);
+	String studentUserName=createMoodleUser(adminUserName, adminPassword,email,newUsername,newUserPassword);
+	selectCourseFromSiteHome(courseName);
+	
+	clickElement("participants", By.xpath("//a[@data-key=\"participants\"]"));
+	clickElement("enroll users", By.xpath("//input[@value=\"Enrol users\"]"));
+	sendKeys("Enter username", By.xpath("(//input[@class=\"form-control\" and contains(id,form_autocomplete_input-1677790244437)])[2]"),studentUserName);
+	clickElement("click from Dropdown", By.xpath("//ul[@class=\"form-autocomplete-suggestions\"]//li"));
+	
+	Select assignRoledropdown = new Select(driver.findElement(By.id("id_roletoassign")));
+	assignRoledropdown.selectByVisibleText(role);
+	clickElement("enroll selected users button", By.xpath("//button[text()=\"Enrol selected users and cohorts\"]"));
+	logout();
+	navigateToLoginPage();
+	driver.manage().window().maximize();
+	loginFast(studentUserName, newUserPassword);
+	selectCourseFromSiteHome(courseName);
+	NavigateToLTI("'XAVIER 1.3'");
+	
+	if(type=="new") {
+	waitForElement(By.xpath("//input[@id=\"newPass1\"]"),15);
+	sendKeys("Enter password", By.xpath("//input[@id=\"newPass1\"]"),password);
+	clickElement("check the agree checkbox",By.xpath("//input[@id=\"termsCheck\"]"));
+	clickElement("create user button",By.xpath("//button[@title=\"Create\"]"));
+	waitForElement(By.xpath("//*[@id=\"bi_userInfoDropdown\"]"),15);
+	navbar.clickMyAccountButton();
+	navbar.clickMyAccountDropdownOption();
+	String myaccountStudentName=driver.findElement(By.xpath("//input[@id='firstName']")).getAttribute("value");
+	navbar.clickCoursesAndGroups();
+	sendKeys("enter course name",By.xpath("//input[@class=\"group-management-inputbox form-control search-box\"]"),courseName);
+	clickElement("choose course after search",By.xpath("//ul[@id=\"courses-and-groups\"]//li"));
+	List<WebElement> memberList= getElementList(By.xpath(CourseRoleType.get(courserole)));
+	String obtainedmemberFirstname=null;
+	for(int i=0;i<memberList.size();i++) {
+		WebElement element=memberList.get(i);
+		String obtainedmemberName = element.getText();
+		String obtainedmembersplitFirstname[]=obtainedmemberName.split(" ",2);
+	    obtainedmemberFirstname=obtainedmembersplitFirstname[0];
+	    System.out.println(obtainedmemberFirstname);
+		if(obtainedmemberFirstname.equals(studentUserName) && obtainedmemberFirstname.equals(myaccountStudentName)){
+			reportStep("The moodle user is enrolled to  course in yuja", "PASS", false);
+			break;
+			}
+	    }
+    if(obtainedmemberFirstname.equals(myaccountStudentName) && obtainedmemberFirstname.equals(studentUserName)){
+		System.out.println(myaccountStudentName+" "+studentUserName + " "+obtainedmemberFirstname );
+		reportStep("The moodle user is successfully provisioned  and enrolled to  course in yuja", "PASS", false);
+		}else {
+		reportStep("The moodle user is  not successfully provisioned  and enrolled to  course in yuja", "FAIL", true);
+		}
+	}
+	
+	else if(type=="existing") {
+		waitForElement(By.xpath("//div[@id=\"loginTab\"]"),15);
+		clickElement("existing user tab",By.xpath("//div[@id=\"loginTab\"]"));
+		sendKeys("Enter username", By.xpath("//input[@name=\"userID\"]"),existingStudentUsername);
+		sendKeys("Enter password", By.xpath("//input[@id=\"password\"]"),"jamNOW123!@#123");
+		clickElement("link button",By.xpath("//button[@id=\"loginButton\"]"));
+		waitForElement(By.xpath("//*[@id=\"bi_userInfoDropdown\"]"),15);
+		navbar.clickMyAccountButton();
+		navbar.clickMyAccountDropdownOption();
+		String StudentName=driver.findElement(By.xpath("//input[@id=\"personalMeetingRoomInput\"]")).getAttribute("value");
+		String obtainedmembersplitFirstname[]=StudentName.split("/");
+	    String obtainedStudentUsername=obtainedmembersplitFirstname[2];
+	    System.out.println(obtainedStudentUsername);
+	    if(obtainedStudentUsername.equals(existingStudentUsername)){
+			reportStep("The moodle user is successfully provisioned to existing user in yuja", "PASS", false);
+			}else {
+			reportStep("The moodle user is  not successfully provisioned to existing user in yuja", "FAIL", true);
+			}
+		}
+	}
+	
 
 
 	
