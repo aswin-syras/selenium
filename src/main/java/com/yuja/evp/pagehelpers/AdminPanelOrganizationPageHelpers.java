@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import helperinterfaces.UICheck;
 
 public class AdminPanelOrganizationPageHelpers extends AdminPanelGeneralPageHelpers implements UICheck {
+	
 	public void CheckPageUI() {
 		URL = "https://staging-demo.yuja.com/P/Institution/Organization/";
 		launchUrl(URL, "Xavier University Enterprise Video Platform");
