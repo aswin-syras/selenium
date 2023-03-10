@@ -47,7 +47,6 @@ public class AdminPanelPlatformPageHelpers extends Helpers implements UICheck {
 			sendKeysModal(metadataContainer, "Adding MetaData Name", By.id("colName" + lastRowIndex), metadataName);
 			WebElement mdataType = driver.findElement(By.cssSelector("#colType" + lastRowIndex + "> option:nth-child(" + metadataTypeValue.get(metadataType) + ")"));
 			clickElement("Select MetaData type", mdataType);
-			
 			if (requirement == true) {
 				WebElement mdataRequire = driver.findElement(By.cssSelector("#colRequired" + lastRowIndex));
 				clickElement("Select MetaData type", mdataRequire);
