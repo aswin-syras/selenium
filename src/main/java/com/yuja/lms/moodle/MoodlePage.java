@@ -281,7 +281,7 @@ public class MoodlePage extends QuizPageHelpers {
 			reportStep("The moodle course is not successfully autoprovisioned in yuja", "FAIL", true);
 		}	
 	 }
-	// Method directly used in test class.
+	// Method directly used in test classes
 	public void checkManualprovisionOfNewCourse(String adminUserName, String adminPassword, String courseName, String courseShortName, String externalToolCustomName, String externalToolVisibleName, String userName, String password ) throws InterruptedException {
 		setAndResetAutomaticProvision(userName,password,"course",false);
 		setStartPageOptionAsMediaChannel();
