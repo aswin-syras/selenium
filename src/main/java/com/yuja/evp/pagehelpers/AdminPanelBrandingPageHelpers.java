@@ -14,7 +14,6 @@ public class AdminPanelBrandingPageHelpers extends AdminPanelGeneralPageHelpers 
 		if(check && sectionTitle.equals("Branding")) {
 			reportStep(sectionTitle + " Page loaded successfully", "PASS", false);
 			System.out.println(sectionTitle);
-		}
-		else reportStep(sectionTitle + "failed to load", "fail", true);	
+		} else reportStep(sectionTitle + "failed to load", "fail", true);	
 	}
 }
