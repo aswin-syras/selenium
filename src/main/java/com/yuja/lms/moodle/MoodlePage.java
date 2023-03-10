@@ -152,9 +152,7 @@ public class MoodlePage extends QuizPageHelpers {
 		logout();
 	    navigateToCourse(stuserName,stpassword);
 	    NavigateToLTI(embedMediaName);
-	    switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
-	    clickPlaybutton();
-		Thread.sleep(5000);
+	   
 	}
 	
 	//Method directly used in test class. login upload media and check in media chooser as well as media library

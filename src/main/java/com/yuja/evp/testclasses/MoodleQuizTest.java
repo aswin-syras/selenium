@@ -43,7 +43,7 @@ public class MoodleQuizTest extends BaseTest {
 	     String marks="100%"; 
 	     String directoryPathForVideo="src\\fileResources\\lmsVideo";
          String directoryPathForAudio="src\\fileResources\\lmsAudio";
-	     String directoryPathForDoc="src\\\\fileResources\\\\lmsDocument";
+	     String directoryPathForDoc="src\\fileResources\\lmsDocument";
 
 	
 	  @Test(description="Moodle_create_publish_attend_gradebook_administrator_test")
@@ -66,7 +66,7 @@ public class MoodleQuizTest extends BaseTest {
     	public void Moodle_create_publish_attend_gradebook_instructor_test(String TestName) {                                                                                                                                                                                                                                                                
       		MoodlePage mp = new MoodlePage();                                                                                                                                                                                                                                                                                 
       		try {                                                                                                                                                                                                                                                                                                             
-      			mp.loginCreateandPublishEmbedQuiz(instuctorUserName, instuctorPassword,LTILinkName,videoName,QuizTitle,question,option1, option2,fitbPossibleans1, fitbPossibleans2,hint,studentUserName, studentPassword, studentAnsForShortAnsQuestion,studentAnsForFitbQuestion,courseName,marks,studentFullName,studentNameinActivityLog);         
+      			mp.loginCreateandPublishEmbedQuiz(instuctorUserName, instuctorPassword,LTILinkName,videoNameinstructor,QuizTitle,question,option1, option2,fitbPossibleans1, fitbPossibleans2,hint,studentUserName, studentPassword, studentAnsForShortAnsQuestion,studentAnsForFitbQuestion,courseName,marks,studentFullName,studentNameinActivityLog);         
       		}                                                                                                                                                                                                                                                                                                                 
       		catch (Exception e) {                                                                                                                                                                                                                                                                                             
       			System.out.println(e.getMessage());                                                                                                                                                                                                                                                                              

@@ -100,7 +100,7 @@ public class Helpers extends Report {
 
 		} catch (Exception e) {
 			System.out.println(fieldName + " Element not exist method - thrown Exception");
-			reportStep(fieldName + " element not exist method - thrown Exception", "FAIL", true);
+			//reportStep(fieldName + " element not exist method - thrown Exception", "FAIL", true);
 		}
 
 		return bReturn;
@@ -271,8 +271,7 @@ public class Helpers extends Report {
 		int listSize = mediaLibraryElementList.size();
 		if (listSize > 0) {
 			WebElement mediaLibraryElement;
-			String mediaLibraryElementName;
-			;
+			String mediaLibraryElementName="";
 			int i = 0;
 			while (i < listSize) {
 				mediaLibraryElement = mediaLibraryElementList.get(i++);

@@ -280,6 +280,7 @@ public class QuizPageHelpers extends Helpers {
 	
 	 public void  checkGradebookTestafterLoginforMultiple(String mediaTitle, String courseName,String name,String marks,String studentName) throws InterruptedException {
 		 clickElement("Click Manage Media",By.xpath("//span[@id='topBarTabName3']"),10);
+		 Thread.sleep(5000);
 		 mediaLibrary.accessMediaMoreMenu(mediaTitle);
 		 mediaDetailsModal.clickQuizzes();
 	   	 mediaDetailsModal.clickGradebookButton();

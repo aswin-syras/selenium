@@ -33,7 +33,7 @@ public class GradebookPageHelpers extends Helpers{
 		clickElement("Click short answer window save button",By.xpath("//button[@title='Save']"),10);
 		clickGetGradebookReport();
 		Thread.sleep(3000);
-		String grade= driver.findElement(By.xpath("//table//tbody//tr["+x+"]//td[3]")).getText();
+		String grade= driver.findElement(By.xpath("//table//tbody//tr["+x+"]//td[4]")).getText();
 		System.out.println(grade);
 		return grade;
 	}

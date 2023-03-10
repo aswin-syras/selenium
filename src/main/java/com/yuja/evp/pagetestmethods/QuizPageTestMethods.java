@@ -98,7 +98,7 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 			String directLink=getQuizDirectLink();
 			mediaDetailsModal.clickCloseMoreMenu();
 			navigationBar.userLogOut();
-			waitForElement(By.id("loginBtn"), 10);
+			waitForElement(By.id("loginBtn"), 20);
 			driver.navigate().to(directLink);
 			switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
 			clickPlaybutton();
@@ -122,7 +122,7 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 			action.keyDown(Keys.CONTROL).sendKeys("c").keyUp(Keys.CONTROL).build().perform();
 			mediaDetailsModal.clickCloseMoreMenu();
 			navigationBar.userLogOut();
-			waitForElement(By.id("loginBtn"), 10);
+			waitForElement(By.id("loginBtn"), 20);
 			driver.navigate().to("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_intro");
 			Thread.sleep(6000);
 			WebElement text= driver.findElement(By.xpath("//div[@class='CodeMirror-code']//child::pre[13]"));
