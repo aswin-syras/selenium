@@ -7,6 +7,7 @@ public class AdminPanelGeneralPageHelpers extends Helpers {
 	
 	public static String title;
 	private SignInPageHelpers signInPage = new SignInPageHelpers();
+
 	public void navigatetoAdminPanelUserLogin(String userName, String password) {
 		signInPage.navigateToLoginPage();
 		driver.manage().window().maximize();

@@ -2,10 +2,6 @@ package com.yuja.evp.pagehelpers;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-
-import com.yuja.evp.modalhelpers.AddMediaModalHelperMethods;
-import com.yuja.evp.modalhelpers.FolderDetailsModalHelperMethods;
 import com.yuja.evp.utilities.Helpers;
 
 import helperinterfaces.UICheck;
@@ -15,6 +11,7 @@ import java.util.HashMap;
 	public class AdminPanelRosterPageHelpers extends Helpers implements UICheck {
 	
 	private SignInPageHelpers signInPage = new SignInPageHelpers();
+	
 	public void navigateToAdminPanelRosterPageUserLogin(String userName, String password){
 		signInPage.navigateToLoginPage();
 		driver.manage().window().maximize();
@@ -149,9 +146,7 @@ import java.util.HashMap;
 		if(check && sectionTitle.equals("Roster")) {
 			reportStep(sectionTitle + " Page loaded successfully", "PASS", false);
 			System.out.println(sectionTitle);
-		}
-		else
-			reportStep(sectionTitle + "failed to load", "fail", true);	
+		} else reportStep(sectionTitle + "failed to load", "fail", true);	
 	}
 	
 }

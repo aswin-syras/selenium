@@ -1,7 +1,6 @@
 package com.yuja.evp.pagehelpers;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import com.yuja.evp.utilities.Helpers;
 
@@ -17,8 +16,6 @@ public class AdminPanelOverviewPageHelpers extends Helpers implements UICheck{
 		if(check && sectionTitle.equals("Overview")) {
 			reportStep(sectionTitle + " Page loaded successfully", "PASS", false);
 			System.out.println(sectionTitle);
-		}
-		else
-			reportStep("Admin Panel " + sectionTitle + "failed to load", "fail", true);	
+		} else reportStep("Admin Panel " + sectionTitle + "failed to load", "fail", true);	
 	}
 }

@@ -10,11 +10,10 @@ public class AdminPanelOrganizationPageHelpers extends AdminPanelGeneralPageHelp
 		launchUrl(URL, "Xavier University Enterprise Video Platform");
 		String sectionTitle = driver.findElement(By.id("secondPartText")).getText();
 		boolean check  = waitForElement(By.id("reactSidebar"),10).isDisplayed();
+		
 		if(check && sectionTitle.equals("Organization")) {
 			reportStep(sectionTitle + " Page loaded successfully", "PASS", false);
 			System.out.println(sectionTitle);
-		}
-		else
-			reportStep(sectionTitle + "failed to load", "fail", true);	
+		} else reportStep(sectionTitle + "failed to load", "fail", true);	
 	}
 }

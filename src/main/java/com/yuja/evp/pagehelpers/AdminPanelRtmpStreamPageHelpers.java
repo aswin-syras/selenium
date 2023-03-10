@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import helperinterfaces.UICheck;
 
 public class AdminPanelRtmpStreamPageHelpers extends AdminPanelGeneralPageHelpers implements UICheck{
+	
 	public void CheckPageUI() {
 		URL = "https://staging-demo.yuja.com/P/Institution/IngestedLiveStreamManagement/";
 		launchUrl(URL, "Xavier University Enterprise Video Platform");
@@ -13,8 +14,6 @@ public class AdminPanelRtmpStreamPageHelpers extends AdminPanelGeneralPageHelper
 		if(check && sectionTitle.equals("RTMP Streams")) {
 			reportStep(sectionTitle + " Page loaded successfully", "PASS", false);
 			System.out.println(sectionTitle);
-		}
-		else
-			reportStep(sectionTitle + "failed to load", "fail", true);	
+		} else reportStep(sectionTitle + "failed to load", "fail", true);	
 	}
 }

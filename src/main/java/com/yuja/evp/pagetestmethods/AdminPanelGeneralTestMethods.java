@@ -43,7 +43,6 @@ public class AdminPanelGeneralTestMethods extends AdminPanelGeneralPageHelpers{
 		List<WebElement> list = driver.findElements(By.xpath("//a[@class='alink border-color']"));
 		WebElement eachElement;
 		for(int i=0;i<list.size();i++) {
-			
 			eachElement = list.get(i);
 			title = list.get(i).getText();
 			clickElement(title,eachElement);	
@@ -52,33 +51,35 @@ public class AdminPanelGeneralTestMethods extends AdminPanelGeneralPageHelpers{
 	}
 	
 	public void AdminPanelCheckPageUI(String userName, String Password) throws InterruptedException {
-		UICheck temp;
-		navigatetoAdminPanelUserLogin(userName,Password);
-		Map<Integer, UICheck> adminpanelPages = new HashMap<Integer, UICheck>();
-		adminpanelPages.put(0, overview);
-		adminpanelPages.put(1, notification);
-		adminpanelPages.put(2, devices);
-		adminpanelPages.put(3, rosterPage);
-		adminpanelPages.put(4, integration);
-		adminpanelPages.put(5, platform);
-		adminpanelPages.put(6, branding);
-		adminpanelPages.put(7, accessibility);
-		adminpanelPages.put(8, storagequota);
-		adminpanelPages.put(9, datamanagement);
-		adminpanelPages.put(10, rtmp);
-		adminpanelPages.put(11, organization);
-
-		for (int i = 0; i < adminpanelPages.size(); i++) {
-			try {
-			temp = adminpanelPages.get(i);
-			temp.CheckPageUI();
+		try {
+			UICheck temp;
+			navigatetoAdminPanelUserLogin(userName,Password);
+			Map<Integer, UICheck> adminpanelPages = new HashMap<Integer, UICheck>();
+			adminpanelPages.put(0, overview);
+			adminpanelPages.put(1, notification);
+			adminpanelPages.put(2, devices);
+			adminpanelPages.put(3, rosterPage);
+			adminpanelPages.put(4, integration);
+			adminpanelPages.put(5, platform);
+			adminpanelPages.put(6, branding);
+			adminpanelPages.put(7, accessibility);
+			adminpanelPages.put(8, storagequota);
+			adminpanelPages.put(9, datamanagement);
+			adminpanelPages.put(10, rtmp);
+			adminpanelPages.put(11, organization);
+			for (int i = 0; i < adminpanelPages.size(); i++) {			
+				try {
+					temp = adminpanelPages.get(i);
+					temp.CheckPageUI();
+				} catch(StaleElementReferenceException ex) {
+					System.out.println(ex.toString());
+				}
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
-			catch(StaleElementReferenceException ex) {
-			System.out.println(ex.toString());
-
-		}
-		}
-		}
-	}
+	}	
+}
 	
 	

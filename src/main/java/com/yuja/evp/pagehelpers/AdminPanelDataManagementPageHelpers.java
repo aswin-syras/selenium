@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import helperinterfaces.UICheck;
 
 public class AdminPanelDataManagementPageHelpers extends AdminPanelGeneralPageHelpers implements UICheck{
+	
 	public void CheckPageUI() {
 		URL = "https://staging-demo.yuja.com/P/Institution/MediaArchive/";
 		launchUrl(URL, "Xavier University Enterprise Video Platform");
@@ -13,8 +14,6 @@ public class AdminPanelDataManagementPageHelpers extends AdminPanelGeneralPageHe
 		if(check && sectionTitle.equals("Data Management")) {
 			reportStep(sectionTitle + " Page loaded successfully", "PASS", false);
 			System.out.println(sectionTitle);
-		}
-		else
-			reportStep(sectionTitle + "failed to load", "fail", true);	
+		} else reportStep(sectionTitle + "failed to load", "fail", true);	
 	}
 }
