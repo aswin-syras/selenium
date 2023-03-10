@@ -2,13 +2,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="Suite">
-  <test name="Side_bar_manager">
+  <test name="Side_bar_manager_test">
   	<classes>
       <class name="com.yuja.evp.testclasses.HTML5PlayerTest">
 	      <methods>
-	          <include name="Side_bar_manager">
+	          <include name="Side_bar_manager_test">
 			      <!-- <parameter name="Browser" value="IE" /> -->
-			      <parameter name="TestName" value="Side_bar_manager" />
+			      <parameter name="TestName" value="Side_bar_manager_test" />
 			  </include> 
 	        </methods>
         </class>

@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.yuja.evp.pagehelpers.RosterPageHelpers;
+import com.yuja.evp.pagehelpers.AdminPanelRosterPageHelpers;
 import com.yuja.evp.pagetestmethods.MediaLibraryPageTestMethods;
 import com.yuja.evp.pagetestmethods.RosterPageTestMethods;
 import com.yuja.evp.modalhelpers.AddMediaModalHelperMethods;
