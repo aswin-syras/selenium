@@ -104,14 +104,14 @@ public class MediaLibraryPageTestMethods extends MediaLibraryPageHelpers {
 		navigateToMyMediaUserLogin(userName, password);
 		createNewFolder(folderName);
 		accessFolder(folderName);
-		bulkMediaUpload("src\\fileResources\\lmsVideo");
+		bulkMediaUpload("src\\fileResources\\lmsAudio");
 	
 		selectAllFolderContents();
 		bulkFavoriteSelectedMedia();
 		
 		int numberOfMediaItemsInOriginalFolder = getElementList(By.cssSelector("[class='videoWrapper']")).size();
 		Thread.sleep(2000);
-		navigateToFavorites("automation_manager");
+		navigateToFavorites(userName);
 		int numberOfMediaItemsInFavoriteFolder = getElementList(By.cssSelector("[class='videoWrapper']")).size();
 		if(numberOfMediaItemsInOriginalFolder == numberOfMediaItemsInFavoriteFolder){
 			reportStep("Bulk favorite succesful", "PASS", false);

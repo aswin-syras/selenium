@@ -271,7 +271,7 @@ public class Helpers extends Report {
 		int listSize = mediaLibraryElementList.size();
 		if (listSize > 0) {
 			WebElement mediaLibraryElement;
-			String mediaLibraryElementName="";
+			String mediaLibraryElementName;
 			int i = 0;
 			while (i < listSize) {
 				mediaLibraryElement = mediaLibraryElementList.get(i++);

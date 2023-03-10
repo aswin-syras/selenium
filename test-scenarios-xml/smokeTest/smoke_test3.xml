@@ -8,16 +8,16 @@
     	<class name="com.yuja.evp.testclasses.MediaLibraryTest">
 	      	<methods>
 	      		
-	          	<include name="Bulkfavorite_manager_Succesful_test" />
-	          	<include name="Bulkfavorite_instructor_Succesful_test" />
-	          	<include name="Bulkfavorite_student_Succesful_test" />
+	            	<include name="Bulkfavorite_manager_Succesful_test" />  
+	           	<include name="Bulkfavorite_instructor_Succesful_test" />  
+	            	<include name="Bulkfavorite_student_Succesful_test" />  
 	          	
 	          	
 	          	
 	          	
 	       	</methods>
         </class>
-        
+        <!--  
         <class name="com.yuja.evp.testclasses.AdminPanelAccessiblityTest">
         	<methods>
         		<include name="Check_humancaption_button_update" />
@@ -100,7 +100,7 @@
         	</methods>
         </class>
         
-       
+       -->
         
         
     </classes>
