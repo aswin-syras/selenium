@@ -48,6 +48,19 @@ public class HTML5PlayerTest extends BaseTest {
 			}
 		 }	
 		
+		@Test(description="Side_bar_gearicon_ui_test")
+		  @Parameters({"TestName"})
+		  public void Side_bar_gearicon_ui_test(String testName) {
+			MediaPlayerSideBarTestMethods sidebarObj = new MediaPlayerSideBarTestMethods();
+			try {
+				sidebarObj.gear_icon("automation_manager", "jamNOW123!@#123", "test");
+				Thread.sleep(2000);
+			}catch(Exception e) {
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+			}
+		 }	
+		
 		
 	}
 
