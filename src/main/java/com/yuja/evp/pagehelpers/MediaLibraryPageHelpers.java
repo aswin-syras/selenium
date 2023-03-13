@@ -82,8 +82,9 @@ public class MediaLibraryPageHelpers extends Helpers{
 		launchUrl(URL, "Xavier University Enterprise Video Platform");
 	}
 	
-	public void bulkMediaUpload(String mediaDirectoryPath) {
+	public boolean bulkMediaUpload(String mediaDirectoryPath) {
 		
+		boolean end;
 		AddMediaModalHelperMethods modal = new AddMediaModalHelperMethods();
 		File mediaDirectory = new File(mediaDirectoryPath);
 		String[] mediaList = mediaDirectory.list();
@@ -110,10 +111,13 @@ public class MediaLibraryPageHelpers extends Helpers{
 					reportStep("e.getMessage(): " + e.getMessage() + ", @Method "+Scenario_Name +" exception to be handled", "Fail", true);
 				}
 			}
+			end = true;
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
+			end = false;
 		}
+		return end;
 	 }// end of  uploadMedia
 
 	public boolean mediaIsProcessed(String mediaName, int timeoutInSeconds, int maxSearchAttemps) {

@@ -104,8 +104,11 @@ public class MediaLibraryPageTestMethods extends MediaLibraryPageHelpers {
 		navigateToMyMediaUserLogin(userName, password);
 		createNewFolder(folderName);
 		accessFolder(folderName);
-		bulkMediaUpload("src\\fileResources\\lmsAudio");
-	
+		if(bulkMediaUpload("src\\fileResources\\lmsAudio")) {
+			System.out.println("media uploaded");
+		} else {
+			throw new Exception();
+		}
 		selectAllFolderContents();
 		bulkFavoriteSelectedMedia();
 		

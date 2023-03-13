@@ -9,8 +9,8 @@
 	      	<methods>
 	      		
 	            	<include name="Bulkfavorite_manager_Succesful_test" />  
-	           	<include name="Bulkfavorite_instructor_Succesful_test" />  
-	            	<include name="Bulkfavorite_student_Succesful_test" />  
+	           	    <include name="Bulkfavorite_instructor_Succesful_test" />  
+	            	 <include name="Bulkfavorite_student_Succesful_test" /> 
 	          	
 	          	
 	          	
