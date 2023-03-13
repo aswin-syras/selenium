@@ -83,7 +83,6 @@ public class MediaPlayerSideBarTestMethods extends MediaPlayerHelpers{
 		try {
 		medialibrary.navigateToMyMediaUserLogin(userName, password);
 		GotoHTMLPlayer(mediaTitle);
-		branding.checkTheme();
 		Thread.sleep(3000);
 		}
 		catch(Exception e) {

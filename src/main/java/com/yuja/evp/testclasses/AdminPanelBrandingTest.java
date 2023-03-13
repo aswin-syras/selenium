@@ -15,6 +15,6 @@ public class AdminPanelBrandingTest extends BaseTest {
 	@Parameters({"TestName"})
 	public void Admin_panel_branding_set_theme(String testName) throws InterruptedException {
 		AdminPanelBrandingTestMethods AdminPanelBranding = new AdminPanelBrandingTestMethods();
-			AdminPanelBranding.setTheDefaultTheme(MANAGER_USER, PASSWORD);
+			AdminPanelBranding.setTheDefaultTheme(MANAGER_USER, PASSWORD,"Automation theme");
 	}
 }

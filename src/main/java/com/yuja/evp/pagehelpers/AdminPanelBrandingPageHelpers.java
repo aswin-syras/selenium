@@ -23,11 +23,11 @@ public class AdminPanelBrandingPageHelpers extends AdminPanelGeneralPageHelpers 
 		} else reportStep(sectionTitle + "failed to load", "fail", true);	
 	}
 	
-	public void setTheme() throws InterruptedException {
+	public void setTheme(String theme) throws InterruptedException {
 		CheckPageUI();
-		WebElement theme = driver.findElement(By.id("html5ThemeSelect"));
-		Select se = new Select(theme);
-		se.selectByValue("Automation theme");
+		WebElement themeName = driver.findElement(By.id("html5ThemeSelect"));
+		Select se = new Select(themeName);
+		se.selectByValue(theme);
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		js.executeScript("window.scrollBy(0,2500)");
 		clickElement("click theme",By.xpath("//*[@id=\"institutionBranding\"]/div[5]/div/button"));
@@ -39,14 +39,12 @@ public class AdminPanelBrandingPageHelpers extends AdminPanelGeneralPageHelpers 
 		navigationBar.userLogOut();	
 	}
 	
-	public void checkTheme() throws InterruptedException {
+	public void checkTheme(String theme) throws InterruptedException {
 		CheckPageUI();
 		String checktheme = driver.findElement(By.id("html5ThemeSelect")).getText();
-		if(checktheme.equals("Automation theme")) {
+		if(checktheme.equals(theme)) {
 			reportStep("Automation theme ", "PASS", false);
 		}
-		else {
-			setTheme();
-		}
+		else { setTheme(theme); }
 	}
 }
