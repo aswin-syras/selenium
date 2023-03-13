@@ -129,7 +129,7 @@ public class MoodlePage extends QuizPageHelpers {
 	public void loginCreateandPublishEmbedQuiz(String userName, String password,String embedMediaTitle,String mediaTitle,String name,String question,String option1, String option2,String possibleans1, String possibleans2,String hint,String stuserName, String stpassword, String sa,String fitbans,String courseName,String marks,String studentFullName, String studentNameinActivitylog) throws Exception {
 		navigateToCourse(userName,password);
 		NavigateToLTI(embedMediaTitle);
-		
+		Thread.sleep(3000);
 		String quizNewName=createandPublishQuiz(mediaTitle,name,question, option1,  option2, possibleans1, possibleans2, hint);
 		String quizFinalName="'"+quizNewName+"'";
 		driver.switchTo().defaultContent();
@@ -150,6 +150,7 @@ public class MoodlePage extends QuizPageHelpers {
 		logout();
 		navigateToCourse(userName,password);
 		NavigateToLTI(embedMediaTitle);
+		Thread.sleep(3000);
 		checkGradebookTestafterLoginforMultiple(mediaTitle, courseName,name, marks,studentFullName );
 		clickElement("Click Manage Media",By.xpath("//span[@id='topBarTabName3']"),10);
 		Thread.sleep(2000);
@@ -188,6 +189,7 @@ public class MoodlePage extends QuizPageHelpers {
 		logout();
 		navigateToCourse(userName,password);
 		NavigateToLTI(embedMediaTitle);
+		Thread.sleep(3000);
 		checkGradebookforPlaybackQuiz(videoNameforPlaybackquiz, courseName, quizNewName, marks, studentFullName);
 		clickElement("Click Manage Media",By.xpath("//span[@id='topBarTabName3']"),10);
 		Thread.sleep(2000);
@@ -207,9 +209,7 @@ public class MoodlePage extends QuizPageHelpers {
             logout();
 	    navigateToCourse(stuserName,stpassword);
 	    NavigateToLTI(embedMediaName);
-	    switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
-	    clickPlaybutton();
-		Thread.sleep(5000);
+	   
 	}
 	
 	//Method directly used in test class. login upload media and check in media chooser as well as media library
@@ -578,7 +578,7 @@ public class MoodlePage extends QuizPageHelpers {
 		clickElement("Turn Editing on button", By.cssSelector("button[id^=\"single_button\"]"));
 		clickElement("add activity or resource button", By.cssSelector("span[class=\"section-modchooser-text\"]"));
 		Thread.sleep(3000);
-		clickElement("cim mediachooser button", By.xpath("//a[@href='https://tmoodle2.yuja.com/course/modedit.php?add=lti&return=0&course=142&sr&typeid=68&section=0&sr=0']"));
+		clickElement("cim mediachooser button", By.xpath("//a[@href='https://tmoodle2.yuja.com/course/modedit.php?add=lti&return=0&course=142&sr&typeid=50&section=0&sr=0']"));
 		clickElement("select content", By.cssSelector("button[name=\"selectcontent\"]"));
         Thread.sleep(3000);
 		switchToIframe("switch to mediachooser frame", By.id("contentitem-page-iframe"), 10);
