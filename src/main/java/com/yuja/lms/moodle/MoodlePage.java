@@ -16,10 +16,10 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import com.yuja.evp.modalhelpers.AddMediaModalHelperMethods;
+import com.yuja.evp.pagehelpers.AdminPanelRosterPageHelpers;
 import com.yuja.evp.pagehelpers.MediaLibraryPageHelpers;
 import com.yuja.evp.pagehelpers.NavigationBarHelpers;
 import com.yuja.evp.pagehelpers.QuizPageHelpers;
-import com.yuja.evp.pagehelpers.RosterPageHelpers;
 import com.yuja.evp.pagetestmethods.MediaLibraryPageTestMethods;
 import com.yuja.evp.utilities.Helpers;
 
@@ -31,7 +31,7 @@ public class MoodlePage extends QuizPageHelpers {
 	
 	MediaLibraryPageHelpers mediaLibrary = new MediaLibraryPageHelpers();
 	NavigationBarHelpers navbar=new NavigationBarHelpers();
-	RosterPageHelpers roster=new RosterPageHelpers();
+	AdminPanelRosterPageHelpers roster=new AdminPanelRosterPageHelpers();
 	
 	private void setMediaUploadModal() {
 		System.out.println("Fetching Media Upload modal...");

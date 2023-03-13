@@ -40,7 +40,7 @@ public class MoodleTest extends BaseTest {
 	     String studentAnsForShortAnsQuestion="moodle";
 	     String studentAnsForFitbQuestion="moodle";
 
-	     String courseNameForQuizPublish="AUTOMATION MOODLE COURSE";
+	     String courseNameForQuizPublish = "AUTOMATION MOODLE COURSE";
 	     String marks="100%"; 
 	     String yujaAdminUserName="automation_manager";
 	     String yujaAdminPassword="jamNOW123!@#123";
@@ -70,7 +70,7 @@ public class MoodleTest extends BaseTest {
 	public void Moodle_create_publish_attend_gradebook_administrator_test(String TestName) {
 		MoodlePage mp = new MoodlePage();
 		try {
-			mp.loginCreateandPublishEmbedQuiz(adminUserName, adminPassword,LTILinkName,videoName,QuizTitle,question,option1, option2,fitbPossibleans1, fitbPossibleans2,hint,studentUserName, studentPassword, studentAnsForShortAnsQuestion,studentAnsForFitbQuestion,courseName,marks,studentFullName,studentNameinActivityLog);
+			mp.loginCreateandPublishEmbedQuiz(adminUserName, adminPassword,LTILinkName,videoName,QuizTitle,question,option1, option2,fitbPossibleans1, fitbPossibleans2,hint,studentUserName, studentPassword, studentAnsForShortAnsQuestion,studentAnsForFitbQuestion,courseNameForQuizPublish,marks,studentFullName,studentNameinActivityLog);
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -85,7 +85,7 @@ public class MoodleTest extends BaseTest {
     	public void Moodle_create_publish_attend_gradebook_instructor_test(String TestName) {                                                                                                                                                                                                                                                                
       		MoodlePage mp = new MoodlePage();                                                                                                                                                                                                                                                                                 
       		try {                                                                                                                                                                                                                                                                                                             
-      			mp.loginCreateandPublishEmbedQuiz(instuctorUserName, instuctorPassword,LTILinkName,videoNameinstructor,QuizTitle,question,option1, option2,fitbPossibleans1, fitbPossibleans2,hint,studentUserName, studentPassword, studentAnsForShortAnsQuestion,studentAnsForFitbQuestion,courseName,marks,studentFullName,studentNameinActivityLog);         
+      			mp.loginCreateandPublishEmbedQuiz(instuctorUserName, instuctorPassword,LTILinkName,videoNameinstructor,QuizTitle,question,option1, option2,fitbPossibleans1, fitbPossibleans2,hint,studentUserName, studentPassword, studentAnsForShortAnsQuestion,studentAnsForFitbQuestion,courseNameForQuizPublish,marks,studentFullName,studentNameinActivityLog);         
 
       		}                                                                                                                                                                                                                                                                                                                 
       		catch (Exception e) {                                                                                                                                                                                                                                                                                             
@@ -101,7 +101,7 @@ public class MoodleTest extends BaseTest {
 		public void Moodle_create_playback_attend_gradebook_administrator_test(String TestName) {
 			MoodlePage mp = new MoodlePage();
 			try {
-				mp.loginCreateandEmbedPlaybackQuiz(adminUserName,adminPassword,LTILinkName,videoNameforPlaybackquiz, playbackQuizTitle,studentUserName, studentPassword, courseName,marks,studentFullName,studentNameinActivityLog);
+				mp.loginCreateandEmbedPlaybackQuiz(adminUserName,adminPassword,LTILinkName,videoNameforPlaybackquiz, playbackQuizTitle,studentUserName, studentPassword, courseNameForQuizPublish ,marks,studentFullName,studentNameinActivityLog);
 			} 
 			catch (Exception e) {
 				System.out.println(e.getMessage());
@@ -116,7 +116,7 @@ public class MoodleTest extends BaseTest {
 	    	public void Moodle_create_playback_attend_gradebook_instructor_test(String TestName) {                                                                                                                                                                                                                                                                
 	      		MoodlePage mp = new MoodlePage();                                                                                                                                                                                                                                                                                 
 	      		try {                                                                                                                                                                                                                                                                                                             
-	      			mp.loginCreateandEmbedPlaybackQuiz(instuctorUserName,instuctorPassword,LTILinkName,videoNameforPlaybackquiz, playbackQuizTitle,studentUserName, studentPassword,courseName,marks,studentFullName,studentNameinActivityLog);         
+	      			mp.loginCreateandEmbedPlaybackQuiz(instuctorUserName,instuctorPassword,LTILinkName,videoNameforPlaybackquiz, playbackQuizTitle,studentUserName, studentPassword, courseNameForQuizPublish ,marks,studentFullName,studentNameinActivityLog);         
 	      		}                                                                                                                                                                                                                                                                                                                 
 	      		catch (Exception e) {                                                                                                                                                                                                                                                                                             
 	      			System.out.println(e.getMessage());                                                                                                                                                                                                                                                                              
