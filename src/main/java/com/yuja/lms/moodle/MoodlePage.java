@@ -16,10 +16,8 @@ import com.yuja.evp.pagehelpers.NavigationBarHelpers;
 import com.yuja.evp.pagehelpers.QuizPageHelpers;
 
 public class MoodlePage extends QuizPageHelpers {
-	//run
 	
 	private WebElement mediaUploadModal = null;
-	
 	
 	MediaLibraryPageHelpers mediaLibrary = new MediaLibraryPageHelpers();
 	NavigationBarHelpers navbar=new NavigationBarHelpers();
