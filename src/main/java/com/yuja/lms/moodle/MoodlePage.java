@@ -68,13 +68,13 @@ public class MoodlePage extends QuizPageHelpers {
 		clickElement("site home", By.xpath("//a[@href=\"https://tmoodle2.yuja.com/?redirect=0\"]"));
 		List<WebElement> courseList= getElementList(By.xpath("//a[@class='aalink']"));
 		for(int i=0;i<courseList.size();i++) {
-			WebElement element=courseList.get(i);
-			String obtainedCourseName = element.getText();
-			if(obtainedCourseName.equals(courseName)) {
-				clickElement("click on given course",element);
-				break;
-			    }
-			  }
+		WebElement element=courseList.get(i);
+		String obtainedCourseName = element.getText();
+		if(obtainedCourseName.equals(courseName)) {
+			clickElement("click on given course",element);
+			break;
+		    }
+		 }
 	}
 	
 	public void createMoodleCourse(String adminUserName, String adminPassword, String courseName, String courseShortName) throws InterruptedException{
@@ -134,14 +134,14 @@ public class MoodlePage extends QuizPageHelpers {
 		driver.switchTo().defaultContent();
 		String URL = "https://tmoodle2.yuja.com/course/view.php?id=142";
 		launchUrl(URL, "Moodle automation course page");
-	    accessCIMMediaChooser();
-	    CIMMediaChooserQuizEmbed(quizNewName);
-	    logout();
-	    navigateToCourse(stuserName,stpassword);
-	    clickElement("click embed media title", By.xpath("//span[text()="+quizFinalName+"]"));
-	    switchToIframe("switch to lti frame", By.id("contentframe"), 10);
-	    switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
-	    clickPlaybutton();
+	        accessCIMMediaChooser();
+	        CIMMediaChooserQuizEmbed(quizNewName);
+	        logout();
+	        navigateToCourse(stuserName,stpassword);
+	        clickElement("click embed media title", By.xpath("//span[text()="+quizFinalName+"]"));
+	        switchToIframe("switch to lti frame", By.id("contentframe"), 10);
+	        switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
+	        clickPlaybutton();
 		Thread.sleep(5000);
 		driver.switchTo().parentFrame();
 		StudentattendallquestionsCorrectly(sa, fitbans);
@@ -162,6 +162,7 @@ public class MoodlePage extends QuizPageHelpers {
 	//used directly in test class. Login create embed attend and access the yuja gradebook do manual sync and check lms grade sync via activity log
 	
 	public void loginCreateandEmbedPlaybackQuiz(String userName, String password,String embedMediaTitle,String videoNameforPlaybackquiz,String playbackQuizTitle,String stuserName, String stpassword, String courseName,String marks,String studentFullName, String studentNameinActivityLog) throws Exception {
+	
 		navigateToCourse(userName,password);
 		NavigateToLTI(embedMediaTitle);
 		clickElement("Click Manage Media",By.xpath("//span[@id='topBarTabName3']"),10);
@@ -173,14 +174,14 @@ public class MoodlePage extends QuizPageHelpers {
 		driver.switchTo().defaultContent();
 		String URL = "https://tmoodle2.yuja.com/course/view.php?id=142";
 		launchUrl(URL, "Moodle automation course page");
-	    accessCIMMediaChooser();
-	    CIMMediaChooserQuizEmbed(quizNewName);
-	    logout();
-	    navigateToCourse(stuserName,stpassword);
-	    clickElement("click embed media title", By.xpath("//span[text()="+quizFinalName+"]"));
-	    switchToIframe("switch to lti frame", By.id("contentframe"), 10);
-	    switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
-	    clickPlaybutton();
+		accessCIMMediaChooser();
+	        CIMMediaChooserQuizEmbed(quizNewName);
+		logout();
+		navigateToCourse(stuserName,stpassword);
+		clickElement("click embed media title", By.xpath("//span[text()="+quizFinalName+"]"));
+		switchToIframe("switch to lti frame", By.id("contentframe"), 10);
+	        switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
+		clickPlaybutton();
 		Thread.sleep(48000);
 		driver.switchTo().defaultContent();
 		logout();
@@ -202,7 +203,7 @@ public class MoodlePage extends QuizPageHelpers {
 		navigateToCourse(userName,password);
 		accessCIMMediaChooser();
 		CIMMediaChooserMediaEmbed(name);
-		logout();
+            logout();
 	    navigateToCourse(stuserName,stpassword);
 	    NavigateToLTI(embedMediaName);
 	    switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
