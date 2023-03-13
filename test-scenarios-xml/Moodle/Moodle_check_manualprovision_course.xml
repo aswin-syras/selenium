@@ -6,7 +6,7 @@
   	<classes>
       <class name="com.yuja.evp.testclasses.MoodleTest">
 	      <methods>
-	          <include name="MoodleEmbedMedia4">
+	          <include name="Moodle_check_manualprovisioningto_existingcourse">
 			      <!-- <parameter name="Browser" value="IE" /> -->
 			      <parameter name="TestName" value="MoodleEmbedMedia4" />
 			  </include> 

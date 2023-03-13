@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import com.yuja.evp.pagetestmethods.QuizPageTestMethods;
 import com.yuja.lms.moodle.MoodlePage;
 
-public class MoodleQuizTest extends BaseTest {
+public class MoodleTest extends BaseTest {
 	     String adminUserName="automationadmin";
 	     String adminPassword="jamNOW123/"; 
 	     String instuctorUserName="automationinstructor"; 
@@ -39,8 +39,25 @@ public class MoodleQuizTest extends BaseTest {
 	     String embedDocumentNameinstructor="'automationdocumentinstructor'";
 	     String studentAnsForShortAnsQuestion="moodle";
 	     String studentAnsForFitbQuestion="moodle";
-	     String courseName="AUTOMATION MOODLE COURSE";
+	     String courseNameForQuizPublish="AUTOMATION MOODLE COURSE";
 	     String marks="100%"; 
+	     String yujaAdminUserName="automation_manager";
+	     String yujaAdminPassword="jamNOW123!@#123";
+	     String courseNameForAutoProvisioning="AUTOPROVISION";
+	     String courseCodeForAutoProvisioning="AP";
+	     String courseNameForManualnewProvisioning="MANUALPROVISIONNEW";
+	     String courseCodeForManualnewProvisioning="MPN";
+	     String courseNameForManualexistingProvisioning="MANUALPROVISIONEXISTING";
+	     String courseCodeForManualexistingProvisioning="MPE";
+	     String userNameforProvisioning="moodlenewuser";
+	     String emailOfUserforProvisioning="moodleuser@yuja.com";
+	     String passwordOfUserforProvisioning="jamNOW123/";
+	     String courseforEnrollingUserforUserProvisioning="USER PROVISIONING";
+	     String[] courseArrayforEnrollingUserforUserProvisioning={"USER PROVISIONING","USER PROVISIONING2","USER PROVISIONING3"};
+	     String userRoleinMoodleCourse="Manager"; //can be Teacher corresponding yuja role is GroupOwner or Student corresponding yuja role is GroupMember
+	     String userRoleinYujaCourse="GroupOwner";
+	     String customToolName="XAVIER 1.3";
+	     String moodleToolNameOnConfiguration="XAVIER 1.3";
 	     String directoryPathForVideo="src\\fileResources\\lmsVideo";
          String directoryPathForAudio="src\\fileResources\\lmsAudio";
 	     String directoryPathForDoc="src\\\\fileResources\\\\lmsDocument";
@@ -51,7 +68,7 @@ public class MoodleQuizTest extends BaseTest {
 	public void Moodle_create_publish_attend_gradebook_administrator_test(String TestName) {
 		MoodlePage mp = new MoodlePage();
 		try {
-			mp.loginCreateandPublishEmbedQuiz(adminUserName, adminPassword,LTILinkName,videoName,QuizTitle,question,option1, option2,fitbPossibleans1, fitbPossibleans2,hint,studentUserName, studentPassword, studentAnsForShortAnsQuestion,studentAnsForFitbQuestion,courseName,marks,studentFullName,studentNameinActivityLog);
+			mp.loginCreateandPublishEmbedQuiz(adminUserName, adminPassword,LTILinkName,videoName,QuizTitle,question,option1, option2,fitbPossibleans1, fitbPossibleans2,hint,studentUserName, studentPassword, studentAnsForShortAnsQuestion,studentAnsForFitbQuestion,courseNameForQuizPublish,marks,studentFullName,studentNameinActivityLog);
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -66,7 +83,7 @@ public class MoodleQuizTest extends BaseTest {
     	public void Moodle_create_publish_attend_gradebook_instructor_test(String TestName) {                                                                                                                                                                                                                                                                
       		MoodlePage mp = new MoodlePage();                                                                                                                                                                                                                                                                                 
       		try {                                                                                                                                                                                                                                                                                                             
-      			mp.loginCreateandPublishEmbedQuiz(instuctorUserName, instuctorPassword,LTILinkName,videoName,QuizTitle,question,option1, option2,fitbPossibleans1, fitbPossibleans2,hint,studentUserName, studentPassword, studentAnsForShortAnsQuestion,studentAnsForFitbQuestion,courseName,marks,studentFullName,studentNameinActivityLog);         
+      			mp.loginCreateandPublishEmbedQuiz(instuctorUserName, instuctorPassword,LTILinkName,videoName,QuizTitle,question,option1, option2,fitbPossibleans1, fitbPossibleans2,hint,studentUserName, studentPassword, studentAnsForShortAnsQuestion,studentAnsForFitbQuestion,courseNameForQuizPublish,marks,studentFullName,studentNameinActivityLog);         
       		}                                                                                                                                                                                                                                                                                                                 
       		catch (Exception e) {                                                                                                                                                                                                                                                                                             
       			System.out.println(e.getMessage());                                                                                                                                                                                                                                                                              
@@ -81,7 +98,7 @@ public class MoodleQuizTest extends BaseTest {
 		public void Moodle_create_playback_attend_gradebook_administrator_test(String TestName) {
 			MoodlePage mp = new MoodlePage();
 			try {
-				mp.loginCreateandEmbedPlaybackQuiz(adminUserName,adminPassword,LTILinkName,videoNameforPlaybackquiz, playbackQuizTitle,studentUserName, studentPassword, courseName,marks,studentFullName,studentNameinActivityLog);
+				mp.loginCreateandEmbedPlaybackQuiz(adminUserName,adminPassword,LTILinkName,videoNameforPlaybackquiz, playbackQuizTitle,studentUserName, studentPassword, courseNameForQuizPublish,marks,studentFullName,studentNameinActivityLog);
 			} 
 			catch (Exception e) {
 				System.out.println(e.getMessage());
@@ -96,7 +113,7 @@ public class MoodleQuizTest extends BaseTest {
 	    	public void Moodle_create_playback_attend_gradebook_instructor_test(String TestName) {                                                                                                                                                                                                                                                                
 	      		MoodlePage mp = new MoodlePage();                                                                                                                                                                                                                                                                                 
 	      		try {                                                                                                                                                                                                                                                                                                             
-	      			mp.loginCreateandEmbedPlaybackQuiz(instuctorUserName,instuctorPassword,LTILinkName,videoNameforPlaybackquiz, playbackQuizTitle,studentUserName, studentPassword,courseName,marks,studentFullName,studentNameinActivityLog);         
+	      			mp.loginCreateandEmbedPlaybackQuiz(instuctorUserName,instuctorPassword,LTILinkName,videoNameforPlaybackquiz, playbackQuizTitle,studentUserName, studentPassword,courseNameForQuizPublish,marks,studentFullName,studentNameinActivityLog);         
 	      		}                                                                                                                                                                                                                                                                                                                 
 	      		catch (Exception e) {                                                                                                                                                                                                                                                                                             
 	      			System.out.println(e.getMessage());                                                                                                                                                                                                                                                                              
@@ -273,6 +290,76 @@ public class MoodleQuizTest extends BaseTest {
       		MoodlePage mp = new MoodlePage();                                                                                                                                                                                                                                                                                 
       		try {                                                                                                                                                                                                                                                                                                             
       			mp.CIMMediaChooserMediaUpload(instuctorUserName, instuctorPassword,directoryPathForDoc,LTILinkName);         
+      		}                                                                                                                                                                                                                                                                                                                 
+      		catch (Exception e) {                                                                                                                                                                                                                                                                                             
+      			System.out.println(e.getMessage());                                                                                                                                                                                                                                                                              
+      			e.printStackTrace();                                                                                                                                                                                                                                                                                             
+      			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);                                                                                                                                                                                                                                  
+      		}                                                                                                                                                                                                                                                                                                                 
+      }  
+		@Test(description="Moodle_check_autoprovisionofcourse")                                                                                                                                                                                                                                                                          
+      	@Parameters({"TestName"})                                                                                                                                                                                                                                                                                        
+    	public void Moodle_check_autoprovisionofcourse(String TestName) {                                                                                                                                                                                                                                                                
+      		MoodlePage mp = new MoodlePage();                                                                                                                                                                                                                                                                                 
+      		try {                                                                                                                                                                                                                                                                                                             
+      			mp.checkAutoprovisionOfCourse(adminUserName, adminPassword, courseNameForAutoProvisioning, courseCodeForAutoProvisioning, customToolName, moodleToolNameOnConfiguration,yujaAdminUserName,yujaAdminPassword);         
+      		}                                                                                                                                                                                                                                                                                                                 
+      		catch (Exception e) {                                                                                                                                                                                                                                                                                             
+      			System.out.println(e.getMessage());                                                                                                                                                                                                                                                                              
+      			e.printStackTrace();                                                                                                                                                                                                                                                                                             
+      			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);                                                                                                                                                                                                                                  
+      		}                                                                                                                                                                                                                                                                                                                 
+      }  
+		
+		@Test(description="Moodle_check_manualprovisioningof_newcourse")                                                                                                                                                                                                                                                                          
+      	@Parameters({"TestName"})                                                                                                                                                                                                                                                                                        
+    	public void Moodle_check_manualprovisioningof_newcourse(String TestName) {                                                                                                                                                                                                                                                                
+      		MoodlePage mp = new MoodlePage();                                                                                                                                                                                                                                                                                 
+      		try {                                                                                                                                                                                                                                                                                                             
+      			mp.checkManualprovisionOfNewCourse(adminUserName, adminPassword, courseNameForManualnewProvisioning, courseCodeForManualnewProvisioning,customToolName, moodleToolNameOnConfiguration,yujaAdminUserName,yujaAdminPassword);       
+      		}                                                                                                                                                                                                                                                                                                                 
+      		catch (Exception e) {                                                                                                                                                                                                                                                                                             
+      			System.out.println(e.getMessage());                                                                                                                                                                                                                                                                              
+      			e.printStackTrace();                                                                                                                                                                                                                                                                                             
+      			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);                                                                                                                                                                                                                                  
+      		}                                                                                                                                                                                                                                                                                                                 
+      }  
+		
+		@Test(description="Moodle_check_manualprovisioningto_existingcourse")                                                                                                                                                                                                                                                                          
+      	@Parameters({"TestName"})                                                                                                                                                                                                                                                                                        
+    	public void Moodle_check_manualprovisioningto_existingcourse(String TestName) {                                                                                                                                                                                                                                                                
+      		MoodlePage mp = new MoodlePage();                                                                                                                                                                                                                                                                                 
+      		try {                                                                                                                                                                                                                                                                                                             
+      			mp.checkManualprovisionToExistingCourse(adminUserName, adminPassword, courseNameForManualexistingProvisioning, courseCodeForManualexistingProvisioning, customToolName, moodleToolNameOnConfiguration,yujaAdminUserName,yujaAdminPassword);       
+      		}                                                                                                                                                                                                                                                                                                                 
+      		catch (Exception e) {                                                                                                                                                                                                                                                                                             
+      			System.out.println(e.getMessage());                                                                                                                                                                                                                                                                              
+      			e.printStackTrace();                                                                                                                                                                                                                                                                                             
+      			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);                                                                                                                                                                                                                                  
+      		}                                                                                                                                                                                                                                                                                                                 
+      }  
+		
+		@Test(description="Moodle_check_autoprovisioning_user")                                                                                                                                                                                                                                                                          
+      	@Parameters({"TestName"})                                                                                                                                                                                                                                                                                        
+    	public void Moodle_check_autoprovisioning_user(String TestName) {                                                                                                                                                                                                                                                                
+      		MoodlePage mp = new MoodlePage();                                                                                                                                                                                                                                                                                 
+      		try {                                                                                                                                                                                                                                                                                                             
+      			mp.checkAutoprovisionOfUser(adminUserName, adminPassword,yujaAdminUserName,yujaAdminPassword,emailOfUserforProvisioning,userNameforProvisioning,passwordOfUserforProvisioning,courseforEnrollingUserforUserProvisioning,userRoleinMoodleCourse,userRoleinYujaCourse);
+      					       
+      		}                                                                                                                                                                                                                                                                                                                 
+      		catch (Exception e) {                                                                                                                                                                                                                                                                                             
+      			System.out.println(e.getMessage());                                                                                                                                                                                                                                                                              
+      			e.printStackTrace();                                                                                                                                                                                                                                                                                             
+      			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);                                                                                                                                                                                                                                  
+      		}                                                                                                                                                                                                                                                                                                                 
+      }  
+		@Test(description="Moodle_check_autoprovisioning_user_multipleCourses")                                                                                                                                                                                                                                                                          
+      	@Parameters({"TestName"})                                                                                                                                                                                                                                                                                        
+    	public void Moodle_check_autoprovisioning_user_multipleCourses(String TestName) {                                                                                                                                                                                                                                                                
+      		MoodlePage mp = new MoodlePage();                                                                                                                                                                                                                                                                                 
+      		try {                                                                                                                                                                                                                                                                                                             
+      			mp.checkAutoprovisionOfUserinMultipleCourses(adminUserName, adminPassword,yujaAdminUserName,yujaAdminPassword,emailOfUserforProvisioning,userNameforProvisioning,passwordOfUserforProvisioning,courseArrayforEnrollingUserforUserProvisioning,userRoleinMoodleCourse,userRoleinYujaCourse);
+      					       
       		}                                                                                                                                                                                                                                                                                                                 
       		catch (Exception e) {                                                                                                                                                                                                                                                                                             
       			System.out.println(e.getMessage());                                                                                                                                                                                                                                                                              
