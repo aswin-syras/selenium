@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import com.yuja.evp.pagetestmethods.QuizPageTestMethods;
 import com.yuja.lms.moodle.MoodlePage;
 
-public class MoodleQuizTest extends BaseTest {
+public class MoodleTest extends BaseTest {
 	     String adminUserName="automationadmin";
 	     String adminPassword="jamNOW123/"; 
 	     String instuctorUserName="automationinstructor"; 
