@@ -2,13 +2,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="Suite">
-  <test name="Sidebar_instructor_test">
+  <test name="MoodleEmbedMedia4">
   	<classes>
-      <class name="com.yuja.evp.testclasses.HTML5PlayerTest">
+      <class name="com.yuja.evp.testclasses.MoodleTest">
 	      <methods>
-	          <include name="Sidebar_instructor_test">
+	          <include name="Moodle_check_manualprovisioningto_existingcourse">
 			      <!-- <parameter name="Browser" value="IE" /> -->
-			      <parameter name="TestName" value="Sidebar_instructor_test" />
+			      <parameter name="TestName" value="MoodleEmbedMedia4" />
 			  </include> 
 	        </methods>
         </class>

@@ -1,8 +1,8 @@
 package com.yuja.evp.pagetestmethods;
 
-import com.yuja.evp.pagehelpers.RosterPageHelpers;
+import com.yuja.evp.pagehelpers.AdminPanelRosterPageHelpers;
 
-public class RosterPageTestMethods extends RosterPageHelpers{
+public class RosterPageTestMethods extends AdminPanelRosterPageHelpers{
 	
 	public void createAndDeleteUser(String loginUserName, String adminPassword, String role) {
 		try {

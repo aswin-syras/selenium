@@ -24,7 +24,7 @@ public class NavigationTest extends BaseTest {
 		NavigationBarHelpers navBar = new NavigationBarHelpers();
 		
 		try {
-			ml.navigateToMyMediaUserLogin("automation_mananger", "JameNOW123!@#123");
+			ml.navigateToMyMediaUserLogin("automation_mananger", "jamNOW123!@#123");
 			navBar.clickAdminPanel();
 			
 			if(mc.fetchedPageTitle()) System.out.println("GotoAdminPanel test success but this test is not completed");

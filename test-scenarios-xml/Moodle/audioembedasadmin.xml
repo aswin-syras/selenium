@@ -4,7 +4,7 @@
 <suite name="Suite">
   <test name="MoodleEmbedMedia4">
   	<classes>
-      <class name="com.yuja.evp.testclasses.MoodleQuizTest">
+      <class name="com.yuja.evp.testclasses.MoodleTest">
 	      <methods>
 	          <include name="MoodleEmbedMedia4">
 			      <!-- <parameter name="Browser" value="IE" /> -->
