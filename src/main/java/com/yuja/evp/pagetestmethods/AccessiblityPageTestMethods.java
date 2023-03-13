@@ -39,6 +39,7 @@ public class AccessiblityPageTestMethods extends AccessiblityPageHelpers {
 	
 	public void checkHumanCaptioningPermissionForUser(String adminUsername,String adminPassword,String permissionBase, String userType,String userUsername,String userPassword,String userFullname, String humanCaptionProviders, String requireApproval, String humancaptionVideo ) throws InterruptedException {
 		navigateToAdminPanelAccessiblityPageUserLogin(adminUsername, adminPassword);
+		setDefaultCaptioningForUploads("none");
 		deleteAllExistingPermissions("human caption");
 		addPermissionHumancaptionUsers(permissionBase,userType,humanCaptionProviders,requireApproval);
 		savePermission();
@@ -54,7 +55,7 @@ public class AccessiblityPageTestMethods extends AccessiblityPageHelpers {
 	
 	public void checkHumanCaptionButtonUpdate( String adminUserName, String adminPassword, String permissionBase, String userName, String humanCaptionProviders, String requireApproval, String humancaptionVideo) throws InterruptedException {
 		mediaLibrary.navigateToMyMediaUserLogin(adminUserName, adminPassword);
-		WebElement media=driver.findElement(By.xpath("//div[@class=\"videoWrapper\"]"));
+		WebElement media=getMedia("editAccessSharedVideoManager");
 		hoverOverElement(media);
 		clickElement(media, "More menu", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 10);
 		mediaDetailsModal.clickAccessiblity();
@@ -63,6 +64,7 @@ public class AccessiblityPageTestMethods extends AccessiblityPageHelpers {
 	    boolean afterIsEnabled = !originalIsEnabled;
 	    URL = "https://staging-demo.yuja.com/P/Institution/AccessibilityOptions/";
 	    launchUrl(URL, "Xavier University Enterprise Video Platform");
+	    setDefaultCaptioningForUploads("none");
 		WebElement editButton = waitForElement(By.cssSelector("button[data-automation='btnEditExternalCaptionUser']"),10);
 	    clickElement("Clicking edit button", editButton); 
 	         
@@ -85,7 +87,7 @@ public class AccessiblityPageTestMethods extends AccessiblityPageHelpers {
 	         }
 	        Thread.sleep(3000); 
 	        clickElement("Click Manage Media",By.xpath("//span[@id='topBarTabName3']"),10);
-	        WebElement media1=driver.findElement(By.xpath("//div[@class=\"videoWrapper\"]"));
+	        WebElement media1=getMedia("editAccessSharedVideoManager");
 	 		hoverOverElement(media1);
 	 		clickElement(media1, "More menu", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 10);
 	 		mediaDetailsModal.clickAccessiblity();

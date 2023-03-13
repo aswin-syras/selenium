@@ -27,7 +27,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 	public void Check_humancaption_button_update(String TestName) {
 		AccessiblityPageTestMethods ap = new AccessiblityPageTestMethods();
 		try {
-			ap.checkHumanCaptionButtonUpdate( ADMIN_USERNAME,ADMIN_PASSWORD, "Role based", "All instructor", "Caption Sync: Arjun Caption Captionsync", "Yes", VIDEONAME);
+			ap.checkHumanCaptionButtonUpdate( ADMIN_USERNAME,ADMIN_PASSWORD, "Role based", "All Instructor", "Caption Sync: Arjun Caption Captionsync", "Yes", VIDEONAME);
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -56,7 +56,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 	public void Edit_autocaption_permissions_for_all_instructors_test(String TestName) {
 				AccessiblityPageTestMethods ap = new AccessiblityPageTestMethods();
 				try {
-					ap.checkAutoCaptioningPermissionForUser(ADMIN_USERNAME,ADMIN_PASSWORD,"Role based", "All instructor", INSTRUCTOR_USERNAME, INSTRUCTOR_PASSWORD,INSTRUCTOR_FULLNAME,VIDEONAME);
+					ap.checkAutoCaptioningPermissionForUser(ADMIN_USERNAME,ADMIN_PASSWORD,"Role based", "All Instructor", INSTRUCTOR_USERNAME, INSTRUCTOR_PASSWORD,INSTRUCTOR_FULLNAME,VIDEONAME);
 				}
 				catch (Exception e) {
 					System.out.println(e.getMessage());
@@ -112,7 +112,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 	public void Edit_humancaption_permissions_for_all_instructors_allcaptionproviders_test(String TestName) {
 				AccessiblityPageTestMethods ap = new AccessiblityPageTestMethods();
 				try {
-					ap.checkHumanCaptioningPermissionForUser(ADMIN_USERNAME,ADMIN_PASSWORD,"Role based", "All instructor", INSTRUCTOR_USERNAME, INSTRUCTOR_PASSWORD,INSTRUCTOR_FULLNAME, "All Caption Providers","Yes",VIDEONAME);
+					ap.checkHumanCaptioningPermissionForUser(ADMIN_USERNAME,ADMIN_PASSWORD,"Role based", "All Instructor", INSTRUCTOR_USERNAME, INSTRUCTOR_PASSWORD,INSTRUCTOR_FULLNAME, "All Caption Providers","Yes",VIDEONAME);
 				}
 				catch (Exception e) {
 					System.out.println(e.getMessage());
@@ -125,7 +125,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 	public void Edit_humancaption_permissions_for_all_instructors_rev_test(String TestName) {
 				AccessiblityPageTestMethods ap = new AccessiblityPageTestMethods();
 				try {
-					ap.checkHumanCaptioningPermissionForUser(ADMIN_USERNAME,ADMIN_PASSWORD,"Role based", "All instructor", INSTRUCTOR_USERNAME, INSTRUCTOR_PASSWORD,INSTRUCTOR_FULLNAME, "Rev: Rev","Yes",VIDEONAME);
+					ap.checkHumanCaptioningPermissionForUser(ADMIN_USERNAME,ADMIN_PASSWORD,"Role based", "All Instructor", INSTRUCTOR_USERNAME, INSTRUCTOR_PASSWORD,INSTRUCTOR_FULLNAME, "Rev: Rev","Yes",VIDEONAME);
 				}
 				catch (Exception e) {
 					System.out.println(e.getMessage());
@@ -138,7 +138,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 	public void Edit_humancaption_permissions_for_all_instructors_3playmedia_test(String TestName) {
 				AccessiblityPageTestMethods ap = new AccessiblityPageTestMethods();
 				try {
-					ap.checkHumanCaptioningPermissionForUser(ADMIN_USERNAME,ADMIN_PASSWORD,"Role based", "All instructor", INSTRUCTOR_USERNAME, INSTRUCTOR_PASSWORD,INSTRUCTOR_FULLNAME, "Three Play: Working","Yes",VIDEONAME);
+					ap.checkHumanCaptioningPermissionForUser(ADMIN_USERNAME,ADMIN_PASSWORD,"Role based", "All Instructor", INSTRUCTOR_USERNAME, INSTRUCTOR_PASSWORD,INSTRUCTOR_FULLNAME, "Three Play: Working","Yes",VIDEONAME);
 				}
 				catch (Exception e) {
 					System.out.println(e.getMessage());
@@ -151,7 +151,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 	public void Edit_humancaption_permissions_for_all_instructors_Cielo24_test(String TestName) {
 				AccessiblityPageTestMethods ap = new AccessiblityPageTestMethods();
 				try {
-					ap.checkHumanCaptioningPermissionForUser(ADMIN_USERNAME,ADMIN_PASSWORD,"Role based", "All instructor", INSTRUCTOR_USERNAME, INSTRUCTOR_PASSWORD,INSTRUCTOR_FULLNAME, "Cielo24: yuja","Yes",VIDEONAME);
+					ap.checkHumanCaptioningPermissionForUser(ADMIN_USERNAME,ADMIN_PASSWORD,"Role based", "All Instructor", INSTRUCTOR_USERNAME, INSTRUCTOR_PASSWORD,INSTRUCTOR_FULLNAME, "Cielo24: yuja","Yes",VIDEONAME);
 				}
 				catch (Exception e) {
 					System.out.println(e.getMessage());
@@ -165,7 +165,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 	public void Edit_humancaption_permissions_for_all_instructors_yujaprocaptioning_test(String TestName) {
 				AccessiblityPageTestMethods ap = new AccessiblityPageTestMethods();
 				try {
-					ap.checkHumanCaptioningPermissionForUser(ADMIN_USERNAME,ADMIN_PASSWORD,"Role based", "All instructor", INSTRUCTOR_USERNAME, INSTRUCTOR_PASSWORD,INSTRUCTOR_FULLNAME, "YuJa Pro Captioning","Yes",VIDEONAME);
+					ap.checkHumanCaptioningPermissionForUser(ADMIN_USERNAME,ADMIN_PASSWORD,"Role based", "All Instructor", INSTRUCTOR_USERNAME, INSTRUCTOR_PASSWORD,INSTRUCTOR_FULLNAME, "YuJa Pro Captioning","Yes",VIDEONAME);
 				}
 				catch (Exception e) {
 					System.out.println(e.getMessage());
@@ -179,7 +179,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 	public void Edit_humancaption_permissions_for_all_instructors_captionSync_test(String TestName) {
 				AccessiblityPageTestMethods ap = new AccessiblityPageTestMethods();
 				try {
-					ap.checkHumanCaptioningPermissionForUser(ADMIN_USERNAME,ADMIN_PASSWORD,"Role based", "All instructor", INSTRUCTOR_USERNAME, INSTRUCTOR_PASSWORD,INSTRUCTOR_FULLNAME, "Caption Sync: Arjun Caption Captionsync","Yes",VIDEONAME);
+					ap.checkHumanCaptioningPermissionForUser(ADMIN_USERNAME,ADMIN_PASSWORD,"Role based", "All Instructor", INSTRUCTOR_USERNAME, INSTRUCTOR_PASSWORD,INSTRUCTOR_FULLNAME, "Caption Sync: Arjun Caption Captionsync","Yes",VIDEONAME);
 				}
 				catch (Exception e) {
 					System.out.println(e.getMessage());

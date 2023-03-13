@@ -7,10 +7,10 @@ import com.yuja.evp.pagetestmethods.QuizPageTestMethods;
 import com.yuja.lms.moodle.MoodlePage;
 
 public class MoodleTest extends BaseTest {
-	     String adminUserName="automationadmin";
-	     String adminPassword="jamNOW123/"; 
-	     String instuctorUserName="automationinstructor"; 
-	     String instuctorPassword="jamNOW123/";
+	     String adminUserName = "automationadmin";
+	     String adminPassword = "jamNOW123/"; 
+	     String instuctorUserName = "automationinstructor"; 
+	     String instuctorPassword = "jamNOW123/";
 	     String LTILinkName="'Xavier LTI 1.3'";        
 	     String videoName="videoforautomation";
 	     String videoNameinstructor="videoforautomationinstructor";
@@ -20,10 +20,10 @@ public class MoodleTest extends BaseTest {
 	     String documentName="automationdocument";
 	     String documentNameinstructor="automationdocumentinstructor";
 	     String QuizTitle= "moodlevideoquiz";
-	     String playbackQuizTitle="moodleplaybackquiz";
-	     String question="Fav lms";
-	     String option1="moodle";
-	     String option2="blackboard";
+	     String playbackQuizTitle= "moodleplaybackquiz";
+	     String question = "Fav lms";
+	     String option1 = "moodle";
+	     String option2 = "blackboard";
 	     String fitbPossibleans1="moodle";
 	     String fitbPossibleans2="blackboard";
 	     String hint="new";
@@ -39,6 +39,7 @@ public class MoodleTest extends BaseTest {
 	     String embedDocumentNameinstructor="'automationdocumentinstructor'";
 	     String studentAnsForShortAnsQuestion="moodle";
 	     String studentAnsForFitbQuestion="moodle";
+
 	     String courseNameForQuizPublish="AUTOMATION MOODLE COURSE";
 	     String marks="100%"; 
 	     String yujaAdminUserName="automation_manager";
@@ -59,8 +60,9 @@ public class MoodleTest extends BaseTest {
 	     String customToolName="XAVIER 1.3";
 	     String moodleToolNameOnConfiguration="XAVIER 1.3";
 	     String directoryPathForVideo="src\\fileResources\\lmsVideo";
-         String directoryPathForAudio="src\\fileResources\\lmsAudio";
+       String directoryPathForAudio="src\\fileResources\\lmsAudio";
 	     String directoryPathForDoc="src\\\\fileResources\\\\lmsDocument";
+
 
 	
 	  @Test(description="Moodle_create_publish_attend_gradebook_administrator_test")
@@ -68,7 +70,7 @@ public class MoodleTest extends BaseTest {
 	public void Moodle_create_publish_attend_gradebook_administrator_test(String TestName) {
 		MoodlePage mp = new MoodlePage();
 		try {
-			mp.loginCreateandPublishEmbedQuiz(adminUserName, adminPassword,LTILinkName,videoName,QuizTitle,question,option1, option2,fitbPossibleans1, fitbPossibleans2,hint,studentUserName, studentPassword, studentAnsForShortAnsQuestion,studentAnsForFitbQuestion,courseNameForQuizPublish,marks,studentFullName,studentNameinActivityLog);
+			mp.loginCreateandPublishEmbedQuiz(adminUserName, adminPassword,LTILinkName,videoName,QuizTitle,question,option1, option2,fitbPossibleans1, fitbPossibleans2,hint,studentUserName, studentPassword, studentAnsForShortAnsQuestion,studentAnsForFitbQuestion,courseName,marks,studentFullName,studentNameinActivityLog);
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -83,7 +85,8 @@ public class MoodleTest extends BaseTest {
     	public void Moodle_create_publish_attend_gradebook_instructor_test(String TestName) {                                                                                                                                                                                                                                                                
       		MoodlePage mp = new MoodlePage();                                                                                                                                                                                                                                                                                 
       		try {                                                                                                                                                                                                                                                                                                             
-      			mp.loginCreateandPublishEmbedQuiz(instuctorUserName, instuctorPassword,LTILinkName,videoName,QuizTitle,question,option1, option2,fitbPossibleans1, fitbPossibleans2,hint,studentUserName, studentPassword, studentAnsForShortAnsQuestion,studentAnsForFitbQuestion,courseNameForQuizPublish,marks,studentFullName,studentNameinActivityLog);         
+      			mp.loginCreateandPublishEmbedQuiz(instuctorUserName, instuctorPassword,LTILinkName,videoNameinstructor,QuizTitle,question,option1, option2,fitbPossibleans1, fitbPossibleans2,hint,studentUserName, studentPassword, studentAnsForShortAnsQuestion,studentAnsForFitbQuestion,courseName,marks,studentFullName,studentNameinActivityLog);         
+
       		}                                                                                                                                                                                                                                                                                                                 
       		catch (Exception e) {                                                                                                                                                                                                                                                                                             
       			System.out.println(e.getMessage());                                                                                                                                                                                                                                                                              
@@ -98,7 +101,7 @@ public class MoodleTest extends BaseTest {
 		public void Moodle_create_playback_attend_gradebook_administrator_test(String TestName) {
 			MoodlePage mp = new MoodlePage();
 			try {
-				mp.loginCreateandEmbedPlaybackQuiz(adminUserName,adminPassword,LTILinkName,videoNameforPlaybackquiz, playbackQuizTitle,studentUserName, studentPassword, courseNameForQuizPublish,marks,studentFullName,studentNameinActivityLog);
+				mp.loginCreateandEmbedPlaybackQuiz(adminUserName,adminPassword,LTILinkName,videoNameforPlaybackquiz, playbackQuizTitle,studentUserName, studentPassword, courseName,marks,studentFullName,studentNameinActivityLog);
 			} 
 			catch (Exception e) {
 				System.out.println(e.getMessage());
@@ -113,7 +116,7 @@ public class MoodleTest extends BaseTest {
 	    	public void Moodle_create_playback_attend_gradebook_instructor_test(String TestName) {                                                                                                                                                                                                                                                                
 	      		MoodlePage mp = new MoodlePage();                                                                                                                                                                                                                                                                                 
 	      		try {                                                                                                                                                                                                                                                                                                             
-	      			mp.loginCreateandEmbedPlaybackQuiz(instuctorUserName,instuctorPassword,LTILinkName,videoNameforPlaybackquiz, playbackQuizTitle,studentUserName, studentPassword,courseNameForQuizPublish,marks,studentFullName,studentNameinActivityLog);         
+	      			mp.loginCreateandEmbedPlaybackQuiz(instuctorUserName,instuctorPassword,LTILinkName,videoNameforPlaybackquiz, playbackQuizTitle,studentUserName, studentPassword,courseName,marks,studentFullName,studentNameinActivityLog);         
 	      		}                                                                                                                                                                                                                                                                                                                 
 	      		catch (Exception e) {                                                                                                                                                                                                                                                                                             
 	      			System.out.println(e.getMessage());                                                                                                                                                                                                                                                                              
@@ -297,6 +300,7 @@ public class MoodleTest extends BaseTest {
       			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);                                                                                                                                                                                                                                  
       		}                                                                                                                                                                                                                                                                                                                 
       }  
+
 		@Test(description="Moodle_check_autoprovisionofcourse")                                                                                                                                                                                                                                                                          
       	@Parameters({"TestName"})                                                                                                                                                                                                                                                                                        
     	public void Moodle_check_autoprovisionofcourse(String TestName) {                                                                                                                                                                                                                                                                
