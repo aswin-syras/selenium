@@ -40,7 +40,7 @@ public class MoodleTest extends BaseTest {
 	     String studentAnsForShortAnsQuestion="moodle";
 	     String studentAnsForFitbQuestion="moodle";
 
-	     String courseNameForQuizPublish="AUTOMATION MOODLE COURSE";
+	     String courseNameForQuizPublish = "AUTOMATION MOODLE COURSE";
 	     String marks="100%"; 
 	     String yujaAdminUserName="automation_manager";
 	     String yujaAdminPassword="jamNOW123!@#123";
@@ -101,7 +101,7 @@ public class MoodleTest extends BaseTest {
 		public void Moodle_create_playback_attend_gradebook_administrator_test(String TestName) {
 			MoodlePage mp = new MoodlePage();
 			try {
-				mp.loginCreateandEmbedPlaybackQuiz(adminUserName,adminPassword,LTILinkName,videoNameforPlaybackquiz, playbackQuizTitle,studentUserName, studentPassword, courseNameForQuizPublish,marks,studentFullName,studentNameinActivityLog);
+				mp.loginCreateandEmbedPlaybackQuiz(adminUserName,adminPassword,LTILinkName,videoNameforPlaybackquiz, playbackQuizTitle,studentUserName, studentPassword, courseNameForQuizPublish ,marks,studentFullName,studentNameinActivityLog);
 			} 
 			catch (Exception e) {
 				System.out.println(e.getMessage());
@@ -116,7 +116,7 @@ public class MoodleTest extends BaseTest {
 	    	public void Moodle_create_playback_attend_gradebook_instructor_test(String TestName) {                                                                                                                                                                                                                                                                
 	      		MoodlePage mp = new MoodlePage();                                                                                                                                                                                                                                                                                 
 	      		try {                                                                                                                                                                                                                                                                                                             
-	      			mp.loginCreateandEmbedPlaybackQuiz(instuctorUserName,instuctorPassword,LTILinkName,videoNameforPlaybackquiz, playbackQuizTitle,studentUserName, studentPassword,courseNameForQuizPublish,marks,studentFullName,studentNameinActivityLog);         
+	      			mp.loginCreateandEmbedPlaybackQuiz(instuctorUserName,instuctorPassword,LTILinkName,videoNameforPlaybackquiz, playbackQuizTitle,studentUserName, studentPassword, courseNameForQuizPublish ,marks,studentFullName,studentNameinActivityLog);         
 	      		}                                                                                                                                                                                                                                                                                                                 
 	      		catch (Exception e) {                                                                                                                                                                                                                                                                                             
 	      			System.out.println(e.getMessage());                                                                                                                                                                                                                                                                              
