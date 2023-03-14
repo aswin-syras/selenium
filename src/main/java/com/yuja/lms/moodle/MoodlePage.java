@@ -254,6 +254,49 @@ public class MoodlePage extends QuizPageHelpers {
             	reportStep("The checkbox is setting was same as required","PASS",false);
             }	
         }
+	
+	public void setRoleMapping(String userName, String password, String yujaRolefromAdmin, String yujaRolefromTeacher, String yujaRolefromStudent) throws InterruptedException {
+		 mediaLibrary.navigateToMyMediaUserLogin(userName, password);
+		 URL = "https://staging-demo.yuja.com/P/Institution/APIManagementServlet/";
+	     launchUrl(URL, "Xavier University Enterprise Video Platform");
+	     Select integrationDropdown = new Select(driver.findElement(By.id("apiPicker")));
+	     integrationDropdown.selectByValue("lti3");
+	     Select lmsDropdown = new Select(driver.findElement(By.id("LTI3LMSSelect")));
+	     lmsDropdown.selectByVisibleText("Moodle");
+	     Select moodleAdminRole = new Select(driver.findElement(By.xpath("(//select[@id=\"moodleAdminRoleTo\"])[2]")));
+	     moodleAdminRole.selectByVisibleText(yujaRolefromAdmin);
+	     Select moodleTeacherRole = new Select(driver.findElement(By.xpath("(//select[@id=\"moodleTeacherRoleTo\"])[2]")));
+	     moodleTeacherRole.selectByVisibleText(yujaRolefromTeacher);
+	     Select moodleStudentRole = new Select(driver.findElement(By.xpath("(//select[@id=\"moodleStudentRoleTo\"])[2]")));
+	     moodleStudentRole.selectByVisibleText(yujaRolefromStudent);
+	     clickElement("save",By.xpath("//form[@id=\"lti3SettingsGeneral\"]//button[@title=\"Save\"]") );
+         clickElement("save confirm",By.xpath("//div[@class=\"modal-content\"]//button[@title=\"Confirm\"]") );
+	}
+	
+	public void setUserTypeToLockedorUnlocked(String lockOrUnlock) throws InterruptedException {
+		 URL = "https://staging-demo.yuja.com/P/Institution/TypeRoster/";
+	     launchUrl(URL, "Xavier University Enterprise Video Platform");
+	     roster.rosterButtons("rolemappinguser");
+		 
+		 if(lockOrUnlock=="lock") {
+			clickElement("usertype",By.xpath("//a[@data-automation=\"btnUserType\"]") );
+			Select userTypeDropdown = new Select(driver.findElement(By.xpath("//div[@class='editable-input']//select")));
+			userTypeDropdown.selectByVisibleText("Student");
+		    clickElement("save",By.xpath("//button[@class=\"btn btn-primary btn-sm editable-submit\"]") );
+			 
+			clickElement("lock",By.xpath("//a[@data-automation=\"btnLockUserType\"]") );
+			Select lockDropdown = new Select(driver.findElement(By.xpath("//div[@class='editable-input']//select")));
+			lockDropdown.selectByVisibleText("Locked");
+			clickElement("save",By.xpath("//button[@class=\"btn btn-primary btn-sm editable-submit\"]") );
+			}
+		 if(lockOrUnlock=="unlock") {
+			clickElement("lock",By.xpath("//a[@data-automation=\"btnLockUserType\"]") );
+			Select lockDropdown = new Select(driver.findElement(By.xpath("//div[@class='editable-input']//select")));
+			lockDropdown.selectByVisibleText("Not Locked");
+			clickElement("save",By.xpath("//button[@class=\"btn btn-primary btn-sm editable-submit\"]") );
+			}
+	}
+	
     	
 	
     public void setStartPageOptionAsMediaChannel() {
@@ -528,6 +571,105 @@ public class MoodlePage extends QuizPageHelpers {
 				}
 			}
 		}
+   
+   public void checkRoleMapping(String userName, String password, int expectedMainMenuListSize, String moodleRole, String courserole) throws InterruptedException{
+	   
+	   HashMap<String, String> CourseRoleType = new HashMap<String, String>();
+	   CourseRoleType.put("GroupMember", "//div[@data-automation=\"divGroupMembers\"]//div[@class=\"user-list-item\"]");
+	   CourseRoleType.put("GroupOwner", "//div[@data-aitomation=\"divGroupOwners\"]//div[@class=\"user-list-item\"]");
+	   
+	   navigateToCourse(userName,password);
+	   clickElement("participants", By.xpath("//a[@data-key=\"participants\"]"));
+	   List<WebElement> memberListInMoodle= getElementList(By.xpath("//table[@id='participants']//tbody//tr//th//a"));
+	   String obtainedmoodlememberFirstname=null;
+	   for(int i=0;i<memberListInMoodle.size();i++) {
+			WebElement element=memberListInMoodle.get(i);
+			String obtainedmemberName = element.getText();
+			String obtainedmembersplitFirstname[]=obtainedmemberName.split(" ",2);
+			obtainedmoodlememberFirstname=obtainedmembersplitFirstname[0];
+		    System.out.println(obtainedmoodlememberFirstname);
+			if(obtainedmoodlememberFirstname.equals("rolemappinguser")) {
+				int rowposition=i+1;
+				clickElement("edit role button", By.xpath("(//span[@class=\"quickediticon visibleifjs\"])["+rowposition+"]"));
+				clickElement("close current role button", By.xpath("//span[@class=\"badge badge-info mb-3 mr-1\"]//span"));
+				sendKeys("enter moodle role",By.xpath("//input[contains(@id,'form_autocomplete_input')]"),moodleRole);
+				clickElement("click autosuggestion",By.xpath("//li[contains(@id,'form_autocomplete_suggestions')]"));
+				Thread.sleep(2000);
+				clickElement("save role button", By.xpath("//i[@title=\"Save changes\"]"));
+				Thread.sleep(2000);
+				reportStep("New moodle role is assigned to user", "PASS", false);
+				break;
+				}
+			}
+	   logout();
+	   navigateToLoginPage();
+	   driver.manage().window().maximize();
+	   loginFast("rolemappinguser", "jamNOW123/");
+	   selectCourseFromSiteHome("AUTOMATION MOODLE COURSE");
+	   NavigateToLTI("'Xavier LTI 1.3'");
+	   waitForElement(By.xpath("//button[@title=\" Main Menu\"]"),15);
+	   clickElement("main menu button", By.xpath("//button[@title=\" Main Menu\"]"));
+	   List<WebElement> mainmenuList= getElementList(By.xpath("//a[@class='yujaAjax']"));
+	   int mainMenuListSize=mainmenuList.size();
+	   clickElement("Courses and Groups button", By.cssSelector("[data-automation=\"btnCourseAndGroups\"]"));
+	   sendKeys("enter course name",By.xpath("//input[@class=\"group-management-inputbox form-control search-box\"]"),"AUTOMATION MOODLE COURSE");
+	   clickElement("choose course after search",By.xpath("//ul[@id=\"courses-and-groups\"]//li"));
+	   List<WebElement> memberList= getElementList(By.xpath(CourseRoleType.get(courserole)));
+	   String obtainedmemberFirstname=null;
+	   for(int i=0;i<memberList.size();i++) {
+			WebElement element=memberList.get(i);
+			String obtainedmemberName = element.getText();
+			String obtainedmembersplitFirstname[]=obtainedmemberName.split(" ",2);
+		    obtainedmemberFirstname=obtainedmembersplitFirstname[0];
+		    System.out.println(obtainedmemberFirstname);
+			if(obtainedmemberFirstname.equals("rolemappinguser")){
+				reportStep("The moodle user role is correctly mapped to course in yuja", "PASS", false);
+				break;
+				}
+		   }
+	
+		if(mainMenuListSize==expectedMainMenuListSize && obtainedmemberFirstname.equals("rolemappinguser")) {
+			reportStep("The moodle user is  enrolled to  course in yuja with correct system role and course role", "PASS", false);
+			}else {
+			reportStep("The moodle user is  not enrolled to  course in yuja with correct system role and course role", "FAIL", true);
+			}
+		driver.switchTo().defaultContent();
+		logout();
+		}
+	   
+	   //Method directly used in test class
+   
+	   public void roleMappingUserTypeUnlocked(String userName, String password, String adminUserName, String adminPassword) throws InterruptedException {
+		   setRoleMapping(userName, password, "IT Manager", "Instructor","Student");
+		   setUserTypeToLockedorUnlocked("unlock");
+		   checkRoleMapping(adminUserName, adminPassword, 2, "Student","GroupMember");
+		   checkRoleMapping(adminUserName, adminPassword, 3, "Teacher", "GroupOwner");
+		   checkRoleMapping(adminUserName, adminPassword, 3, "Non-editing Teacher", "GroupMember");
+		   checkRoleMapping(adminUserName, adminPassword, 3, "Manager", "GroupOwner");
+		   setRoleMapping(userName, password, "IT Manager", "Student","Instructor");
+		   checkRoleMapping(adminUserName, adminPassword, 3, "Student", "GroupOwner");
+		   checkRoleMapping(adminUserName, adminPassword, 2, "Teacher", "GroupMember");
+		   checkRoleMapping(adminUserName, adminPassword, 2, "Non-editing Teacher", "GroupOwner");
+		   checkRoleMapping(adminUserName, adminPassword, 2, "Manager", "GroupMember");
+		   }
+	   
+	   //Method directly used in test class
+	   public void roleMappingUserTypeLocked(String userName, String password, String adminUserName, String adminPassword) throws InterruptedException {
+		   setRoleMapping(userName, password, "IT Manager", "Instructor","Student");
+		   setUserTypeToLockedorUnlocked("lock");
+		   checkRoleMapping(adminUserName, adminPassword, 2, "Student","GroupMember");
+		   checkRoleMapping(adminUserName, adminPassword, 2, "Teacher", "GroupOwner");
+		   checkRoleMapping(adminUserName, adminPassword, 2, "Non-editing Teacher", "GroupMember");
+		   checkRoleMapping(adminUserName, adminPassword, 2, "Manager", "GroupOwner");
+		   setRoleMapping(userName, password, "IT Manager", "Student","Instructor");
+		   checkRoleMapping(adminUserName, adminPassword, 2, "Student", "GroupOwner");
+		   checkRoleMapping(adminUserName, adminPassword, 2, "Teacher", "GroupMember");
+		   checkRoleMapping(adminUserName, adminPassword, 2, "Non-editing Teacher", "GroupOwner");
+		   checkRoleMapping(adminUserName, adminPassword, 2, "Manager", "GroupMember");
+		   mediaLibrary.navigateToMyMediaUserLogin(userName, password);
+		   setUserTypeToLockedorUnlocked("unlock");
+		   }
+   
 	
 
 
