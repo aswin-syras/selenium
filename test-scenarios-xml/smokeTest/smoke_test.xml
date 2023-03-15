@@ -112,7 +112,7 @@
         	</methods>
         </class>
         
-        <class name="com.yuja.evp.testclasses.MoodleQuizTest">
+        <class name="com.yuja.evp.testclasses.MoodleTest">
         	<methods>
         		<include name="Moodle_create_publish_attend_gradebook_administrator_test" />
         		<include name="Moodle_create_publish_attend_gradebook_instructor_test" />

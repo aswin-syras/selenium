@@ -210,8 +210,7 @@ public class MediaLibraryPageHelpers extends Helpers{
 		WebElement media = getMedia(mediaTitle);
 		hoverOverElement(media);
 		//Thread.sleep(2000);
-		clickElement(media,"More menu button from the video hover",By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 30);
-		
+		clickElement(media, "More menu button from the video hover", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 30);
 	}
 	
 	public void selectAllFolderContents(){
