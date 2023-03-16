@@ -34,7 +34,7 @@ public class QuizTest extends BaseTest {
 	public void Create_quiz_test(String TestName) {
 		QuizPageTestMethods qp = new QuizPageTestMethods();
 		try {
-			qp.createPublishandAttendQuizTest(MANAGER_USER, PASSWORD, VIDEO_NAME, QUIZ_NAME,QUIZ_QUESTION,OPTION_1, OPTION_2,FITBPOSSIBLEANS_1,FITBPOSSIBLEANS_2,HINT,STUDENT_USER,PASSWORD,STUDENT_SHORTANSWER,STUDENT_FITBANS);
+			qp.createPublishandAttendQuizTest(MANAGER_USER, PASSWORD, VIDEO_NAME, QUIZ_NAME,QUIZ_QUESTION,OPTION_1, OPTION_2,FITBPOSSIBLEANS_1,FITBPOSSIBLEANS_2,HINT,STUDENT_USER,PASSWORD,STUDENT_SHORTANSWER,STUDENT_FITBANS,QUIZ_PUBLISH_COURSE_NAME);
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -62,7 +62,7 @@ public class QuizTest extends BaseTest {
 	public void Check_instructor_gradebook_test(String TestName) {
 		QuizPageTestMethods qp = new QuizPageTestMethods();
 		try {
-			qp.checkGradebookTest(MANAGER_USER, PASSWORD, VIDEO_NAME, QUIZ_PUBLISH_COURSE_NAME, QUIZ_NAME,"100%",STUDENT_NAME);
+			qp.checkGradebookTest(MANAGER_USER, PASSWORD, VIDEO_NAME, QUIZ_NAME, QUIZ_PUBLISH_COURSE_NAME, STUDENT_NAME, "100%");
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -76,7 +76,7 @@ public class QuizTest extends BaseTest {
 	public void Check_unauthenticated_user_quiz_test(String TestName) {
 		QuizPageTestMethods qp = new QuizPageTestMethods();
 		try {
-			qp. unauthenticatedUserDirectQuizTest(MANAGER_USER, PASSWORD, VIDEO_NAME,STUDENT_SHORTANSWER,STUDENT_FITBANS,"Unauthenticated Users",QUIZ_NAME,"100%","Anonymous-1");
+			qp. unauthenticatedUserDirectQuizTest(MANAGER_USER, PASSWORD, VIDEO_NAME,STUDENT_SHORTANSWER,STUDENT_FITBANS,"Unauthenticated Users","100%","Anonymous-1",QUIZ_NAME);
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -90,7 +90,7 @@ public class QuizTest extends BaseTest {
 	public void Check_Unauthenticated_user_embedded_quiz_test(String TestName) {
 		QuizPageTestMethods qp = new QuizPageTestMethods();
 		try {
-			qp. unauthenticatedUserEmbeddedQuizTest(MANAGER_USER, PASSWORD, VIDEO_NAME,STUDENT_SHORTANSWER,STUDENT_FITBANS, "Unauthenticated Users", QUIZ_NAME, "100%", "Anonymous-2");
+			qp. unauthenticatedUserEmbeddedQuizTest(MANAGER_USER, PASSWORD, VIDEO_NAME,STUDENT_SHORTANSWER,STUDENT_FITBANS, "Unauthenticated Users", "100%", "Anonymous-2",QUIZ_NAME);
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -104,7 +104,7 @@ public class QuizTest extends BaseTest {
 	public void Check_delete_quiz_test(String TestName) {
 		QuizPageTestMethods qp = new QuizPageTestMethods();
 		try {
-			qp.deleteQuizTest(MANAGER_USER, PASSWORD, VIDEO_NAME);
+			qp.deleteQuizTest(MANAGER_USER, PASSWORD, VIDEO_NAME,QUIZ_NAME);
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -113,7 +113,7 @@ public class QuizTest extends BaseTest {
 		}
 	  }
 	
-	@Test(description="Check_playButton")
+	@Test(description="Check_")
 	  @Parameters({"TestName"})
 	public void CheckPlaybutton(String TestName) {
 		QuizPageTestMethods qp = new QuizPageTestMethods();

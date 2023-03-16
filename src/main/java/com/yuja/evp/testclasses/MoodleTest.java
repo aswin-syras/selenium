@@ -61,7 +61,7 @@ public class MoodleTest extends BaseTest {
 	     String moodleToolNameOnConfiguration="XAVIER 1.3";
 	     String directoryPathForVideo="src\\fileResources\\lmsVideo";
        String directoryPathForAudio="src\\fileResources\\lmsAudio";
-	     String directoryPathForDoc="src\\\\fileResources\\\\lmsDocument";
+	     String directoryPathForDoc="src\\fileResources\\lmsDocument";
 
 
 	

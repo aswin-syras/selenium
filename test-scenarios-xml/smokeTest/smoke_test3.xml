@@ -5,21 +5,17 @@
   <parameter name="TestName" value="TestValue" />
   <test name="Create_new_folder_test">
   	<classes>
-    	<class name="com.yuja.evp.testclasses.MediaLibraryTest">
+    	 <class name="com.yuja.evp.testclasses.MediaLibraryTest">
 	      	<methods>
 	      		
 	            	<include name="Bulkfavorite_manager_Succesful_test" />  
 	           	    <include name="Bulkfavorite_instructor_Succesful_test" />  
 	            	 <include name="Bulkfavorite_student_Succesful_test" /> 
-	          	
-	          	
-	          	
-	          	
-	       	</methods>
-        </class>
-        <!--  
+	          	</methods>
+        </class> 
+        
         <class name="com.yuja.evp.testclasses.AdminPanelAccessiblityTest">
-        	<methods>
+        	<methods> 
         		<include name="Check_humancaption_button_update" />
         		
         		<include name="Edit_humancaption_permissions_for_Specific_user_captionSync_test" />
@@ -28,7 +24,7 @@
         		<include name="Edit_autocaption_permissions_for_all_students_test" />
         		<include name="Edit_autocaption_permissions_for_ITManager_test" />
         		<include name="Edit_autocaption_permissions_for_Specific_user_test" />
-        		
+        		  
         		<include name="Edit_humancaption_permissions_for_all_instructors_allcaptionproviders_test" />
         		<include name="Edit_humancaption_permissions_for_all_instructors_rev_test" />
         		<include name="Edit_humancaption_permissions_for_all_instructors_3playmedia_test" />
@@ -36,7 +32,7 @@
         		<include name="Edit_humancaption_permissions_for_all_instructors_yujaprocaptioning_test" />
         		<include name="Edit_humancaption_permissions_for_all_instructors_captionSync_test" />
         		
-        		<include name="Edit_humancaption_permissions_for_ITManager_allcaptionproviders_test" />
+        	 	<include name="Edit_humancaption_permissions_for_ITManager_allcaptionproviders_test" />
         		<include name="Edit_humancaption_permissions_for_ITManager_rev_test" />
         		<include name="Edit_humancaption_permissions_for_ITManager_3playmedia_test" />
         		<include name="Edit_humancaption_permissions_for_ITManager_Cielo24_test" />
@@ -55,17 +51,18 @@
         		<include name="Edit_humancaption_permissions_for_Specific_user_3playmedia_test" />
         		<include name="Edit_humancaption_permissions_for_Specific_user_Cielo24_test" />
         		<include name="Edit_humancaption_permissions_for_Specific_user_yujaprocaptioning_test" />
-        	</methods>
-        </class>
-          <class name="com.yuja.evp.testclasses.MoodleQuizTest">
-        	<methods>
-        		<include name="Moodle_create_publish_attend_gradebook_administrator_test" />
+        		</methods>
+        </class> 
+        	
+           <class name="com.yuja.evp.testclasses.MoodleTest">
+        	<methods> 
+        		 <include name="Moodle_create_publish_attend_gradebook_administrator_test" />
         		<include name="Moodle_create_publish_attend_gradebook_instructor_test" />
         		
         		<include name="Moodle_create_playback_attend_gradebook_administrator_test" />
         		<include name="Moodle_create_playback_attend_gradebook_instructor_test" />
         		
-        		<include name="Moodle_embed_video_as_instructor_check_accessible_by_student_test" />
+        	 	<include name="Moodle_embed_video_as_instructor_check_accessible_by_student_test" />
         		<include name="Moodle_embed_video_as_administrator_check_accessible_by_student_test" />
         		
         		<include name="Moodle_embed_audio_as_instructor_check_accessible_by_student_test" />
@@ -81,7 +78,20 @@
         		<include name="Moodle_upload_audio_as_instuctor_check_in_media_library_test" />
         		
         		<include name="Moodle_upload_doc_as_administrator_check_in_media_library_test" />
-        		<include name="Moodle_upload_doc_as_instuctor_check_in_media_library_test" />
+        		<include name="Moodle_upload_doc_as_instuctor_check_in_media_library_test" /> 
+        		<include name="Check_role_mapping_locked" />
+        		<include name="Check_role_mapping_unlocked" />
+        		
+        	   <include name="Moodle_check_manualprovisioning_existinguser" />
+        		<include name="Moodle_check_manualprovisioning_newuser" />
+        		
+        		<include name="Moodle_check_autoprovisioning_user_multipleCourses" />
+        		<include name="Moodle_check_autoprovisioning_user" /> 
+        		<include name="Moodle_check_manualprovisioningto_existingcourse" />
+        		<include name="Moodle_check_manualprovisioningof_newcourse" />
+        		<include name="Moodle_check_autoprovisionofcourse" />  
+
+        		
         	</methods>
         </class>
          <class name="com.yuja.evp.testclasses.QuizTest">
@@ -98,9 +108,9 @@
         		
         		<include name="Check_delete_quiz_test" />
         	</methods>
-        </class>
+        </class> 
         
-       -->
+      
         
         
     </classes>

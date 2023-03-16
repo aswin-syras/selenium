@@ -88,13 +88,14 @@ public class Wrapper {
 				System.out.println("Launching Chrome Browser");
 				String chrome = "./" + config.getProperty("Browser_Drivers_Path") + "/chromedriver.exe";
 				System.setProperty("webdriver.chrome.driver", chrome);
+				
 
 				// Cleaning the Chrome Memory
 				Runtime.getRuntime().exec("taskkill /F /IM ChromeDriver.exe");
 
 				// Setting up IE chrome options
 				ChromeOptions chromeOptions = new ChromeOptions();
-				chromeOptions.addArguments("start-maximized");
+				chromeOptions.addArguments("--remote-allow-origins=*");
 				
 				// Creating the driver variable
 				Thread.sleep(2000);

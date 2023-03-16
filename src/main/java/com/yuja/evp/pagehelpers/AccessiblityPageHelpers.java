@@ -43,6 +43,7 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 		clickElement("Click save button",By.xpath("//button[@id='singlebutton']"),10);
 		clickElement("Click toast close button",By.xpath("//button[@class=\"right-close-button btn dismisscolor inline-btn\"]"),10);
 		driver.navigate().refresh();
+		Thread.sleep(3000);
 	   }
 	
 	public void deleteAllExistingPermissions(String typeOfButton) throws InterruptedException {
@@ -97,6 +98,7 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 		 boolean processed = medialibraryHelpers.mediaIsProcessed(autocaptionVideo, 60, 3);
 			if(processed) {
 				reportStep(autocaptionVideo + " media fully proccessed", "PASS", false);
+				// driver.navigate().refresh();
 				 WebElement media1=waitForElement(By.xpath("//div[@class=\"videoWrapper\"]"),10);
 				 hoverOverElement(media1);
 				 clickElement(media1, "More menu", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 10);
@@ -110,6 +112,7 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 		        	 reportStep("Autocaptioning is not sucessfully disabled","FAIL", true);
 		         }
 		           mediaDetailsModal.clickCloseMoreMenu();
+		          // driver.navigate().refresh();
 				   mediaLibrary.deleteMedia(autocaptionVideo);
 				   navigationBar.userLogOut();
 			}
@@ -125,7 +128,9 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 		 boolean processed = medialibraryHelpers.mediaIsProcessed(autocaptionVideo, 60, 3);
 			if(processed) {
 				reportStep(autocaptionVideo + " media fully proccessed", "PASS", false);
+				//driver.navigate().refresh();
 				WebElement media=waitForElement(By.xpath("//div[@class=\"videoWrapper\"]"),10);
+				
 				hoverOverElement(media);
 				clickElement(media, "More menu", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 10);
 				mediaDetailsModal.clickAccessiblity();
@@ -191,8 +196,9 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 		 boolean processed = medialibraryHelpers.mediaIsProcessed(autocaptionVideo, 60, 3);
 			if(processed) {
 				reportStep(autocaptionVideo + " media fully proccessed", "PASS", false);
-				
+				//driver.navigate().refresh();
 				WebElement media=driver.findElement(By.xpath("//div[@class=\"videoWrapper\"]"));
+				
 				hoverOverElement(media);
 				clickElement(media, "More menu", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 10);
 				mediaDetailsModal.clickAccessiblity();
@@ -322,6 +328,7 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 				
 				clickElement("humancaption modal close button", By.id("veryFastCloseFooterBtn_Todo"),10);
 				mediaDetailsModal.clickCloseMoreMenu();
+				//driver.navigate().refresh();
 				mediaLibrary.deleteMedia(autocaptionVideo);
 				navigationBar.userLogOut();
 			}
@@ -338,8 +345,9 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 		 boolean processed = medialibraryHelpers.mediaIsProcessed(autocaptionVideo, 60, 3);
 			if(processed) {
 				reportStep(autocaptionVideo + " media fully proccessed", "PASS", false);
-				
+				driver.navigate().refresh();
 				 WebElement media1=waitForElement(By.xpath("//div[@class=\"videoWrapper\"]"),10);
+				 
 				 hoverOverElement(media1);
 				 clickElement(media1, "More menu", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 10);
 				 mediaDetailsModal.clickAccessiblity();
@@ -355,6 +363,7 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 						reportStep(" humancaption button is enabled", "FAIL", false);
 					}
 				   mediaDetailsModal.clickCloseMoreMenu();
+				   driver.navigate().refresh();
 				   mediaLibrary.deleteMedia(autocaptionVideo);
 				   navigationBar.userLogOut();
 				

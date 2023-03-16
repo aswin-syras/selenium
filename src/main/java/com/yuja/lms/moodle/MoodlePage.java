@@ -48,6 +48,11 @@ public class MoodlePage extends QuizPageHelpers {
 		fillInUserId(username);
 		fillInPassword(password);
 		clickSignInButton();
+		Boolean sitehomeexist=verifyElementExist("dashboard", By.xpath("//div[@class=\"media\"]//span[text()='Dashboard']"));
+		System.out.println(sitehomeexist);
+		if(sitehomeexist==false) {
+			clickElement("show sidebar", By.xpath("//button[@class='btn nav-link float-sm-left mr-1 btn-light bg-gray']"));
+			}
 	}
 	
 	public void logout() {
@@ -130,7 +135,7 @@ public class MoodlePage extends QuizPageHelpers {
 		navigateToCourse(userName,password);
 		NavigateToLTI(embedMediaTitle);
 		Thread.sleep(3000);
-		String quizNewName=createandPublishQuiz(mediaTitle,name,question, option1,  option2, possibleans1, possibleans2, hint);
+		String quizNewName=createandPublishQuiz(mediaTitle,name,question, option1,  option2, possibleans1, possibleans2, hint,courseName);
 		String quizFinalName="'"+quizNewName+"'";
 		driver.switchTo().defaultContent();
 		String URL = "https://tmoodle2.yuja.com/course/view.php?id=142";
@@ -151,7 +156,7 @@ public class MoodlePage extends QuizPageHelpers {
 		navigateToCourse(userName,password);
 		NavigateToLTI(embedMediaTitle);
 		Thread.sleep(3000);
-		checkGradebookTestafterLoginforMultiple(mediaTitle, courseName,name, marks,studentFullName );
+		checkGradebookTestafterLoginforMultiple(mediaTitle,quizNewName,courseName ,studentFullName,marks );
 		clickElement("Click Manage Media",By.xpath("//span[@id='topBarTabName3']"),10);
 		Thread.sleep(2000);
 		checkActivityLogforQuizSync(mediaTitle, studentNameinActivitylog,marks, quizNewName);
@@ -190,7 +195,7 @@ public class MoodlePage extends QuizPageHelpers {
 		navigateToCourse(userName,password);
 		NavigateToLTI(embedMediaTitle);
 		Thread.sleep(3000);
-		checkGradebookforPlaybackQuiz(videoNameforPlaybackquiz, courseName, quizNewName, marks, studentFullName);
+		checkGradebookforPlaybackQuiz(videoNameforPlaybackquiz, courseName, marks, studentFullName,quizNewName);
 		clickElement("Click Manage Media",By.xpath("//span[@id='topBarTabName3']"),10);
 		Thread.sleep(2000);
 		checkActivityLogforQuizSync(videoNameforPlaybackquiz, studentNameinActivityLog,marks, quizNewName);
@@ -206,7 +211,7 @@ public class MoodlePage extends QuizPageHelpers {
 		navigateToCourse(userName,password);
 		accessCIMMediaChooser();
 		CIMMediaChooserMediaEmbed(name);
-            logout();
+        logout();
 	    navigateToCourse(stuserName,stpassword);
 	    NavigateToLTI(embedMediaName);
 	   
@@ -640,35 +645,36 @@ public class MoodlePage extends QuizPageHelpers {
 	   //Method directly used in test class
    
 	   public void roleMappingUserTypeUnlocked(String userName, String password, String adminUserName, String adminPassword) throws InterruptedException {
-		   setRoleMapping(userName, password, "IT Manager", "Instructor","Student");
-		   setUserTypeToLockedorUnlocked("unlock");
-		   checkRoleMapping(adminUserName, adminPassword, 2, "Student","GroupMember");
-		   checkRoleMapping(adminUserName, adminPassword, 3, "Teacher", "GroupOwner");
-		   checkRoleMapping(adminUserName, adminPassword, 3, "Non-editing Teacher", "GroupMember");
-		   checkRoleMapping(adminUserName, adminPassword, 3, "Manager", "GroupOwner");
 		   setRoleMapping(userName, password, "IT Manager", "Student","Instructor");
+		   setUserTypeToLockedorUnlocked("unlock");
 		   checkRoleMapping(adminUserName, adminPassword, 3, "Student", "GroupOwner");
 		   checkRoleMapping(adminUserName, adminPassword, 2, "Teacher", "GroupMember");
-		   checkRoleMapping(adminUserName, adminPassword, 2, "Non-editing Teacher", "GroupOwner");
+		   checkRoleMapping(adminUserName, adminPassword, 3, "Non-editing Teacher", "GroupOwner");
 		   checkRoleMapping(adminUserName, adminPassword, 2, "Manager", "GroupMember");
+		  
+		   setRoleMapping(userName, password, "IT Manager", "Instructor","Student");
+		   checkRoleMapping(adminUserName, adminPassword, 2, "Student","GroupMember");
+		   checkRoleMapping(adminUserName, adminPassword, 3, "Teacher", "GroupOwner");
+		   checkRoleMapping(adminUserName, adminPassword, 2, "Non-editing Teacher", "GroupMember");
+		   checkRoleMapping(adminUserName, adminPassword, 3, "Manager", "GroupOwner");
 		   }
 	   
 	   //Method directly used in test class
 	   public void roleMappingUserTypeLocked(String userName, String password, String adminUserName, String adminPassword) throws InterruptedException {
-		   setRoleMapping(userName, password, "IT Manager", "Instructor","Student");
-		   setUserTypeToLockedorUnlocked("lock");
-		   checkRoleMapping(adminUserName, adminPassword, 2, "Student","GroupMember");
-		   checkRoleMapping(adminUserName, adminPassword, 2, "Teacher", "GroupOwner");
-		   checkRoleMapping(adminUserName, adminPassword, 2, "Non-editing Teacher", "GroupMember");
-		   checkRoleMapping(adminUserName, adminPassword, 2, "Manager", "GroupOwner");
 		   setRoleMapping(userName, password, "IT Manager", "Student","Instructor");
+		   setUserTypeToLockedorUnlocked("lock");
 		   checkRoleMapping(adminUserName, adminPassword, 2, "Student", "GroupOwner");
 		   checkRoleMapping(adminUserName, adminPassword, 2, "Teacher", "GroupMember");
 		   checkRoleMapping(adminUserName, adminPassword, 2, "Non-editing Teacher", "GroupOwner");
 		   checkRoleMapping(adminUserName, adminPassword, 2, "Manager", "GroupMember");
-		   mediaLibrary.navigateToMyMediaUserLogin(userName, password);
-		   setUserTypeToLockedorUnlocked("unlock");
+		  
+		   setRoleMapping(userName, password, "IT Manager", "Instructor","Student");
+		   checkRoleMapping(adminUserName, adminPassword, 2, "Student","GroupMember");
+		   checkRoleMapping(adminUserName, adminPassword, 2, "Teacher", "GroupOwner");
+		   checkRoleMapping(adminUserName, adminPassword, 2, "Non-editing Teacher", "GroupMember");
+		   checkRoleMapping(adminUserName, adminPassword, 2, "Manager", "GroupOwner");
 		   }
+		   
    
 	
 
