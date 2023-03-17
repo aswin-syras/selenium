@@ -94,7 +94,7 @@ public class Wrapper {
 
 				// Setting up IE chrome options
 				ChromeOptions chromeOptions = new ChromeOptions();
-				chromeOptions.addArguments("start-maximized");
+				chromeOptions.addArguments("--remote-allow-origins=*");
 				
 				// Creating the driver variable
 				Thread.sleep(2000);
