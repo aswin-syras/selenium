@@ -363,7 +363,7 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 						reportStep(" humancaption button is enabled", "FAIL", false);
 					}
 				   mediaDetailsModal.clickCloseMoreMenu();
-				   driver.navigate().refresh();
+				  // driver.navigate().refresh();
 				   mediaLibrary.deleteMedia(autocaptionVideo);
 				   navigationBar.userLogOut();
 				

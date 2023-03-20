@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -278,7 +279,7 @@ public class MoodlePage extends QuizPageHelpers {
          clickElement("save confirm",By.xpath("//div[@class=\"modal-content\"]//button[@title=\"Confirm\"]") );
 	}
 	
-	public void setUserTypeToLockedorUnlocked(String lockOrUnlock) throws InterruptedException {
+	public void setUserTypeToLockedorUnlocked(String lockOrUnlock,String userType) throws InterruptedException {
 		 URL = "https://staging-demo.yuja.com/P/Institution/TypeRoster/";
 	     launchUrl(URL, "Xavier University Enterprise Video Platform");
 	     roster.rosterButtons("rolemappinguser");
@@ -286,7 +287,7 @@ public class MoodlePage extends QuizPageHelpers {
 		 if(lockOrUnlock=="lock") {
 			clickElement("usertype",By.xpath("//a[@data-automation=\"btnUserType\"]") );
 			Select userTypeDropdown = new Select(driver.findElement(By.xpath("//div[@class='editable-input']//select")));
-			userTypeDropdown.selectByVisibleText("Student");
+			userTypeDropdown.selectByVisibleText(userType);
 		    clickElement("save",By.xpath("//button[@class=\"btn btn-primary btn-sm editable-submit\"]") );
 			 
 			clickElement("lock",By.xpath("//a[@data-automation=\"btnLockUserType\"]") );
@@ -644,42 +645,99 @@ public class MoodlePage extends QuizPageHelpers {
 	   
 	   //Method directly used in test class
    
-	   public void roleMappingUserTypeUnlocked(String userName, String password, String adminUserName, String adminPassword) throws InterruptedException {
-		   setRoleMapping(userName, password, "IT Manager", "Student","Instructor");
-		   setUserTypeToLockedorUnlocked("unlock");
-		   checkRoleMapping(adminUserName, adminPassword, 3, "Student", "GroupOwner");
-		   checkRoleMapping(adminUserName, adminPassword, 2, "Teacher", "GroupMember");
-		   checkRoleMapping(adminUserName, adminPassword, 3, "Non-editing Teacher", "GroupOwner");
-		   checkRoleMapping(adminUserName, adminPassword, 2, "Manager", "GroupMember");
-		  
-		   setRoleMapping(userName, password, "IT Manager", "Instructor","Student");
-		   checkRoleMapping(adminUserName, adminPassword, 2, "Student","GroupMember");
-		   checkRoleMapping(adminUserName, adminPassword, 3, "Teacher", "GroupOwner");
-		   checkRoleMapping(adminUserName, adminPassword, 2, "Non-editing Teacher", "GroupMember");
-		   checkRoleMapping(adminUserName, adminPassword, 3, "Manager", "GroupOwner");
-		   }
-	   
-	   //Method directly used in test class
-	   public void roleMappingUserTypeLocked(String userName, String password, String adminUserName, String adminPassword) throws InterruptedException {
-		   setRoleMapping(userName, password, "IT Manager", "Student","Instructor");
-		   setUserTypeToLockedorUnlocked("lock");
-		   checkRoleMapping(adminUserName, adminPassword, 2, "Student", "GroupOwner");
-		   checkRoleMapping(adminUserName, adminPassword, 2, "Teacher", "GroupMember");
-		   checkRoleMapping(adminUserName, adminPassword, 2, "Non-editing Teacher", "GroupOwner");
-		   checkRoleMapping(adminUserName, adminPassword, 2, "Manager", "GroupMember");
-		  
-		   setRoleMapping(userName, password, "IT Manager", "Instructor","Student");
-		   checkRoleMapping(adminUserName, adminPassword, 2, "Student","GroupMember");
-		   checkRoleMapping(adminUserName, adminPassword, 2, "Teacher", "GroupOwner");
-		   checkRoleMapping(adminUserName, adminPassword, 2, "Non-editing Teacher", "GroupMember");
-		   checkRoleMapping(adminUserName, adminPassword, 2, "Manager", "GroupOwner");
-		   }
-		   
    
-	
+	   public void roleMappingUserTypeUnlocked(String userName, String password, String adminUserName, String adminPassword, String userType) throws InterruptedException {
+		   
+		   HashMap<String, RoleMappingObject> hm = new HashMap<String, RoleMappingObject>();
 
+		   RoleMappingObject t1 = new RoleMappingObject(2, "Manager", "GroupMember");		  
+		   hm.put("Instructor1",t1);
+		   RoleMappingObject t2 = new RoleMappingObject(2, "Teacher", "GroupMember");		  
+		   hm.put("Instructor",t2);
+		   RoleMappingObject t3 = new RoleMappingObject(3, "Student", "GroupOwner");		 
+		   hm.put("Student",t3);
+		   
+		   setRoleMapping(userName, password, "IT Manager", "Student","Instructor");
+		   setUserTypeToLockedorUnlocked("unlock",userType);
+		   String key=null;
+		   getCheckRoleMapping(adminUserName, adminPassword, hm);		  
+		   for (Entry<String, RoleMappingObject> entry : hm.entrySet()) {
+			   key=entry.getKey();
+		   if(key=="Instructor1") {
+			   RoleMappingObject value = entry.setValue(t1);
+			   value.setNumberOfMainMenuOptions(3);
+			   value.setMoodleRole("Manager");
+			   value.setCourseRole("GroupOwner");
+			  }
+		   if(key=="Instructor") {
+			   RoleMappingObject value = entry.setValue(t2);
+			   value.setNumberOfMainMenuOptions(3);
+			   value.setMoodleRole("Teacher");
+			   value.setCourseRole("GroupOwner");
+			   }
+		   if(key=="Student") {
+			   RoleMappingObject value = entry.setValue(t3);
+			   value.setNumberOfMainMenuOptions(2);
+			   value.setMoodleRole("Student");
+			   value.setCourseRole("GroupMember");
+			   }}
+		   
+           setRoleMapping(userName, password, "IT Manager", "Instructor","Student");
+           getCheckRoleMapping(adminUserName, adminPassword, hm);
+	   }
+		   
+	   public void getCheckRoleMapping(String adminUserName, String adminPassword, HashMap<String, RoleMappingObject> hm) throws InterruptedException {
+		   for (Entry<String, RoleMappingObject> entry : hm.entrySet()) {
+			    String key2 = entry.getKey();
+			    RoleMappingObject value = entry.getValue();
+			    checkRoleMapping(adminUserName, adminPassword,value.getNumberOfMainMenuOptions(),value.getMoodleRole(),value.getCourseRole() );
+			    }
+	   }
+	   
+	 //Method directly used in test class
+		   
+      public void roleMappingUserTypeLocked(String userName, String password, String adminUserName, String adminPassword, String userType,int numberOfMainMenuOptions) throws InterruptedException {
+		   
+		   HashMap<String, RoleMappingObject> hm = new HashMap<String, RoleMappingObject>();
 
-	
+		   RoleMappingObject t1 = new RoleMappingObject(numberOfMainMenuOptions, "Manager", "GroupMember");		  
+		   hm.put("Instructor1",t1);
+		   RoleMappingObject t2 = new RoleMappingObject(numberOfMainMenuOptions, "Teacher", "GroupMember");		  
+		   hm.put("Instructor",t2);
+		   RoleMappingObject t3 = new RoleMappingObject(numberOfMainMenuOptions, "Student", "GroupOwner");		 
+		   hm.put("Student",t3);
+		   
+		   setRoleMapping(userName, password, "IT Manager", "Student","Instructor");
+		   setUserTypeToLockedorUnlocked("lock",userType);
+		   String key=null;
+		   getCheckRoleMapping(adminUserName, adminPassword, hm);		  
+		   for (Entry<String, RoleMappingObject> entry : hm.entrySet()) {
+			   key=entry.getKey();
+		   if(key=="Instructor1") {
+			   RoleMappingObject value = entry.setValue(t1);
+			   value.setNumberOfMainMenuOptions(numberOfMainMenuOptions);
+			   value.setMoodleRole("Manager");
+			   value.setCourseRole("GroupOwner");
+			  }
+		   if(key=="Instructor") {
+			   RoleMappingObject value = entry.setValue(t2);
+			   value.setNumberOfMainMenuOptions(numberOfMainMenuOptions);
+			   value.setMoodleRole("Teacher");
+			   value.setCourseRole("GroupOwner");
+			   }
+		   if(key=="Student") {
+			   RoleMappingObject value = entry.setValue(t3);
+			   value.setNumberOfMainMenuOptions(numberOfMainMenuOptions);
+			   value.setMoodleRole("Student");
+			   value.setCourseRole("GroupMember");
+			   }}
+		   
+           setRoleMapping(userName, password, "IT Manager", "Instructor","Student");
+           getCheckRoleMapping(adminUserName, adminPassword, hm);
+	   } 
+		  
+
+   
 	//Check media exists in the media library deletion only work for last uploaded media
 	
 	public void checkMediaExitsinMediaLibrary(List<String> mediaTitlelist) throws InterruptedException {

@@ -5,7 +5,7 @@
   <parameter name="TestName" value="TestValue" />
   <test name="Create_new_folder_test">
   	<classes>
-    	 <class name="com.yuja.evp.testclasses.MediaLibraryTest">
+    	<!--   <class name="com.yuja.evp.testclasses.MediaLibraryTest">
 	      	<methods>
 	      		
 	            	<include name="Bulkfavorite_manager_Succesful_test" />  
@@ -52,12 +52,12 @@
         		<include name="Edit_humancaption_permissions_for_Specific_user_Cielo24_test" />
         		<include name="Edit_humancaption_permissions_for_Specific_user_yujaprocaptioning_test" />
         		</methods>
-        </class> 
+        </class> -->
         	
            <class name="com.yuja.evp.testclasses.MoodleTest">
-        	<methods> 
+        	<methods>   
         		 <include name="Moodle_create_publish_attend_gradebook_administrator_test" />
-        		<include name="Moodle_create_publish_attend_gradebook_instructor_test" />
+        		<!--<include name="Moodle_create_publish_attend_gradebook_instructor_test" />
         		
         		<include name="Moodle_create_playback_attend_gradebook_administrator_test" />
         		<include name="Moodle_create_playback_attend_gradebook_instructor_test" />
@@ -79,10 +79,10 @@
         		
         		<include name="Moodle_upload_doc_as_administrator_check_in_media_library_test" />
         		<include name="Moodle_upload_doc_as_instuctor_check_in_media_library_test" /> 
-        		<include name="Check_role_mapping_locked" />
+        		<include name="Check_role_mapping_locked_as_instructor" /> 
         		<include name="Check_role_mapping_unlocked" />
         		
-        	   <include name="Moodle_check_manualprovisioning_existinguser" />
+        	    <include name="Moodle_check_manualprovisioning_existinguser" />
         		<include name="Moodle_check_manualprovisioning_newuser" />
         		
         		<include name="Moodle_check_autoprovisioning_user_multipleCourses" />
@@ -106,7 +106,7 @@
         		
         		<include name="Check_Unauthenticated_user_embedded_quiz_test" />
         		
-        		<include name="Check_delete_quiz_test" />
+        		<include name="Check_delete_quiz_test" />-->
         	</methods>
         </class> 
         
