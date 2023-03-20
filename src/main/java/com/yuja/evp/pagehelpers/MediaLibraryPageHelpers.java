@@ -31,8 +31,7 @@ public class MediaLibraryPageHelpers extends Helpers{
 		driver.manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
-		URL = "https://staging-demo.yuja.com/P/VideoManagement/MediaLibrary/Users/"+userName+"/MyMediaCollections";
-		launchUrl(URL, "Xavier University Enterprise Video Platform");
+		launchUrl(prop.getProperty("URL"), "Xavier University Enterprise Video Platform");
 	}
 	
 	public void navigateToMyMedia(String userName){

@@ -43,8 +43,8 @@ public class SignInPageHelpers extends Helpers{
 	///////////////////////////////////////////////////////////////////////////
 	
 	public void navigateToLoginPage() {
-		URL = "https://staging-demo.yuja.com/Login?accesstype=YuJa%20Credentials";
-		launchUrl(URL, "Xavier University Media Library");
+		//URL = "https://staging-demo.yuja.com/Login?accesstype=YuJa%20Credentials";
+		launchUrl(prop.getProperty("URL"), "Xavier University Media Library");
 	}
 	
 	public void loginFast(String username, String password) {
