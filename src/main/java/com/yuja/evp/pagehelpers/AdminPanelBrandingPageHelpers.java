@@ -13,13 +13,11 @@ public class AdminPanelBrandingPageHelpers extends AdminPanelGeneralPageHelpers 
 	NavigationBarHelpers navigationBar = new NavigationBarHelpers();
 	
 	public void CheckPageUI() {
-		//URL = "https://staging-demo.yuja.com/P/Institution/InstitutionBranding/";
-		launchUrl(prop.getProperty("URL"), "Xavier University Enterprise Video Platform");
+		launchUrl(prop.getProperty("BrandingURL"), "Test Automation Enterprise Video Platform");
 		String sectionTitle = driver.findElement(By.id("secondPartText")).getText();
 		boolean check  = waitForElement(By.id("institutionBranding"),10).isDisplayed();
 		if(check && sectionTitle.equals("Branding")) {
 			reportStep(sectionTitle + " Page loaded successfully", "PASS", false);
-			System.out.println(sectionTitle);
 		} else reportStep(sectionTitle + "failed to load", "fail", true);	
 	}
 	
