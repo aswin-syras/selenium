@@ -23,9 +23,9 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 	GradebookPageHelpers gradebook=new GradebookPageHelpers();
 	MyAccountPageHelpers myAccount= new MyAccountPageHelpers();
 	
-		public String createPublishandAttendQuizTest(String userName, String password, String mediaTitle, String name,String question,String option1, String option2,String possibleans1, String possibleans2,String hint, String studentUserName, String studentPassword,String sa, String fitbans) throws Exception {
+		public String createPublishandAttendQuizTest(String userName, String password, String mediaTitle, String name,String question,String option1, String option2,String possibleans1, String possibleans2,String hint, String studentUserName, String studentPassword,String sa, String fitbans, String courseName) throws Exception {
 			loginAsCreator(userName, password);
-			String newQuizName = createandPublishQuiz(mediaTitle, name, question,option1, option2, possibleans1, possibleans2,hint);
+			String newQuizName = createandPublishQuiz(mediaTitle, name, question,option1, option2, possibleans1, possibleans2,hint,courseName);
 			navigationBar.userLogOut();
 			Thread.sleep(25000);
 			mediaLibrary.navigateToMyMediaUserLogin(studentUserName, studentPassword);
@@ -44,8 +44,8 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 			return newQuizName;
 		}
 		
-		public void checkStudentgradeBookTest(String userName,String password, String mediaTitle, String quizclosedate,String studentUserName, String studentPassword,String courseName,String name) throws InterruptedException{
-			updatePostInfo(userName,password, mediaTitle, quizclosedate);
+		public void checkStudentgradeBookTest(String userName,String password, String mediaTitle, String studentUserName, String studentPassword,String courseName,String quizName) throws InterruptedException{
+			updatePostInfo(userName,password, mediaTitle,quizName);
 			navigationBar.userLogOut();
 			Thread.sleep(2000);
 			mediaLibrary.navigateToMyMediaUserLogin(studentUserName, studentPassword);
@@ -64,7 +64,7 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 			Thread.sleep(3000);
 			List <WebElement> element3= driver.findElements(By.xpath("//input[@class='select2-input']"));
 			WebElement element4=element3.get(element3.size()-1);
-			typeKeys(name);
+			typeKeys(quizName);
 			keyboardEnter();
 			gradebook.clickGetGradebookReport();
 			Thread.sleep(3000);
@@ -84,16 +84,17 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 			}
 			navigationBar.userLogOut();
 		}
-		
-		public void checkGradebookTest(String userName, String password, String mediaTitle, String courseName,String name,String marks, String studentName) throws InterruptedException {
+	
+		public void checkGradebookTest(String userName, String password, String mediaTitle,String quizName, String courseName, String studentName,String marks) throws InterruptedException {
 			loginAsCreator(userName, password);
-			checkGradebookTestafterLoginforMultiple(mediaTitle, courseName,name, marks, studentName);
+			checkGradebookTestafterLoginforMultiple(mediaTitle,quizName, courseName, studentName,marks);
 		}
 		
-		public void unauthenticatedUserDirectQuizTest(String userName,String password, String mediaTitle,String sa, String fitbans,String courseName,String name,String marks,String studentName) throws InterruptedException {
+		public void unauthenticatedUserDirectQuizTest(String userName,String password, String mediaTitle,String sa, String fitbans,String courseName,String marks,String studentName, String quizName) throws InterruptedException {
 			mediaLibrary.navigateToMyMediaUserLogin(userName, password);
 			mediaLibrary.accessMediaMoreMenu(mediaTitle);
 			mediaDetailsModal.clickQuizzes();
+			sendKeys("Search for quizzes", By.id("quiz-search-input"), quizName);
 			mediaDetailsModal.clickQuizLinksdrop();
 			String directLink=getQuizDirectLink();
 			mediaDetailsModal.clickCloseMoreMenu();
@@ -106,14 +107,15 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 			StudentattendallquestionsCorrectly(sa, fitbans);
 			Thread.sleep(2000);
 			loginAsCreator(userName, password);
-			checkGradebookTestafterLoginforMultiple(mediaTitle, courseName,name, marks, studentName);
+			checkGradebookTestafterLoginforMultiple(mediaTitle,quizName, courseName,studentName, marks);
 			navigationBar.userLogOut();
 		}
 
-		public void unauthenticatedUserEmbeddedQuizTest(String userName,String password, String mediaTitle,String sa, String fitbans,String courseName,String name,String marks,String studentName) throws InterruptedException {
+		public void unauthenticatedUserEmbeddedQuizTest(String userName,String password, String mediaTitle,String sa, String fitbans,String courseName,String marks,String studentName, String quizName) throws InterruptedException {
 			mediaLibrary.navigateToMyMediaUserLogin(userName, password);
 			mediaLibrary.accessMediaMoreMenu(mediaTitle);
 			mediaDetailsModal.clickQuizzes();
+			sendKeys("Search for quizzes", By.id("quiz-search-input"), quizName);
 			mediaDetailsModal.clickQuizLinksdrop();
 			clickElement("click on embed code",By.xpath("//input[@id='embedCodeInputBox']"),10);
 			//driver.findElement(By.xpath("//input[@id='embedCodeInputBox']")).click(); 
@@ -135,7 +137,7 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 			switchToIframe("switch to iframe result", By.id("iframeResult"), 10);
 			//driver.switchTo().frame("iframeResult");
 			Thread.sleep(4000);
-			WebElement frame = driver.findElement(By.xpath("//iframe[contains(@src,'https://staging-demo.yuja.com')]"));
+			WebElement frame = driver.findElement(By.xpath("//iframe[contains(@src,'https://staging-my.yuja.com')]"));
 			driver.switchTo().frame(frame);
 			Thread.sleep(4000);
 			switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
@@ -144,14 +146,15 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 			StudentattendallquestionsCorrectly(sa, fitbans);
 			Thread.sleep(2000);
 			loginAsCreator(userName, password);
-			checkGradebookTestafterLoginforMultiple(mediaTitle, courseName,name, marks, studentName);
+			checkGradebookTestafterLoginforMultiple(mediaTitle,quizName, courseName, studentName,marks);
 			navigationBar.userLogOut();
 		}
 		
-		public void deleteQuizTest(String userName, String password, String mediaTitle) throws InterruptedException {
+		public void deleteQuizTest(String userName, String password, String mediaTitle, String quizName) throws InterruptedException {
 			mediaLibrary.navigateToMyMediaUserLogin(userName, password);
 			mediaLibrary.accessMediaMoreMenu(mediaTitle);
 			mediaDetailsModal.clickQuizzes();
+			sendKeys("Search for quizzes", By.id("quiz-search-input"), quizName);
 			mediaDetailsModal.clickDeleteQuizButton();
 			clickElement("yes",By.xpath("//button[@title='Yes']"),10);
 			String x=driver.findElement(By.xpath("//div[@class='toast-message']")).getAttribute("innerHTML");

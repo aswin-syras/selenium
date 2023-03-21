@@ -6,7 +6,7 @@
   	<classes>
       <class name="com.yuja.evp.testclasses.AdminPanelAccessiblityTest">
 	      <methods>
-	          <include name="Edit_autocaption_permissions_for_Specific_user">
+	          <include name="Edit_autocaption_permissions_for_all_students_test">
 			      <!-- <parameter name="Browser" value="IE" /> -->
 			      <parameter name="TestName" value="Edit_autocaption_permissions_for_all_instructors" />
 			  </include> 

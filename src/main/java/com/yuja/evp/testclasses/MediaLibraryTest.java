@@ -331,7 +331,7 @@ public class MediaLibraryTest extends BaseTest{
 		int randomInt = (int)Math.floor(Math.random() * 100 + 1);
 		String folderName = "temp folder " + randomInt;
 		try {
-			ml.bulkFavoriteAndUnfavoriteTest(MANAGER_USER, PASSWORD, folderName);
+			ml.bulkFavoriteAndUnfavoriteTest(prop.getProperty("ManagerID"), prop.getProperty("Password"), folderName);
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -347,7 +347,7 @@ public class MediaLibraryTest extends BaseTest{
 		int randomInt = (int)Math.floor(Math.random() * 100 + 1);
 		String folderName = "temp folder " + randomInt;
 		try {
-			ml.bulkFavoriteAndUnfavoriteTest(INSTRUCTOR_USER, PASSWORD, folderName);
+			ml.bulkFavoriteAndUnfavoriteTest(prop.getProperty("InstructorID"), prop.getProperty("Password"), folderName);
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -363,7 +363,7 @@ public class MediaLibraryTest extends BaseTest{
 		int randomInt = (int)Math.floor(Math.random() * 100 + 1);
 		String folderName = "temp folder " + randomInt;
 		try {
-			ml.bulkFavoriteAndUnfavoriteTest(STUDENT_USER, PASSWORD, folderName);
+			ml.bulkFavoriteAndUnfavoriteTest(prop.getProperty("StudentID"), prop.getProperty("Password"), folderName);
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());

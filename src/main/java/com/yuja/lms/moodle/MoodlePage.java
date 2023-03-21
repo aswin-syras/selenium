@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -48,6 +49,11 @@ public class MoodlePage extends QuizPageHelpers {
 		fillInUserId(username);
 		fillInPassword(password);
 		clickSignInButton();
+		Boolean sitehomeexist=verifyElementExist("dashboard", By.xpath("//div[@class=\"media\"]//span[text()='Dashboard']"));
+		System.out.println(sitehomeexist);
+		if(sitehomeexist==false) {
+			clickElement("show sidebar", By.xpath("//button[@class='btn nav-link float-sm-left mr-1 btn-light bg-gray']"));
+			}
 	}
 	
 	public void logout() {
@@ -130,7 +136,7 @@ public class MoodlePage extends QuizPageHelpers {
 		navigateToCourse(userName,password);
 		NavigateToLTI(embedMediaTitle);
 		Thread.sleep(3000);
-		String quizNewName=createandPublishQuiz(mediaTitle,name,question, option1,  option2, possibleans1, possibleans2, hint);
+		String quizNewName=createandPublishQuiz(mediaTitle,name,question, option1,  option2, possibleans1, possibleans2, hint,courseName);
 		String quizFinalName="'"+quizNewName+"'";
 		driver.switchTo().defaultContent();
 		String URL = "https://tmoodle2.yuja.com/course/view.php?id=142";
@@ -151,7 +157,7 @@ public class MoodlePage extends QuizPageHelpers {
 		navigateToCourse(userName,password);
 		NavigateToLTI(embedMediaTitle);
 		Thread.sleep(3000);
-		checkGradebookTestafterLoginforMultiple(mediaTitle, courseName,name, marks,studentFullName );
+		checkGradebookTestafterLoginforMultiple(mediaTitle,quizNewName,courseName ,studentFullName,marks );
 		clickElement("Click Manage Media",By.xpath("//span[@id='topBarTabName3']"),10);
 		Thread.sleep(2000);
 		checkActivityLogforQuizSync(mediaTitle, studentNameinActivitylog,marks, quizNewName);
@@ -190,7 +196,7 @@ public class MoodlePage extends QuizPageHelpers {
 		navigateToCourse(userName,password);
 		NavigateToLTI(embedMediaTitle);
 		Thread.sleep(3000);
-		checkGradebookforPlaybackQuiz(videoNameforPlaybackquiz, courseName, quizNewName, marks, studentFullName);
+		checkGradebookforPlaybackQuiz(videoNameforPlaybackquiz, courseName, marks, studentFullName,quizNewName);
 		clickElement("Click Manage Media",By.xpath("//span[@id='topBarTabName3']"),10);
 		Thread.sleep(2000);
 		checkActivityLogforQuizSync(videoNameforPlaybackquiz, studentNameinActivityLog,marks, quizNewName);
@@ -206,7 +212,7 @@ public class MoodlePage extends QuizPageHelpers {
 		navigateToCourse(userName,password);
 		accessCIMMediaChooser();
 		CIMMediaChooserMediaEmbed(name);
-            logout();
+        logout();
 	    navigateToCourse(stuserName,stpassword);
 	    NavigateToLTI(embedMediaName);
 	   
@@ -239,8 +245,8 @@ public class MoodlePage extends QuizPageHelpers {
 		provisionType.put("user", "(//input[@id='autoProvisionId'])[2]");
 		provisionType.put("course", "(//input[@id=\"autoProvisionClassesId\"])[2]");
 	    mediaLibrary.navigateToMyMediaUserLogin(userName, password);
-	    URL = "https://staging-demo.yuja.com/P/Institution/APIManagementServlet/";
-        launchUrl(URL, "Xavier University Enterprise Video Platform");
+	    URL = prop.getProperty("URL")+"P/Institution/APIManagementServlet/";
+        launchUrl(URL, "Test Automation Enterprise Video Platform");
         Select integrationDropdown = new Select(driver.findElement(By.id("apiPicker")));
         integrationDropdown.selectByValue("lti3");
         WebElement checkBox=driver.findElement(By.xpath(provisionType.get(userOrcourse)));
@@ -254,11 +260,54 @@ public class MoodlePage extends QuizPageHelpers {
             	reportStep("The checkbox is setting was same as required","PASS",false);
             }	
         }
+	
+	public void setRoleMapping(String userName, String password, String yujaRolefromAdmin, String yujaRolefromTeacher, String yujaRolefromStudent) throws InterruptedException {
+		 mediaLibrary.navigateToMyMediaUserLogin(userName, password);
+		 URL =  prop.getProperty("URL")+"P/Institution/APIManagementServlet/";
+	     launchUrl(URL, "Test Automation Enterprise Video Platform");
+	     Select integrationDropdown = new Select(driver.findElement(By.id("apiPicker")));
+	     integrationDropdown.selectByValue("lti3");
+	     Select lmsDropdown = new Select(driver.findElement(By.id("LTI3LMSSelect")));
+	     lmsDropdown.selectByVisibleText("Moodle");
+	     Select moodleAdminRole = new Select(driver.findElement(By.xpath("(//select[@id=\"moodleAdminRoleTo\"])[2]")));
+	     moodleAdminRole.selectByVisibleText(yujaRolefromAdmin);
+	     Select moodleTeacherRole = new Select(driver.findElement(By.xpath("(//select[@id=\"moodleTeacherRoleTo\"])[2]")));
+	     moodleTeacherRole.selectByVisibleText(yujaRolefromTeacher);
+	     Select moodleStudentRole = new Select(driver.findElement(By.xpath("(//select[@id=\"moodleStudentRoleTo\"])[2]")));
+	     moodleStudentRole.selectByVisibleText(yujaRolefromStudent);
+	     clickElement("save",By.xpath("//form[@id=\"lti3SettingsGeneral\"]//button[@title=\"Save\"]") );
+         clickElement("save confirm",By.xpath("//div[@class=\"modal-content\"]//button[@title=\"Confirm\"]") );
+	}
+	
+	public void setUserTypeToLockedorUnlocked(String lockOrUnlock,String userType) throws InterruptedException {
+		 URL = prop.getProperty("URL")+"P/Institution/TypeRoster/";
+	     launchUrl(URL, "Test Automation Enterprise Video Platform");
+	     roster.rosterButtons("rolemappinguser");
+		 
+		 if(lockOrUnlock=="lock") {
+			clickElement("usertype",By.xpath("//a[@data-automation=\"btnUserType\"]") );
+			Select userTypeDropdown = new Select(driver.findElement(By.xpath("//div[@class='editable-input']//select")));
+			userTypeDropdown.selectByVisibleText(userType);
+		    clickElement("save",By.xpath("//button[@class=\"btn btn-primary btn-sm editable-submit\"]") );
+			 
+			clickElement("lock",By.xpath("//a[@data-automation=\"btnLockUserType\"]") );
+			Select lockDropdown = new Select(driver.findElement(By.xpath("//div[@class='editable-input']//select")));
+			lockDropdown.selectByVisibleText("Locked");
+			clickElement("save",By.xpath("//button[@class=\"btn btn-primary btn-sm editable-submit\"]") );
+			}
+		 if(lockOrUnlock=="unlock") {
+			clickElement("lock",By.xpath("//a[@data-automation=\"btnLockUserType\"]") );
+			Select lockDropdown = new Select(driver.findElement(By.xpath("//div[@class='editable-input']//select")));
+			lockDropdown.selectByVisibleText("Not Locked");
+			clickElement("save",By.xpath("//button[@class=\"btn btn-primary btn-sm editable-submit\"]") );
+			}
+	}
+	
     	
 	
     public void setStartPageOptionAsMediaChannel() {
-        URL = "https://staging-demo.yuja.com/P/Institution/MenuManagement/";
-        launchUrl(URL, "Xavier University Enterprise Video Platform");
+        URL = prop.getProperty("URL")+"P/Institution/MenuManagement/";
+        launchUrl(URL, "Test Automation Enterprise Video Platform");
         Select startPageOptionITManager = new Select(driver.findElement(By.id("select_defaultLandingPageIT")));
         startPageOptionITManager.selectByValue("mediaChannel");
         Select startPageOptionInstructor = new Select(driver.findElement(By.id("select_defaultLandingPageInstructor")));
@@ -275,7 +324,7 @@ public class MoodlePage extends QuizPageHelpers {
 		createMoodleCourse(adminUserName, adminPassword,courseName,courseShortName);
 		String moodleCourseName=driver.findElement(By.xpath("//div[@class=\"page-header-headings\"]")).getText();
 		addExternalTool(externalToolCustomName,externalToolVisibleName);
-		NavigateToLTI("'XAVIER 1.3'");
+		NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
 		String provisionedCourseName=driver.findElement(By.xpath("//li[@class='nav-item active']")).getAttribute("title");
 	
 		if(provisionedCourseName.contains(moodleCourseName)) {
@@ -292,7 +341,7 @@ public class MoodlePage extends QuizPageHelpers {
 		setStartPageOptionAsMediaChannel();
 		createMoodleCourse(adminUserName, adminPassword,courseName,courseShortName);
 		addExternalTool(externalToolCustomName,externalToolVisibleName);
-		NavigateToLTI("'XAVIER 1.3'");
+		NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
 		clickElement("Create new course button", By.xpath("//a[@title=\"Create a Course\"]"));
 		waitForElement(By.xpath("//input[@id=\"className\"]"),10);
 		sendKeys("Enter manual course full name", By.xpath("//input[@id=\"className\"]"),courseName+getRandomInteger(1000));
@@ -314,16 +363,16 @@ public class MoodlePage extends QuizPageHelpers {
 		setStartPageOptionAsMediaChannel();
 		createMoodleCourse(adminUserName, adminPassword,courseName,courseShortName);
 		addExternalTool(externalToolCustomName,externalToolVisibleName);
-		NavigateToLTI("'XAVIER 1.3'");
+		NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
 		clickElement("Link to an existing course button", By.xpath("//a[@title=\"Link to an Existing Course\"]"));
 		waitForElement(By.xpath("//select[@id=\"classSelectBox\"]"),10);
 		clickElement("dropdown", By.xpath("//select[@id=\"classSelectBox\"]"));
-		clickElement("choose the auto existing course", By.xpath("//select[@id=\"classSelectBox\"]//option[text()='aec -  - AutoExistingCourse - ']"));
+		clickElement("choose the auto existing course", By.xpath("//select[@id=\"classSelectBox\"]//option[text()='aec - Mar 2023 - Auto Existing Course']"));
 		clickElement("Click OK button after selecting the existing course", By.xpath("//button[@title=\"OK\"]"));
 		waitForElement(By.xpath("//li[@class='nav-item active']"),15);
 		String provisionedCourseName=driver.findElement(By.xpath("//li[@class='nav-item active']")).getAttribute("title");
 		
-       if(provisionedCourseName.contains("AutoExistingCourse")) {
+       if(provisionedCourseName.contains("Auto Existing Course")) {
     	   reportStep("The moodle course is successfully manuallyprovisioned  and connected to existing course in yuja", "PASS", false);
 		} else {
 			reportStep("The moodle course is not successfully manuallyprovisioned connected to existing course in yuja", "FAIL", true);
@@ -354,7 +403,7 @@ public class MoodlePage extends QuizPageHelpers {
 		driver.manage().window().maximize();
 		loginFast(studentUserName, newUserPassword);
 		selectCourseFromSiteHome(courseName);
-		NavigateToLTI("'XAVIER 1.3'");
+		NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
 		waitForElement(By.xpath("//*[@id=\"bi_userInfoDropdown\"]"),15);
 		navbar.clickMyAccountButton();
 		navbar.clickMyAccountDropdownOption();
@@ -414,7 +463,7 @@ public class MoodlePage extends QuizPageHelpers {
 		
 		for(String course:courseName) {
 		selectCourseFromSiteHome(course);
-		NavigateToLTI("'XAVIER 1.3'");
+		NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
 		waitForElement(By.xpath("//*[@id=\"bi_userInfoDropdown\"]"),15);
 		navbar.clickMyAccountButton();
 		navbar.clickMyAccountDropdownOption();
@@ -473,7 +522,7 @@ public class MoodlePage extends QuizPageHelpers {
 	   driver.manage().window().maximize();
 	   loginFast(studentUserName, newUserPassword);
 	   selectCourseFromSiteHome(courseName);
-	   NavigateToLTI("'XAVIER 1.3'");
+	   NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
 	
 	   if(type=="new") {
 		   waitForElement(By.xpath("//input[@id=\"newPass1\"]"),15);
@@ -528,10 +577,167 @@ public class MoodlePage extends QuizPageHelpers {
 				}
 			}
 		}
+   
+   public void checkRoleMapping(String userName, String password, int expectedMainMenuListSize, String moodleRole, String courserole) throws InterruptedException{
+	   
+	   HashMap<String, String> CourseRoleType = new HashMap<String, String>();
+	   CourseRoleType.put("GroupMember", "//div[@data-automation=\"divGroupMembers\"]//div[@class=\"user-list-item\"]");
+	   CourseRoleType.put("GroupOwner", "//div[@data-aitomation=\"divGroupOwners\"]//div[@class=\"user-list-item\"]");
+	   
+	   navigateToCourse(userName,password);
+	   clickElement("participants", By.xpath("//a[@data-key=\"participants\"]"));
+	   List<WebElement> memberListInMoodle= getElementList(By.xpath("//table[@id='participants']//tbody//tr//th//a"));
+	   String obtainedmoodlememberFirstname=null;
+	   for(int i=0;i<memberListInMoodle.size();i++) {
+			WebElement element=memberListInMoodle.get(i);
+			String obtainedmemberName = element.getText();
+			String obtainedmembersplitFirstname[]=obtainedmemberName.split(" ",2);
+			obtainedmoodlememberFirstname=obtainedmembersplitFirstname[0];
+		    System.out.println(obtainedmoodlememberFirstname);
+			if(obtainedmoodlememberFirstname.equals("rolemappinguser")) {
+				int rowposition=i+1;
+				clickElement("edit role button", By.xpath("(//span[@class=\"quickediticon visibleifjs\"])["+rowposition+"]"));
+				clickElement("close current role button", By.xpath("//span[@class=\"badge badge-info mb-3 mr-1\"]//span"));
+				sendKeys("enter moodle role",By.xpath("//input[contains(@id,'form_autocomplete_input')]"),moodleRole);
+				clickElement("click autosuggestion",By.xpath("//li[contains(@id,'form_autocomplete_suggestions')]"));
+				Thread.sleep(2000);
+				clickElement("save role button", By.xpath("//i[@title=\"Save changes\"]"));
+				Thread.sleep(2000);
+				reportStep("New moodle role is assigned to user", "PASS", false);
+				break;
+				}
+			}
+	   logout();
+	   navigateToLoginPage();
+	   driver.manage().window().maximize();
+	   loginFast("rolemappinguser", "jamNOW123/");
+	   selectCourseFromSiteHome("AUTOMATION MOODLE COURSE");
+	   NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
+	   waitForElement(By.xpath("//button[@title=\" Main Menu\"]"),15);
+	   clickElement("main menu button", By.xpath("//button[@title=\" Main Menu\"]"));
+	   List<WebElement> mainmenuList= getElementList(By.xpath("//a[@class='yujaAjax']"));
+	   int mainMenuListSize=mainmenuList.size();
+	   clickElement("Courses and Groups button", By.cssSelector("[data-automation=\"btnCourseAndGroups\"]"));
+	   sendKeys("enter course name",By.xpath("//input[@class=\"group-management-inputbox form-control search-box\"]"),"AUTOMATION MOODLE COURSE");
+	   clickElement("choose course after search",By.xpath("//ul[@id=\"courses-and-groups\"]//li"));
+	   List<WebElement> memberList= getElementList(By.xpath(CourseRoleType.get(courserole)));
+	   String obtainedmemberFirstname=null;
+	   for(int i=0;i<memberList.size();i++) {
+			WebElement element=memberList.get(i);
+			String obtainedmemberName = element.getText();
+			String obtainedmembersplitFirstname[]=obtainedmemberName.split(" ",2);
+		    obtainedmemberFirstname=obtainedmembersplitFirstname[0];
+		    System.out.println(obtainedmemberFirstname);
+			if(obtainedmemberFirstname.equals("rolemappinguser")){
+				reportStep("The moodle user role is correctly mapped to course in yuja", "PASS", false);
+				break;
+				}
+		   }
 	
+		if(mainMenuListSize==expectedMainMenuListSize && obtainedmemberFirstname.equals("rolemappinguser")) {
+			reportStep("The moodle user is  enrolled to  course in yuja with correct system role and course role", "PASS", false);
+			}else {
+			reportStep("The moodle user is  not enrolled to  course in yuja with correct system role and course role", "FAIL", true);
+			}
+		driver.switchTo().defaultContent();
+		logout();
+		}
+	   
+	   //Method directly used in test class
+   
+   
+	   public void roleMappingUserTypeUnlocked(String userName, String password, String adminUserName, String adminPassword, String userType) throws InterruptedException {
+		   
+		   HashMap<String, RoleMappingObject> hm = new HashMap<String, RoleMappingObject>();
 
+		   RoleMappingObject t1 = new RoleMappingObject(2, "Manager", "GroupMember");		  
+		   hm.put("Instructor1",t1);
+		   RoleMappingObject t2 = new RoleMappingObject(2, "Teacher", "GroupMember");		  
+		   hm.put("Instructor",t2);
+		   RoleMappingObject t3 = new RoleMappingObject(3, "Student", "GroupOwner");		 
+		   hm.put("Student",t3);
+		   
+		   setRoleMapping(userName, password, "IT Manager", "Student","Instructor");
+		   setUserTypeToLockedorUnlocked("unlock",userType);
+		   String key=null;
+		   getCheckRoleMapping(adminUserName, adminPassword, hm);		  
+		   for (Entry<String, RoleMappingObject> entry : hm.entrySet()) {
+			   key=entry.getKey();
+		   if(key=="Instructor1") {
+			   RoleMappingObject value = entry.setValue(t1);
+			   value.setNumberOfMainMenuOptions(3);
+			   value.setMoodleRole("Manager");
+			   value.setCourseRole("GroupOwner");
+			  }
+		   if(key=="Instructor") {
+			   RoleMappingObject value = entry.setValue(t2);
+			   value.setNumberOfMainMenuOptions(3);
+			   value.setMoodleRole("Teacher");
+			   value.setCourseRole("GroupOwner");
+			   }
+		   if(key=="Student") {
+			   RoleMappingObject value = entry.setValue(t3);
+			   value.setNumberOfMainMenuOptions(2);
+			   value.setMoodleRole("Student");
+			   value.setCourseRole("GroupMember");
+			   }}
+		   
+           setRoleMapping(userName, password, "IT Manager", "Instructor","Student");
+           getCheckRoleMapping(adminUserName, adminPassword, hm);
+	   }
+		   
+	   public void getCheckRoleMapping(String adminUserName, String adminPassword, HashMap<String, RoleMappingObject> hm) throws InterruptedException {
+		   for (Entry<String, RoleMappingObject> entry : hm.entrySet()) {
+			    String key2 = entry.getKey();
+			    RoleMappingObject value = entry.getValue();
+			    checkRoleMapping(adminUserName, adminPassword,value.getNumberOfMainMenuOptions(),value.getMoodleRole(),value.getCourseRole() );
+			    }
+	   }
+	   
+	 //Method directly used in test class
+		   
+      public void roleMappingUserTypeLocked(String userName, String password, String adminUserName, String adminPassword, String userType,int numberOfMainMenuOptions) throws InterruptedException {
+		   
+		   HashMap<String, RoleMappingObject> hm = new HashMap<String, RoleMappingObject>();
 
-	
+		   RoleMappingObject t1 = new RoleMappingObject(numberOfMainMenuOptions, "Manager", "GroupMember");		  
+		   hm.put("Instructor1",t1);
+		   RoleMappingObject t2 = new RoleMappingObject(numberOfMainMenuOptions, "Teacher", "GroupMember");		  
+		   hm.put("Instructor",t2);
+		   RoleMappingObject t3 = new RoleMappingObject(numberOfMainMenuOptions, "Student", "GroupOwner");		 
+		   hm.put("Student",t3);
+		   
+		   setRoleMapping(userName, password, "IT Manager", "Student","Instructor");
+		   setUserTypeToLockedorUnlocked("lock",userType);
+		   String key=null;
+		   getCheckRoleMapping(adminUserName, adminPassword, hm);		  
+		   for (Entry<String, RoleMappingObject> entry : hm.entrySet()) {
+			   key=entry.getKey();
+		   if(key=="Instructor1") {
+			   RoleMappingObject value = entry.setValue(t1);
+			   value.setNumberOfMainMenuOptions(numberOfMainMenuOptions);
+			   value.setMoodleRole("Manager");
+			   value.setCourseRole("GroupOwner");
+			  }
+		   if(key=="Instructor") {
+			   RoleMappingObject value = entry.setValue(t2);
+			   value.setNumberOfMainMenuOptions(numberOfMainMenuOptions);
+			   value.setMoodleRole("Teacher");
+			   value.setCourseRole("GroupOwner");
+			   }
+		   if(key=="Student") {
+			   RoleMappingObject value = entry.setValue(t3);
+			   value.setNumberOfMainMenuOptions(numberOfMainMenuOptions);
+			   value.setMoodleRole("Student");
+			   value.setCourseRole("GroupMember");
+			   }}
+		   
+           setRoleMapping(userName, password, "IT Manager", "Instructor","Student");
+           getCheckRoleMapping(adminUserName, adminPassword, hm);
+	   } 
+		  
+
+   
 	//Check media exists in the media library deletion only work for last uploaded media
 	
 	public void checkMediaExitsinMediaLibrary(List<String> mediaTitlelist) throws InterruptedException {
@@ -578,7 +784,7 @@ public class MoodlePage extends QuizPageHelpers {
 		clickElement("Turn Editing on button", By.cssSelector("button[id^=\"single_button\"]"));
 		clickElement("add activity or resource button", By.cssSelector("span[class=\"section-modchooser-text\"]"));
 		Thread.sleep(3000);
-		clickElement("cim mediachooser button", By.xpath("//a[@href='https://tmoodle2.yuja.com/course/modedit.php?add=lti&return=0&course=142&sr&typeid=50&section=0&sr=0']"));
+		clickElement("cim mediachooser button", By.xpath("//a[@href='https://tmoodle2.yuja.com/course/modedit.php?add=lti&return=0&course=142&sr&typeid=76&section=0&sr=0']"));
 		clickElement("select content", By.cssSelector("button[name=\"selectcontent\"]"));
         Thread.sleep(3000);
 		switchToIframe("switch to mediachooser frame", By.id("contentitem-page-iframe"), 10);
