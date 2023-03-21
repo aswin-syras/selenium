@@ -139,7 +139,7 @@ import java.util.HashMap;
 	}
 	
 	public void CheckPageUI() {
-		URL = "https://staging-demo.yuja.com/P/Institution/TypeRoster/";
+		URL = prop.getProperty("URL")+"P/Institution/InstitutionBranding/";
 		launchUrl(URL, "Xavier University Enterprise Video Platform");
 		String sectionTitle = driver.findElement(By.id("secondPartText")).getText();
 		boolean check  = waitForElement(By.id("rosterContent"),10).isDisplayed();

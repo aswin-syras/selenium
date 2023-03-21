@@ -113,7 +113,7 @@ public class AdminPanelPlatformPageHelpers extends Helpers implements UICheck {
 	}
 	
 	public void CheckPageUI() {
-		URL = "https://staging-demo.yuja.com/P/Institution/MenuManagement/";
+		URL = prop.getProperty("URL")+"P/Institution/InstitutionBranding/";
 		launchUrl(URL, "Xavier University Enterprise Video Platform");
 		String sectionTitle = driver.findElement(By.id("secondPartText")).getText();
 		boolean check  = waitForElement(By.id("di_masterContainer"),10).isDisplayed();
