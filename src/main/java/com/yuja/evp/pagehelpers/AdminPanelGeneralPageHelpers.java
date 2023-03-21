@@ -13,7 +13,7 @@ public class AdminPanelGeneralPageHelpers extends Helpers {
 		driver.manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
-		URL = "https://staging-demo.yuja.com/P/Institution/OverviewManagement";
-		launchUrl(URL, "Xavier University Enterprise Video Platform");
+		URL = prop.getProperty("URL")+"P/Institution/OverviewManagement";
+		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 }

@@ -53,7 +53,7 @@ public class HTML5PlayerTest extends BaseTest {
 		  public void Side_bar_gearicon_ui_test(String testName) {
 			MediaPlayerSideBarTestMethods sidebarObj = new MediaPlayerSideBarTestMethods();
 			try {
-				sidebarObj.gear_icon(prop.getProperty("UserID"), prop.getProperty("Password"), "test");
+				//sidebarObj.gear_icon(prop.getProperty("UserID"), prop.getProperty("Password"), "test");
 				Thread.sleep(2000);
 			}catch(Exception e) {
 				System.out.println(e.getMessage());

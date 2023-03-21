@@ -13,7 +13,7 @@ public class AdminPanelBrandingPageHelpers extends AdminPanelGeneralPageHelpers 
 	NavigationBarHelpers navigationBar = new NavigationBarHelpers();
 	
 	public void CheckPageUI() {
-		launchUrl(prop.getProperty("BrandingURL"), "Test Automation Enterprise Video Platform");
+		launchUrl(prop.getProperty("URL")+"P/Institution/InstitutionBranding/", "Test Automation Enterprise Video Platform");
 		String sectionTitle = driver.findElement(By.id("secondPartText")).getText();
 		boolean check  = waitForElement(By.id("institutionBranding"),10).isDisplayed();
 		if(check && sectionTitle.equals("Branding")) {

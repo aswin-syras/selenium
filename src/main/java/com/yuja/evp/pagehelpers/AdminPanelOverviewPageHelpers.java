@@ -9,8 +9,8 @@ import helperinterfaces.UICheck;
 public class AdminPanelOverviewPageHelpers extends Helpers implements UICheck{
 	
 	public void CheckPageUI() {
-		URL = "https://staging-demo.yuja.com/P/Institution/OverviewManagement";
-		launchUrl(URL, "Xavier University Enterprise Video Platform");
+		URL = prop.getProperty("URL")+"P/Institution/OverviewManagement";
+		launchUrl(URL, "Test Automation Enterprise Video Platform");
 		String sectionTitle = driver.findElement(By.id("secondPartText")).getText();
 		boolean check  = waitForElement(By.id("userBtn"),10).isDisplayed();
 		if(check && sectionTitle.equals("Overview")) {
