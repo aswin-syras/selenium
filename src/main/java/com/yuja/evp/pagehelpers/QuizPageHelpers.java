@@ -129,7 +129,7 @@ public class QuizPageHelpers extends Helpers {
 		}	
 	}
 	
-	public void updatePostInfo(String userName,String password, String mediaTitle, String quizclosedate, String quizName) throws InterruptedException {
+	public void updatePostInfo(String userName,String password, String mediaTitle, String quizName) throws InterruptedException {
 		mediaLibrary.navigateToMyMediaUserLogin(userName, password);;
 		mediaLibrary.accessMediaMoreMenu(mediaTitle);
 		mediaDetailsModal.clickQuizzes();
@@ -137,7 +137,7 @@ public class QuizPageHelpers extends Helpers {
 		mediaDetailsModal.clickManageQuizButton();
 		clickElement("Click Update post date Dropdown",By.xpath("//div[@class='postInfoIcon']"),10);
 		clickElement("Click Uncheck no close date checkbox",By.xpath("(//input[@type='checkbox'])[2]"),10);
-		sendKeys("Quiz close date", By.xpath("//input[@id='publishPollEndDate_145314']"), quizclosedate);
+		sendKeys("Quiz close date", By.xpath("//input[contains(@id,'publishPollEndDate')]"), "1/5/23");
 		mediaDetailsModal.clickUpdatePostQuiz();
 		mediaDetailsModal.clickCloseMoreMenu();
 		

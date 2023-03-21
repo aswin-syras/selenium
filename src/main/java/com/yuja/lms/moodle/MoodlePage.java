@@ -245,8 +245,8 @@ public class MoodlePage extends QuizPageHelpers {
 		provisionType.put("user", "(//input[@id='autoProvisionId'])[2]");
 		provisionType.put("course", "(//input[@id=\"autoProvisionClassesId\"])[2]");
 	    mediaLibrary.navigateToMyMediaUserLogin(userName, password);
-	    URL = "https://staging-demo.yuja.com/P/Institution/APIManagementServlet/";
-        launchUrl(URL, "Xavier University Enterprise Video Platform");
+	    URL = prop.getProperty("URL")+"P/Institution/APIManagementServlet/";
+        launchUrl(URL, "Test Automation Enterprise Video Platform");
         Select integrationDropdown = new Select(driver.findElement(By.id("apiPicker")));
         integrationDropdown.selectByValue("lti3");
         WebElement checkBox=driver.findElement(By.xpath(provisionType.get(userOrcourse)));
@@ -263,8 +263,8 @@ public class MoodlePage extends QuizPageHelpers {
 	
 	public void setRoleMapping(String userName, String password, String yujaRolefromAdmin, String yujaRolefromTeacher, String yujaRolefromStudent) throws InterruptedException {
 		 mediaLibrary.navigateToMyMediaUserLogin(userName, password);
-		 URL = "https://staging-demo.yuja.com/P/Institution/APIManagementServlet/";
-	     launchUrl(URL, "Xavier University Enterprise Video Platform");
+		 URL =  prop.getProperty("URL")+"P/Institution/APIManagementServlet/";
+	     launchUrl(URL, "Test Automation Enterprise Video Platform");
 	     Select integrationDropdown = new Select(driver.findElement(By.id("apiPicker")));
 	     integrationDropdown.selectByValue("lti3");
 	     Select lmsDropdown = new Select(driver.findElement(By.id("LTI3LMSSelect")));
@@ -280,8 +280,8 @@ public class MoodlePage extends QuizPageHelpers {
 	}
 	
 	public void setUserTypeToLockedorUnlocked(String lockOrUnlock,String userType) throws InterruptedException {
-		 URL = "https://staging-demo.yuja.com/P/Institution/TypeRoster/";
-	     launchUrl(URL, "Xavier University Enterprise Video Platform");
+		 URL = prop.getProperty("URL")+"P/Institution/TypeRoster/";
+	     launchUrl(URL, "Test Automation Enterprise Video Platform");
 	     roster.rosterButtons("rolemappinguser");
 		 
 		 if(lockOrUnlock=="lock") {
@@ -306,8 +306,8 @@ public class MoodlePage extends QuizPageHelpers {
     	
 	
     public void setStartPageOptionAsMediaChannel() {
-        URL = "https://staging-demo.yuja.com/P/Institution/MenuManagement/";
-        launchUrl(URL, "Xavier University Enterprise Video Platform");
+        URL = prop.getProperty("URL")+"P/Institution/MenuManagement/";
+        launchUrl(URL, "Test Automation Enterprise Video Platform");
         Select startPageOptionITManager = new Select(driver.findElement(By.id("select_defaultLandingPageIT")));
         startPageOptionITManager.selectByValue("mediaChannel");
         Select startPageOptionInstructor = new Select(driver.findElement(By.id("select_defaultLandingPageInstructor")));
@@ -324,7 +324,7 @@ public class MoodlePage extends QuizPageHelpers {
 		createMoodleCourse(adminUserName, adminPassword,courseName,courseShortName);
 		String moodleCourseName=driver.findElement(By.xpath("//div[@class=\"page-header-headings\"]")).getText();
 		addExternalTool(externalToolCustomName,externalToolVisibleName);
-		NavigateToLTI("'XAVIER 1.3'");
+		NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
 		String provisionedCourseName=driver.findElement(By.xpath("//li[@class='nav-item active']")).getAttribute("title");
 	
 		if(provisionedCourseName.contains(moodleCourseName)) {
@@ -341,7 +341,7 @@ public class MoodlePage extends QuizPageHelpers {
 		setStartPageOptionAsMediaChannel();
 		createMoodleCourse(adminUserName, adminPassword,courseName,courseShortName);
 		addExternalTool(externalToolCustomName,externalToolVisibleName);
-		NavigateToLTI("'XAVIER 1.3'");
+		NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
 		clickElement("Create new course button", By.xpath("//a[@title=\"Create a Course\"]"));
 		waitForElement(By.xpath("//input[@id=\"className\"]"),10);
 		sendKeys("Enter manual course full name", By.xpath("//input[@id=\"className\"]"),courseName+getRandomInteger(1000));
@@ -363,16 +363,16 @@ public class MoodlePage extends QuizPageHelpers {
 		setStartPageOptionAsMediaChannel();
 		createMoodleCourse(adminUserName, adminPassword,courseName,courseShortName);
 		addExternalTool(externalToolCustomName,externalToolVisibleName);
-		NavigateToLTI("'XAVIER 1.3'");
+		NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
 		clickElement("Link to an existing course button", By.xpath("//a[@title=\"Link to an Existing Course\"]"));
 		waitForElement(By.xpath("//select[@id=\"classSelectBox\"]"),10);
 		clickElement("dropdown", By.xpath("//select[@id=\"classSelectBox\"]"));
-		clickElement("choose the auto existing course", By.xpath("//select[@id=\"classSelectBox\"]//option[text()='aec -  - AutoExistingCourse - ']"));
+		clickElement("choose the auto existing course", By.xpath("//select[@id=\"classSelectBox\"]//option[text()='aec - Mar 2023 - Auto Existing Course']"));
 		clickElement("Click OK button after selecting the existing course", By.xpath("//button[@title=\"OK\"]"));
 		waitForElement(By.xpath("//li[@class='nav-item active']"),15);
 		String provisionedCourseName=driver.findElement(By.xpath("//li[@class='nav-item active']")).getAttribute("title");
 		
-       if(provisionedCourseName.contains("AutoExistingCourse")) {
+       if(provisionedCourseName.contains("Auto Existing Course")) {
     	   reportStep("The moodle course is successfully manuallyprovisioned  and connected to existing course in yuja", "PASS", false);
 		} else {
 			reportStep("The moodle course is not successfully manuallyprovisioned connected to existing course in yuja", "FAIL", true);
@@ -403,7 +403,7 @@ public class MoodlePage extends QuizPageHelpers {
 		driver.manage().window().maximize();
 		loginFast(studentUserName, newUserPassword);
 		selectCourseFromSiteHome(courseName);
-		NavigateToLTI("'XAVIER 1.3'");
+		NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
 		waitForElement(By.xpath("//*[@id=\"bi_userInfoDropdown\"]"),15);
 		navbar.clickMyAccountButton();
 		navbar.clickMyAccountDropdownOption();
@@ -463,7 +463,7 @@ public class MoodlePage extends QuizPageHelpers {
 		
 		for(String course:courseName) {
 		selectCourseFromSiteHome(course);
-		NavigateToLTI("'XAVIER 1.3'");
+		NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
 		waitForElement(By.xpath("//*[@id=\"bi_userInfoDropdown\"]"),15);
 		navbar.clickMyAccountButton();
 		navbar.clickMyAccountDropdownOption();
@@ -522,7 +522,7 @@ public class MoodlePage extends QuizPageHelpers {
 	   driver.manage().window().maximize();
 	   loginFast(studentUserName, newUserPassword);
 	   selectCourseFromSiteHome(courseName);
-	   NavigateToLTI("'XAVIER 1.3'");
+	   NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
 	
 	   if(type=="new") {
 		   waitForElement(By.xpath("//input[@id=\"newPass1\"]"),15);
@@ -612,7 +612,7 @@ public class MoodlePage extends QuizPageHelpers {
 	   driver.manage().window().maximize();
 	   loginFast("rolemappinguser", "jamNOW123/");
 	   selectCourseFromSiteHome("AUTOMATION MOODLE COURSE");
-	   NavigateToLTI("'Xavier LTI 1.3'");
+	   NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
 	   waitForElement(By.xpath("//button[@title=\" Main Menu\"]"),15);
 	   clickElement("main menu button", By.xpath("//button[@title=\" Main Menu\"]"));
 	   List<WebElement> mainmenuList= getElementList(By.xpath("//a[@class='yujaAjax']"));
@@ -784,7 +784,7 @@ public class MoodlePage extends QuizPageHelpers {
 		clickElement("Turn Editing on button", By.cssSelector("button[id^=\"single_button\"]"));
 		clickElement("add activity or resource button", By.cssSelector("span[class=\"section-modchooser-text\"]"));
 		Thread.sleep(3000);
-		clickElement("cim mediachooser button", By.xpath("//a[@href='https://tmoodle2.yuja.com/course/modedit.php?add=lti&return=0&course=142&sr&typeid=50&section=0&sr=0']"));
+		clickElement("cim mediachooser button", By.xpath("//a[@href='https://tmoodle2.yuja.com/course/modedit.php?add=lti&return=0&course=142&sr&typeid=76&section=0&sr=0']"));
 		clickElement("select content", By.cssSelector("button[name=\"selectcontent\"]"));
         Thread.sleep(3000);
 		switchToIframe("switch to mediachooser frame", By.id("contentitem-page-iframe"), 10);

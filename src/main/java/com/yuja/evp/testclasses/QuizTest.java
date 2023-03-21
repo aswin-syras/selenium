@@ -11,7 +11,7 @@ public class QuizTest extends BaseTest {
 	
 	
 	final String STUDENT_NAME = "Student Automation";
-	final String VIDEO_NAME = "editAccessSharedVideoManager";
+	final String VIDEO_NAME = "quizvideo";
 	final String QUIZ_NAME = "autoquiz";
 	final String QUIZ_QUESTION = "color of apple";
 	final String OPTION_1 = "red";
@@ -21,7 +21,6 @@ public class QuizTest extends BaseTest {
 	final String HINT = "hello";
 	final String STUDENT_SHORTANSWER = "red";
 	final String STUDENT_FITBANS = "red";
-	final String QUIZ_CLOSEDATE = "1/5/23";
 	final String QUIZ_PUBLISH_COURSE_NAME = "Automation 1337";
 	
 	NavigationBarHelpers navigationBar = new NavigationBarHelpers();
@@ -45,7 +44,7 @@ public class QuizTest extends BaseTest {
 	public void Check_student_gradebook_test(String TestName) {
 		QuizPageTestMethods qp = new QuizPageTestMethods();
 		try {
-			qp.checkStudentgradeBookTest(prop.getProperty("ManagerID"), prop.getProperty("Password"), VIDEO_NAME, QUIZ_CLOSEDATE,prop.getProperty("StudentID"), prop.getProperty("Password"),QUIZ_PUBLISH_COURSE_NAME, QUIZ_NAME);
+			qp.checkStudentgradeBookTest(prop.getProperty("ManagerID"), prop.getProperty("Password"), VIDEO_NAME, prop.getProperty("StudentID"), prop.getProperty("Password"),QUIZ_PUBLISH_COURSE_NAME, QUIZ_NAME);
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());

@@ -6,7 +6,7 @@
   	<classes>
       <class name="com.yuja.evp.testclasses.QuizTest">
 	      <methods>
-	          <include name="Create_quiz_test">
+	          <include name="Check_delete_quiz_test">
 			      <!-- <parameter name="Browser" value="IE" /> -->
 			      <parameter name="TestName" value="CreateQuizTest" />
 			  </include> 

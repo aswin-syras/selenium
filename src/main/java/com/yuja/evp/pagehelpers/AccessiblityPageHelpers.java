@@ -32,8 +32,8 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 		driver.manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
-		URL = "https://staging-demo.yuja.com/P/Institution/AccessibilityOptions/";
-		launchUrl(URL, "Xavier University Enterprise Video Platform");
+		URL = prop.getProperty("URL")+"P/Institution/AccessibilityOptions/";
+		launchUrl(URL, "Test Automation Enterprise Video Platform");
 		}
 	
 	public void setDefaultCaptioningForUploads(String defaultAutocaptionSetting) throws InterruptedException {

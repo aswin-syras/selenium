@@ -44,8 +44,8 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 			return newQuizName;
 		}
 		
-		public void checkStudentgradeBookTest(String userName,String password, String mediaTitle, String quizclosedate,String studentUserName, String studentPassword,String courseName,String quizName) throws InterruptedException{
-			updatePostInfo(userName,password, mediaTitle, quizclosedate,quizName);
+		public void checkStudentgradeBookTest(String userName,String password, String mediaTitle, String studentUserName, String studentPassword,String courseName,String quizName) throws InterruptedException{
+			updatePostInfo(userName,password, mediaTitle,quizName);
 			navigationBar.userLogOut();
 			Thread.sleep(2000);
 			mediaLibrary.navigateToMyMediaUserLogin(studentUserName, studentPassword);
@@ -137,7 +137,7 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 			switchToIframe("switch to iframe result", By.id("iframeResult"), 10);
 			//driver.switchTo().frame("iframeResult");
 			Thread.sleep(4000);
-			WebElement frame = driver.findElement(By.xpath("//iframe[contains(@src,'https://staging-demo.yuja.com')]"));
+			WebElement frame = driver.findElement(By.xpath("//iframe[contains(@src,'https://staging-my.yuja.com')]"));
 			driver.switchTo().frame(frame);
 			Thread.sleep(4000);
 			switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);

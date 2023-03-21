@@ -9,9 +9,9 @@ import com.yuja.evp.pagetestmethods.QuizPageTestMethods;
 
 public class AdminPanelAccessiblityTest extends BaseTest{
 	
-	String INSTRUCTOR_FULLNAME="Automation Instructor";
-	String STUDENT_FULLNAME="Automation Student";
-	String ITMANAGER_FULLNAME="Leo Hernandez";
+	String INSTRUCTOR_FULLNAME="Instructor Automation";
+	String STUDENT_FULLNAME="Student Automation";
+	String ITMANAGER_FULLNAME="Manager Automation2";
 	String VIDEONAME="humancaption";
 	
 	
@@ -35,7 +35,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 
 		AccessiblityPageTestMethods ap = new AccessiblityPageTestMethods();
 		try {
-			ap.checkHumanCaptioningPermissionForUser(prop.getProperty("ManagerID"), prop.getProperty("Password"),"User based", "automation_manager2" ,prop.getProperty("ManagerID2"), prop.getProperty("Password"),ITMANAGER_FULLNAME, "Caption Sync: Arjun Caption Captionsync","Yes",VIDEONAME);
+			ap.checkHumanCaptioningPermissionForUser(prop.getProperty("ManagerID"), prop.getProperty("Password"),"User based", "Manager Automation2" ,prop.getProperty("ManagerID2"), prop.getProperty("Password"),ITMANAGER_FULLNAME, "Caption Sync: Arjun Caption Captionsync","Yes",VIDEONAME);
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -91,7 +91,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 	public void Edit_autocaption_permissions_for_Specific_user_test(String TestName) {
 		AccessiblityPageTestMethods ap = new AccessiblityPageTestMethods();
 		try {
-			ap.checkAutoCaptioningPermissionForUser(prop.getProperty("ManagerID"), prop.getProperty("Password"),"User based", "automation_manager2" ,prop.getProperty("ManagerID2"), prop.getProperty("Password"),ITMANAGER_FULLNAME,VIDEONAME );
+			ap.checkAutoCaptioningPermissionForUser(prop.getProperty("ManagerID"), prop.getProperty("Password"),"User based", "Manager Automation2" ,prop.getProperty("ManagerID2"), prop.getProperty("Password"),ITMANAGER_FULLNAME,VIDEONAME );
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -348,7 +348,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 	public void Edit_humancaption_permissions_for_Specific_users_allcaptionproviders_test(String TestName) {
 				AccessiblityPageTestMethods ap = new AccessiblityPageTestMethods();
 				try {
-					ap.checkHumanCaptioningPermissionForUser(prop.getProperty("ManagerID"), prop.getProperty("Password"),"User based", "automation_manager2" ,prop.getProperty("ManagerID2"), prop.getProperty("Password"),ITMANAGER_FULLNAME, "All Caption Providers","Yes",VIDEONAME);
+					ap.checkHumanCaptioningPermissionForUser(prop.getProperty("ManagerID"), prop.getProperty("Password"),"User based", "Manager Automation2" ,prop.getProperty("ManagerID2"), prop.getProperty("Password"),ITMANAGER_FULLNAME, "All Caption Providers","Yes",VIDEONAME);
 				}
 				catch (Exception e) {
 					System.out.println(e.getMessage());
@@ -361,7 +361,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 	public void Edit_humancaption_permissions_for_Specific_user_rev_test(String TestName) {
 				AccessiblityPageTestMethods ap = new AccessiblityPageTestMethods();
 				try {
-					ap.checkHumanCaptioningPermissionForUser(prop.getProperty("ManagerID"), prop.getProperty("Password"),"User based", "automation_manager2" ,prop.getProperty("ManagerID2"), prop.getProperty("Password"),ITMANAGER_FULLNAME, "Rev: Rev","Yes",VIDEONAME);
+					ap.checkHumanCaptioningPermissionForUser(prop.getProperty("ManagerID"), prop.getProperty("Password"),"User based", "Manager Automation2" ,prop.getProperty("ManagerID2"), prop.getProperty("Password"),ITMANAGER_FULLNAME, "Rev: Rev","Yes",VIDEONAME);
 				}
 				catch (Exception e) {
 					System.out.println(e.getMessage());
@@ -374,7 +374,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 	public void Edit_humancaption_permissions_for_Specific_user_3playmedia_test(String TestName) {
 				AccessiblityPageTestMethods ap = new AccessiblityPageTestMethods();
 				try {
-					ap.checkHumanCaptioningPermissionForUser(prop.getProperty("ManagerID"), prop.getProperty("Password"),"User based", "automation_manager2" ,prop.getProperty("ManagerID2"), prop.getProperty("Password"),ITMANAGER_FULLNAME, "Three Play: Working","Yes",VIDEONAME);
+					ap.checkHumanCaptioningPermissionForUser(prop.getProperty("ManagerID"), prop.getProperty("Password"),"User based", "Manager Automation2" ,prop.getProperty("ManagerID2"), prop.getProperty("Password"),ITMANAGER_FULLNAME, "Three Play: Working","Yes",VIDEONAME);
 				}
 				catch (Exception e) {
 					System.out.println(e.getMessage());
@@ -387,7 +387,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 	public void Edit_humancaption_permissions_for_Specific_user_Cielo24_test(String TestName) {
 				AccessiblityPageTestMethods ap = new AccessiblityPageTestMethods();
 				try {
-					ap.checkHumanCaptioningPermissionForUser(prop.getProperty("ManagerID"), prop.getProperty("Password"),"User based", "automation_manager2" ,prop.getProperty("ManagerID2"), prop.getProperty("Password"),ITMANAGER_FULLNAME, "Cielo24: yuja","Yes",VIDEONAME);
+					ap.checkHumanCaptioningPermissionForUser(prop.getProperty("ManagerID"), prop.getProperty("Password"),"User based", "Manager Automation2" ,prop.getProperty("ManagerID2"), prop.getProperty("Password"),ITMANAGER_FULLNAME, "Cielo24: yuja","Yes",VIDEONAME);
 				}
 				catch (Exception e) {
 					System.out.println(e.getMessage());
@@ -401,7 +401,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 	public void Edit_humancaption_permissions_for_Specific_user_yujaprocaptioning_test(String TestName) {
 				AccessiblityPageTestMethods ap = new AccessiblityPageTestMethods();
 				try {
-					ap.checkHumanCaptioningPermissionForUser(prop.getProperty("ManagerID"), prop.getProperty("Password"),"User based", "automation_manager2" ,prop.getProperty("ManagerID2"), prop.getProperty("Password"),ITMANAGER_FULLNAME, "YuJa Pro Captioning","Yes",VIDEONAME);
+					ap.checkHumanCaptioningPermissionForUser(prop.getProperty("ManagerID"), prop.getProperty("Password"),"User based", "Manager Automation2" ,prop.getProperty("ManagerID2"), prop.getProperty("Password"),ITMANAGER_FULLNAME, "YuJa Pro Captioning","Yes",VIDEONAME);
 				}
 				catch (Exception e) {
 					System.out.println(e.getMessage());

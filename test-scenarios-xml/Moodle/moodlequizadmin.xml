@@ -6,7 +6,7 @@
   	<classes>
       <class name="com.yuja.evp.testclasses.MoodleTest">
 	      <methods>
-	          <include name="Moodle_create_playback_attend_gradebook_administrator_test">
+	          <include name="Check_role_mapping_locked_as_instructor">
 			      <!-- <parameter name="Browser" value="IE" /> -->
 			      <parameter name="TestName" value="MoodleCreateQuizTest1" />
 			  </include> 
