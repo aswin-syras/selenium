@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <test name="Admin_panel_branding_set_theme">
+  	<classes>
+      <class name="com.yuja.evp.testclasses.AdminPanelBrandingTest">
+	      <methods>
+	          <include name="Admin_panel_branding_set_theme">
+			      <!-- <parameter name="Browser" value="IE" /> -->
+			      <parameter name="TestName" value="Admin_panel_branding_set_theme" />
+			  </include> 
+	        </methods>
+        </class>
+    </classes>
+  </test>
+</suite> <!-- Suite -->
