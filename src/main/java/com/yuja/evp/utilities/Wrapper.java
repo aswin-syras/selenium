@@ -47,7 +47,7 @@ public class Wrapper {
 	public void loadObject() {
 		prop = new Properties();
 		try {
-			prop.load(new FileInputStream(new File("./userDetails.properties")));
+			prop.load(new FileInputStream(new File("./Credentials.properties")));
 			prop.load(new FileInputStream(new File("./applicationURL.properties")));
 			prop.load(new FileInputStream(new File("./pageObjects.properties")));
 			prop.load(new FileInputStream(new File("./config.properties")));
