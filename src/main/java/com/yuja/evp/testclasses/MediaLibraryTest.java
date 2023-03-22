@@ -7,7 +7,6 @@ import com.yuja.evp.pagetestmethods.MediaLibraryPageTestMethods;
 public class MediaLibraryTest extends BaseTest{
 	
 	final String PASSWORD = "jamNOW123!@#123";
-	final String MANAGER_USER = "automation_manager";
 	final String INSTRUCTOR_USER = "automation_instructor";
 	final String STUDENT_USER = "automation_student";
 	
@@ -16,7 +15,7 @@ public class MediaLibraryTest extends BaseTest{
 	  public void Video_upload_manager_test(String testName) {
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
-			mediaLibrary.uploadMedia(MANAGER_USER, PASSWORD, "videoFolder", "src\\fileResources\\videoFiles\\videoType");
+			mediaLibrary.uploadMedia(prop.getProperty("ManagerID"), PASSWORD, "videoFolder", "src\\fileResources\\videoFiles\\videoType");
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -52,7 +51,7 @@ public class MediaLibraryTest extends BaseTest{
 	  public void Video_quality_upload_manager_test(String testName) {
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
-			mediaLibrary.uploadMedia(MANAGER_USER, PASSWORD, "videoQualityFolder", "src\\fileResources\\videoFiles\\videoQuality");
+			mediaLibrary.uploadMedia(prop.getProperty("ManagerID"), PASSWORD, "videoQualityFolder", "src\\fileResources\\videoFiles\\videoQuality");
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -88,7 +87,7 @@ public class MediaLibraryTest extends BaseTest{
 	  public void Audio_upload_manager_test(String testName) {
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
-			mediaLibrary.uploadMedia(MANAGER_USER, PASSWORD, "audioFolder", "src\\fileResources\\audioFiles");
+			mediaLibrary.uploadMedia(prop.getProperty("ManagerID"), PASSWORD, "audioFolder", "src\\fileResources\\audioFiles");
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -124,7 +123,7 @@ public class MediaLibraryTest extends BaseTest{
 	  public void Document_upload_manager_test(String testName) {
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
-			mediaLibrary.uploadMedia(MANAGER_USER, PASSWORD, "documentFolder", "src\\fileResources\\documentFiles");
+			mediaLibrary.uploadMedia(prop.getProperty("ManagerID"), PASSWORD, "documentFolder", "src\\fileResources\\documentFiles");
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -162,7 +161,7 @@ public class MediaLibraryTest extends BaseTest{
 	  public void Create_delete_folder_manager_test(String testName) {
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
-			mediaLibrary.checkCreateAndDeleteFolder(MANAGER_USER, PASSWORD,  "temp folder");
+			mediaLibrary.checkCreateAndDeleteFolder(prop.getProperty("ManagerID"), PASSWORD,  "temp folder");
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -198,7 +197,7 @@ public class MediaLibraryTest extends BaseTest{
 	  public void delete_folder_more_menu_test(String testName) {
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
-			mediaLibrary.navigateToMyMediaUserLogin(MANAGER_USER, PASSWORD);
+			mediaLibrary.navigateToMyMediaUserLogin(prop.getProperty("ManagerID"), PASSWORD);
 			mediaLibrary.deleteFolderViaMoreMenu("dope folder");
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -212,7 +211,7 @@ public class MediaLibraryTest extends BaseTest{
 	  public void Share_video_full_access_manager_test(String testName) {
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
-			mediaLibrary.shareMediaTest("fullAccess", "fullAccessSharedVideoManager", MANAGER_USER, PASSWORD, INSTRUCTOR_USER, PASSWORD, "Automation Instructor");
+			mediaLibrary.shareMediaTest("fullAccess", "fullAccessSharedVideoManager", prop.getProperty("ManagerID"), PASSWORD, INSTRUCTOR_USER, PASSWORD, "Automation Instructor");
 			Thread.sleep(5000);
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -225,7 +224,7 @@ public class MediaLibraryTest extends BaseTest{
 	  public void Share_video_edit_access_manager_test(String testName) {
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
-			mediaLibrary.shareMediaTest("editAccess", "editAccessSharedVideoManager", MANAGER_USER, PASSWORD, INSTRUCTOR_USER, PASSWORD, "Automation Instructor");
+			mediaLibrary.shareMediaTest("editAccess", "editAccessSharedVideoManager", prop.getProperty("ManagerID"), PASSWORD, INSTRUCTOR_USER, PASSWORD, "Automation Instructor");
 			Thread.sleep(5000);
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -238,7 +237,7 @@ public class MediaLibraryTest extends BaseTest{
 	  public void share_video_read_only_manager_test(String testName) {
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
-			mediaLibrary.shareMediaTest("readAccess", "readAccessSharedVideoManager", MANAGER_USER, PASSWORD, INSTRUCTOR_USER, PASSWORD, "Automation Instructor");
+			mediaLibrary.shareMediaTest("readAccess", "readAccessSharedVideoManager", prop.getProperty("ManagerID"), PASSWORD, INSTRUCTOR_USER, PASSWORD, "Automation Instructor");
 			Thread.sleep(5000);
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -251,7 +250,7 @@ public class MediaLibraryTest extends BaseTest{
 	  public void Share_video_full_access_instructor_test(String testName) {
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
-			mediaLibrary.shareMediaTest("fullAccess", "fullAccessSharedVideoInstructor", INSTRUCTOR_USER, PASSWORD, MANAGER_USER, PASSWORD, "Automation Manager");
+			mediaLibrary.shareMediaTest("fullAccess", "fullAccessSharedVideoInstructor", INSTRUCTOR_USER, PASSWORD, prop.getProperty("ManagerID"), PASSWORD, "Automation Manager");
 			Thread.sleep(5000);
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -264,7 +263,7 @@ public class MediaLibraryTest extends BaseTest{
 	  public void Share_video_edit_access_instructor_test(String testName) {
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
-			mediaLibrary.shareMediaTest("editAccess", "editAccessSharedVideoInstructor", INSTRUCTOR_USER, PASSWORD, MANAGER_USER, PASSWORD, "Automation Manager");
+			mediaLibrary.shareMediaTest("editAccess", "editAccessSharedVideoInstructor", INSTRUCTOR_USER, PASSWORD, prop.getProperty("ManagerID"), PASSWORD, "Automation Manager");
 			Thread.sleep(5000);
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -277,7 +276,7 @@ public class MediaLibraryTest extends BaseTest{
 	  public void Share_video_read_only_instructor_test(String testName) {
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
-			mediaLibrary.shareMediaTest("readAccess", "readAccessSharedVideoInstructor", INSTRUCTOR_USER, PASSWORD, MANAGER_USER, PASSWORD, "Automation Manager");
+			mediaLibrary.shareMediaTest("readAccess", "readAccessSharedVideoInstructor", INSTRUCTOR_USER, PASSWORD, prop.getProperty("ManagerID"), PASSWORD, "Automation Manager");
 			Thread.sleep(5000);
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -331,7 +330,7 @@ public class MediaLibraryTest extends BaseTest{
 		int randomInt = (int)Math.floor(Math.random() * 100 + 1);
 		String folderName = "temp folder " + randomInt;
 		try {
-			ml.bulkFavoriteAndUnfavoriteTest(MANAGER_USER, PASSWORD, folderName);
+			ml.bulkFavoriteAndUnfavoriteTest(prop.getProperty("ManagerID"), PASSWORD, folderName);
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -378,7 +377,7 @@ public class MediaLibraryTest extends BaseTest{
 	  public void Edit_folder_manager_test(String testName) {
 		 MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
-			mediaLibrary.editFolder(MANAGER_USER, PASSWORD, "Testing", "newFolderName", "newDescription", "newTag");
+			mediaLibrary.editFolder(prop.getProperty("ManagerID"), PASSWORD, "Testing", "newFolderName", "newDescription", "newTag");
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -391,7 +390,7 @@ public class MediaLibraryTest extends BaseTest{
 	  public void Delete_media_test(String testName) {
 		 MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
-			mediaLibrary.checkDeleteMedia(MANAGER_USER, PASSWORD);
+			mediaLibrary.checkDeleteMedia(prop.getProperty("ManagerID"), PASSWORD);
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -403,7 +402,7 @@ public class MediaLibraryTest extends BaseTest{
 	  public void Publish_and_unpublish_media_Manager_test(String testName) {
 		 MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
-			mediaLibrary.checkPublishandUnpublishMediaLibrary(MANAGER_USER, PASSWORD,"publishVideo","Automation 1337");
+			mediaLibrary.checkPublishandUnpublishMediaLibrary(prop.getProperty("ManagerID"), PASSWORD,"publishVideo","Automation 1337");
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();

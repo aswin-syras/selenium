@@ -17,7 +17,7 @@ public class MediaDetailsModalTest extends BaseTest {
 	  public void Replace_media_test(String testName) {
 		MediaDetailsModalTestMethods mediadetails = new MediaDetailsModalTestMethods();
 		try {
-			mediadetails.replaceMedia(MANAGER_USER, PASSWORD, "ReplaceVideo", "ReplacedWith", INSTRUCTOR_USER, "automation instructor", PASSWORD, "Automation 1337");
+			mediadetails.replaceMedia(prop.getProperty("ManagerID"), prop.getProperty("Password"), "ReplaceVideo", "ReplacedWith", INSTRUCTOR_USER, "automation instructor", PASSWORD, "Automation 1337");
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
