@@ -31,11 +31,13 @@ public class MediaLibraryPageHelpers extends Helpers{
 		driver.manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
-		launchUrl(prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/Users/"+userName+"/MyMediaCollections", "Test Automation Enterprise Video Platform");
+		URL = prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/Users/"+userName+"/MyMediaCollections";
+		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	
 	public void navigateToMyMedia(String userName){
-		launchUrl(prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/Users/"+userName+"/MyMediaCollections", "Test Automation Enterprise Video Platform");
+		URL = prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/Users/"+userName+"/MyMediaCollections";
+		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	
 	public void navigateToSharedWithMeUserLogin(String userName, String password){
@@ -71,7 +73,7 @@ public class MediaLibraryPageHelpers extends Helpers{
 		driver.manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
-		URL = prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/Users/"+userName+"/Favorites";
+		URL =prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/Users/"+userName+"/Favorites";
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	

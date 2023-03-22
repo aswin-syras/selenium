@@ -17,7 +17,7 @@ import java.util.HashMap;
 		driver.manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
-		URL = prop.getProperty("URL")+"P/Institution/TypeRoster/";
+		URL =  prop.getProperty("URL")+"P/Institution/TypeRoster/";
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	

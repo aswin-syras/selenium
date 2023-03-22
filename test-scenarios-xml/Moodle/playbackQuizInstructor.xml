@@ -4,7 +4,7 @@
 <suite name="Suite">
   <test name="Moodle_create_playback_attend_gradebook_instructor_test">
   	<classes>
-      <class name="com.yuja.evp.testclasses.MoodleQuizTest">
+      <class name="com.yuja.evp.testclasses.MoodleTest">
 	      <methods>
 	          <include name="Moodle_create_playback_attend_gradebook_instructor_test">
 			      <!-- <parameter name="Browser" value="IE" /> -->
