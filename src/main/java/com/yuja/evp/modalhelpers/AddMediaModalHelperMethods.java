@@ -33,11 +33,9 @@ public class AddMediaModalHelperMethods extends Helpers{
 		System.out.println("mediaPath = " + mediaPath);
 		System.out.println("Uploading media...");
 		sendKeysModal(mediaUploadModal, "uploading media", By.xpath("//*[@id=\"addItemModalDialog\"]/div[1]/div/div/div[2]/div/div/div/div[2]/div[1]/div/div/div[1]/div/input"), mediaPath);		
-		
 		WebElement hideProgressIcon = waitForElement(By.xpath("//*[@id=\"drag-and-drop-uploader\"]/div/div/div[2]/div/div[2]/div/div[1]/div/div[2]/div/button/img"), 60);
 		boolean mediaUploaded;
 		int count = 0;
-		
 		if(hideProgressIcon != null) {
 			try {
 				while(count < 20) {
