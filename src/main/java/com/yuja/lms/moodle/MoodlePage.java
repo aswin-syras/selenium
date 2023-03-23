@@ -41,8 +41,8 @@ public class MoodlePage extends QuizPageHelpers {
 	}
 	
 	public void navigateToLoginPage() {
-		String URL = "https://tmoodle2.yuja.com/login/index.php";
-		launchUrl(URL, "Moodle login page");
+		String URL = prop.getProperty("LMS.Moodle")+"login/index.php";
+		launchUrl(URL, "LMS login page");
 	}
 	
 	public void loginFast(String username, String password) {
