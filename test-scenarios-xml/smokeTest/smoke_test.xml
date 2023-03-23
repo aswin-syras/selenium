@@ -5,6 +5,21 @@
   <parameter name="TestName" value="TestValue" />
   <test name="Create_new_folder_test">
   	<classes>
+		   <class name="com.yuja.evp.testclasses.QuizTest">
+        	<methods>
+        		<include name="Create_quiz_test" />
+    
+        		<include name="Check_student_gradebook_test" />
+        		
+        		<include name="Check_instructor_gradebook_test" />
+        		
+        		<include name="Check_unauthenticated_user_quiz_test" />
+        		
+        		<include name="Check_Unauthenticated_user_embedded_quiz_test" />
+        		
+        		<include name="Check_delete_quiz_test" />
+        	</methods>
+        </class>
       	<class name="com.yuja.evp.testclasses.MediaLibraryTest">
 	      	<methods>
 	      		<include name="Video_upload_manager_test" />
@@ -180,21 +195,7 @@
         	</methods>
         </class>
         
-        <class name="com.yuja.evp.testclasses.QuizTest">
-        	<methods>
-        		<include name="Create_quiz_test" />
-    
-        		<include name="Check_student_gradebook_test" />
-        		
-        		<include name="Check_instructor_gradebook_test" />
-        		
-        		<include name="Check_unauthenticated_user_quiz_test" />
-        		
-        		<include name="Check_Unauthenticated_user_embedded_quiz_test" />
-        		
-        		<include name="Check_delete_quiz_test" />
-        	</methods>
-        </class>
+       
         
         
         
