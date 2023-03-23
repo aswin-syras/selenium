@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite">
-  <test name="Acessiblity_smoke_test">
+  <parameter name="TestName" value="TestValue" />
+  <test name="Create_new_folder_test">
   	<classes>
       <class name="com.yuja.evp.testclasses.AdminPanelAccessiblityTest">
         	<methods>

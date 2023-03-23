@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-
 <suite name="Suite">
   <parameter name="TestName" value="TestValue" />
   <test name="Create_new_folder_test">
@@ -61,13 +60,11 @@
 	          	
 	          	<include name="Publish_and_unpublish_media_Manager_test" />
 	          	<include name="Publish_and_unpublish_media_Instructor_test" />
-	          	
-	          	
+	         	
 	          	
 	       	</methods>
         </class>
-        
-        <class name="com.yuja.evp.testclasses.AdminPanelRosterTest">
+                <class name="com.yuja.evp.testclasses.AdminPanelRosterTest">
         	<methods>
         		<include name="Create_and_delete_student_User_test" />
 	      		<include name="Create_and_delete_instructor_User_test" />
