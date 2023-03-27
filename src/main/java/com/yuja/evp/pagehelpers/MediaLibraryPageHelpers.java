@@ -31,13 +31,13 @@ public class MediaLibraryPageHelpers extends Helpers{
 		driver.manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
-		URL = "https://staging-demo.yuja.com/P/VideoManagement/MediaLibrary/Users/"+userName+"/MyMediaCollections";
-		launchUrl(URL, "Xavier University Enterprise Video Platform");
+		URL = prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/Users/"+userName+"/MyMediaCollections";
+		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	
 	public void navigateToMyMedia(String userName){
-		URL = "https://staging-demo.yuja.com/P/VideoManagement/MediaLibrary/Users/"+userName+"/MyMediaCollections";
-		launchUrl(URL, "Xavier University Enterprise Video Platform");
+		URL = prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/Users/"+userName+"/MyMediaCollections";
+		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	
 	public void navigateToSharedWithMeUserLogin(String userName, String password){
@@ -45,13 +45,13 @@ public class MediaLibraryPageHelpers extends Helpers{
 		driver.manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
-		URL = "https://staging-demo.yuja.com/P/VideoManagement/MediaLibrary/Users/"+userName+"/Shared";
-		launchUrl(URL, "Xavier University Enterprise Video Platform");
+		URL = prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/Users/"+userName+"/Shared";
+		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	
 	public void navigateToSharedWithMe(String userName){
-		URL = "https://staging-demo.yuja.com/P/VideoManagement/MediaLibrary/Users/"+userName+"/Shared";
-		launchUrl(URL, "Xavier University Enterprise Video Platform");
+		URL = prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/Users/"+userName+"/Shared";
+		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	
 	public void navigateToInternalLibraryUserLogin(String userName, String password) {
@@ -59,13 +59,13 @@ public class MediaLibraryPageHelpers extends Helpers{
 		driver.manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
-		URL = "https://staging-demo.yuja.com/P/VideoManagement/MediaLibrary/InstitutionPrivateChannel";
-		launchUrl(URL, "Xavier University Enterprise Video Platform");
+		URL = prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/InstitutionPrivateChannel";
+		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	
 	public void navigateToInternalLibrary(){
-		URL = "https://staging-demo.yuja.com/P/VideoManagement/MediaLibrary/InstitutionPrivateChannel";
-		launchUrl(URL, "Xavier University Enterprise Video Platform");
+		URL = prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/InstitutionPrivateChannel";
+		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	
 	public void navigateToFavoriteUserLogin(String userName, String password) {
@@ -73,13 +73,13 @@ public class MediaLibraryPageHelpers extends Helpers{
 		driver.manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
-		URL = "https://staging-demo.yuja.com/P/VideoManagement/MediaLibrary/Users/"+userName+"/Favorites";
-		launchUrl(URL, "Xavier University Enterprise Video Platform");
+		URL =prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/Users/"+userName+"/Favorites";
+		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	
 	public void navigateToFavorites(String userName){
-		URL = "https://staging-demo.yuja.com/P/VideoManagement/MediaLibrary/Users/"+userName+"/Favorites";
-		launchUrl(URL, "Xavier University Enterprise Video Platform");
+		URL = prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/Users/"+userName+"/Favorites";
+		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	
 	public boolean bulkMediaUpload(String mediaDirectoryPath) {
@@ -207,9 +207,10 @@ public class MediaLibraryPageHelpers extends Helpers{
 		folder.findElement(By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]")).click();
 	}
 	 public void accessMediaMoreMenu(String mediaTitle) throws InterruptedException {
+		Thread.sleep(2000);
 		WebElement media = getMedia(mediaTitle);
 		hoverOverElement(media);
-		//Thread.sleep(2000);
+		Thread.sleep(2000);
 		clickElement(media, "More menu button from the video hover", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 30);
 	}
 	

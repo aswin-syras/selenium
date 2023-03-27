@@ -7,7 +7,7 @@
   	<classes>
       	<class name="com.yuja.evp.testclasses.MediaLibraryTest">
 	      	<methods>
-	          	<include name="Bulkfavorite_student_Succesful" />
+	          	<include name="Bulkfavorite_student_Succesful_test" />
 	       	</methods>
         </class>
     </classes>

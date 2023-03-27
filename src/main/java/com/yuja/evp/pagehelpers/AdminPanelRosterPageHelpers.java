@@ -17,8 +17,8 @@ import java.util.HashMap;
 		driver.manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
-		URL = "https://staging-demo.yuja.com/P/Institution/TypeRoster/";
-		launchUrl(URL, "Xavier University Enterprise Video Platform");
+		URL =  prop.getProperty("URL")+"P/Institution/TypeRoster/";
+		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	
 	public void clickCreateUserButton() {
@@ -139,8 +139,8 @@ import java.util.HashMap;
 	}
 	
 	public void CheckPageUI() {
-		URL = "https://staging-demo.yuja.com/P/Institution/TypeRoster/";
-		launchUrl(URL, "Xavier University Enterprise Video Platform");
+		URL = prop.getProperty("URL")+"P/Institution/TypeRoster/";
+		launchUrl(URL, "Test Automation Enterprise Video Platform");
 		String sectionTitle = driver.findElement(By.id("secondPartText")).getText();
 		boolean check  = waitForElement(By.id("rosterContent"),10).isDisplayed();
 		if(check && sectionTitle.equals("Roster")) {

@@ -21,14 +21,22 @@ public class QuizPageHelpers extends Helpers {
 	GradebookPageHelpers gradebook=new GradebookPageHelpers();
 	MyAccountPageHelpers myAccount= new MyAccountPageHelpers();
 	
-	public void createDraftQuiz(String mediaTitle, String name,String question,String option1, String option2,String possibleans1, String possibleans2,String hint) throws Exception{
+	public String createDraftQuiz(String mediaTitle, String name,String question,String option1, String option2,String possibleans1, String possibleans2,String hint) throws Exception{
 		clickElement("Click Manage Media",By.xpath("//span[@id='topBarTabName3']"),10);
 		Thread.sleep(4000);
 		mediaLibrary.accessMediaMoreMenu(mediaTitle);
 		mediaDetailsModal.clickQuizzes();
+		List<WebElement> quizpanelContainer= getElementList(By.xpath("//div[@class=\"quiz-panel-contents-container\"]"));
+		if(quizpanelContainer!=null) {
+			for(int i=0;i<quizpanelContainer.size();i++) {
+				int index=i+1;
+				clickElement("delete Quiz", By.xpath("(//div[@class=\"quiz-panel-contents-container\"])["+index+"]//div[@class=\"quiz-btn-group\"]//button//i[@class=\"fa fa-trash-o\"]"));
+				clickElement("yes",By.xpath("//button[@title='Yes']"),10);
+				}
+			}
 		clickElement("Create Video Quiz", By.id("createVideoQuizBtn"));
 		Thread.sleep(2000);
-		enterQuizName(name+getRandomInteger(1000));
+		String obtainedQuizName=enterQuizName(name+getRandomInteger(1000));
 		clickAddQuestion();
 		createMultiplechoiceQuestion(question,option1,option2,hint);
 		Thread.sleep(2000);
@@ -47,38 +55,34 @@ public class QuizPageHelpers extends Helpers {
 		clickAddQuestion();
 		createFITBQuestion(question,possibleans1,possibleans2,hint);
 		clickQuizSavebutton();
+		return obtainedQuizName;
 	}
 	
 	public String createPlaybackquiz(String playbackQuizTitle,String mediaTitle) throws InterruptedException {
+		List<WebElement> quizpanelContainer= getElementList(By.xpath("//div[@class=\"quiz-panel-contents-container\"]"));
+		if(quizpanelContainer!=null) {
+			for(int i=0;i<quizpanelContainer.size();i++) {
+				int index=i+1;
+				clickElement("delete Quiz", By.xpath("(//div[@class=\"quiz-panel-contents-container\"])["+index+"]//div[@class=\"quiz-btn-group\"]//button[3]"));
+				clickElement("yes",By.xpath("//button[@title='Yes']"),10);
+				}
+			}
 		clickElement("Create Playback Quiz", By.xpath("(//button[@class=\"btn btn-inline leftAlignIcon\"])[2]"));
 		sendKeys("Playback Quiz Title", By.id("createPlaybackTitle"), playbackQuizTitle+getRandomInteger(1000));
+		String quiznameObtained=driver.findElement(By.id("createPlaybackTitle")).getAttribute("value");
 		clickElement("Click Create Button", By.xpath("//button[@title='Create']"));
 		mediaDetailsModal.clickCloseMoreMenu();
-		mediaLibrary.accessMediaMoreMenu(mediaTitle);
-		mediaDetailsModal.clickQuizzes();
-		Thread.sleep(5000);
-		String quiznewName=driver.findElement(By.xpath("//div[@class='quiz-panel-contents']/h4")).getText();
-		Actions action = new Actions(driver);
-		action.sendKeys(Keys.ESCAPE).build().perform();
-		System.out.println(quiznewName);
-		return quiznewName;
+		return quiznameObtained;
 	}
 	
 	
-	public String createandPublishQuiz(String mediaTitle, String name,String question,String option1, String option2,String possibleans1, String possibleans2,String hint) throws Exception {
-		createDraftQuiz(mediaTitle, name, question,option1, option2, possibleans1, possibleans2,hint);
+	public String createandPublishQuiz(String mediaTitle, String name,String question,String option1, String option2,String possibleans1, String possibleans2,String hint, String courseName) throws Exception {
+		String quiznewName=createDraftQuiz(mediaTitle, name, question,option1, option2, possibleans1, possibleans2,hint);
 		clickQuizPostbutton();
-		clickQuizSelectcourse();
+		clickQuizSelectcourse(courseName);
 		Thread.sleep(2000);
 		clickQuizpostaftercourseSelection();
 		Thread.sleep(5000);
-		mediaLibrary.accessMediaMoreMenu(mediaTitle);
-		mediaDetailsModal.clickQuizzes();
-		Thread.sleep(1000);
-		String quiznewName=driver.findElement(By.xpath("//div[@class='quiz-panel-contents']/h4")).getText();
-		Actions action = new Actions(driver);
-		action.sendKeys(Keys.ESCAPE).build().perform();
-		System.out.println(quiznewName);
 		return quiznewName;
 		
 	}
@@ -111,6 +115,7 @@ public class QuizPageHelpers extends Helpers {
 	public void checkActivityLogforQuizSync(String mediaTitle,String studentFullName,String marks,String quizName) throws InterruptedException {
 		mediaLibrary.accessMediaMoreMenu(mediaTitle);
 		mediaDetailsModal.clickQuizzes();
+		sendKeys("Search for quizzes", By.id("quiz-search-input"), quizName);
 		mediaDetailsModal.clickActivityLogButton();
 		String logtext=mediaDetailsModal.getActivityLogforQuizSync().getText();
 		System.out.println(logtext);
@@ -124,18 +129,28 @@ public class QuizPageHelpers extends Helpers {
 		}	
 	}
 	
-	public void updatePostInfo(String userName,String password, String mediaTitle, String quizclosedate) throws InterruptedException {
+	public void updatePostInfo(String userName,String password, String mediaTitle, String quizName, String courseName) throws InterruptedException {
 		mediaLibrary.navigateToMyMediaUserLogin(userName, password);;
 		mediaLibrary.accessMediaMoreMenu(mediaTitle);
 		mediaDetailsModal.clickQuizzes();
+		sendKeys("Search for quizzes", By.id("quiz-search-input"), quizName);
 		mediaDetailsModal.clickManageQuizButton();
-		clickElement("Click Update post date Dropdown",By.xpath("//div[@class='postInfoIcon']"),10);
-		clickElement("Click Uncheck no close date checkbox",By.xpath("(//input[@type='checkbox'])[2]"),10);
-		sendKeys("Quiz close date", By.xpath("//input[@id='publishPollEndDate_145314']"), quizclosedate);
+		List<WebElement> courseList= getElementList(By.xpath("//table//tbody//tr//td//div[@class=\"row postCourseName\"]"));
+		for(int i=0;i<courseList.size();i++) {
+			WebElement element=courseList.get(i);
+			String obtainedcourseName = element.getText();
+			if(obtainedcourseName.contains(courseName)){
+				int rowposition=i+1;
+				int rowpos=rowposition+2;
+				clickElement("Click Update post date Dropdown",By.xpath("(//div[@class='postInfoIcon'])["+rowposition+"]"),10);
+				clickElement("Click Uncheck no close date checkbox",By.xpath("(//input[@type='checkbox'])["+rowpos+"]"),10);
+				sendKeys("Quiz close date", By.xpath("(//input[contains(@id,'publishPollEndDate')])["+rowposition+"]"), "1/5/23");
+				break;
+				}
+			}
 		mediaDetailsModal.clickUpdatePostQuiz();
 		mediaDetailsModal.clickCloseMoreMenu();
-		
-	}
+		}
 	
 	public void loginAsCreator(String userName, String password) {
 		mediaLibrary.navigateToMyMediaUserLogin(userName, password);
@@ -224,8 +239,10 @@ public class QuizPageHelpers extends Helpers {
 		clickElement("Click Submit Quiz",By.id("submit"), 10);
 	}
 
-	private void enterQuizName(String name) {
+	private String enterQuizName(String name) {
 		sendKeys("Quiz Name", By.id("titleBox"), name);
+		String quiznameObtained=driver.findElement(By.id("titleBox")).getAttribute("value");
+		return quiznameObtained;
 	}
 	
 	private void clickAddQuestion() {
@@ -264,9 +281,21 @@ public class QuizPageHelpers extends Helpers {
 		clickElement("Quiz Post button", By.id("doneButton"));
 	}
 	
-	private void clickQuizSelectcourse() {
-		clickElement("Select course Checkbox", By.id("classCheck"));
-	}
+	private void clickQuizSelectcourse(String courseName) {
+		List<WebElement> courseList= getElementList(By.xpath("//table//tbody//tr//td//div[@class=\"row postCourseName\"]"));
+		String obtainedmemberFirstname=null;
+		for(int i=0;i<courseList.size();i++) {
+			WebElement element=courseList.get(i);
+			String obtainedcourseName = element.getText();
+			 System.out.println(obtainedcourseName);
+			if(obtainedcourseName.contains(courseName)){
+				int rowposition=i+1;
+				clickElement("Select course Checkbox", By.xpath("(//input[@id=\"classCheck\"])["+rowposition+"]"));
+				reportStep("The moodle user is enrolled to  course in yuja", "PASS", false);
+				break;
+				}
+			}
+		}
 	
 	private void clickQuizpostaftercourseSelection() {
 		clickElement("Quiz post after course selection", By.xpath("(//button[@title=\"Post\"])[2]"));
@@ -278,11 +307,12 @@ public class QuizPageHelpers extends Helpers {
 		return quizDirectLink;
 	 }
 	
-	 public void  checkGradebookTestafterLoginforMultiple(String mediaTitle, String courseName,String name,String marks,String studentName) throws InterruptedException {
+	 public void  checkGradebookTestafterLoginforMultiple(String mediaTitle,String quizName, String courseName,String studentName,String marks ) throws InterruptedException {
 		 clickElement("Click Manage Media",By.xpath("//span[@id='topBarTabName3']"),10);
 		 Thread.sleep(5000);
 		 mediaLibrary.accessMediaMoreMenu(mediaTitle);
 		 mediaDetailsModal.clickQuizzes();
+		 sendKeys("Search for quizzes", By.id("quiz-search-input"), quizName);
 	   	 mediaDetailsModal.clickGradebookButton();
 		 Thread.sleep(3000);
 		 gradebook.clickSelectCourse();
@@ -296,7 +326,7 @@ public class QuizPageHelpers extends Helpers {
 		 Thread.sleep(3000);
 		 List <WebElement> element3= driver.findElements(By.xpath("//input[@class='select2-input']"));
 		 WebElement element4=element3.get(element3.size()-1);
-		 typeKeys(name);
+		 typeKeys(quizName);
 		 keyboardEnter();
 		 gradebook.clickGetGradebookReport();
 		 int gradeBookUserIndex = gradebook.getUserIndexFromGradeBook(studentName);
@@ -319,10 +349,11 @@ public class QuizPageHelpers extends Helpers {
 			}
 	 }
 	 
-	 public void checkGradebookforPlaybackQuiz(String mediaTitle, String courseName,String name,String marks,String studentName) throws InterruptedException {
+	 public void checkGradebookforPlaybackQuiz(String mediaTitle, String courseName,String marks,String studentName, String quizName) throws InterruptedException {
 		 clickElement("Click Manage Media",By.xpath("//span[@id='topBarTabName3']"),10);
 		 mediaLibrary.accessMediaMoreMenu(mediaTitle);
 		 mediaDetailsModal.clickQuizzes();
+		 sendKeys("Search for quizzes", By.id("quiz-search-input"), quizName);
 	   	 mediaDetailsModal.clickGradebookButton();
 		 Thread.sleep(3000);
 		 gradebook.clickSelectCourse();
@@ -336,7 +367,7 @@ public class QuizPageHelpers extends Helpers {
 		 Thread.sleep(3000);
 		 List <WebElement> element3= driver.findElements(By.xpath("//input[@class='select2-input']"));
 		 WebElement element4 = element3.get(element3.size()-1);
-		 typeKeys(name);
+		 typeKeys(quizName);
 		 keyboardEnter();
 		 gradebook.clickGetGradebookReport();
 		 int gradeBookUserIndex = gradebook.getUserIndexFromGradeBook(studentName);

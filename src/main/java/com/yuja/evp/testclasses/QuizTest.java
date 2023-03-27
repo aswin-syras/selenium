@@ -9,12 +9,9 @@ import com.yuja.evp.pagetestmethods.QuizPageTestMethods;
 
 public class QuizTest extends BaseTest {
 	
-	final String PASSWORD = "jamNOW123!@#123";
-	final String MANAGER_USER = "automation_manager";
-	final String INSTRUCTOR_USER = "automation_instructor";
-	final String STUDENT_USER = "automation_student";
+	
 	final String STUDENT_NAME = "Student Automation";
-	final String VIDEO_NAME = "editAccessSharedVideoManager";
+	final String VIDEO_NAME = "quizvideo";
 	final String QUIZ_NAME = "autoquiz";
 	final String QUIZ_QUESTION = "color of apple";
 	final String OPTION_1 = "red";
@@ -24,7 +21,6 @@ public class QuizTest extends BaseTest {
 	final String HINT = "hello";
 	final String STUDENT_SHORTANSWER = "red";
 	final String STUDENT_FITBANS = "red";
-	final String QUIZ_CLOSEDATE = "1/5/23";
 	final String QUIZ_PUBLISH_COURSE_NAME = "Automation 1337";
 	
 	NavigationBarHelpers navigationBar = new NavigationBarHelpers();
@@ -34,7 +30,7 @@ public class QuizTest extends BaseTest {
 	public void Create_quiz_test(String TestName) {
 		QuizPageTestMethods qp = new QuizPageTestMethods();
 		try {
-			qp.createPublishandAttendQuizTest(MANAGER_USER, PASSWORD, VIDEO_NAME, QUIZ_NAME,QUIZ_QUESTION,OPTION_1, OPTION_2,FITBPOSSIBLEANS_1,FITBPOSSIBLEANS_2,HINT,STUDENT_USER,PASSWORD,STUDENT_SHORTANSWER,STUDENT_FITBANS);
+			qp.createPublishandAttendQuizTest(prop.getProperty("ManagerID"), prop.getProperty("Password"), VIDEO_NAME, QUIZ_NAME,QUIZ_QUESTION,OPTION_1, OPTION_2,FITBPOSSIBLEANS_1,FITBPOSSIBLEANS_2,HINT,prop.getProperty("StudentID"), prop.getProperty("Password"),STUDENT_SHORTANSWER,STUDENT_FITBANS,QUIZ_PUBLISH_COURSE_NAME);
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -48,7 +44,7 @@ public class QuizTest extends BaseTest {
 	public void Check_student_gradebook_test(String TestName) {
 		QuizPageTestMethods qp = new QuizPageTestMethods();
 		try {
-			qp.checkStudentgradeBookTest(MANAGER_USER, PASSWORD, VIDEO_NAME, QUIZ_CLOSEDATE,STUDENT_USER,PASSWORD,QUIZ_PUBLISH_COURSE_NAME, QUIZ_NAME);
+			qp.checkStudentgradeBookTest(prop.getProperty("ManagerID"), prop.getProperty("Password"), VIDEO_NAME, prop.getProperty("StudentID"), prop.getProperty("Password"),QUIZ_PUBLISH_COURSE_NAME, QUIZ_NAME);
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -62,7 +58,7 @@ public class QuizTest extends BaseTest {
 	public void Check_instructor_gradebook_test(String TestName) {
 		QuizPageTestMethods qp = new QuizPageTestMethods();
 		try {
-			qp.checkGradebookTest(MANAGER_USER, PASSWORD, VIDEO_NAME, QUIZ_PUBLISH_COURSE_NAME, QUIZ_NAME,"100%",STUDENT_NAME);
+			qp.checkGradebookTest(prop.getProperty("ManagerID"), prop.getProperty("Password"), VIDEO_NAME, QUIZ_NAME, QUIZ_PUBLISH_COURSE_NAME, STUDENT_NAME, "100%");
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -76,7 +72,7 @@ public class QuizTest extends BaseTest {
 	public void Check_unauthenticated_user_quiz_test(String TestName) {
 		QuizPageTestMethods qp = new QuizPageTestMethods();
 		try {
-			qp. unauthenticatedUserDirectQuizTest(MANAGER_USER, PASSWORD, VIDEO_NAME,STUDENT_SHORTANSWER,STUDENT_FITBANS,"Unauthenticated Users",QUIZ_NAME,"100%","Anonymous-1");
+			qp. unauthenticatedUserDirectQuizTest(prop.getProperty("ManagerID"), prop.getProperty("Password"), VIDEO_NAME,STUDENT_SHORTANSWER,STUDENT_FITBANS,"Unauthenticated Users","100%","Anonymous-1",QUIZ_NAME);
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -90,7 +86,7 @@ public class QuizTest extends BaseTest {
 	public void Check_Unauthenticated_user_embedded_quiz_test(String TestName) {
 		QuizPageTestMethods qp = new QuizPageTestMethods();
 		try {
-			qp. unauthenticatedUserEmbeddedQuizTest(MANAGER_USER, PASSWORD, VIDEO_NAME,STUDENT_SHORTANSWER,STUDENT_FITBANS, "Unauthenticated Users", QUIZ_NAME, "100%", "Anonymous-2");
+			qp. unauthenticatedUserEmbeddedQuizTest(prop.getProperty("ManagerID"), prop.getProperty("Password"), VIDEO_NAME,STUDENT_SHORTANSWER,STUDENT_FITBANS, "Unauthenticated Users", "100%", "Anonymous-2",QUIZ_NAME);
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -104,7 +100,7 @@ public class QuizTest extends BaseTest {
 	public void Check_delete_quiz_test(String TestName) {
 		QuizPageTestMethods qp = new QuizPageTestMethods();
 		try {
-			qp.deleteQuizTest(MANAGER_USER, PASSWORD, VIDEO_NAME);
+			qp.deleteQuizTest(prop.getProperty("ManagerID"), prop.getProperty("Password"), VIDEO_NAME,QUIZ_NAME);
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -113,12 +109,12 @@ public class QuizTest extends BaseTest {
 		}
 	  }
 	
-	@Test(description="Check_playButton")
+	@Test(description="Check_")
 	  @Parameters({"TestName"})
 	public void CheckPlaybutton(String TestName) {
 		QuizPageTestMethods qp = new QuizPageTestMethods();
 		try {
-			qp.checkPlaybutton(MANAGER_USER, PASSWORD, VIDEO_NAME);
+			qp.checkPlaybutton(prop.getProperty("ManagerID"), prop.getProperty("Password"), VIDEO_NAME);
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());

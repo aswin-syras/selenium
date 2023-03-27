@@ -332,14 +332,31 @@ public class Helpers extends Report {
 
 	protected boolean captionFileExistsInSystem() throws InterruptedException {
 		String downloadDirectoryPath = Paths.get("src//fileResources//downloads").toAbsolutePath().toString();
-		File file = new File(downloadDirectoryPath + "\\274787.pdf");
-		if (file.exists()) {
-			file.delete();
-			return true;
-		} else {
-			return false;
+		File folder = new File(downloadDirectoryPath);
+		File fList[] = folder.listFiles();
+		boolean list = false;
+		for (int i = 0; i < fList.length; i++) {
+			File pes = fList[i];
+		    if (pes.exists() == true) {
+		        // and deletes
+		        pes.delete();
+		        list = true;
+		        return list;
+		    }
+		    else {
+		    	list = false;
+		    	return false;}
 		}
-	}
+		return list;
+		}
+//		File file = new File(downloadDirectoryPath + "\\284383_English.pdf");
+//		if (file.exists()) {
+//			file.delete();
+//			return true;
+//		} else {
+//			return false;
+//		}
+//	}
 
 	public int getRandomInteger(int min, int max) {
 		int randomInteger = (int) Math.floor(Math.random() * (max - min + 1) + min);
