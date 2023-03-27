@@ -129,15 +129,36 @@ public class QuizPageHelpers extends Helpers {
 		}	
 	}
 	
-	public void updatePostInfo(String userName,String password, String mediaTitle, String quizName) throws InterruptedException {
+	public void updatePostInfo(String userName,String password, String mediaTitle, String quizName,String courseName) throws InterruptedException {
 		mediaLibrary.navigateToMyMediaUserLogin(userName, password);;
 		mediaLibrary.accessMediaMoreMenu(mediaTitle);
+//		WebElement media = getMedia(mediaTitle);
+//		hoverOverElement(media);
+//		clickElement(media, "More menu button from the video hover", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 30);
 		mediaDetailsModal.clickQuizzes();
 		sendKeys("Search for quizzes", By.id("quiz-search-input"), quizName);
 		mediaDetailsModal.clickManageQuizButton();
-		clickElement("Click Update post date Dropdown",By.xpath("//div[@class='postInfoIcon']"),10);
-		clickElement("Click Uncheck no close date checkbox",By.xpath("(//input[@type='checkbox'])[2]"),10);
-		sendKeys("Quiz close date", By.xpath("//input[contains(@id,'publishPollEndDate')]"), "1/5/23");
+		List<WebElement> courseList= getElementList(By.xpath("//table//tbody//tr//td//div[@class=\"row postCourseName\"]"));
+		String obtainedmemberFirstname=null;
+		for(int i=0;i<courseList.size();i++) {
+			WebElement element=courseList.get(i);
+			String obtainedcourseName = element.getText();
+			 System.out.println(obtainedcourseName);
+			 System.out.println(courseName);
+			if(obtainedcourseName.contains(courseName)){
+				int rowposition=i+1;
+				int rowpos=rowposition+2;
+				clickElement("Click Update post date Dropdown",By.xpath("(//div[@class='postInfoIcon'])["+rowposition+"]"),10);
+				clickElement("Click Uncheck no close date checkbox",By.xpath("(//input[@type='checkbox'])["+rowpos+"]"),10);
+				sendKeys("Quiz close date", By.xpath("(//input[contains(@id,'publishPollEndDate')])["+rowposition+"]"), "1/5/23");
+				//clickElement("Select course Checkbox", By.xpath("(//input[@type=\"checkbox\"])["+rowposition+"]"));
+				//reportStep("The moodle user is enrolled to  course in yuja", "PASS", false);
+				break;
+				}
+			}
+//		clickElement("Click Update post date Dropdown",By.xpath("//div[@class='postInfoIcon']"),10);
+//		clickElement("Click Uncheck no close date checkbox",By.xpath("(//input[@type='checkbox'])[2]"),10);
+//		sendKeys("Quiz close date", By.xpath("//input[contains(@id,'publishPollEndDate')]"), "1/5/23");
 		mediaDetailsModal.clickUpdatePostQuiz();
 		mediaDetailsModal.clickCloseMoreMenu();
 		
@@ -301,7 +322,9 @@ public class QuizPageHelpers extends Helpers {
 	 public void  checkGradebookTestafterLoginforMultiple(String mediaTitle,String quizName, String courseName,String studentName,String marks ) throws InterruptedException {
 		 clickElement("Click Manage Media",By.xpath("//span[@id='topBarTabName3']"),10);
 		 Thread.sleep(5000);
-		 mediaLibrary.accessMediaMoreMenu(mediaTitle);
+		 WebElement media = getMedia(mediaTitle);
+		 hoverOverElement(media);
+		 clickElement(media, "More menu button from the video hover", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 30);
 		 mediaDetailsModal.clickQuizzes();
 		 sendKeys("Search for quizzes", By.id("quiz-search-input"), quizName);
 	   	 mediaDetailsModal.clickGradebookButton();

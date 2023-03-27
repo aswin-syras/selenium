@@ -6,7 +6,7 @@
   	<classes>
       <class name="com.yuja.evp.testclasses.CanvasTest">
 	      <methods>
-	          <include name="Canvas_create_publish_attend_gradebook_administrator_test">
+	          <include name="Canvas_create_playback_attend_gradebook_administrator_test">
 			      <!-- <parameter name="Browser" value="IE" /> -->
 			      <parameter name="TestName" value="MoodleCreateQuizTest1" />
 			  </include> 

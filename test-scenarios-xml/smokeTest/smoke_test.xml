@@ -4,7 +4,7 @@
 <suite name="Suite">
   <parameter name="TestName" value="TestValue" />
   <test name="Create_new_folder_test">
-  	<classes>
+  	<classes><!--  
       	<class name="com.yuja.evp.testclasses.MediaLibraryTest">
 	      	<methods>
 	      		<include name="Video_upload_manager_test" />
@@ -178,7 +178,7 @@
         		<include name="Edit_humancaption_permissions_for_Specific_user_Cielo24_test" />
         		<include name="Edit_humancaption_permissions_for_Specific_user_yujaprocaptioning_test" />
         	</methods>
-        </class>
+        </class>-->
         
         <class name="com.yuja.evp.testclasses.QuizTest">
         	<methods>

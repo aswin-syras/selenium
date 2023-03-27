@@ -10,7 +10,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
-
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.yuja.evp.modalhelpers.AddMediaModalHelperMethods;
@@ -207,10 +207,15 @@ public class MediaLibraryPageHelpers extends Helpers{
 		folder.findElement(By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]")).click();
 	}
 	 public void accessMediaMoreMenu(String mediaTitle) throws InterruptedException {
+		Thread.sleep(2000);
 		WebElement media = getMedia(mediaTitle);
 		hoverOverElement(media);
-		//Thread.sleep(2000);
+		Thread.sleep(2000);
+		//Actions actions = new Actions(driver);
+	  //  actions.moveToElement(driver.findElement( By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"))).click().perform();
 		clickElement(media, "More menu button from the video hover", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 30);
+		//if(ElementNotInteractableException==true)
+		
 	}
 	
 	public void selectAllFolderContents(){

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -47,7 +48,7 @@ private WebElement mediaUploadModal = null;
 	
 	public void logout() {
 		clickElement("account button", By.xpath("//button[@id='global_nav_profile_link']"));
-		clickElement("logout button", By.xpath("(//button[contains(@class,'fOyUs_bGBk fOyUs_fKyb fOyUs_cuDs fOyUs_cBHs fOyUs_eWbJ fOyUs_fmDy fOyUs_eeJl fOyUs_cBtr fOyUs_fuTR fOyUs_cnfU fQfxa_bGBk')])[3]"));
+		clickElement("logout button", By.xpath("//button[@type='submit']//span[text()='Logout']"));
 		
 	}
 	
@@ -63,27 +64,29 @@ private WebElement mediaUploadModal = null;
 		if(assignmentexist==false) {
 			clickElement("show sidebar", By.xpath("//i[@class='icon-hamburger']"));}
 	}
-	public void selectCourseFromSiteHome(String courseName) {
-		clickElement("site home", By.xpath("//a[@href=\"https://tmoodle2.yuja.com/?redirect=0\"]"));
-		List<WebElement> courseList= getElementList(By.xpath("//a[@class='aalink']"));
-		for(int i=0;i<courseList.size();i++) {
-		WebElement element=courseList.get(i);
-		String obtainedCourseName = element.getText();
-		if(obtainedCourseName.equals(courseName)) {
+	public void selectAssignment(String assignmentName) {
+		clickElement("Assignment", By.xpath("//a[@href='/courses/817/assignments']"));
+		List<WebElement> assignmentList= getElementList(By.xpath("//a[@class=\"ig-title\"]"));
+		for(int i=0;i<assignmentList.size();i++) {
+		WebElement element=assignmentList.get(i);
+		String obtainedAssignmentName = element.getText();
+		System.out.println(obtainedAssignmentName);
+		System.out.println(assignmentName);
+		if(obtainedAssignmentName.equals(assignmentName)) {
 			clickElement("click on given course",element);
 			break;
 		    }
 		 }
 	}
 	
-	public void createMoodleCourse(String adminUserName, String adminPassword, String courseName, String courseShortName) throws InterruptedException{
+	public void createCanvasCourse(String adminUserName, String adminPassword, String courseName, String courseShortName) throws InterruptedException{
 		navigateToLoginPage();
 		driver.manage().window().maximize();
 		loginFast(adminUserName, adminPassword);
 		waitForElement(By.xpath("//span[@class='site-name d-none d-md-inline']"), 10);
-		String URL = "https://tmoodle2.yuja.com/admin/search.php#linkcourses";
-		launchUrl(URL, "Moodle automation course creation page");
-		clickElement("Add a new course button", By.xpath("//a[text()='Add a new course']"));
+		String URL = "https://panotesting.instructure.com/accounts/1";
+		launchUrl(URL, "Canvas automation course creation page");
+		clickElement("Add a new course button", By.xpath("//button[@aria-label=\"Create new course\"]"));
 		sendKeys("Enter course full name", By.xpath("//input[@name='fullname']"),courseName+getRandomInteger(1000));
 		sendKeys("Enter course short name", By.xpath("//input[@name='shortname']"),courseShortName+getRandomInteger(1000));
 		clickElement("save and display button", By.xpath("//input[@name='saveanddisplay']"));
@@ -133,14 +136,16 @@ private WebElement mediaUploadModal = null;
 		driver.switchTo().defaultContent();
 		String URL = "https://panotesting.instructure.com/courses/817";
 		launchUrl(URL, "Canvas automation course page");
-	        accessCIMMediaChooser();
-	        CIMMediaChooserQuizEmbed(quizNewName);
-	        logout();
-	        navigateToCourse(stuserName,stpassword);
-        clickElement("click embed media title", By.xpath("//span[text()="+quizFinalName+"]"));
-	        switchToIframe("switch to lti frame", By.id("contentframe"), 10);
-	        switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
-	        clickPlaybutton();
+	    accessCIMMediaChooser(embedMediaTitle,quizNewName);
+	    CIMMediaChooserQuizEmbed(quizNewName);
+	    logout();
+	    navigateToCourse(stuserName,stpassword);
+	    clickElement("Assignment", By.xpath("//a[@href='/courses/817/assignments']"));
+	    clickElement("Click embed link",By.xpath("//div[@class=\"ig-info\"]//a[contains(text(),'"+quizNewName+"')]"),10);
+	   // selectAssignment(quizNewName);
+        switchToIframe("switch to lti frame", By.id("tool_content"), 10);
+	    switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
+	    clickPlaybutton();
 		Thread.sleep(5000);
 		driver.switchTo().parentFrame();
 		StudentattendallquestionsCorrectly(sa, fitbans);
@@ -172,15 +177,18 @@ private WebElement mediaUploadModal = null;
 		String quizNewName=createPlaybackquiz(playbackQuizTitle,videoNameforPlaybackquiz);
 		String quizFinalName="'"+quizNewName+"'";
 		driver.switchTo().defaultContent();
-		String URL = "https://tmoodle2.yuja.com/course/view.php?id=142";
-		launchUrl(URL, "Moodle automation course page");
-		accessCIMMediaChooser();
-	        CIMMediaChooserQuizEmbed(quizNewName);
+		String URL = "https://panotesting.instructure.com/courses/817";
+		launchUrl(URL, "Canvas automation course page");
+		accessCIMMediaChooser(embedMediaTitle,quizNewName);
+	    CIMMediaChooserQuizEmbed(quizNewName);
 		logout();
 		navigateToCourse(stuserName,stpassword);
-		clickElement("click embed media title", By.xpath("//span[text()="+quizFinalName+"]"));
-		switchToIframe("switch to lti frame", By.id("contentframe"), 10);
-	        switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
+		//selectAssignment(quizNewName);
+		 clickElement("Assignment", By.xpath("//a[@href='/courses/817/assignments']"));
+		 clickElement("Click embed link",By.xpath("//div[@class=\"ig-info\"]//a[contains(text(),'"+quizNewName+"')]"),10);
+		 Thread.sleep(5000);
+		switchToIframe("switch to lti frame", By.id("tool_content"), 10);
+	    switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
 		clickPlaybutton();
 		Thread.sleep(48000);
 		driver.switchTo().defaultContent();
@@ -200,36 +208,40 @@ private WebElement mediaUploadModal = null;
 	
 	// Method directly used in test class. Login embed media and access as student
 	
-	public void loginEmbedMedia(String userName, String password,String name,String stuserName,String stpassword, String embedMediaName) throws InterruptedException {
+	public void loginEmbedMedia(String userName, String password,String name,String stuserName,String stpassword, String embedMediaName, String LTILinkName) throws InterruptedException {
 		navigateToCourse(userName,password);
-		accessCIMMediaChooser();
+		accessCIMMediaChooserforAnnouncements(name, LTILinkName);
 		CIMMediaChooserMediaEmbed(name);
         logout();
 	    navigateToCourse(stuserName,stpassword);
-	    NavigateToLTI(embedMediaName);
+	    clickElement("Announcement", By.xpath("//a[@href='/courses/817/announcements']"));
+	    clickElement("choosen announcement", By.xpath("//h3[text()="+embedMediaName+"]"));
+	    Thread.sleep(3000);
 	   
 	}
 	
 	//Method directly used in test class. login upload media and check in media chooser as well as media library
 	
-	public void CIMMediaChooserMediaUpload(String userName, String password, String mediaDirectoryPath, String LTILinkName) throws InterruptedException {
+	public void CIMMediaChooserMediaUpload(String userName, String password, String mediaDirectoryPath, String LTILinkName, String name) throws InterruptedException {
 		navigateToCourse(userName,password);
-		accessCIMMediaChooser();
+		accessCIMMediaChooserforAnnouncements(name, LTILinkName);
 		Thread.sleep(5000);
 		clickElement("click upload media", By.cssSelector("div[id=\"uploadMediaTab\"]"));
 		Thread.sleep(2000);
 		mediaChooserBulkUploadMedia(mediaDirectoryPath);
 		List<String> mediaTitlelist=getMediaTitleArrayfromDirectory(mediaDirectoryPath);
 		System.out.println(mediaTitlelist);
-        Actions action = new Actions(driver);
-		action.sendKeys(Keys.ESCAPE).build().perform();
-	    Thread.sleep(4000);
-		String URL = "https://tmoodle2.yuja.com/course/view.php?id=142";
-		launchUrl(URL, "Moodle automation course page");
-		NavigateToLTI(LTILinkName);
+		clickElement("click choose media", By.xpath("//div[@id=\"chooseMediaTab\"]"));
+		clickElement("select entered media", By.xpath("//div[@id=\"videoSelectionContainer\"]/div/div[3]/div/div/div"));
+		clickElement("insert button", By.xpath("//button[@id=\"embedButton\"]"));
+		Thread.sleep(4000);
+		clickEmbedMediaCanvas(LTILinkName);
+	    Alert prompt=driver.switchTo().alert();
+		prompt.accept();
+		switchToIframe("switch to lti frame", By.id("tool_content"), 10);
+		Thread.sleep(4000);
 		clickElement("Click Manage Media",By.xpath("//span[@id='topBarTabName3']"),10);
 		checkMediaExitsinMediaLibrary(mediaTitlelist);
-		Thread.sleep(4000);
 	}
 	
 	public void setAndResetAutomaticProvision(String userName,String password,String userOrcourse,Boolean enabledOrDisabled) {
@@ -313,7 +325,7 @@ private WebElement mediaUploadModal = null;
 	public void checkAutoprovisionOfCourse(String adminUserName, String adminPassword, String courseName, String courseShortName, String externalToolCustomName, String externalToolVisibleName, String userName, String password ) throws InterruptedException {
 		setAndResetAutomaticProvision(userName,password,"course",true);
 		setStartPageOptionAsMediaChannel();
-		createMoodleCourse(adminUserName, adminPassword,courseName,courseShortName);
+		//createMoodleCourse(adminUserName, adminPassword,courseName,courseShortName);
 		String moodleCourseName=driver.findElement(By.xpath("//div[@class=\"page-header-headings\"]")).getText();
 		//addExternalTool(externalToolCustomName,externalToolVisibleName);
 		NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
@@ -331,7 +343,7 @@ private WebElement mediaUploadModal = null;
 	public void checkManualprovisionOfNewCourse(String adminUserName, String adminPassword, String courseName, String courseShortName, String externalToolCustomName, String externalToolVisibleName, String userName, String password ) throws InterruptedException {
 		setAndResetAutomaticProvision(userName,password,"course",false);
 		setStartPageOptionAsMediaChannel();
-		createMoodleCourse(adminUserName, adminPassword,courseName,courseShortName);
+		//createMoodleCourse(adminUserName, adminPassword,courseName,courseShortName);
 		//addExternalTool(externalToolCustomName,externalToolVisibleName);
 		NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
 		clickElement("Create new course button", By.xpath("//a[@title=\"Create a Course\"]"));
@@ -353,7 +365,7 @@ private WebElement mediaUploadModal = null;
 	public void checkManualprovisionToExistingCourse(String adminUserName, String adminPassword, String courseName, String courseShortName, String externalToolCustomName, String externalToolVisibleName, String userName, String password ) throws InterruptedException {
 		setAndResetAutomaticProvision(userName,password,"course",false);
 		setStartPageOptionAsMediaChannel();
-		createMoodleCourse(adminUserName, adminPassword,courseName,courseShortName);
+		//createMoodleCourse(adminUserName, adminPassword,courseName,courseShortName);
 	//	addExternalTool(externalToolCustomName,externalToolVisibleName);
 		NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
 		clickElement("Link to an existing course button", By.xpath("//a[@title=\"Link to an Existing Course\"]"));
@@ -380,7 +392,7 @@ private WebElement mediaUploadModal = null;
 		
 		setAndResetAutomaticProvision(userName,password,"user",true);
 		String studentUserName=createMoodleUser(adminUserName, adminPassword,email,newUsername,newUserPassword);
-		selectCourseFromSiteHome(courseName);
+		//selectCourseFromSiteHome(courseName);
 		
 		clickElement("participants", By.xpath("//a[@data-key=\"participants\"]"));
 		clickElement("enroll users", By.xpath("//input[@value=\"Enrol users\"]"));
@@ -394,7 +406,7 @@ private WebElement mediaUploadModal = null;
 		navigateToLoginPage();
 		driver.manage().window().maximize();
 		loginFast(studentUserName, newUserPassword);
-		selectCourseFromSiteHome(courseName);
+		//selectCourseFromSiteHome(courseName);
 		NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
 		waitForElement(By.xpath("//*[@id=\"bi_userInfoDropdown\"]"),15);
 		navbar.clickMyAccountButton();
@@ -438,7 +450,7 @@ private WebElement mediaUploadModal = null;
 		String myaccountStudentName=null;
 		
 		for(String course:courseName) {
-		selectCourseFromSiteHome(course);
+		//selectCourseFromSiteHome(course);
 		clickElement("participants", By.xpath("//a[@data-key=\"participants\"]"));
 		clickElement("enroll users", By.xpath("//input[@value=\"Enrol users\"]"));
 		sendKeys("Enter username", By.xpath("(//input[@class=\"form-control\" and contains(id,form_autocomplete_input-1677790244437)])[2]"),studentUserName);
@@ -454,7 +466,7 @@ private WebElement mediaUploadModal = null;
 		loginFast(studentUserName, newUserPassword);
 		
 		for(String course:courseName) {
-		selectCourseFromSiteHome(course);
+		//selectCourseFromSiteHome(course);
 		NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
 		waitForElement(By.xpath("//*[@id=\"bi_userInfoDropdown\"]"),15);
 		navbar.clickMyAccountButton();
@@ -499,7 +511,7 @@ private WebElement mediaUploadModal = null;
 	
 	   setAndResetAutomaticProvision(userName,password,"user",false);
 	   String studentUserName=createMoodleUser(adminUserName, adminPassword,email,newUsername,newUserPassword);
-	   selectCourseFromSiteHome(courseName);
+	  // selectCourseFromSiteHome(courseName);
 	
 	   clickElement("participants", By.xpath("//a[@data-key=\"participants\"]"));
 	   clickElement("enroll users", By.xpath("//input[@value=\"Enrol users\"]"));
@@ -513,7 +525,7 @@ private WebElement mediaUploadModal = null;
 	   navigateToLoginPage();
 	   driver.manage().window().maximize();
 	   loginFast(studentUserName, newUserPassword);
-	   selectCourseFromSiteHome(courseName);
+	   //selectCourseFromSiteHome(courseName);
 	   NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
 	
 	   if(type=="new") {
@@ -603,7 +615,7 @@ private WebElement mediaUploadModal = null;
 	   navigateToLoginPage();
 	   driver.manage().window().maximize();
 	   loginFast("rolemappinguser", "jamNOW123/");
-	   selectCourseFromSiteHome("AUTOMATION MOODLE COURSE");
+	   //selectCourseFromSiteHome("AUTOMATION MOODLE COURSE");
 	   NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
 	   waitForElement(By.xpath("//button[@title=\" Main Menu\"]"),15);
 	   clickElement("main menu button", By.xpath("//button[@title=\" Main Menu\"]"));
@@ -754,9 +766,12 @@ private WebElement mediaUploadModal = null;
 		searchMediaName(name);
 		keyboardEnter();
 		Thread.sleep(12000);
-		clickElement("select entered media", By.xpath("//div[@id=\"videoSelectionContainer\"]/div/div[2]/div/div/div"));
+		clickElement("select entered media", By.xpath("//div[@id=\"videoSelectionContainer\"]/div/div[3]/div/div/div"));
 		Thread.sleep(3000);
-		clickElement("click save and return to course", By.xpath("//input[@name='submitbutton2']"));
+		clickElement("insert button", By.xpath("//button[@id=\"embedButton\"]"));
+		Thread.sleep(3000);
+		clickElement("publish button", By.xpath("//button[@type=\"submit\"]"));
+		
 	}
 	
 	//Search for quiz in search bar of media chooser and embed
@@ -769,23 +784,48 @@ private WebElement mediaUploadModal = null;
 		Thread.sleep(3000);
 		clickElement("select entered quiz", By.cssSelector("div[class=\"list-item list-item-large add-media-list-item media-item-container\"]"));
 		Thread.sleep(3000);
+		driver.switchTo().defaultContent();
+		clickElement("click Select", By.xpath("//span[text()='Select']"));
 		clickElement("click save and publish to course", By.xpath("//button[contains(@class,'btn btn-default save_and_publish')]"));
 	}
 	
-	private void accessCIMMediaChooser() throws InterruptedException {
+	private void accessCIMMediaChooser(String LTILinkName,String quizNewName) throws InterruptedException {
 		clickElement("Assignment", By.xpath("//a[@href='/courses/817/assignments']"));
 		clickElement("add assignment button", By.xpath("//a[@href='https://panotesting.instructure.com/courses/817/assignments/new']"));
 		Thread.sleep(3000);
-		sendKeys("Enter assignment name", By.xpath("//input[@id='assignment_name']"),"quiz1");
+		sendKeys("Enter assignment name", By.id("assignment_name"),quizNewName);
 		sendKeys("Enter assignment points", By.xpath("//input[@id='assignment_points_possible']"),"100");
 		Select externaltoolDropdown = new Select(driver.findElement(By.id("assignment_submission_type")));
 		externaltoolDropdown.selectByValue("external_tool");
 		clickElement("Find button", By.xpath("//button[@id='assignment_external_tool_tag_attributes_url_find']"));
-		clickElement("tool link", By.xpath("//li[@class=\"tool resource_selection\"]//a[text()='TEST AUTOMATION STAGING 1.3']"));
+		clickElement("tool link", By.xpath("//li[@class=\"tool resource_selection\"]//a[text()="+LTILinkName+"]"));
 		Thread.sleep(5000);
 		switchToIframe("switch to mediachooser frame", By.id("resource_selection_iframe"), 10);
 	}
 	
+	private void accessCIMMediaChooserforAnnouncements(String name, String LTILinkName) throws InterruptedException {
+		clickElement("Announcement", By.xpath("//a[@href='/courses/817/announcements']"));
+		clickElement("add announcement button", By.xpath("//a[@id=\"add_announcement\"]"));
+		Thread.sleep(3000);
+		sendKeys("Enter announcement name", By.xpath("//input[@id='discussion-title']"),name);
+		clickElement("Apps button", By.xpath("//button[@title=\"Apps\"]"));
+		clickElement("View all link", By.xpath("//div[@title=\"View All\"]"));
+		
+		List<WebElement> appList= getElementList(By.xpath("//li[@class=\"fOyUs_bGBk jpyTq_bGBk jpyTq_ycrn\"]"));
+		for(int i=0;i<appList.size();i++) {
+		WebElement element=appList.get(i);
+		String obtainedAppName = element.getText();
+		String obtainedsplitLTILinkname[]=LTILinkName.split("'",3);
+		String originalLTIName=obtainedsplitLTILinkname[1];
+		String expectedApp=originalLTIName+"\nView description";
+		if(obtainedAppName.equals(expectedApp)) {
+			clickElement("click on given course",element);
+			break;
+		    }
+		 }
+		Thread.sleep(5000);
+		switchToIframe("switch to mediachooser frame", By.name("external_tool_launch"), 10);
+	}
 	
 	
 	
