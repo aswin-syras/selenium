@@ -139,7 +139,6 @@ public class QuizPageHelpers extends Helpers {
 		sendKeys("Search for quizzes", By.id("quiz-search-input"), quizName);
 		mediaDetailsModal.clickManageQuizButton();
 		List<WebElement> courseList= getElementList(By.xpath("//table//tbody//tr//td//div[@class=\"row postCourseName\"]"));
-		String obtainedmemberFirstname=null;
 		for(int i=0;i<courseList.size();i++) {
 			WebElement element=courseList.get(i);
 			String obtainedcourseName = element.getText();
