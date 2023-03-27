@@ -207,9 +207,10 @@ public class MediaLibraryPageHelpers extends Helpers{
 		folder.findElement(By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]")).click();
 	}
 	 public void accessMediaMoreMenu(String mediaTitle) throws InterruptedException {
+		Thread.sleep(2000);
 		WebElement media = getMedia(mediaTitle);
 		hoverOverElement(media);
-		//Thread.sleep(2000);
+		Thread.sleep(2000);
 		clickElement(media, "More menu button from the video hover", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 30);
 	}
 	

@@ -45,7 +45,7 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 		}
 		
 		public void checkStudentgradeBookTest(String userName,String password, String mediaTitle, String studentUserName, String studentPassword,String courseName,String quizName) throws InterruptedException{
-			updatePostInfo(userName,password, mediaTitle,quizName);
+			updatePostInfo(userName,password, mediaTitle,quizName,courseName);
 			navigationBar.userLogOut();
 			Thread.sleep(2000);
 			mediaLibrary.navigateToMyMediaUserLogin(studentUserName, studentPassword);
