@@ -129,19 +129,28 @@ public class QuizPageHelpers extends Helpers {
 		}	
 	}
 	
-	public void updatePostInfo(String userName,String password, String mediaTitle, String quizName) throws InterruptedException {
+	public void updatePostInfo(String userName,String password, String mediaTitle, String quizName, String courseName) throws InterruptedException {
 		mediaLibrary.navigateToMyMediaUserLogin(userName, password);;
 		mediaLibrary.accessMediaMoreMenu(mediaTitle);
 		mediaDetailsModal.clickQuizzes();
 		sendKeys("Search for quizzes", By.id("quiz-search-input"), quizName);
 		mediaDetailsModal.clickManageQuizButton();
-		clickElement("Click Update post date Dropdown",By.xpath("//div[@class='postInfoIcon']"),10);
-		clickElement("Click Uncheck no close date checkbox",By.xpath("(//input[@type='checkbox'])[2]"),10);
-		sendKeys("Quiz close date", By.xpath("//input[contains(@id,'publishPollEndDate')]"), "1/5/23");
+		List<WebElement> courseList= getElementList(By.xpath("//table//tbody//tr//td//div[@class=\"row postCourseName\"]"));
+		for(int i=0;i<courseList.size();i++) {
+			WebElement element=courseList.get(i);
+			String obtainedcourseName = element.getText();
+			if(obtainedcourseName.contains(courseName)){
+				int rowposition=i+1;
+				int rowpos=rowposition+2;
+				clickElement("Click Update post date Dropdown",By.xpath("(//div[@class='postInfoIcon'])["+rowposition+"]"),10);
+				clickElement("Click Uncheck no close date checkbox",By.xpath("(//input[@type='checkbox'])["+rowpos+"]"),10);
+				sendKeys("Quiz close date", By.xpath("(//input[contains(@id,'publishPollEndDate')])["+rowposition+"]"), "1/5/23");
+				break;
+				}
+			}
 		mediaDetailsModal.clickUpdatePostQuiz();
 		mediaDetailsModal.clickCloseMoreMenu();
-		
-	}
+		}
 	
 	public void loginAsCreator(String userName, String password) {
 		mediaLibrary.navigateToMyMediaUserLogin(userName, password);

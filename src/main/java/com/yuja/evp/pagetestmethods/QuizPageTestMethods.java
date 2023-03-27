@@ -27,12 +27,16 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 			loginAsCreator(userName, password);
 			String newQuizName = createandPublishQuiz(mediaTitle, name, question,option1, option2, possibleans1, possibleans2,hint,courseName);
 			navigationBar.userLogOut();
-			Thread.sleep(25000);
 			mediaLibrary.navigateToMyMediaUserLogin(studentUserName, studentPassword);
-			navigationBar.clickNotifications();
-			Thread.sleep(5000);
-			clickElement("Quiz Notificaton",By.xpath("//div[@class='post']"),10);
-			Thread.sleep(5000);
+			for(int i=0;i<5;i++) {
+				driver.navigate().refresh();
+				navigationBar.clickNotifications();
+				Thread.sleep(5000);
+				if( verifyElementExist("Quiz Notificaton",By.xpath("//div[@class='post']"))){
+				clickElement("Quiz Notificaton",By.xpath("//div[@class='post']"),10);
+				break;}
+				}
+				Thread.sleep(5000);
 			switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
 			clickPlaybutton();
 			Thread.sleep(5000);
@@ -45,7 +49,7 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 		}
 		
 		public void checkStudentgradeBookTest(String userName,String password, String mediaTitle, String studentUserName, String studentPassword,String courseName,String quizName) throws InterruptedException{
-			updatePostInfo(userName,password, mediaTitle,quizName);
+			updatePostInfo(userName,password, mediaTitle,quizName,courseName);
 			navigationBar.userLogOut();
 			Thread.sleep(2000);
 			mediaLibrary.navigateToMyMediaUserLogin(studentUserName, studentPassword);
@@ -137,7 +141,7 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 			switchToIframe("switch to iframe result", By.id("iframeResult"), 10);
 			//driver.switchTo().frame("iframeResult");
 			Thread.sleep(4000);
-			WebElement frame = driver.findElement(By.xpath("//iframe[contains(@src,'https://staging-my.yuja.com')]"));
+			WebElement frame = driver.findElement(By.xpath("//iframe[contains(@src,'"+prop.getProperty("URL")+"')]"));
 			driver.switchTo().frame(frame);
 			Thread.sleep(4000);
 			switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
