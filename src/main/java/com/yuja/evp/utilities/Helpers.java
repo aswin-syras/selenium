@@ -297,13 +297,6 @@ public class Helpers extends Report {
 			break;}}
 		return element;}
 		
-		    
-		 
-		
-		
-	
-	
-
 	public boolean mediaExists(String mediaTitle) {
 		WebElement mediaLibraryElement = getMedia(mediaTitle);
 		if (mediaLibraryElement != null) {
