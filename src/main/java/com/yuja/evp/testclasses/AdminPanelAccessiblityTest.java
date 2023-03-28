@@ -9,7 +9,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 	
 	String INSTRUCTOR_FULLNAME="Instructor Automation";
 	String STUDENT_FULLNAME="Student Automation";
-	String ITMANAGER_FULLNAME="Manager Automation2";
+	String ITMANAGER_FULLNAME="automation tmananger3";
 	String VIDEONAME="captionvideo";
 	
 	

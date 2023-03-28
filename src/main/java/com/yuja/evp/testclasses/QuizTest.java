@@ -23,6 +23,7 @@ public class QuizTest extends BaseTest {
 	final String STUDENT_FITBANS = "red";
 	final String QUIZ_PUBLISH_COURSE_NAME = "Automation 1337";
 	
+	
 	NavigationBarHelpers navigationBar = new NavigationBarHelpers();
 	
 	@Test(description="Create_quiz_test")

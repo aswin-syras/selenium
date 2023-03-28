@@ -113,6 +113,7 @@ public class QuizPageHelpers extends Helpers {
 	//Method to check quiz grade sync in LMS gradebook
 	
 	public void checkActivityLogforQuizSync(String mediaTitle,String studentFullName,String marks,String quizName) throws InterruptedException {
+	
 		mediaLibrary.accessMediaMoreMenu(mediaTitle);
 		mediaDetailsModal.clickQuizzes();
 		sendKeys("Search for quizzes", By.id("quiz-search-input"), quizName);
@@ -130,7 +131,7 @@ public class QuizPageHelpers extends Helpers {
 	}
 	
 	public void updatePostInfo(String userName,String password, String mediaTitle, String quizName,String courseName) throws InterruptedException {
-		mediaLibrary.navigateToMyMediaUserLogin(userName, password);;
+		mediaLibrary.navigateToMyMediaUserLogin(userName, password);
 		mediaLibrary.accessMediaMoreMenu(mediaTitle);
 //		WebElement media = getMedia(mediaTitle);
 //		hoverOverElement(media);
