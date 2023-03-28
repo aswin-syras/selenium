@@ -10,7 +10,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.yuja.evp.modalhelpers.AddMediaModalHelperMethods;
@@ -45,13 +45,13 @@ public class MediaLibraryPageHelpers extends Helpers{
 		driver.manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
-		URL = "https://staging-demo.yuja.com/P/VideoManagement/MediaLibrary/Users/"+userName+"/Shared";
-		launchUrl(URL, "Xavier University Enterprise Video Platform");
+		URL = prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/Users/"+userName+"/Shared";
+		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	
 	public void navigateToSharedWithMe(String userName){
-		URL = "https://staging-demo.yuja.com/P/VideoManagement/MediaLibrary/Users/"+userName+"/Shared";
-		launchUrl(URL, "Xavier University Enterprise Video Platform");
+		URL = prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/Users/"+userName+"/Shared";
+		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	
 	public void navigateToInternalLibraryUserLogin(String userName, String password) {
@@ -59,13 +59,13 @@ public class MediaLibraryPageHelpers extends Helpers{
 		driver.manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
-		URL = "https://staging-demo.yuja.com/P/VideoManagement/MediaLibrary/InstitutionPrivateChannel";
-		launchUrl(URL, "Xavier University Enterprise Video Platform");
+		URL = prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/InstitutionPrivateChannel";
+		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	
 	public void navigateToInternalLibrary(){
-		URL = "https://staging-demo.yuja.com/P/VideoManagement/MediaLibrary/InstitutionPrivateChannel";
-		launchUrl(URL, "Xavier University Enterprise Video Platform");
+		URL = prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/InstitutionPrivateChannel";
+		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	
 	public void navigateToFavoriteUserLogin(String userName, String password) {
@@ -211,11 +211,7 @@ public class MediaLibraryPageHelpers extends Helpers{
 		WebElement media = getMedia(mediaTitle);
 		hoverOverElement(media);
 		Thread.sleep(2000);
-		//Actions actions = new Actions(driver);
-	  //  actions.moveToElement(driver.findElement( By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"))).click().perform();
 		clickElement(media, "More menu button from the video hover", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 30);
-		//if(ElementNotInteractableException==true)
-		
 	}
 	
 	public void selectAllFolderContents(){

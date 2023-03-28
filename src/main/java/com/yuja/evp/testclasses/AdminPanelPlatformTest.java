@@ -1,7 +1,5 @@
 package com.yuja.evp.testclasses;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import com.yuja.evp.pagetestmethods.AdminPanelPlatformTestMethods;

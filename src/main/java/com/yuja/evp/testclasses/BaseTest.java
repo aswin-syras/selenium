@@ -19,13 +19,15 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.AfterSuite;
 
 public class BaseTest extends Report {
+	
+	public String pw;
 
 	public ITestContext testContext;
 
 	@BeforeMethod(alwaysRun = true)
 	@Parameters({ "TestName" })
 	public void beforeMethod(String refTestSheetName, Method M, ITestContext context) {
-
+		
 		System.out.println("@BeforeMethod");
 
 		// Sheet reference for test data

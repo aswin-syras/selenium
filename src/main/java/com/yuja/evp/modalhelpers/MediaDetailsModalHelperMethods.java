@@ -93,6 +93,7 @@ public class MediaDetailsModalHelperMethods extends Helpers {
 		clickElement("Search button", By.xpath("//*[@id=\"injectedVideoContent\"]/form/div[2]/button"));
 		Thread.sleep(2000);
 		clickElement("The video to be replaced",By.xpath("//*[@id=\"injectedVideoContent\"]/div[1]/div/div[1]/div/div/div/div[1]/img[1]"));
+		Thread.sleep(2000);
 		List<WebElement> dialogList = getElementList(By.cssSelector(".modal-dialog "));
 		WebElement confirmDialog = dialogList.get(dialogList.size() - 1);
 		WebElement okButton = confirmDialog.findElement(By.cssSelector(".modal-content > .modal-footer > #buttonSection > [title=\"OK\"]"));
