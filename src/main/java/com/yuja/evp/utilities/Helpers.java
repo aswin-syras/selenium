@@ -293,7 +293,6 @@ public class Helpers extends Report {
 		element=mediaLibraryElementList.get(i);
 		String obtainedmediaLibraryElementName = element.findElement(By.className("titleText")).getText();
 		System.out.println(obtainedmediaLibraryElementName);
-		//System.out.println(assignmentName);
 		if(obtainedmediaLibraryElementName.equals(mediaTitle)) {
 			break;}}
 		return element;}
