@@ -4,7 +4,7 @@
 <suite name="Suite">
   <parameter name="TestName" value="TestValue" />
   <test name="Create_new_folder_test">
-  	<classes><!--  
+  	<classes> 
       	<class name="com.yuja.evp.testclasses.MediaLibraryTest">
 	      	<methods>
 	      		<include name="Video_upload_manager_test" />
@@ -112,7 +112,34 @@
         	</methods>
         </class>
         
-        <class name="com.yuja.evp.testclasses.MoodleTest">
+        <class name="com.yuja.evp.testclasses.CanvasTest">
+        	<methods>
+        		<include name="Canvas_create_publish_attend_gradebook_administrator_test" />
+        		<include name="Canvas_create_publish_attend_gradebook_instructor_test" />
+        		
+        		<include name="Canvas_create_playback_attend_gradebook_administrator_test" />
+        		<include name="Canvas_create_playback_attend_gradebook_instructor_test" />
+        		
+        		<include name="Canvas_embed_video_as_instructor_check_accessible_by_student_test" />
+        		<include name="Canvas_embed_video_as_administrator_check_accessible_by_student_test" />
+        		
+        		<include name="Canvas_embed_audio_as_instructor_check_accessible_by_student_test" />
+        		<include name="Canvas_embed_audio_as_administrator_check_accessible_by_student_test" />
+        		
+        		<include name="Canvas_embed_document_as_instructor_check_accessible_by_student_test" />
+        		<include name="Canvas_embed_document_as_administrator_check_accessible_by_student_test" />
+        		
+        		<include name="Canvas_upload_video_as_administrator_check_in_media_library_test" />
+        		<include name="Canvas_upload_video_as_instuctor_check_in_media_library_test" />
+        		
+        		<include name="Canvas_upload_audio_as_administrator_check_in_media_library_test" />
+        		<include name="Canvas_upload_audio_as_instuctor_check_in_media_library_test" />
+        		
+        		<include name="Canvas_upload_doc_as_administrator_check_in_media_library_test" />
+        		<include name="Canvas_upload_doc_as_instuctor_check_in_media_library_test" />
+        	</methods>
+        </class>
+         <class name="com.yuja.evp.testclasses.MoodleTest">
         	<methods>
         		<include name="Moodle_create_publish_attend_gradebook_administrator_test" />
         		<include name="Moodle_create_publish_attend_gradebook_instructor_test" />
@@ -137,14 +164,29 @@
         		
         		<include name="Moodle_upload_doc_as_administrator_check_in_media_library_test" />
         		<include name="Moodle_upload_doc_as_instuctor_check_in_media_library_test" />
-        	</methods>
+        		
+        		<include name="Moodle_check_autoprovisionofcourse" />
+        		<include name="Moodle_check_manualprovisioningof_newcourse" />
+        		
+        		<include name="Moodle_check_manualprovisioningto_existingcourse" />
+        		<include name="Moodle_check_autoprovisioning_user" />
+        		
+        		<include name="Moodle_check_autoprovisioning_user_multipleCourses" />
+        		<include name="Moodle_check_manualprovisioning_newuser" />
+        		
+        		<include name="Moodle_check_manualprovisioning_existinguser" />
+        		<include name="Check_role_mapping_unlocked" />
+        		
+        		<include name="Check_role_mapping_locked_as_student" />
+        		<include name="Check_role_mapping_locked_as_instructor" />
+        		</methods>
         </class>
-        
+         
         <class name="com.yuja.evp.testclasses.AdminPanelAccessiblityTest">
         	<methods>
-        		<include name="Check_humancaption_button_update" />
         		
-        		<include name="Edit_humancaption_permissions_for_Specific_user_captionSync_test" />
+        		
+        		
         		
         		<include name="Edit_autocaption_permissions_for_all_instructors_test" />
         		<include name="Edit_autocaption_permissions_for_all_students_test" />
@@ -177,8 +219,9 @@
         		<include name="Edit_humancaption_permissions_for_Specific_user_3playmedia_test" />
         		<include name="Edit_humancaption_permissions_for_Specific_user_Cielo24_test" />
         		<include name="Edit_humancaption_permissions_for_Specific_user_yujaprocaptioning_test" />
+        		<include name="Edit_humancaption_permissions_for_Specific_user_captionSync_test" />
         	</methods>
-        </class>-->
+        </class>  
         
         <class name="com.yuja.evp.testclasses.QuizTest">
         	<methods>

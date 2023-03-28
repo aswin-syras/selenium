@@ -209,6 +209,7 @@ public class MediaLibraryPageHelpers extends Helpers{
 	 public void accessMediaMoreMenu(String mediaTitle) throws InterruptedException {
 		Thread.sleep(2000);
 		WebElement media = getMedia(mediaTitle);
+		System.out.println(media);
 		hoverOverElement(media);
 		Thread.sleep(2000);
 		//Actions actions = new Actions(driver);

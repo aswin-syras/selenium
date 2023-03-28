@@ -46,9 +46,10 @@ private WebElement mediaUploadModal = null;
 		clickSignInButton();
 		}
 	
-	public void logout() {
+	public void logout() throws InterruptedException {
 		clickElement("account button", By.xpath("//button[@id='global_nav_profile_link']"));
-		clickElement("logout button", By.xpath("//button[@type='submit']//span[text()='Logout']"));
+		Thread.sleep(2000);
+		clickElement("logout button", By.xpath("//form[@action=\"/logout\"]//button[@type='submit']"));
 		
 	}
 	
@@ -56,7 +57,7 @@ private WebElement mediaUploadModal = null;
 		navigateToLoginPage();
 		driver.manage().window().maximize();
 		loginFast(userName, password);
-		waitForElement(By.xpath("//a[@href='https://panotesting.instructure.com']"), 10);
+		waitForElement(By.xpath("//a[@href='https://panotesting.instructure.com/']"), 10);
 		String URL = "https://panotesting.instructure.com/courses/817";
 		launchUrl(URL, "Canvas automation course page");
 		Boolean assignmentexist=verifyElementExist("Assignments", By.xpath("//a[@href='/courses/817/assignments']"));
@@ -142,7 +143,7 @@ private WebElement mediaUploadModal = null;
 	    navigateToCourse(stuserName,stpassword);
 	    clickElement("Assignment", By.xpath("//a[@href='/courses/817/assignments']"));
 	    clickElement("Click embed link",By.xpath("//div[@class=\"ig-info\"]//a[contains(text(),'"+quizNewName+"')]"),10);
-	   // selectAssignment(quizNewName);
+	
         switchToIframe("switch to lti frame", By.id("tool_content"), 10);
 	    switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
 	    clickPlaybutton();
@@ -154,10 +155,10 @@ private WebElement mediaUploadModal = null;
 		navigateToCourse(userName,password);
 		NavigateToLTI(embedMediaTitle);
 		Thread.sleep(3000);
-		checkGradebookTestafterLoginforMultiple(mediaTitle,quizNewName,courseName ,studentFullName,marks );
+		checkGradebookTestafterLoginforMultiple(mediaTitle,quizNewName,courseName ,studentFullName,marks);
 		clickElement("Click Manage Media",By.xpath("//span[@id='topBarTabName3']"),10);
 		Thread.sleep(2000);
-		checkActivityLogforQuizSync(mediaTitle, studentNameinActivitylog,marks, quizNewName);
+		checkActivityLogforQuizSync(mediaTitle,studentNameinActivitylog,marks, quizNewName);
 		Thread.sleep(2000);
 		clickElement("Click close button",By.xpath("(//button[@data-automation=\"btnCloseModalDialog\"])[2]"),10);
 		mediaDetailsModal.clickDeleteQuizButton();
@@ -183,10 +184,10 @@ private WebElement mediaUploadModal = null;
 	    CIMMediaChooserQuizEmbed(quizNewName);
 		logout();
 		navigateToCourse(stuserName,stpassword);
-		//selectAssignment(quizNewName);
-		 clickElement("Assignment", By.xpath("//a[@href='/courses/817/assignments']"));
-		 clickElement("Click embed link",By.xpath("//div[@class=\"ig-info\"]//a[contains(text(),'"+quizNewName+"')]"),10);
-		 Thread.sleep(5000);
+		clickElement("Assignment", By.xpath("//a[@href='/courses/817/assignments']"));
+		Thread.sleep(2000);
+		clickElement("Click embed link",By.xpath("//div[@class=\"ig-info\"]//a[contains(text(),'"+quizNewName+"')]"),10);
+		Thread.sleep(5000);
 		switchToIframe("switch to lti frame", By.id("tool_content"), 10);
 	    switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
 		clickPlaybutton();
@@ -217,8 +218,7 @@ private WebElement mediaUploadModal = null;
 	    clickElement("Announcement", By.xpath("//a[@href='/courses/817/announcements']"));
 	    clickElement("choosen announcement", By.xpath("//h3[text()="+embedMediaName+"]"));
 	    Thread.sleep(3000);
-	   
-	}
+	   }
 	
 	//Method directly used in test class. login upload media and check in media chooser as well as media library
 	
@@ -233,9 +233,11 @@ private WebElement mediaUploadModal = null;
 		System.out.println(mediaTitlelist);
 		clickElement("click choose media", By.xpath("//div[@id=\"chooseMediaTab\"]"));
 		clickElement("select entered media", By.xpath("//div[@id=\"videoSelectionContainer\"]/div/div[3]/div/div/div"));
-		clickElement("insert button", By.xpath("//button[@id=\"embedButton\"]"));
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//button[@id=\"embedButton\"]")).click();
 		Thread.sleep(4000);
 		clickEmbedMediaCanvas(LTILinkName);
+		Thread.sleep(2000);
 	    Alert prompt=driver.switchTo().alert();
 		prompt.accept();
 		switchToIframe("switch to lti frame", By.id("tool_content"), 10);
@@ -769,7 +771,7 @@ private WebElement mediaUploadModal = null;
 		clickElement("select entered media", By.xpath("//div[@id=\"videoSelectionContainer\"]/div/div[3]/div/div/div"));
 		Thread.sleep(3000);
 		clickElement("insert button", By.xpath("//button[@id=\"embedButton\"]"));
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		clickElement("publish button", By.xpath("//button[@type=\"submit\"]"));
 		
 	}
