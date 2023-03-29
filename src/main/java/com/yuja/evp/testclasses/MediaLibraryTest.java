@@ -230,7 +230,7 @@ public class MediaLibraryTest extends BaseTest{
 	 
 	 @Test(description="Share_video_read_only_manager_test")
 	  @Parameters({"TestName"})
-	  public void share_video_read_only_manager_test(String testName) {
+	  public void Share_video_read_only_manager_test(String testName) {
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
 			mediaLibrary.shareMediaTest("readAccess", "readAccessSharedVideoManager", prop.getProperty("ManagerID"), prop.getProperty("Password"), prop.getProperty("InstructorID"), prop.getProperty("Password"), prop.getProperty("instructorName"));
