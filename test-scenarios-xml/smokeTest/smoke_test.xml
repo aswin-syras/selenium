@@ -47,14 +47,17 @@
 	          	<include name="Bulkfavorite_instructor_Succesful_test" />
 	          	<include name="Bulkfavorite_student_Succesful_test" />
 	          	
-	          	<include name="Replace_media_test" />
-	          	
+	          	<include name="Edit_folder_manager_test"/>
+	          		          	
 	          	<include name="Publish_and_unpublish_media_Manager_test" />
 	          	<include name="Publish_and_unpublish_media_Instructor_test" />
 	          	
-	          	
-	          	
-	       	</methods>
+    	</methods>
+        </class>
+        <class name="com.yuja.evp.testclasses.MediaDetailsModalTest">
+	      <methods>
+	          <include name="Replace_media_test" />
+	       </methods>
         </class>
         
         <class name="com.yuja.evp.testclasses.AdminPanelRosterTest">
