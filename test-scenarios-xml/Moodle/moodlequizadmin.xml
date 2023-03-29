@@ -4,7 +4,7 @@
 <suite name="Suite">
   <test name="MoodleCreateQuizTest1">
   	<classes>
-      <class name="com.yuja.evp.testclasses.QuizTest">
+      <class name="com.yuja.evp.testclasses.CanvasTest">
 	      <methods>
 	          <include name="Create_quiz_test">
 			      <!-- <parameter name="Browser" value="IE" /> -->
