@@ -110,18 +110,6 @@ public class QuizTest extends BaseTest {
 		}
 	  }
 	
-	@Test(description="Check_")
-	  @Parameters({"TestName"})
-	public void CheckPlaybutton(String TestName) {
-		QuizPageTestMethods qp = new QuizPageTestMethods();
-		try {
-			qp.checkPlaybutton(prop.getProperty("ManagerID"), prop.getProperty("Password"), VIDEO_NAME);
-		} 
-		catch (Exception e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
-		}
-	  }
+	
 }
 

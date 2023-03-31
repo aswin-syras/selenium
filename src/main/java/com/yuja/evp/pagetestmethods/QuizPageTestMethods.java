@@ -27,7 +27,6 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 			loginAsCreator(userName, password);
 			String newQuizName = createandPublishQuiz(mediaTitle, name, question,option1, option2, possibleans1, possibleans2,hint,courseName);
 			navigationBar.userLogOut();
-			//Thread.sleep(25000);
 			mediaLibrary.navigateToMyMediaUserLogin(studentUserName, studentPassword);
 			for(int i=0;i<5;i++) {
 			driver.navigate().refresh();
@@ -98,9 +97,6 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 		public void unauthenticatedUserDirectQuizTest(String userName,String password, String mediaTitle,String sa, String fitbans,String courseName,String marks,String studentName, String quizName) throws InterruptedException {
 			mediaLibrary.navigateToMyMediaUserLogin(userName, password);
 			mediaLibrary.accessMediaMoreMenu(mediaTitle);
-//			WebElement media = getMedia(mediaTitle);
-//			hoverOverElement(media);
-//			clickElement(media, "More menu button from the video hover", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 30);
 			mediaDetailsModal.clickQuizzes();
 			sendKeys("Search for quizzes", By.id("quiz-search-input"), quizName);
 			mediaDetailsModal.clickQuizLinksdrop();
@@ -122,14 +118,10 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 		public void unauthenticatedUserEmbeddedQuizTest(String userName,String password, String mediaTitle,String sa, String fitbans,String courseName,String marks,String studentName, String quizName) throws InterruptedException {
 			mediaLibrary.navigateToMyMediaUserLogin(userName, password);
 			mediaLibrary.accessMediaMoreMenu(mediaTitle);
-//			WebElement media = getMedia(mediaTitle);
-//			hoverOverElement(media);
-//			clickElement(media, "More menu button from the video hover", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 30);
 			mediaDetailsModal.clickQuizzes();
 			sendKeys("Search for quizzes", By.id("quiz-search-input"), quizName);
 			mediaDetailsModal.clickQuizLinksdrop();
 			clickElement("click on embed code",By.xpath("//input[@id='embedCodeInputBox']"),10);
-			//driver.findElement(By.xpath("//input[@id='embedCodeInputBox']")).click(); 
 			Actions action=new Actions(driver);
 			action.keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL).build().perform();
 			action.keyDown(Keys.CONTROL).sendKeys("c").keyUp(Keys.CONTROL).build().perform();
@@ -139,14 +131,12 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 			driver.navigate().to("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_intro");
 			Thread.sleep(6000);
 			WebElement text= driver.findElement(By.xpath("//div[@class='CodeMirror-code']//child::pre[13]"));
-			//text.click();
 			clickElement("click on text field",text);
 			action.keyDown(Keys.CONTROL).sendKeys("v").keyUp(Keys.CONTROL).build().perform();
 			Thread.sleep(4000);
 			clickElement("run button",By.xpath("//button[@id='runbtn']"),10);
 			Thread.sleep(4000);
 			switchToIframe("switch to iframe result", By.id("iframeResult"), 10);
-			//driver.switchTo().frame("iframeResult");
 			Thread.sleep(4000);
 			WebElement frame = driver.findElement(By.xpath("//iframe[contains(@src,'"+prop.getProperty("URL")+"')]"));
 			driver.switchTo().frame(frame);
@@ -164,9 +154,6 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 		public void deleteQuizTest(String userName, String password, String mediaTitle, String quizName) throws InterruptedException {
 			mediaLibrary.navigateToMyMediaUserLogin(userName, password);
 			mediaLibrary.accessMediaMoreMenu(mediaTitle);
-//			WebElement media = getMedia(mediaTitle);
-//			hoverOverElement(media);
-//			clickElement(media, "More menu button from the video hover", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 30);
 			mediaDetailsModal.clickQuizzes();
 			sendKeys("Search for quizzes", By.id("quiz-search-input"), quizName);
 			mediaDetailsModal.clickDeleteQuizButton();
@@ -180,16 +167,6 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 			}
 		}
 		
-		public void checkPlaybutton(String userName, String password, String mediaTitle) throws InterruptedException {
-			mediaLibrary.navigateToMyMediaUserLogin(userName, password);
-			WebElement media=getMedia(mediaTitle);
-			clickElement("media",media);
-			 switchToIframe("switch to video player frame", By.id("ifi_videoPlayerContainer"), 10);
-			clickPlaybutton();
-			Thread.sleep(12000);
-			
-			
-			
-		}
+		
 
 }

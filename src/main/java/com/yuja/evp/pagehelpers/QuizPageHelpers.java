@@ -133,9 +133,6 @@ public class QuizPageHelpers extends Helpers {
 	public void updatePostInfo(String userName,String password, String mediaTitle, String quizName,String courseName) throws InterruptedException {
 		mediaLibrary.navigateToMyMediaUserLogin(userName, password);
 		mediaLibrary.accessMediaMoreMenu(mediaTitle);
-//		WebElement media = getMedia(mediaTitle);
-//		hoverOverElement(media);
-//		clickElement(media, "More menu button from the video hover", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 30);
 		mediaDetailsModal.clickQuizzes();
 		sendKeys("Search for quizzes", By.id("quiz-search-input"), quizName);
 		mediaDetailsModal.clickManageQuizButton();
@@ -151,14 +148,9 @@ public class QuizPageHelpers extends Helpers {
 				clickElement("Click Update post date Dropdown",By.xpath("(//div[@class='postInfoIcon'])["+rowposition+"]"),10);
 				clickElement("Click Uncheck no close date checkbox",By.xpath("(//input[@type='checkbox'])["+rowpos+"]"),10);
 				sendKeys("Quiz close date", By.xpath("(//input[contains(@id,'publishPollEndDate')])["+rowposition+"]"), "1/5/23");
-				//clickElement("Select course Checkbox", By.xpath("(//input[@type=\"checkbox\"])["+rowposition+"]"));
-				//reportStep("The moodle user is enrolled to  course in yuja", "PASS", false);
 				break;
 				}
 			}
-//		clickElement("Click Update post date Dropdown",By.xpath("//div[@class='postInfoIcon']"),10);
-//		clickElement("Click Uncheck no close date checkbox",By.xpath("(//input[@type='checkbox'])[2]"),10);
-//		sendKeys("Quiz close date", By.xpath("//input[contains(@id,'publishPollEndDate')]"), "1/5/23");
 		mediaDetailsModal.clickUpdatePostQuiz();
 		mediaDetailsModal.clickCloseMoreMenu();
 		

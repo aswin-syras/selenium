@@ -752,9 +752,9 @@ private WebElement mediaUploadModal = null;
 		 media = mediaTitlelist.get(i);
 		 System.out.println(media);
 		 if(mediaExists(media)) {
-			 System.out.println("media " +media+ "exists");
-			// mediaLibrary.deleteMedia(media);
-		 }
+			 System.out.println("media " +media+ " exists");}
+			mediaLibrary.deleteMedia(media);
+		 
 	  }
 	}
 	
@@ -867,6 +867,7 @@ private WebElement mediaUploadModal = null;
 		try {
 			System.out.println("inside media upload media chooser");
 			uploadMediaMC(mediaPath);
+			Thread.sleep(2000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -945,6 +946,7 @@ private WebElement mediaUploadModal = null;
 	//get a media element from the media chooser			
 		
 	public WebElement getMediaMediaChooser(String mediaTitle) {
+		waitForElement(By.xpath("//div[text()='"+mediaTitle+"']"), 30);
 		List<WebElement> mediaLibraryElementList = getElementList( By.cssSelector("div[class=\"list-item list-item-large add-media-list-item media-item-container\"]"));
 		int listSize = mediaLibraryElementList.size();
 		System.out.println(listSize);
@@ -962,6 +964,7 @@ private WebElement mediaUploadModal = null;
 			while(!mediaLibraryElementName.equals(mediaTitle) && i<listSize) {
 				mediaLibraryElement = mediaLibraryElementList.get(i++);
 				mediaLibraryElementName = mediaLibraryElement.findElement(By.className("choose-media-video-title")).getText();
+				System.out.println(mediaLibraryElementName);
 			}
 			return mediaLibraryElement;
 		}
