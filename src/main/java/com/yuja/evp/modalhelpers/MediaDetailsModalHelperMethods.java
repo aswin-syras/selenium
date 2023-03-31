@@ -141,7 +141,7 @@ public class MediaDetailsModalHelperMethods extends Helpers {
 			for(int i = 0; !thisIsTrue && i < numberOfChecks; i++) {
 				clickElement("Media Details Close button", By.cssSelector("[data-automation=\"btnCancelMediaDetails\"]"));
 				driver.navigate().refresh();
-				Thread.sleep(2000);
+				Thread.sleep(3000);
 				mediaLibrary.accessMediaMoreMenu(mediaTitle);
 				clickElement("Accessibility tab", By.cssSelector("[data-automation=\"btnAccessibilityDetails\"]"));
                 captionButton = waitForElement(By.cssSelector(buttonTypes.get(typeOfButton)), 10);

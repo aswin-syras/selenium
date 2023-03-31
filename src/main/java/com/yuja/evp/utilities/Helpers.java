@@ -265,7 +265,7 @@ public class Helpers extends Report {
 		}
 	}
 
-	public WebElement getMedia2(String mediaTitle) {
+	public WebElement getMedia(String mediaTitle) {
 		reportStep("Fetching the media with the name \"" + mediaTitle + "\"", "PASS", false);
 		List<WebElement> mediaLibraryElementList = getElementList(By.className("videoWrapper"));
 		int listSize = mediaLibraryElementList.size();
@@ -285,17 +285,6 @@ public class Helpers extends Report {
 		return null;
 	}
 	
-	public WebElement getMedia(String mediaTitle) {
-		reportStep("Fetching the media with the name \"" + mediaTitle + "\"", "PASS", false);
-		List<WebElement> mediaLibraryElementList = getElementList(By.className("videoWrapper"));
-		WebElement element=null;
-		for(int i=0;i< mediaLibraryElementList.size();i++) {
-		element=mediaLibraryElementList.get(i);
-		String obtainedmediaLibraryElementName = element.findElement(By.className("titleText")).getText();
-		System.out.println(obtainedmediaLibraryElementName);
-		if(obtainedmediaLibraryElementName.equals(mediaTitle)) {
-			break;}}
-		return element;}
 		
 	public boolean mediaExists(String mediaTitle) {
 		WebElement mediaLibraryElement = getMedia(mediaTitle);

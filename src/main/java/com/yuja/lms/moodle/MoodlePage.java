@@ -746,9 +746,10 @@ public class MoodlePage extends QuizPageHelpers {
 		 media = mediaTitlelist.get(i);
 		 System.out.println(media);
 		 if(mediaExists(media)) {
-			 System.out.println("media " +media+ "exists");
-			// mediaLibrary.deleteMedia(media);
-		 }
+			 System.out.println("media " +media+ "exists");}
+			mediaLibrary.deleteMedia(media);
+			 
+		 
 	  }
 	}
 	
@@ -834,10 +835,11 @@ public class MoodlePage extends QuizPageHelpers {
 	
    //Methods for uploading media in media chooser
 
-	public Boolean mediaUploadedMediachooser(String mediaTitle, String mediaPath) {
+	public Boolean mediaUploadedMediachooser(String mediaTitle, String mediaPath) throws InterruptedException {
 		try {
 			System.out.println("inside media upload media chooser");
 			uploadMediaMC(mediaPath);
+			Thread.sleep(2000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -891,7 +893,7 @@ public class MoodlePage extends QuizPageHelpers {
 
 	//Get the array of media titles uploaded from directory 
 	
-   public ArrayList<String> getMediaTitleArrayfromDirectory(String mediaDirectoryPath) {
+   public ArrayList<String> getMediaTitleArrayfromDirectory(String mediaDirectoryPath) throws InterruptedException {
 	   
 	   File mediaDirectory = new File(mediaDirectoryPath);
 	   String[] mediaList = mediaDirectory.list();
@@ -907,6 +909,7 @@ public class MoodlePage extends QuizPageHelpers {
 			mediaTitlelistName = mediaList[i]; 
 			mediaTitle = mediaTitlelistName.substring(0, mediaTitlelistName.indexOf('.'));
 			mediaTitlelist1.add(mediaTitle);
+			
 		}
 	   
 	   return mediaTitlelist1;
@@ -916,6 +919,7 @@ public class MoodlePage extends QuizPageHelpers {
 	//get a media element from the media chooser			
 		
 	public WebElement getMediaMediaChooser(String mediaTitle) {
+		waitForElement(By.xpath("//div[text()='"+mediaTitle+"']"), 30);
 		List<WebElement> mediaLibraryElementList = getElementList( By.cssSelector("div[class=\"list-item list-item-large add-media-list-item media-item-container\"]"));
 		int listSize = mediaLibraryElementList.size();
 		System.out.println(listSize);
@@ -933,6 +937,7 @@ public class MoodlePage extends QuizPageHelpers {
 			while(!mediaLibraryElementName.equals(mediaTitle) && i<listSize) {
 				mediaLibraryElement = mediaLibraryElementList.get(i++);
 				mediaLibraryElementName = mediaLibraryElement.findElement(By.className("choose-media-video-title")).getText();
+				System.out.println(mediaLibraryElementName);
 			}
 			return mediaLibraryElement;
 		}
@@ -940,7 +945,7 @@ public class MoodlePage extends QuizPageHelpers {
 	
 	//Check a media exists in media chooser
 	
-	public boolean mediaExistsMediaChooser(String mediaTitle) {
+	public boolean mediaExistsMediaChooser(String mediaTitle) throws InterruptedException {
 		WebElement mediaLibraryElement =  getMediaMediaChooser(mediaTitle);
 		String mediaLibraryElementName = mediaLibraryElement.findElement(By.className("choose-media-video-title")).getText();
 		Boolean mediaLibraryElementExists = mediaTitle.equals(mediaLibraryElementName);
