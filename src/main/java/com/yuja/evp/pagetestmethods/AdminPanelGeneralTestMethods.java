@@ -20,6 +20,7 @@ import com.yuja.evp.pagehelpers.AdminPanelPlatformPageHelpers;
 import com.yuja.evp.pagehelpers.AdminPanelRosterPageHelpers;
 import com.yuja.evp.pagehelpers.AdminPanelRtmpStreamPageHelpers;
 import com.yuja.evp.pagehelpers.AdminPanelStorageQuotaPageHelpers;
+import com.yuja.evp.utilities.Driver;
 
 import helperinterfaces.UICheck;
 
@@ -40,7 +41,7 @@ public class AdminPanelGeneralTestMethods extends AdminPanelGeneralPageHelpers{
 	
 	public void checkAdminPanelUI(String userName, String Password) throws InterruptedException {
 		navigatetoAdminPanelUserLogin(userName,Password);
-		List<WebElement> list = driver.findElements(By.xpath("//a[@class='alink border-color']"));
+		List<WebElement> list = Driver.getDriver().findElements(By.xpath("//a[@class='alink border-color']"));
 		WebElement eachElement;
 		for(int i=0;i<list.size();i++) {
 			eachElement = list.get(i);

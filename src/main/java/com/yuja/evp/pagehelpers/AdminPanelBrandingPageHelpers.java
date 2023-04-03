@@ -5,6 +5,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import com.yuja.evp.pagetestmethods.MediaLibraryPageTestMethods;
+import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
+
 import helperinterfaces.UICheck;
 
 public class AdminPanelBrandingPageHelpers extends AdminPanelGeneralPageHelpers implements UICheck{
@@ -15,24 +18,24 @@ public class AdminPanelBrandingPageHelpers extends AdminPanelGeneralPageHelpers 
 	public void CheckPageUI() {
 		URL = prop.getProperty("URL")+"P/Institution/InstitutionBranding/";
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
-		String sectionTitle = driver.findElement(By.id("secondPartText")).getText();
+		String sectionTitle = Driver.getDriver().findElement(By.id("secondPartText")).getText();
 		boolean check  = waitForElement(By.id("institutionBranding"),10).isDisplayed();
 		if(check && sectionTitle.equals("Branding")) {
-			reportStep(sectionTitle + " Page loaded successfully", "PASS", false);
-		} else reportStep(sectionTitle + "failed to load", "fail", true);	
+			Report.reportStep(Driver.getDriver(), sectionTitle + " Page loaded successfully", "PASS", false);
+		} else Report.reportStep(Driver.getDriver(), sectionTitle + "failed to load", "fail", true);	
 	}
 	
 	public void setTheme(String theme) throws InterruptedException {
 		CheckPageUI();
-		WebElement themeName = driver.findElement(By.id("html5ThemeSelect"));
+		WebElement themeName = Driver.getDriver().findElement(By.id("html5ThemeSelect"));
 		Select se = new Select(themeName);
 		se.selectByValue(theme);
-		JavascriptExecutor js = (JavascriptExecutor)driver;
+		JavascriptExecutor js = (JavascriptExecutor)Driver.getDriver();
 		js.executeScript("window.scrollBy(0,2500)");
 		clickElement("click theme",By.xpath("//*[@id=\"institutionBranding\"]/div[5]/div/button"));
 		Thread.sleep(2000);
 		js.executeScript("window.scrollBy(0,-2500)");
-		WebElement element = driver.findElement(By.id("defaultHtml5Theme"));
+		WebElement element = Driver.getDriver().findElement(By.id("defaultHtml5Theme"));
 		clickElement("Set default one",element);
 		Thread.sleep(1000);
 		navigationBar.userLogOut();	
@@ -40,9 +43,9 @@ public class AdminPanelBrandingPageHelpers extends AdminPanelGeneralPageHelpers 
 	
 	public void checkTheme(String theme) throws InterruptedException {
 		CheckPageUI();
-		String checktheme = driver.findElement(By.id("html5ThemeSelect")).getText();
+		String checktheme = Driver.getDriver().findElement(By.id("html5ThemeSelect")).getText();
 		if(checktheme.equals(theme)) {
-			reportStep("Automation theme ", "PASS", false);
+			Report.reportStep(Driver.getDriver(), "Automation theme ", "PASS", false);
 		}
 		else { setTheme(theme); }
 	}

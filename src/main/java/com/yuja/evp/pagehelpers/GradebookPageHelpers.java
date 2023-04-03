@@ -5,6 +5,8 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
 import com.yuja.evp.utilities.Helpers;
 
 public class GradebookPageHelpers extends Helpers{
@@ -33,7 +35,7 @@ public class GradebookPageHelpers extends Helpers{
 		clickElement("Click short answer window save button",By.xpath("//button[@title='Save']"),10);
 		clickGetGradebookReport();
 		Thread.sleep(3000);
-		String grade= driver.findElement(By.xpath("//table//tbody//tr["+x+"]//td[3]")).getText();
+		String grade= Driver.getDriver().findElement(By.xpath("//table//tbody//tr["+x+"]//td[3]")).getText();
 		System.out.println(grade);
 		return grade;
 	}
@@ -47,7 +49,7 @@ public class GradebookPageHelpers extends Helpers{
 		Thread.sleep(5000);
 		clickGetGradebookReport();
 		Thread.sleep(3000);
-		String grade= driver.findElement(By.xpath("//table[@id='fullStudentDataTable']//tbody//tr["+x+"]//td[3]")).getText();
+		String grade= Driver.getDriver().findElement(By.xpath("//table[@id='fullStudentDataTable']//tbody//tr["+x+"]//td[3]")).getText();
 		System.out.println(grade);
 		return grade;
 		
@@ -60,7 +62,7 @@ public class GradebookPageHelpers extends Helpers{
 		System.out.println("numberOfRows = " + numberOfRows);
 		WebElement studentNameElement = null;
 		String studentNameElementText = "";
-		reportStep("Fetching the element with the name \"" + studentName + "\"", "PASS", false);
+		Report.reportStep(Driver.getDriver(), "Fetching the element with the name \"" + studentName + "\"", "PASS", false);
 		
 		int i = 0;
 		boolean studentFound = false;

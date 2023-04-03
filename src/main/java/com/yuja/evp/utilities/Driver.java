@@ -11,11 +11,11 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-public class DriverFactory {
+public class Driver {
 	
 	private static final ThreadLocal<RemoteWebDriver> drivers = new ThreadLocal<RemoteWebDriver>();
 	
-	private DriverFactory() {};
+	private Driver() {};
 	
 	public static void setDriver(Properties config) {
 		try {
@@ -51,7 +51,6 @@ public class DriverFactory {
 	
 	public static RemoteWebDriver getDriver()
 	{
-		
 		return Objects.requireNonNull(drivers.get());
 	}
 	

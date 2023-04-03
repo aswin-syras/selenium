@@ -9,6 +9,8 @@ import org.openqa.selenium.interactions.Actions;
 
 import com.yuja.evp.modalhelpers.MediaDetailsModalHelperMethods;
 import com.yuja.evp.pagetestmethods.MediaLibraryPageTestMethods;
+import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
 import com.yuja.evp.utilities.Helpers;
 
 public class QuizPageHelpers extends Helpers {
@@ -69,7 +71,7 @@ public class QuizPageHelpers extends Helpers {
 			}
 		clickElement("Create Playback Quiz", By.xpath("(//button[@class=\"btn btn-inline leftAlignIcon\"])[2]"));
 		sendKeys("Playback Quiz Title", By.id("createPlaybackTitle"), playbackQuizTitle+getRandomInteger(1000));
-		String quiznameObtained=driver.findElement(By.id("createPlaybackTitle")).getAttribute("value");
+		String quiznameObtained=Driver.getDriver().findElement(By.id("createPlaybackTitle")).getAttribute("value");
 		clickElement("Click Create Button", By.xpath("//button[@title='Create']"));
 		mediaDetailsModal.clickCloseMoreMenu();
 		return quiznameObtained;
@@ -123,9 +125,9 @@ public class QuizPageHelpers extends Helpers {
         System.out.println(expectedLogText);
         
 		if(logtext.contains(expectedLogText)){
-			reportStep("The student grade is sucessfully synced to LMS ", "PASS", false);
+			Report.reportStep(Driver.getDriver(), "The student grade is sucessfully synced to LMS ", "PASS", false);
 		} else {
-			reportStep("The student grade is not sucessfully synced to LMS", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), "The student grade is not sucessfully synced to LMS", "FAIL", true);
 		}	
 	}
 	
@@ -241,7 +243,7 @@ public class QuizPageHelpers extends Helpers {
 
 	private String enterQuizName(String name) {
 		sendKeys("Quiz Name", By.id("titleBox"), name);
-		String quiznameObtained=driver.findElement(By.id("titleBox")).getAttribute("value");
+		String quiznameObtained=Driver.getDriver().findElement(By.id("titleBox")).getAttribute("value");
 		return quiznameObtained;
 	}
 	
@@ -260,7 +262,7 @@ public class QuizPageHelpers extends Helpers {
 				clickElement("Play from beginning", By.id("previewPlayButton"));
 			}
 			else {
-				reportStep("both play buttons" + " element not exist method - thrown Exception", "FAIL", true);
+				Report.reportStep(Driver.getDriver(), "both play buttons" + " element not exist method - thrown Exception", "FAIL", true);
 			}
 		}
        }
@@ -291,7 +293,7 @@ public class QuizPageHelpers extends Helpers {
 			if(obtainedcourseName.contains(courseName)){
 				int rowposition=i+1;
 				clickElement("Select course Checkbox", By.xpath("(//input[@id=\"classCheck\"])["+rowposition+"]"));
-				reportStep("The moodle user is enrolled to  course in yuja", "PASS", false);
+				Report.reportStep(Driver.getDriver(), "The moodle user is enrolled to  course in yuja", "PASS", false);
 				break;
 				}
 			}
@@ -302,8 +304,8 @@ public class QuizPageHelpers extends Helpers {
 	}
 	 
 	 protected String getQuizDirectLink() {
-		driver.findElement(By.xpath("//input[@id='directLinkInputBox']")).click(); 
-		String quizDirectLink=driver.findElement(By.xpath("//input[@id='directLinkInputBox']")).getAttribute("value");
+		Driver.getDriver().findElement(By.xpath("//input[@id='directLinkInputBox']")).click(); 
+		String quizDirectLink=Driver.getDriver().findElement(By.xpath("//input[@id='directLinkInputBox']")).getAttribute("value");
 		return quizDirectLink;
 	 }
 	
@@ -317,14 +319,14 @@ public class QuizPageHelpers extends Helpers {
 		 Thread.sleep(3000);
 		 gradebook.clickSelectCourse();
 		 Thread.sleep(3000);
-		 List <WebElement> element1= driver.findElements(By.xpath("//input[@class='select2-input']"));
+		 List <WebElement> element1= Driver.getDriver().findElements(By.xpath("//input[@class='select2-input']"));
 		 WebElement element2=element1.get(element1.size()-1);
 		 typeKeys(courseName);
 		 keyboardEnter();
 		 Thread.sleep(3000);
 		 gradebook.clickSelectQuiz();
 		 Thread.sleep(3000);
-		 List <WebElement> element3= driver.findElements(By.xpath("//input[@class='select2-input']"));
+		 List <WebElement> element3= Driver.getDriver().findElements(By.xpath("//input[@class='select2-input']"));
 		 WebElement element4=element3.get(element3.size()-1);
 		 typeKeys(quizName);
 		 keyboardEnter();
@@ -335,17 +337,17 @@ public class QuizPageHelpers extends Helpers {
 		 int d = gradeBookUserIndex + 1;
 		 String expectedCorrectness="Used Hint : Yes, Status: Answered";
 	
-	        String question1correctness= driver.findElement(By.xpath("(//table/tbody/tr["+d+"]/td[@class='general-entry'])[1]")).getAttribute("title");
-			String question2correctness= driver.findElement(By.xpath("(//table/tbody/tr["+d+"]/td[@class='general-entry'])[2]")).getAttribute("title");
-			String question3correctness= driver.findElement(By.xpath("(//table/tbody/tr["+d+"]/td[@class='general-entry'])[3]")).getAttribute("title");
-			String question4correctness= driver.findElement(By.xpath("(//table/tbody/tr["+d+"]/td[@class='general-entry'])[4]")).getAttribute("title");
-			String question5correctness= driver.findElement(By.xpath("(//table/tbody/tr["+d+"]/td[@class='general-entry'])[5]")).getAttribute("title");
-			String question6correctness= driver.findElement(By.xpath("(//table/tbody/tr["+d+"]/td[@class='general-entry'])[6]")).getAttribute("title");
+	        String question1correctness= Driver.getDriver().findElement(By.xpath("(//table/tbody/tr["+d+"]/td[@class='general-entry'])[1]")).getAttribute("title");
+			String question2correctness= Driver.getDriver().findElement(By.xpath("(//table/tbody/tr["+d+"]/td[@class='general-entry'])[2]")).getAttribute("title");
+			String question3correctness= Driver.getDriver().findElement(By.xpath("(//table/tbody/tr["+d+"]/td[@class='general-entry'])[3]")).getAttribute("title");
+			String question4correctness= Driver.getDriver().findElement(By.xpath("(//table/tbody/tr["+d+"]/td[@class='general-entry'])[4]")).getAttribute("title");
+			String question5correctness= Driver.getDriver().findElement(By.xpath("(//table/tbody/tr["+d+"]/td[@class='general-entry'])[5]")).getAttribute("title");
+			String question6correctness= Driver.getDriver().findElement(By.xpath("(//table/tbody/tr["+d+"]/td[@class='general-entry'])[6]")).getAttribute("title");
 			 
 			if(grade.equals(marks)&&question1correctness.contains(expectedCorrectness)&&question2correctness.contains(expectedCorrectness)&&question3correctness.contains(expectedCorrectness)&&question4correctness.contains(expectedCorrectness)&&question5correctness.contains("Used Hint : N/A, Status: N/A")&&question6correctness.contains(expectedCorrectness) ){
-				reportStep("The student grade is displayed correctly ", "PASS", false);
+				Report.reportStep(Driver.getDriver(), "The student grade is displayed correctly ", "PASS", false);
 			} else {
-				reportStep("The student grade is not displayed correctly", "FAIL", true);
+				Report.reportStep(Driver.getDriver(), "The student grade is not displayed correctly", "FAIL", true);
 			}
 	 }
 	 
@@ -358,14 +360,14 @@ public class QuizPageHelpers extends Helpers {
 		 Thread.sleep(3000);
 		 gradebook.clickSelectCourse();
 		 Thread.sleep(3000);
-		 List <WebElement> element1= driver.findElements(By.xpath("//input[@class='select2-input']"));
+		 List <WebElement> element1= Driver.getDriver().findElements(By.xpath("//input[@class='select2-input']"));
 		 WebElement element2=element1.get(element1.size()-1);
 		 typeKeys(courseName);
 		 keyboardEnter();
 		 Thread.sleep(3000);
 		 gradebook.clickSelectQuiz();
 		 Thread.sleep(3000);
-		 List <WebElement> element3= driver.findElements(By.xpath("//input[@class='select2-input']"));
+		 List <WebElement> element3= Driver.getDriver().findElements(By.xpath("//input[@class='select2-input']"));
 		 WebElement element4 = element3.get(element3.size()-1);
 		 typeKeys(quizName);
 		 keyboardEnter();
@@ -374,9 +376,9 @@ public class QuizPageHelpers extends Helpers {
 		 String grade = gradebook.gradePlaybackQuiz(gradeBookUserIndex);
 		 Thread.sleep(3000);
 		 if(grade.equals(marks)) {
-			 reportStep("The student grade is displayed correctly ", "PASS", false);
+			 Report.reportStep(Driver.getDriver(), "The student grade is displayed correctly ", "PASS", false);
 		 } else {
-			 reportStep("The student grade is not displayed correctly", "FAIL", true);
+			 Report.reportStep(Driver.getDriver(), "The student grade is not displayed correctly", "FAIL", true);
 		 }
 	 }
 		

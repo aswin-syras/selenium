@@ -5,6 +5,8 @@ import java.nio.file.Paths;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
 import com.yuja.evp.utilities.Helpers;
 
 public class AddMediaModalHelperMethods extends Helpers{
@@ -53,7 +55,7 @@ public class AddMediaModalHelperMethods extends Helpers{
 				e.printStackTrace();
 			}
 		}
-		reportStep("Error uploading media : " + mediaTitle, "Fail", true);
+		Report.reportStep(Driver.getDriver(), "Error uploading media : " + mediaTitle, "Fail", true);
 		return false;
 	}
 	

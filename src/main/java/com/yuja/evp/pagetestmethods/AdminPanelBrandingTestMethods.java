@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 
 import com.yuja.evp.pagehelpers.AdminPanelBrandingPageHelpers;
 import com.yuja.evp.pagehelpers.MediaPlayerHelpers;
+import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
 
 public class AdminPanelBrandingTestMethods extends AdminPanelBrandingPageHelpers{
 	
@@ -19,7 +21,7 @@ public class AdminPanelBrandingTestMethods extends AdminPanelBrandingPageHelpers
 		player.GotoHTMLPlayer("test");
 		WebElement sidebar = waitForElement(By.cssSelector("#playbar-sidebar-menuitem"), 1);
 		if (sidebar == null) {
-			reportStep("Theme didn't update", "FAIL", true);
-		} else { reportStep("Theme updated", "PASS", false);} 
+			Report.reportStep(Driver.getDriver(), "Theme didn't update", "FAIL", true);
+		} else { Report.reportStep(Driver.getDriver(), "Theme updated", "PASS", false);} 
 	}
 }

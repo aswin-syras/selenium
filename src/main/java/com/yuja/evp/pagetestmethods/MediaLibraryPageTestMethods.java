@@ -13,6 +13,9 @@ import com.yuja.evp.modaltestmethods.MediaDetailsModalTestMethods;
 import com.yuja.evp.pagehelpers.MediaChannelPageHelpers;
 import com.yuja.evp.pagehelpers.MediaLibraryPageHelpers;
 import com.yuja.evp.pagehelpers.NavigationBarHelpers;
+import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
+
 import net.jodah.failsafe.internal.util.Assert;
 
 
@@ -78,14 +81,14 @@ public class MediaLibraryPageTestMethods extends MediaLibraryPageHelpers {
 			List<WebElement> moreMenuOptions = video.findElements(By.cssSelector("[role=\"menuitem\"]"));
 			int numberOfMoreMenuOptions = moreMenuOptions.size();
 			if(numberOfMoreMenuOptions == 6) {
-				reportStep("The media with the title \"" + mediaName + "\" was shared with full access", "PASS", false);
+				Report.reportStep(Driver.getDriver(), "The media with the title \"" + mediaName + "\" was shared with full access", "PASS", false);
 			}
 			else {
-				reportStep("The media with the title \"" + mediaName + "\" was not shared with full access", "FAIL", true);
+				Report.reportStep(Driver.getDriver(), "The media with the title \"" + mediaName + "\" was not shared with full access", "FAIL", true);
 			}
 		}
 		else {
-			reportStep("The media with the title \"" + mediaName + "\" was not shared succesfully", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), "The media with the title \"" + mediaName + "\" was not shared succesfully", "FAIL", true);
 		}
 	}
 	
@@ -117,9 +120,9 @@ public class MediaLibraryPageTestMethods extends MediaLibraryPageHelpers {
 		navigateToFavorites(userName);
 		int numberOfMediaItemsInFavoriteFolder = getElementList(By.cssSelector("[class='videoWrapper']")).size();
 		if(numberOfMediaItemsInOriginalFolder == numberOfMediaItemsInFavoriteFolder){
-			reportStep("Bulk favorite succesful", "PASS", false);
+			Report.reportStep(Driver.getDriver(), "Bulk favorite succesful", "PASS", false);
 		}else {
-				reportStep("Bulk favorite unsuccesful", "FAIL", true);
+				Report.reportStep(Driver.getDriver(), "Bulk favorite unsuccesful", "FAIL", true);
 				throw new Exception("Bulk favorite unsuccesful");
 		}
 		
@@ -130,10 +133,10 @@ public class MediaLibraryPageTestMethods extends MediaLibraryPageHelpers {
 		
 		numberOfMediaItemsInFavoriteFolder = getElementList(By.cssSelector("[class='videoWrapper']")).size();
 		if(numberOfMediaItemsInFavoriteFolder == 0) {
-			reportStep("Bulk unfavorite succesful", "PASS", false);
+			Report.reportStep(Driver.getDriver(), "Bulk unfavorite succesful", "PASS", false);
 		}
 		else {
-			reportStep("Bulk unfavorite unsuccesful", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), "Bulk unfavorite unsuccesful", "FAIL", true);
 			throw new Exception("Bulk unfavorite unsuccesful");
 		}
 		
@@ -144,14 +147,14 @@ public class MediaLibraryPageTestMethods extends MediaLibraryPageHelpers {
 	public void replaceMedia(String userName, String password, String replaceVideo, String VideoReplaced,String shareUserID,String shareUserName, String shareUserPassword, String publishCourseName) throws InterruptedException {
 		navigateToMyMediaUserLogin(userName, password);
 		MediaDetailsModalTestMethods ReplaceObj = new MediaDetailsModalTestMethods();
-		driver.findElement(By.xpath("//*[@id=\"btnUploadMedia\"]")).click();;
+		Driver.getDriver().findElement(By.xpath("//*[@id=\"btnUploadMedia\"]")).click();;
 		mediaLibrary.bulkMediaUpload("src\\fileResources\\replaceTest");
 		boolean processed = mediaIsProcessed(replaceVideo, 60, 3);
 		if(processed) {
-			reportStep(replaceVideo + " media fully proccessed", "PASS", false);
+			Report.reportStep(Driver.getDriver(), replaceVideo + " media fully proccessed", "PASS", false);
 		}
 		else {
-			reportStep(replaceVideo + " media not fully proccessed", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), replaceVideo + " media not fully proccessed", "FAIL", true);
 			Assert.state(processed, "Video failed to process");
 		}
 		publishMediaFromMediaLibrary(replaceVideo,publishCourseName);
@@ -167,10 +170,10 @@ public class MediaLibraryPageTestMethods extends MediaLibraryPageHelpers {
 		boolean mediaDoesntExist = !mediaExists("testReplaceVideo");
 		System.out.println("mediaExist = " + mediaDoesntExist);
 		if(mediaDoesntExist) {
-			reportStep("Media was succesfully deleted", "PASS", false);
+			Report.reportStep(Driver.getDriver(), "Media was succesfully deleted", "PASS", false);
 		}
 		else {
-			reportStep("Media was not succesfully deleted", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), "Media was not succesfully deleted", "FAIL", true);
 		}
 	}
 	
@@ -184,25 +187,25 @@ public class MediaLibraryPageTestMethods extends MediaLibraryPageHelpers {
 			navigateToChannel(destinationChannelName);
 			boolean mediaIsPublished = mediaExists(mediaTitle);
 			if(mediaIsPublished) {
-				reportStep("Media with title " + mediaTitle + " was succesfully published " + destinationChannelName, "PASS", false);
+				Report.reportStep(Driver.getDriver(), "Media with title " + mediaTitle + " was succesfully published " + destinationChannelName, "PASS", false);
 			}
 			else {
-				reportStep("Media with title " + mediaTitle + " was not published " + destinationChannelName, "FAIL", true);
+				Report.reportStep(Driver.getDriver(), "Media with title " + mediaTitle + " was not published " + destinationChannelName, "FAIL", true);
 			}
 			//unpublishing the media
 			mediaLibrary.unpublishMedia(mediaTitle);
 			//check that media was unpublished
 			mediaIsPublished = mediaExists(mediaTitle);
 			if(!mediaIsPublished) {
-				reportStep("Media with title " + mediaTitle + " was succesfully unpublished " + destinationChannelName, "PASS", false);
+				Report.reportStep(Driver.getDriver(), "Media with title " + mediaTitle + " was succesfully unpublished " + destinationChannelName, "PASS", false);
 			}
 			else {
-				reportStep("Media with title " + mediaTitle + " was not unpublished " + destinationChannelName, "FAIL", true);
+				Report.reportStep(Driver.getDriver(), "Media with title " + mediaTitle + " was not unpublished " + destinationChannelName, "FAIL", true);
 			}
 		}
 		else
 		{
-			reportStep("No media with title " +mediaTitle,"FAIL",true);
+			Report.reportStep(Driver.getDriver(), "No media with title " +mediaTitle,"FAIL",true);
 		}
 	}
 
@@ -218,18 +221,18 @@ public class MediaLibraryPageTestMethods extends MediaLibraryPageHelpers {
 		mediaLibrary.navigateToMyMediaUserLogin(userName, password);
 		mediaLibrary.createNewFolder(newFolderName);
 		if(folderExists(newFolderName)) {
-			reportStep("folder was succesfully created", "PASS", false);
+			Report.reportStep(Driver.getDriver(), "folder was succesfully created", "PASS", false);
 			mediaLibrary.deleteFolder(newFolderName);
 			if(!folderExists(newFolderName)) {
-				reportStep("folder was succesfully deleted", "PASS", false);
+				Report.reportStep(Driver.getDriver(), "folder was succesfully deleted", "PASS", false);
 			}
 			else {
-				reportStep("folder was not deleted", "FAIL", true);
+				Report.reportStep(Driver.getDriver(), "folder was not deleted", "FAIL", true);
 			}
 		} 
 		else 
 		{
-			reportStep("folder was not succesfully created", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), "folder was not succesfully created", "FAIL", true);
 		}
 	}
 	

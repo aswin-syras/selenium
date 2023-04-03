@@ -4,6 +4,8 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.yuja.evp.pagetestmethods.AccessiblityPageTestMethods;
+import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
 
 public class AdminPanelAccessiblityTest extends BaseTest{
 	
@@ -23,7 +25,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 		}
 	}
 
@@ -38,7 +40,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 		}
 	}
 	
@@ -52,7 +54,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 				}
 			  }
 	
@@ -66,7 +68,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 		}
 	  }
 	
@@ -80,7 +82,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 		}
 	  }
 	
@@ -94,7 +96,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 		}
 	  }
 	
@@ -108,7 +110,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 				}
 			  }
 	@Test(description="Edit_humancaption_permissions_for_all_instructors_rev_test")
@@ -121,7 +123,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 				}
 			  }
 	@Test(description="Edit_humancaption_permissions_for_all_instructors_3playmedia_test")
@@ -134,7 +136,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 				}
 			  }
 	@Test(description="Edit_humancaption_permissions_for_all_instructors_Cielo24_test")
@@ -147,7 +149,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 				}
 			  }
 	
@@ -161,7 +163,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 				}
 			  }
 	
@@ -175,7 +177,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 				}
 			  }
 	
@@ -189,7 +191,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 				}
 			  }
 	@Test(description="Edit_humancaption_permissions_for_ITManager_rev_test")
@@ -202,7 +204,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 				}
 			  }
 	@Test(description="Edit_humancaption_permissions_for_ITManager_3playmedia_test")
@@ -215,7 +217,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 				}
 			  }
 	@Test(description="Edit_humancaption_permissions_for_ITManager_Cielo24_test")
@@ -228,7 +230,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 				}
 			  }
 	
@@ -242,7 +244,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 				}
 			  }
 	
@@ -256,7 +258,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 				}
 			  }
 	
@@ -270,7 +272,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 				}
 			  }
 	@Test(description="Edit_humancaption_permissions_for_all_students_rev_test")
@@ -283,7 +285,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 				}
 			  }
 	@Test(description="Edit_humancaption_permissions_for_all_students_3playmedia_test")
@@ -296,7 +298,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 				}
 			  }
 	@Test(description="Edit_humancaption_permissions_for_all_students_Cielo24_test")
@@ -309,7 +311,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 				}
 			  }
 	
@@ -323,7 +325,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 				}
 			  }
 	
@@ -337,7 +339,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 				}
 			  }
 	
@@ -351,7 +353,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 				}
 			  }
 	@Test(description="Edit_humancaption_permissions_for_Specific_user_rev_test")
@@ -364,7 +366,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 				}
 			  }
 	@Test(description="Edit_humancaption_permissions_for_Specific_user_3playmedia_test")
@@ -377,7 +379,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 				}
 			  }
 	@Test(description="Edit_humancaption_permissions_for_Specific_user_Cielo24_test")
@@ -390,7 +392,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 				}
 			  }
 	
@@ -404,7 +406,7 @@ public class AdminPanelAccessiblityTest extends BaseTest{
 				catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 				}
 			  }
 	

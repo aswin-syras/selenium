@@ -15,6 +15,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.yuja.evp.modalhelpers.AddMediaModalHelperMethods;
 import com.yuja.evp.modalhelpers.FolderDetailsModalHelperMethods;
+import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
 import com.yuja.evp.utilities.Helpers;
 
 import net.jodah.failsafe.internal.util.Assert;
@@ -28,7 +30,7 @@ public class MediaLibraryPageHelpers extends Helpers{
 	
 	public void navigateToMyMediaUserLogin(String userName, String password){
 		signInPage.navigateToLoginPage();
-		driver.manage().window().maximize();
+		Driver.getDriver().manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
 		URL = prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/Users/"+userName+"/MyMediaCollections";
@@ -42,7 +44,7 @@ public class MediaLibraryPageHelpers extends Helpers{
 	
 	public void navigateToSharedWithMeUserLogin(String userName, String password){
 		signInPage.navigateToLoginPage();
-		driver.manage().window().maximize();
+		Driver.getDriver().manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
 		URL = prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/Users/"+userName+"/Shared";
@@ -56,7 +58,7 @@ public class MediaLibraryPageHelpers extends Helpers{
 	
 	public void navigateToInternalLibraryUserLogin(String userName, String password) {
 		signInPage.navigateToLoginPage();
-		driver.manage().window().maximize();
+		Driver.getDriver().manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
 		URL = prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/InstitutionPrivateChannel";
@@ -70,7 +72,7 @@ public class MediaLibraryPageHelpers extends Helpers{
 	
 	public void navigateToFavoriteUserLogin(String userName, String password) {
 		signInPage.navigateToLoginPage();
-		driver.manage().window().maximize();
+		Driver.getDriver().manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
 		URL =prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/Users/"+userName+"/Favorites";
@@ -108,7 +110,7 @@ public class MediaLibraryPageHelpers extends Helpers{
 				} catch(Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
-					reportStep("e.getMessage(): " + e.getMessage() + ", @Method "+Scenario_Name +" exception to be handled", "Fail", true);
+					Report.reportStep(Driver.getDriver(), "e.getMessage(): " + e.getMessage() + ", @Method "+Scenario_Name +" exception to be handled", "Fail", true);
 				}
 			}
 			end = true;
@@ -127,12 +129,12 @@ public class MediaLibraryPageHelpers extends Helpers{
         while(!isProcessed && failCount < maxSearchAttemps) {
             media = getMedia(mediaName);
             try {
-                driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+                Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
                 WebElement processingThumbnail =  media.findElement(By.cssSelector("[class=\"hcenter vcenter\"] > img[src=\"/Dashboard/icons/defaultThumbnailProcessing.svg\"]"));
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+                WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeoutInSeconds));
                 wait.until( (WebDriverWait) -> {return !processingThumbnail.isDisplayed(); } );
             } catch(NoSuchElementException e) {
-                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                 isProcessed = true;
             } catch(StaleElementReferenceException e) {
                 hoverOverElement(media);
@@ -142,10 +144,10 @@ public class MediaLibraryPageHelpers extends Helpers{
                 } 
             } catch(TimeoutException e) {
                 failCount++;
-                driver.navigate().refresh();
+                Driver.getDriver().navigate().refresh();
             }
         }
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return isProcessed;
      }
     
@@ -220,7 +222,7 @@ public class MediaLibraryPageHelpers extends Helpers{
 	}
 	
 	public String getToastmessagetext() {
-		String toastmessage=driver.findElement(By.xpath("//div[text()='Success']")).getAttribute("innerHTML");
+		String toastmessage= Driver.getDriver().findElement(By.xpath("//div[text()='Success']")).getAttribute("innerHTML");
 		return toastmessage;
 	}
 	
@@ -292,7 +294,7 @@ public class MediaLibraryPageHelpers extends Helpers{
 		}
 		else
 		{	
-			reportStep("Media with title " + mediaName + " does not exist ", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), "Media with title " + mediaName + " does not exist ", "FAIL", true);
 			Assert.state(mediaExists, "No media with title " + mediaName);
 		}
 	}

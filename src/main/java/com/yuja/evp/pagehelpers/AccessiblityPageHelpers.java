@@ -15,6 +15,8 @@ import org.openqa.selenium.support.ui.Select;
 import com.yuja.evp.modalhelpers.MediaDetailsModalHelperMethods;
 
 import com.yuja.evp.pagetestmethods.MediaLibraryPageTestMethods;
+import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
 import com.yuja.evp.utilities.Helpers;
 
 import net.jodah.failsafe.internal.util.Assert;
@@ -29,7 +31,7 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 	
 	public void navigateToAdminPanelAccessiblityPageUserLogin(String userName, String password) throws InterruptedException{
 		signInPage.navigateToLoginPage();
-		driver.manage().window().maximize();
+		Driver.getDriver().manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
 		URL = prop.getProperty("URL")+"P/Institution/AccessibilityOptions/";
@@ -37,12 +39,12 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 		}
 	
 	public void setDefaultCaptioningForUploads(String defaultAutocaptionSetting) throws InterruptedException {
-		Select options = new Select(driver.findElement(By.id("si_defaultCaptioningOption")));
+		Select options = new Select(Driver.getDriver().findElement(By.id("si_defaultCaptioningOption")));
 		options.selectByValue(defaultAutocaptionSetting);
-		reportStep(defaultAutocaptionSetting + " is chosen from the dropdown ", "PASS", false);
+		Report.reportStep(Driver.getDriver(), defaultAutocaptionSetting + " is chosen from the dropdown ", "PASS", false);
 		clickElement("Click save button",By.xpath("//button[@id='singlebutton']"),10);
 		clickElement("Click toast close button",By.xpath("//button[@class=\"right-close-button btn dismisscolor inline-btn\"]"),10);
-		driver.navigate().refresh();
+		Driver.getDriver().navigate().refresh();
 		Thread.sleep(3000);
 	   }
 	
@@ -80,7 +82,7 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
             }
 		
 		if(permissionBase.equals("Role based")) {
-			Select rolesDropdown = new Select(driver.findElement(By.xpath("//div[@class=\"form-group\"]/select[@class=\"form-control\"]")));
+			Select rolesDropdown = new Select(Driver.getDriver().findElement(By.xpath("//div[@class=\"form-group\"]/select[@class=\"form-control\"]")));
 			rolesDropdown.selectByVisibleText(userName);
 		   }
 		clickElement("add Persmission button", By.xpath("//button[@title='Add Permission']"), 10);
@@ -97,27 +99,27 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 		 mediaLibrary.bulkMediaUpload("src\\fileResources\\humancaptionvideo");
 		 boolean processed = medialibraryHelpers.mediaIsProcessed(autocaptionVideo, 60, 3);
 			if(processed) {
-				reportStep(autocaptionVideo + " media fully proccessed", "PASS", false);
-				// driver.navigate().refresh();
+				Report.reportStep(Driver.getDriver(), autocaptionVideo + " media fully proccessed", "PASS", false);
+				// Driver.getDriver().navigate().refresh();
 				 WebElement media1=waitForElement(By.xpath("//div[@class=\"videoWrapper\"]"),10);
 				 hoverOverElement(media1);
 				 clickElement(media1, "More menu", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 10);
 				 mediaDetailsModal.clickAccessiblity();
-				 WebElement autocaptionButton=driver.findElement(By.id("autoCaptionButtonID"));
+				 WebElement autocaptionButton=Driver.getDriver().findElement(By.id("autoCaptionButtonID"));
 				 boolean actualState=autocaptionButton.isEnabled();
 				 if(mediaDetailsModal.captionButtonEnabledStateIsAsExpected("auto caption",false, actualState, 10, "humancaption")) {
-		        	 reportStep("Autocaptioning is sucessfully disabled","PASS",false);
+		        	 Report.reportStep(Driver.getDriver(), "Autocaptioning is sucessfully disabled","PASS",false);
 		         }
 		         else {
-		        	 reportStep("Autocaptioning is not sucessfully disabled","FAIL", true);
+		        	 Report.reportStep(Driver.getDriver(), "Autocaptioning is not sucessfully disabled","FAIL", true);
 		         }
 		           mediaDetailsModal.clickCloseMoreMenu();
-		          // driver.navigate().refresh();
+		          // Driver.getDriver().navigate().refresh();
 				   mediaLibrary.deleteMedia(autocaptionVideo);
 				   navigationBar.userLogOut();
 			}
 			else {
-				reportStep(autocaptionVideo + " media not fully proccessed", "FAIL", true);
+				Report.reportStep(Driver.getDriver(), autocaptionVideo + " media not fully proccessed", "FAIL", true);
 				Assert.state(processed, "Video failed to process");
 			}
 		}
@@ -127,14 +129,14 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 	    mediaLibrary.bulkMediaUpload("src\\fileResources\\humancaptionvideo");
 		 boolean processed = medialibraryHelpers.mediaIsProcessed(autocaptionVideo, 60, 3);
 			if(processed) {
-				reportStep(autocaptionVideo + " media fully proccessed", "PASS", false);
-				//driver.navigate().refresh();
+				Report.reportStep(Driver.getDriver(), autocaptionVideo + " media fully proccessed", "PASS", false);
+				//Driver.getDriver().navigate().refresh();
 				WebElement media=waitForElement(By.xpath("//div[@class=\"videoWrapper\"]"),10);
 				
 				hoverOverElement(media);
 				clickElement(media, "More menu", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 10);
 				mediaDetailsModal.clickAccessiblity();
-				WebElement autocaptionButton=driver.findElement(By.id("autoCaptionButtonID"));
+				WebElement autocaptionButton=Driver.getDriver().findElement(By.id("autoCaptionButtonID"));
 				boolean actualState=autocaptionButton.isEnabled();
 				System.out.println(actualState);
 				mediaDetailsModal.captionButtonEnabledStateIsAsExpected("auto caption",true, actualState, 10,autocaptionVideo );
@@ -145,7 +147,7 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 				navigationBar.userLogOut();
 			}
 			else {
-				reportStep(autocaptionVideo + " media not fully proccessed", "FAIL", true);
+				Report.reportStep(Driver.getDriver(), autocaptionVideo + " media not fully proccessed", "FAIL", true);
 				Assert.state(processed, "Video failed to process");
 			}
 		}
@@ -153,13 +155,13 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
    
 	public void checkAdminPanelAccessiblityStatusTableforUser(String adminUsername, String adminPassword, String userFullname) throws InterruptedException {
 	    navigateToAdminPanelAccessiblityPageUserLogin(adminUsername, adminPassword);
-		String autocaptionRequester = driver.findElement(By.xpath("//table[@id='autoCaptionStatusTable']/tbody/tr/td[2]")).getText();
+		String autocaptionRequester = Driver.getDriver().findElement(By.xpath("//table[@id='autoCaptionStatusTable']/tbody/tr/td[2]")).getText();
 	    System.out.println(autocaptionRequester);
 		if(autocaptionRequester.equals(userFullname)){
-		   reportStep("instructor send the autocaption request successfully and displayed in status table","PASS",false);
+		   Report.reportStep(Driver.getDriver(), "instructor send the autocaption request successfully and displayed in status table","PASS",false);
 	   }
 	   else {
-		   reportStep("instructor send the autocaption request successfully and not seen in the status table","FAIL", true);
+		   Report.reportStep(Driver.getDriver(), "instructor send the autocaption request successfully and not seen in the status table","FAIL", true);
 	     }
 	  }
     
@@ -180,12 +182,12 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
             }
 		
 		if(permissionBase.equals("Role based")) {
-			Select rolesDropdown = new Select(driver.findElement(By.xpath("//div[@class=\"form-group\"]/select[@class=\"form-control\"]")));
+			Select rolesDropdown = new Select(Driver.getDriver().findElement(By.xpath("//div[@class=\"form-group\"]/select[@class=\"form-control\"]")));
 			rolesDropdown.selectByVisibleText(userName);
 		   }
-		Select captionproviderDropdown = new Select(driver.findElement(By.xpath("//select[@aria-label=\"Select Caption Provider\"]")));
+		Select captionproviderDropdown = new Select(Driver.getDriver().findElement(By.xpath("//select[@aria-label=\"Select Caption Provider\"]")));
 	    captionproviderDropdown.selectByVisibleText(humanCaptionProviders);
-		Select requireApprovalDropdown = new Select(driver.findElement(By.xpath("//select[@aria-label='Require Approval']")));
+		Select requireApprovalDropdown = new Select(Driver.getDriver().findElement(By.xpath("//select[@aria-label='Require Approval']")));
 		requireApprovalDropdown.selectByVisibleText(requireApproval);
 		clickElement("add Persmission button", By.xpath("//button[@title='Add Permission']"), 10);
 	    }
@@ -195,14 +197,14 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 	    mediaLibrary.bulkMediaUpload("src\\fileResources\\humancaptionvideo");
 		 boolean processed = medialibraryHelpers.mediaIsProcessed(autocaptionVideo, 60, 3);
 			if(processed) {
-				reportStep(autocaptionVideo + " media fully proccessed", "PASS", false);
-				//driver.navigate().refresh();
-				WebElement media=driver.findElement(By.xpath("//div[@class=\"videoWrapper\"]"));
+				Report.reportStep(Driver.getDriver(), autocaptionVideo + " media fully proccessed", "PASS", false);
+				//Driver.getDriver().navigate().refresh();
+				WebElement media=Driver.getDriver().findElement(By.xpath("//div[@class=\"videoWrapper\"]"));
 				
 				hoverOverElement(media);
 				clickElement(media, "More menu", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 10);
 				mediaDetailsModal.clickAccessiblity();
-				WebElement humancaptionButton=driver.findElement(By.id("humanCaptionButtonID"));
+				WebElement humancaptionButton=Driver.getDriver().findElement(By.id("humanCaptionButtonID"));
 				boolean actualState=humancaptionButton.isEnabled();
 				mediaDetailsModal.captionButtonEnabledStateIsAsExpected("human caption",true, actualState, 10,autocaptionVideo );
 				mediaDetailsModal.clickHumanCaptionButton();
@@ -220,10 +222,10 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 					
 					 ArrayList<String> expectedlist = new ArrayList<>(Arrays.asList("3PlayMedia", "Rev", "CaptionSync","YuJa Pro","Cielo24"));
 		             if(captionProvidersArray.equals(expectedlist)) {
-						 reportStep("All caption providers are available","PASS",false);
+						 Report.reportStep(Driver.getDriver(), "All caption providers are available","PASS",false);
 					   }
 					   else {
-						   reportStep("All caption providers are not present","FAIL", true);
+						   Report.reportStep(Driver.getDriver(), "All caption providers are not present","FAIL", true);
 					   }
 				}
 				
@@ -240,10 +242,10 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 					 System.out.println(expectedlist);
 
 					 if(captionProvidersArray.equals(expectedlist)) {
-						 reportStep("Only 3 play media is  available","PASS",false);
+						 Report.reportStep(Driver.getDriver(), "Only 3 play media is  available","PASS",false);
 					   }
 					   else {
-						   reportStep("3 play media is not available","FAIL", true);
+						   Report.reportStep(Driver.getDriver(), "3 play media is not available","FAIL", true);
 					   }
 				}
 				
@@ -260,10 +262,10 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 					 System.out.println(expectedlist);
 
 					 if(captionProvidersArray.equals(expectedlist)) {
-						 reportStep("Only Rev is  available","PASS",false);
+						 Report.reportStep(Driver.getDriver(), "Only Rev is  available","PASS",false);
 					   }
 					   else {
-						   reportStep("Rev is not  available","FAIL", true);
+						   Report.reportStep(Driver.getDriver(), "Rev is not  available","FAIL", true);
 					   }
 				}
 				
@@ -279,10 +281,10 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 					 System.out.println(captionProvidersArray);
 					 System.out.println(expectedlist);
 					 if(captionProvidersArray.equals(expectedlist)) {
-						 reportStep("Only CaptionSync is  available","PASS",false);
+						 Report.reportStep(Driver.getDriver(), "Only CaptionSync is  available","PASS",false);
 					   }
 					   else {
-						   reportStep("CaptionSync is not  available","FAIL", true);
+						   Report.reportStep(Driver.getDriver(), "CaptionSync is not  available","FAIL", true);
 					   }
 				}
 				
@@ -299,10 +301,10 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 					 System.out.println(expectedlist);
 
 					 if(captionProvidersArray.equals(expectedlist)) {
-						 reportStep("Only YuJa Pro is  available","PASS",false);
+						 Report.reportStep(Driver.getDriver(), "Only YuJa Pro is  available","PASS",false);
 					   }
 					   else {
-						   reportStep("YuJa Pro is not  available","FAIL", true);
+						   Report.reportStep(Driver.getDriver(), "YuJa Pro is not  available","FAIL", true);
 					   }
 				}
 				
@@ -319,21 +321,21 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 					 System.out.println(expectedlist);
 
 					 if(captionProvidersArray.equals(expectedlist)) {
-						 reportStep("Only Cielo24 is  available","PASS",false);
+						 Report.reportStep(Driver.getDriver(), "Only Cielo24 is  available","PASS",false);
 					   }
 					   else {
-						   reportStep("Cielo24 is not  available","FAIL", true);
+						   Report.reportStep(Driver.getDriver(), "Cielo24 is not  available","FAIL", true);
 					   }
 				}
 				
 				clickElement("humancaption modal close button", By.id("veryFastCloseFooterBtn_Todo"),10);
 				mediaDetailsModal.clickCloseMoreMenu();
-				//driver.navigate().refresh();
+				//Driver.getDriver().navigate().refresh();
 				mediaLibrary.deleteMedia(autocaptionVideo);
 				navigationBar.userLogOut();
 			}
 			else {
-				reportStep(autocaptionVideo + " media not fully proccessed", "FAIL", true);
+				Report.reportStep(Driver.getDriver(), autocaptionVideo + " media not fully proccessed", "FAIL", true);
 				Assert.state(processed, "Video failed to process");
 			}
 		
@@ -344,32 +346,32 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 		 mediaLibrary.bulkMediaUpload("src\\fileResources\\humanCaptionVideo");
 		 boolean processed = medialibraryHelpers.mediaIsProcessed(autocaptionVideo, 60, 3);
 			if(processed) {
-				reportStep(autocaptionVideo + " media fully proccessed", "PASS", false);
-				driver.navigate().refresh();
+				Report.reportStep(Driver.getDriver(), autocaptionVideo + " media fully proccessed", "PASS", false);
+				Driver.getDriver().navigate().refresh();
 				 WebElement media1=waitForElement(By.xpath("//div[@class=\"videoWrapper\"]"),10);
 				 
 				 hoverOverElement(media1);
 				 clickElement(media1, "More menu", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 10);
 				 mediaDetailsModal.clickAccessiblity();
-				 WebElement humancaptionButton=driver.findElement(By.id("humanCaptionButtonID"));
+				 WebElement humancaptionButton=Driver.getDriver().findElement(By.id("humanCaptionButtonID"));
 				 boolean actualState=humancaptionButton.isEnabled();
 				 System.out.println(actualState);
 				 boolean captionEnabledState=mediaDetailsModal.captionButtonEnabledStateIsAsExpected("human caption",false, actualState, 10,autocaptionVideo );
 				 System.out.println(captionEnabledState);
 				   if (captionEnabledState == true) {
-						reportStep(" humancaption button is not enabled ", "PASS", true);
+						Report.reportStep(Driver.getDriver(), " humancaption button is not enabled ", "PASS", true);
 						
 					} else {
-						reportStep(" humancaption button is enabled", "FAIL", false);
+						Report.reportStep(Driver.getDriver(), " humancaption button is enabled", "FAIL", false);
 					}
 				   mediaDetailsModal.clickCloseMoreMenu();
-				  // driver.navigate().refresh();
+				  // Driver.getDriver().navigate().refresh();
 				   mediaLibrary.deleteMedia(autocaptionVideo);
 				   navigationBar.userLogOut();
 				
 			}
 			else {
-				reportStep(autocaptionVideo + " media not fully proccessed", "FAIL", true);
+				Report.reportStep(Driver.getDriver(), autocaptionVideo + " media not fully proccessed", "FAIL", true);
 				Assert.state(processed, "Video failed to process");
 			}
     }

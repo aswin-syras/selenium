@@ -13,7 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.yuja.evp.reports.Report;
 
-public class ExcelUtils extends Report {
+public class ExcelUtils extends Wrapper {
 
 	HashMap<String, String> testData = null;
 	InputStream testFile = null;
@@ -34,7 +34,7 @@ public class ExcelUtils extends Report {
 
 			if (testCaseColumn == -1) {
 				System.err.println("Scenario_ID column not exist, Check the Data Sheet: " + Test_Sheet_Path);
-				reportStep("Scenario_ID column not exist, Check the Data Sheet: " + Test_Sheet_Path, "FAIL", false);
+				Report.reportStep(Driver.getDriver(), "Scenario_ID column not exist, Check the Data Sheet: " + Test_Sheet_Path, "FAIL", false);
 
 			}
 

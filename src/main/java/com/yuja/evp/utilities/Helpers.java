@@ -21,31 +21,30 @@ import com.yuja.evp.reports.Report;
 
 import net.jodah.failsafe.internal.util.Assert;
 
-public class Helpers extends Report {
+public class Helpers extends Wrapper {
 
 /////navigation helper
 
 	public void launchUrl(String url, String verifyTitle) {
 		try {
-			driver.get(url);
+			Driver.getDriver().get(url);
 
 			if (!verifyTitle.equalsIgnoreCase("")) {
-				if (!driver.getTitle().equalsIgnoreCase(verifyTitle)) {
+				if (!Driver.getDriver().getTitle().equalsIgnoreCase(verifyTitle)) {
 					System.out.println("Browser Launch failed");
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			reportStep("Application Launch Failed", "Fail", true);
+			Report.reportStep(Driver.getDriver(), "Application Launch Failed", "Fail", true);
 		}
-
 	}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //visual helpers
 
 	public void flash(WebElement element) {
-		JavascriptExecutor js = ((JavascriptExecutor) driver);
+		JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
 		String bgcolor = element.getCssValue("backgroundColor");
 		for (int i = 0; i < 3; i++) {
 			changeColor("rgb(0,200,0)", element, js);
@@ -70,14 +69,14 @@ public class Helpers extends Report {
 		WebElement element;
 		try {
 
-			driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); // nullify the default timeout
+			Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); // nullify the default timeout
 
-			WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
+			WebDriverWait wait = new WebDriverWait(Driver.getDriver(), timeOutInSeconds);
 
 			element = wait.until(ExpectedConditions.presenceOfElementLocated(by));
 			element = wait.until(ExpectedConditions.visibilityOfElementLocated(by));
 
-			driver.manage().timeouts().implicitlyWait(Default_Wait_For_Page, TimeUnit.SECONDS);
+			Driver.getDriver().manage().timeouts().implicitlyWait(Default_Wait_For_Page, TimeUnit.SECONDS);
 			return element;// return the element
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -92,15 +91,15 @@ public class Helpers extends Report {
 			WebElement element = waitForElement(identifier, timeout);
 
 			if (element.isDisplayed() == true && element.isEnabled() == true) {
-				reportStep(fieldName + " element displayed as expected", "PASS", false);
+				Report.reportStep(Driver.getDriver(), fieldName + " element displayed as expected", "PASS", false);
 				bReturn = true;
 			} else {
-				reportStep(fieldName + " element is not displayed", "FAIL", true);
+				Report.reportStep(Driver.getDriver(), fieldName + " element is not displayed", "FAIL", true);
 			}
 
 		} catch (Exception e) {
 			System.out.println(fieldName + " Element not exist method - thrown Exception");
-			//reportStep(fieldName + " element not exist method - thrown Exception", "FAIL", true);
+			//Report.reportStep(Driver.getDriver(), fieldName + " element not exist method - thrown Exception", "FAIL", true);
 		}
 
 		return bReturn;
@@ -115,8 +114,8 @@ public class Helpers extends Report {
 	public boolean verifyElementExistReturn(By identifier) {
 		boolean bReturn = false;
 		try {
-			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); // nullify the default timeout
-			WebElement element = driver.findElement(identifier);
+			Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); // nullify the default timeout
+			WebElement element = Driver.getDriver().findElement(identifier);
 
 			if (element.isDisplayed() == true && element.isEnabled() == true) {
 				bReturn = true;
@@ -125,7 +124,7 @@ public class Helpers extends Report {
 			System.out.println("Element not exist method - thrown Exception");
 			return bReturn;
 		}
-		driver.manage().timeouts().implicitlyWait(Default_Wait_For_Page, TimeUnit.SECONDS);
+		Driver.getDriver().manage().timeouts().implicitlyWait(Default_Wait_For_Page, TimeUnit.SECONDS);
 		return bReturn;
 	}
 ///////////////////////////////////////////////////////////////////////////////
@@ -139,9 +138,9 @@ public class Helpers extends Report {
 			flash(element);
 			element.clear();
 			element.sendKeys(strValue);
-			reportStep(strValue + " is entered in the field " + fieldName, "PASS", false);
+			Report.reportStep(Driver.getDriver(), strValue + " is entered in the field " + fieldName, "PASS", false);
 		} catch (Exception e) {
-			reportStep(strValue + " is not entered in the field " + fieldName, "FAIL", false);
+			Report.reportStep(Driver.getDriver(), strValue + " is not entered in the field " + fieldName, "FAIL", false);
 		}
 	}
 
@@ -150,35 +149,35 @@ public class Helpers extends Report {
 			System.out.println(indentifier);
 			WebElement element = modal.findElement(indentifier);
 			element.sendKeys(strValue);
-			reportStep(strValue + " is entered in the field " + fieldName, "PASS", false);
+			Report.reportStep(Driver.getDriver(), strValue + " is entered in the field " + fieldName, "PASS", false);
 		} catch (Exception e) {
-			reportStep(strValue + " is not entered in the field " + fieldName, "FAIL", false);
+			Report.reportStep(Driver.getDriver(), strValue + " is not entered in the field " + fieldName, "FAIL", false);
 		}
 
 	}
 
 	public void typeKeys(String keys) {
 		try {
-			Actions action = new Actions(driver);
+			Actions action = new Actions(Driver.getDriver());
 			for (int i = 0; i < keys.length(); i++) {
 				String c = keys.charAt(i) + "";
 				action.sendKeys(c).build().perform();
 
 			}
-			reportStep(keys + " is typed", "PASS", false);
+			Report.reportStep(Driver.getDriver(), keys + " is typed", "PASS", false);
 		} catch (Exception e) {
-			reportStep(keys + " is not typed", "FAIL", false);
+			Report.reportStep(Driver.getDriver(), keys + " is not typed", "FAIL", false);
 		}
 	}
 
 	public void keyboardEnter() {
 		try {
-			Actions action = new Actions(driver);
+			Actions action = new Actions(Driver.getDriver());
 			action.sendKeys(Keys.ENTER).build().perform();
 
-			reportStep(" enter is clicked", "PASS", false);
+			Report.reportStep(Driver.getDriver(), " enter is clicked", "PASS", false);
 		} catch (Exception e) {
-			reportStep(" enter is not clicked", "FAIL", false);
+			Report.reportStep(Driver.getDriver(), " enter is not clicked", "FAIL", false);
 		}
 	}
 
@@ -186,9 +185,9 @@ public class Helpers extends Report {
 		try {
 			flash(element);
 			element.click();
-			reportStep(fieldName + " is clicked successfully", "PASS", false);
+			Report.reportStep(Driver.getDriver(), fieldName + " is clicked successfully", "PASS", false);
 		} catch (Exception e) {
-			reportStep(fieldName + " is not clicked successfully", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), fieldName + " is not clicked successfully", "FAIL", true);
 			e.printStackTrace();
 		}
 
@@ -199,9 +198,9 @@ public class Helpers extends Report {
 		try {
 			flash(element);
 			element.click();
-			reportStep(fieldName + " is clicked successfully", "PASS", false);
+			Report.reportStep(Driver.getDriver(), fieldName + " is clicked successfully", "PASS", false);
 		} catch (Exception e) {
-			reportStep(fieldName + " is not clicked successfully", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), fieldName + " is not clicked successfully", "FAIL", true);
 			e.printStackTrace();
 		}
 
@@ -214,9 +213,9 @@ public class Helpers extends Report {
 		try {
 			element.click();
 			Thread.sleep(500);
-			reportStep(fieldName + " is clicked successfully", "PASS", false);
+			Report.reportStep(Driver.getDriver(), fieldName + " is clicked successfully", "PASS", false);
 		} catch (Exception e) {
-			reportStep(fieldName + " is not clicked successfully", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), fieldName + " is not clicked successfully", "FAIL", true);
 			e.printStackTrace();
 		}
 	}
@@ -231,7 +230,7 @@ public class Helpers extends Report {
 		List<WebElement> videoElementList;
 
 		try {
-			videoElementList = driver.findElements(identifier);
+			videoElementList = Driver.getDriver().findElements(identifier);
 			return videoElementList;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -242,31 +241,30 @@ public class Helpers extends Report {
 	public void doubleClick(String fieldName, WebElement element) {
 		try {
 			flash(element);
-			Actions action = new Actions(driver);
+			Actions action = new Actions(Driver.getDriver());
 			action.doubleClick(element).perform();
-			reportStep(fieldName + " is doubleclicked successfully", "PASS", false);
+			Report.reportStep(Driver.getDriver(), fieldName + " is doubleclicked successfully", "PASS", false);
 		} catch (Exception e) {
-			reportStep(fieldName + " is not doubleclicked successfully", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), fieldName + " is not doubleclicked successfully", "FAIL", true);
 			e.printStackTrace();
 		}
-
 	}
 
 	public void switchToIframe(String fieldName, By identifier, int timeout) {
 		WebElement frame = waitForElement(identifier, timeout);
 		try {
 			if (frame != null) {
-				driver.switchTo().frame(frame);
+				Driver.getDriver().switchTo().frame(frame);
 			}
-			reportStep("Succesfully switched to iframe " + fieldName, "PASS", false);
+			Report.reportStep(Driver.getDriver(), "Succesfully switched to iframe " + fieldName, "PASS", false);
 		} catch (Exception e) {
-			reportStep("Unable to switch to iframe " + fieldName, "FAIL", true);
+			Report.reportStep(Driver.getDriver(), "Unable to switch to iframe " + fieldName, "FAIL", true);
 			e.printStackTrace();
 		}
 	}
 
 	public WebElement getMedia(String mediaTitle) {
-		reportStep("Fetching the media with the name \"" + mediaTitle + "\"", "PASS", false);
+		Report.reportStep(Driver.getDriver(), "Fetching the media with the name \"" + mediaTitle + "\"", "PASS", false);
 		List<WebElement> mediaLibraryElementList = getElementList(By.className("videoWrapper"));
 		int listSize = mediaLibraryElementList.size();
 		if (listSize > 0) {
@@ -294,7 +292,7 @@ public class Helpers extends Report {
 	}
 
 	public WebElement getFolder(String folderName) {
-		reportStep("Fetching the folder with the name \"" + folderName + "\"", "PASS", false);
+		Report.reportStep(Driver.getDriver(), "Fetching the folder with the name \"" + folderName + "\"", "PASS", false);
 		List<WebElement> mediaLibraryElementList = getElementList(
 				By.cssSelector("[data-automation=\"mediaLibraryFolder\"]"));
 		int listSize = mediaLibraryElementList.size();
@@ -326,10 +324,11 @@ public class Helpers extends Report {
 
 	public void hoverOverElement(WebElement element) {
 		System.out.println("hovering over element...");
-		Actions action = new Actions(driver);
+		Actions action = new Actions(Driver.getDriver());
 		action.moveToElement(element).perform();
 	}
 
+	//this method must be reworked, it assumes that the download folder will always be empty prior to it being called, which is not a reasonable assumption to make
 	protected boolean captionFileExistsInSystem() throws InterruptedException {
 		String downloadDirectoryPath = Paths.get("src//fileResources//downloads").toAbsolutePath().toString();
 		File folder = new File(downloadDirectoryPath);
@@ -343,13 +342,13 @@ public class Helpers extends Report {
 		        list = true;
 		        return list;
 		    }
-		    else {
-		    	list = false;
-		    	return false;}
 		}
 		return list;
-		}
-//		File file = new File(downloadDirectoryPath + "\\284383_English.pdf");
+	}
+	
+//	protected boolean captionFileExistsInSystem() throws InterruptedException {
+//		String downloadDirectoryPath = Paths.get("src//fileResources//downloads").toAbsolutePath().toString();
+//		File file = new File(downloadDirectoryPath + "\\274787.pdf");
 //		if (file.exists()) {
 //			file.delete();
 //			return true;

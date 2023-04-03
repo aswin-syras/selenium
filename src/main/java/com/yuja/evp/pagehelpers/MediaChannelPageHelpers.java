@@ -1,6 +1,8 @@
 package com.yuja.evp.pagehelpers;
 
 import org.openqa.selenium.By;
+
+import com.yuja.evp.utilities.Driver;
 import com.yuja.evp.utilities.Helpers;
 
 public class MediaChannelPageHelpers extends Helpers{
@@ -21,7 +23,7 @@ public class MediaChannelPageHelpers extends Helpers{
 	}
 	
 	private String getPageTitle() {
-		return driver.getTitle();
+		return Driver.getDriver().getTitle();
 	}
 
 }
