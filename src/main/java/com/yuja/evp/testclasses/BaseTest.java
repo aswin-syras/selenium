@@ -22,7 +22,7 @@ import org.testng.annotations.AfterSuite;
 public class BaseTest extends Wrapper {
 	
 	public ITestContext testContext;
-	public String testCaseName, testDescription, author, category;
+	public String testDescription;
 
 	@BeforeMethod(alwaysRun = true)
 	@Parameters({ "TestName" })
