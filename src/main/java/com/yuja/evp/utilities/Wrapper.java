@@ -32,7 +32,7 @@ public class Wrapper {
 		//Loading the configuration properties file
 		config = new Properties();
 		try {
-			config.load(new FileInputStream(new File("./config.properties")));
+			config.load(new FileInputStream(new File("./properties/config.properties")));
 		}
 		catch (FileNotFoundException e) {
 			System.err.println("'config.properties' file load Error. Please check the file exist/name of the file");
@@ -48,13 +48,13 @@ public class Wrapper {
 		prop = new Properties();
 		System.out.println("loading properties");
 		try {
-			prop.load(new FileInputStream(new File("./credentials.properties")));
+			prop.load(new FileInputStream(new File("./properties/credentials.properties")));
 			System.out.println("user details loaded");
-			prop.load(new FileInputStream(new File("./urls.properties")));
+			prop.load(new FileInputStream(new File("./properties/urls.properties")));
 			System.out.println("urls loaded");
-			prop.load(new FileInputStream(new File("./pageObjects.properties")));
+			prop.load(new FileInputStream(new File("./properties/pageObjects.properties")));
 			System.out.println("page objects loaded");
-			prop.load(new FileInputStream(new File("./config.properties")));
+			prop.load(new FileInputStream(new File("./properties/config.properties")));
 			System.out.println("cofig properties loaded");
 		} catch (FileNotFoundException e) {
 			System.err.println("'*.properties' multiple file load Error. Please check the file exist/name of the file");
