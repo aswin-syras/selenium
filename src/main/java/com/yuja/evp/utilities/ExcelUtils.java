@@ -24,18 +24,14 @@ public class ExcelUtils extends Wrapper {
 	public HashMap<String, String> testCaseRetrieve(String testCaseID, String sheetName) {
 
 		try {
-
 			testFile = new FileInputStream(Test_Sheet_Path);
 			testWorkBook = new XSSFWorkbook(testFile);
 			Sheet testSheet = testWorkBook.getSheet(sheetName);
-
 			int testCaseColumn = getColumnNumber(testSheet, "Scenario_ID");
 			int testCaseExecute = getColumnNumber(testSheet, "To_Be_Executed");
-
 			if (testCaseColumn == -1) {
 				System.err.println("Scenario_ID column not exist, Check the Data Sheet: " + Test_Sheet_Path);
 				Report.reportStep(Driver.getDriver(), "Scenario_ID column not exist, Check the Data Sheet: " + Test_Sheet_Path, "FAIL", false);
-
 			}
 
 			int rowsCount = testSheet.getLastRowNum();
@@ -55,11 +51,9 @@ public class ExcelUtils extends Wrapper {
 						testData.put(cellHeader.getStringCellValue(), formatter.formatCellValue(cellValue));
 					}
 					testData.entrySet();
-
 					return testData;
 				}
 			}
-
 		}
 
 		catch (Exception e) {
