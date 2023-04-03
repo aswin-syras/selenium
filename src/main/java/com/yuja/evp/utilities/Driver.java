@@ -17,16 +17,18 @@ public class Driver {
 	
 	private Driver() {};
 	
-	public static void setDriver(Properties config) {
+	public static void setDriver(Properties config, String browserName) {
 		try {
-			System.out.println("Launching Chrome Browser");
-			String chrome = "./" + config.getProperty("Browser_Drivers_Path") + "/chromedriver.exe";
-			System.setProperty("webdriver.chrome.driver", chrome);
-			System.out.println("Setting up driver...");
-			
-			RemoteWebDriver webDriver = new ChromeDriver(setChromeOptions());
-			drivers.set(webDriver);
-			
+			switch(browserName.toUpperCase()) {
+			case "CHROME":
+				System.out.println("Launching Chrome Browser");
+				String chrome = "./" + config.getProperty("Browser_Drivers_Path") + "/chromedriver.exe";
+				System.setProperty("webdriver.chrome.driver", chrome);
+				System.out.println("Setting up driver...");
+				
+				RemoteWebDriver webDriver = new ChromeDriver(setChromeOptions());
+				drivers.set(webDriver);
+			}
 		} catch(Exception e){
 			System.err.println("Browser driver initiation failed - Exception");
 			e.printStackTrace();
@@ -45,9 +47,8 @@ public class Driver {
 	}
 	
 	private static ChromeOptions setChromeOptions() throws InterruptedException {
-		
 		ChromeOptions chromeOptions = new ChromeOptions();
-		
+
 		// Setting up Chrome options
 	    chromeOptions.addArguments("start-maximized");
 		chromeOptions.addArguments("--remote-allow-origins=*");
