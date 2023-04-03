@@ -144,7 +144,7 @@
     </classes>
   </test>
   
-   <test name="quizTests">
+  <test name="quizTests">
   	<classes>
   		<class name="com.yuja.evp.testclasses.QuizTest">
         	<methods>
