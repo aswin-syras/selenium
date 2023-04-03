@@ -44,7 +44,7 @@ public class SignInPageHelpers extends Helpers{
 	///////////////////////////////////////////////////////////////////////////
 	
 	public void navigateToLoginPage() {
-		URL = prop.getProperty("URL")+"Login?accesstype=YuJa%20Credentials";
+		URL = prop.getProperty("loginPageURL");
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	

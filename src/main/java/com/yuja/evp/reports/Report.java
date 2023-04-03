@@ -20,6 +20,8 @@ public class Report {
 	private static final ThreadLocal<ExtentTest> extent_tests = new ThreadLocal<ExtentTest>();
 	public static ExtentReports extent;
 	public static String reportFileName;
+	
+	private Report() {};
 
 	public static ExtentReports startResult() {
 		try {

@@ -46,11 +46,16 @@ public class Wrapper {
 	public void loadObject() {
 		System.out.println("Loading objects");
 		prop = new Properties();
+		System.out.println("loading properties");
 		try {
-			prop.load(new FileInputStream(new File("./userDetails.properties")));
-			prop.load(new FileInputStream(new File("./applicationURL.properties")));
+			prop.load(new FileInputStream(new File("./credentials.properties")));
+			System.out.println("user details loaded");
+			prop.load(new FileInputStream(new File("./urls.properties")));
+			System.out.println("urls loaded");
 			prop.load(new FileInputStream(new File("./pageObjects.properties")));
+			System.out.println("page objects loaded");
 			prop.load(new FileInputStream(new File("./config.properties")));
+			System.out.println("cofig properties loaded");
 		} catch (FileNotFoundException e) {
 			System.err.println("'*.properties' multiple file load Error. Please check the file exist/name of the file");
 			e.printStackTrace();

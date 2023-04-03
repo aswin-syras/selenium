@@ -24,23 +24,7 @@ public class Driver {
 			System.setProperty("webdriver.chrome.driver", chrome);
 			System.out.println("Setting up driver...");
 			
-			// Setting up Chrome options
-			ChromeOptions chromeOptions = new ChromeOptions();
-		    chromeOptions.addArguments("start-maximized");
-			chromeOptions.addArguments("--remote-allow-origins=*");
-			DesiredCapabilities chromeCapabilities = new DesiredCapabilities();
-			chromeCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-			chromeOptions.merge(chromeCapabilities);
-			
-			// Creating the driver variable
-			Thread.sleep(2000);
-			Map<String, Object> prefs = new HashMap<String, Object>();
-			String userDirectoryPath = Paths.get("").toAbsolutePath().toString();
-			String defaultDownloadDirectoryPath = userDirectoryPath + "\\src\\fileResources\\downloads";
-			prefs.put("download.default_directory", defaultDownloadDirectoryPath);
-			chromeOptions.setExperimentalOption("prefs", prefs);
-			
-			RemoteWebDriver webDriver = new ChromeDriver(chromeOptions);
+			RemoteWebDriver webDriver = new ChromeDriver(setChromeOptions());
 			drivers.set(webDriver);
 			
 		} catch(Exception e){
@@ -58,6 +42,28 @@ public class Driver {
 	{
 		getDriver().quit();
 		drivers.remove();
+	}
+	
+	private static ChromeOptions setChromeOptions() throws InterruptedException {
+		
+		ChromeOptions chromeOptions = new ChromeOptions();
+		
+		// Setting up Chrome options
+	    chromeOptions.addArguments("start-maximized");
+		chromeOptions.addArguments("--remote-allow-origins=*");
+		DesiredCapabilities chromeCapabilities = new DesiredCapabilities();
+		chromeCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+		chromeOptions.merge(chromeCapabilities);
+		
+		// Creating the driver variable
+		Thread.sleep(2000);
+		Map<String, Object> prefs = new HashMap<String, Object>();
+		String userDirectoryPath = Paths.get("").toAbsolutePath().toString();
+		String defaultDownloadDirectoryPath = userDirectoryPath + "\\src\\fileResources\\downloads";
+		prefs.put("download.default_directory", defaultDownloadDirectoryPath);
+		chromeOptions.setExperimentalOption("prefs", prefs);
+		
+		return chromeOptions;
 	}
 
 }

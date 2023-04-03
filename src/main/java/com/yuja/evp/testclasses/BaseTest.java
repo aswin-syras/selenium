@@ -43,7 +43,6 @@ public class BaseTest extends Wrapper {
 		test.assignAuthor("EVP_Automated_Test");
 		test.assignCategory("Regression_Testing");
 		
-		//launchBrowser(Browser);
 		Driver.setDriver(config);
 	}
 

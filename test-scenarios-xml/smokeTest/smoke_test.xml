@@ -2,19 +2,24 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite">
   <parameter name="TestName" value="TestValue" />
-  <test name="Create_new_folder_test">
+  <test name="Create_new_folder_test" parallel="methods" thread-count="5">
   	<classes>
-		    <class name="com.yuja.evp.testclasses.QuizTest">
-        	<methods><!--
+  	
+  	<!--
+		<class name="com.yuja.evp.testclasses.QuizTest">
+        	<methods>
         		<include name="Create_quiz_test" />
         		<include name="Check_student_gradebook_test" />
         		<include name="Check_instructor_gradebook_test" />
-        		<include name="Check_unauthenticated_user_quiz_test" />-->
+        		<include name="Check_unauthenticated_user_quiz_test" />
         		<include name="Check_Unauthenticated_user_embedded_quiz_test" />
         		<include name="Check_delete_quiz_test" />
         	</methods>
         </class>
-      <!-- 	<class name="com.yuja.evp.testclasses.MediaLibraryTest">
+        
+        -->
+        
+        <class name="com.yuja.evp.testclasses.MediaLibraryTest">
 	      	<methods>
 	      		<include name="Video_upload_manager_test" />
 	      		<include name="Video_upload_instructor_test" />
@@ -149,7 +154,7 @@
         		<include name="Moodle_upload_doc_as_administrator_check_in_media_library_test" />
         		<include name="Moodle_upload_doc_as_instuctor_check_in_media_library_test" />
         	</methods>
-        </class>   -->  
+        </class>   
     </classes>
   </test>
 </suite> <!-- Suite -->
