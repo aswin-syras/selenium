@@ -19,7 +19,7 @@ public class AdminPanelPlatformPageHelpers extends Helpers implements UICheck {
 		Driver.getDriver().manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
-		URL = prop.getProperty("URL")+"P/Institution/MenuManagement/";
+		URL = prop.getProperty("URL")+"/P/Institution/MenuManagement/";
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 
@@ -116,7 +116,7 @@ public class AdminPanelPlatformPageHelpers extends Helpers implements UICheck {
 	}
 	
 	public void CheckPageUI() {
-		URL = prop.getProperty("URL")+"P/Institution/MenuManagement/";
+		URL = prop.getProperty("URL")+"/P/Institution/MenuManagement/";
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
 		String sectionTitle = Driver.getDriver().findElement(By.id("secondPartText")).getText();
 		boolean check  = waitForElement(By.id("di_masterContainer"),10).isDisplayed();

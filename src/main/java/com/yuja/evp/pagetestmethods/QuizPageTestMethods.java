@@ -143,7 +143,7 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 			switchToIframe("switch to iframe result", By.id("iframeResult"), 10);
 			//Driver.getDriver().switchTo().frame("iframeResult");
 			Thread.sleep(4000);
-			WebElement frame = Driver.getDriver().findElement(By.xpath("//iframe[contains(@src,'"+prop.getProperty("URL")+"')]"));
+			WebElement frame = Driver.getDriver().findElement(By.xpath("//iframe[contains(@src,'"+prop.getProperty("URL")+"/')]"));
 			Driver.getDriver().switchTo().frame(frame);
 			Thread.sleep(4000);
 			switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);

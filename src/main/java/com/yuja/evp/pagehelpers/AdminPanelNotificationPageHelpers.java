@@ -10,7 +10,7 @@ import helperinterfaces.UICheck;
 public class AdminPanelNotificationPageHelpers extends AdminPanelGeneralPageHelpers implements UICheck{
 	
 	public void CheckPageUI() {
-		URL = prop.getProperty("URL")+"P/Institution/NotificationsSummary";
+		URL = prop.getProperty("URL")+"/P/Institution/NotificationsSummary";
 		launchUrl(URL, "Test Automation Enterprise Video Platform");	
 		String sectionTitle = Driver.getDriver().findElement(By.id("secondPartText")).getText();
 		boolean check  = waitForElement(By.id("overviewTable"),10).isDisplayed();

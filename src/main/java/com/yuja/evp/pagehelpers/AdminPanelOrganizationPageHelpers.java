@@ -10,7 +10,7 @@ import helperinterfaces.UICheck;
 public class AdminPanelOrganizationPageHelpers extends AdminPanelGeneralPageHelpers implements UICheck {
 	
 	public void CheckPageUI() {
-		URL = prop.getProperty("URL")+"P/Institution/Organization/";
+		URL = prop.getProperty("URL")+"/P/Institution/Organization/";
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
 		String sectionTitle = Driver.getDriver().findElement(By.id("secondPartText")).getText();
 		boolean check  = waitForElement(By.id("reactSidebar"),10).isDisplayed();

@@ -34,7 +34,7 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 		Driver.getDriver().manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
-		URL = prop.getProperty("URL")+"P/Institution/AccessibilityOptions/";
+		URL = prop.getProperty("URL")+"/P/Institution/AccessibilityOptions/";
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
 		}
 	

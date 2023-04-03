@@ -10,7 +10,7 @@ import helperinterfaces.UICheck;
 public class AdminPanelStorageQuotaPageHelpers extends AdminPanelGeneralPageHelpers implements UICheck{
 	
 	public void CheckPageUI() {
-		URL = prop.getProperty("URL")+"P/Institution/QuotaManagement/";
+		URL = prop.getProperty("URL")+"/P/Institution/QuotaManagement/";
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
 		String sectionTitle = Driver.getDriver().findElement(By.id("secondPartText")).getText();
 		boolean check  = waitForElement(By.id("establish-quota"),10).isDisplayed();

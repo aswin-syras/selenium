@@ -10,7 +10,7 @@ import helperinterfaces.UICheck;
 public class AdminPanelRtmpStreamPageHelpers extends AdminPanelGeneralPageHelpers implements UICheck{
 	
 	public void CheckPageUI() {
-		URL = prop.getProperty("URL")+"P/Institution/IngestedLiveStreamManagement/";
+		URL = prop.getProperty("URL")+"/P/Institution/IngestedLiveStreamManagement/";
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
 		String sectionTitle = Driver.getDriver().findElement(By.id("secondPartText")).getText();
 		boolean check  = waitForElement(By.id("pageTitleHeader"),10).isDisplayed();

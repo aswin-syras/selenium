@@ -247,7 +247,7 @@ public class MoodlePage extends QuizPageHelpers {
 		provisionType.put("user", "(//input[@id='autoProvisionId'])[2]");
 		provisionType.put("course", "(//input[@id=\"autoProvisionClassesId\"])[2]");
 	    mediaLibrary.navigateToMyMediaUserLogin(userName, password);
-	    URL = prop.getProperty("URL")+"P/Institution/APIManagementServlet/";
+	    URL = prop.getProperty("URL")+"/P/Institution/APIManagementServlet/";
         launchUrl(URL, "Test Automation Enterprise Video Platform");
         Select integrationDropdown = new Select(Driver.getDriver().findElement(By.id("apiPicker")));
         integrationDropdown.selectByValue("lti3");
@@ -261,11 +261,11 @@ public class MoodlePage extends QuizPageHelpers {
             else {
             	Report.reportStep(Driver.getDriver(), "The checkbox is setting was same as required","PASS",false);
             }	
-        }
+       }
 	
 	public void setRoleMapping(String userName, String password, String yujaRolefromAdmin, String yujaRolefromTeacher, String yujaRolefromStudent) throws InterruptedException {
 		 mediaLibrary.navigateToMyMediaUserLogin(userName, password);
-		 URL =  prop.getProperty("URL")+"P/Institution/APIManagementServlet/";
+		 URL =  prop.getProperty("URL")+"/P/Institution/APIManagementServlet/";
 	     launchUrl(URL, "Test Automation Enterprise Video Platform");
 	     Select integrationDropdown = new Select(Driver.getDriver().findElement(By.id("apiPicker")));
 	     integrationDropdown.selectByValue("lti3");
@@ -282,7 +282,7 @@ public class MoodlePage extends QuizPageHelpers {
 	}
 	
 	public void setUserTypeToLockedorUnlocked(String lockOrUnlock,String userType) throws InterruptedException {
-		 URL = prop.getProperty("URL")+"P/Institution/TypeRoster/";
+		 URL = prop.getProperty("URL")+"/P/Institution/TypeRoster/";
 	     launchUrl(URL, "Test Automation Enterprise Video Platform");
 	     roster.rosterButtons("rolemappinguser");
 		 
@@ -308,7 +308,7 @@ public class MoodlePage extends QuizPageHelpers {
     	
 	
     public void setStartPageOptionAsMediaChannel() {
-        URL = prop.getProperty("URL")+"P/Institution/MenuManagement/";
+        URL = prop.getProperty("URL")+"/P/Institution/MenuManagement/";
         launchUrl(URL, "Test Automation Enterprise Video Platform");
         Select startPageOptionITManager = new Select(Driver.getDriver().findElement(By.id("select_defaultLandingPageIT")));
         startPageOptionITManager.selectByValue("mediaChannel");
@@ -379,7 +379,8 @@ public class MoodlePage extends QuizPageHelpers {
 		} else {
 			Report.reportStep(Driver.getDriver(), "The moodle course is not successfully manuallyprovisioned connected to existing course in yuja", "FAIL", true);
 		}	
-       }
+      }
+	
 	
 	// Method directly used in test class.
 	public void checkAutoprovisionOfUser(String adminUserName, String adminPassword, String userName, String password, String email, String newUsername, String newUserPassword, String courseName, String role, String courserole ) throws InterruptedException {

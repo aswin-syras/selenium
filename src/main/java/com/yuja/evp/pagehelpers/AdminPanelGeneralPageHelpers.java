@@ -15,7 +15,7 @@ public class AdminPanelGeneralPageHelpers extends Helpers {
 		Driver.getDriver().manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
-		URL = prop.getProperty("URL")+"P/Institution/OverviewManagement";
+		URL = prop.getProperty("URL")+"/P/Institution/OverviewManagement";
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 }

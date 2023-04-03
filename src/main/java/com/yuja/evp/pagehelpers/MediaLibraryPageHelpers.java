@@ -33,12 +33,12 @@ public class MediaLibraryPageHelpers extends Helpers{
 		Driver.getDriver().manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
-		URL = prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/Users/"+userName+"/MyMediaCollections";
+		URL = prop.getProperty("URL")+"/P/VideoManagement/MediaLibrary/Users/"+userName+"/MyMediaCollections";
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	
 	public void navigateToMyMedia(String userName){
-		URL = prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/Users/"+userName+"/MyMediaCollections";
+		URL = prop.getProperty("URL")+"/P/VideoManagement/MediaLibrary/Users/"+userName+"/MyMediaCollections";
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	
@@ -47,12 +47,12 @@ public class MediaLibraryPageHelpers extends Helpers{
 		Driver.getDriver().manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
-		URL = prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/Users/"+userName+"/Shared";
+		URL = prop.getProperty("URL")+"/P/VideoManagement/MediaLibrary/Users/"+userName+"/Shared";
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	
 	public void navigateToSharedWithMe(String userName){
-		URL = prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/Users/"+userName+"/Shared";
+		URL = prop.getProperty("URL")+"/P/VideoManagement/MediaLibrary/Users/"+userName+"/Shared";
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	
@@ -61,12 +61,12 @@ public class MediaLibraryPageHelpers extends Helpers{
 		Driver.getDriver().manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
-		URL = prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/InstitutionPrivateChannel";
+		URL = prop.getProperty("URL")+"/P/VideoManagement/MediaLibrary/InstitutionPrivateChannel";
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	
 	public void navigateToInternalLibrary(){
-		URL = prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/InstitutionPrivateChannel";
+		URL = prop.getProperty("URL")+"/P/VideoManagement/MediaLibrary/InstitutionPrivateChannel";
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	
@@ -75,12 +75,12 @@ public class MediaLibraryPageHelpers extends Helpers{
 		Driver.getDriver().manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
-		URL =prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/Users/"+userName+"/Favorites";
+		URL =prop.getProperty("URL")+"/P/VideoManagement/MediaLibrary/Users/"+userName+"/Favorites";
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	
 	public void navigateToFavorites(String userName){
-		URL = prop.getProperty("URL")+"P/VideoManagement/MediaLibrary/Users/"+userName+"/Favorites";
+		URL = prop.getProperty("URL")+"/P/VideoManagement/MediaLibrary/Users/"+userName+"/Favorites";
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	

@@ -10,7 +10,7 @@ import helperinterfaces.UICheck;
 public class AdminPanelAccessibilityPageHelpers extends AdminPanelGeneralPageHelpers implements UICheck {
 	
 	public void CheckPageUI() {
-		URL = prop.getProperty("URL")+"P/Institution/AccessibilityOptions/";
+		URL = prop.getProperty("URL")+"/P/Institution/AccessibilityOptions/";
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
 		String sectionTitle = Driver.getDriver().findElement(By.id("secondPartText")).getText();
 		boolean check  = waitForElement(By.id("accessibilityPanel"),10).isDisplayed();

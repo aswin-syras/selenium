@@ -10,7 +10,7 @@ import helperinterfaces.UICheck;
 public class AdminPanelDevicesPageHelpers extends AdminPanelGeneralPageHelpers implements UICheck{
 	
 	public void CheckPageUI() {
-		URL = prop.getProperty("URL")+"P/Institution/CaptureStations";
+		URL = prop.getProperty("URL")+"/P/Institution/CaptureStations";
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
 		String sectionTitle = Driver.getDriver().findElement(By.id("secondPartText")).getText();
 		boolean check  = waitForElement(By.id("deviceFilter"),10).isDisplayed();

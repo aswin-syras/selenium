@@ -20,7 +20,7 @@ import java.util.HashMap;
 		Driver.getDriver().manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
-		URL =  prop.getProperty("URL")+"P/Institution/TypeRoster/";
+		URL =  prop.getProperty("URL")+"/P/Institution/TypeRoster/";
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	
@@ -142,7 +142,7 @@ import java.util.HashMap;
 	}
 	
 	public void CheckPageUI() {
-		URL = prop.getProperty("URL")+"P/Institution/TypeRoster/";
+		URL = prop.getProperty("URL")+"/P/Institution/TypeRoster/";
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
 		String sectionTitle = Driver.getDriver().findElement(By.id("secondPartText")).getText();
 		boolean check  = waitForElement(By.id("rosterContent"),10).isDisplayed();
