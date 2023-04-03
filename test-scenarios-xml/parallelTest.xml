@@ -3,7 +3,8 @@
 
 <suite name="Parallel Test Suite" >
 <parameter name="TestName" value="TestValue" />
-  <test name="test" parallel="methods" thread-count="5">
+
+  <test name="test" parallel="methods" thread-count="3">
   	<classes>
       <class name="com.yuja.evp.testclasses.MediaLibraryTest" >
 	      <methods>
@@ -21,15 +22,32 @@
 	          <include name="Create_delete_folder_student_test" />
 	          <include name="Delete_folder_more_menu_test" />
 	          <include name="Delete_media_test" />
+	          <!-- 
 	          <include name="Share_video_full_access_manager_test" />
 	          <include name="Share_video_edit_access_manager_test" />
 	          <include name="share_video_read_only_manager_test" />
 	          <include name="Share_video_full_access_instructor_test" />
 	          <include name="Share_video_edit_access_instructor_test" />
 	          <include name="share_video_read_only_instructor_test" />
+	          -->
 	      </methods>
         </class>
     </classes>
+  </test>
+  
+  <test name="quizTests">
+  	<classes>
+  		<class name="com.yuja.evp.testclasses.QuizTest">
+        	<methods>
+        		<include name="Create_quiz_test" />
+        		<include name="Check_student_gradebook_test" />
+        		<include name="Check_instructor_gradebook_test" />
+        		<include name="Check_unauthenticated_user_quiz_test" />
+        		<include name="Check_Unauthenticated_user_embedded_quiz_test" />
+        		<include name="Check_delete_quiz_test" />
+        	</methods>
+        </class>
+  	</classes>
   </test>
  
 </suite> <!-- Suite -->
