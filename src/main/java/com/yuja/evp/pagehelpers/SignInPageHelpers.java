@@ -3,6 +3,7 @@ package com.yuja.evp.pagehelpers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.yuja.evp.utilities.Driver;
 import com.yuja.evp.utilities.Helpers;
 
 public class SignInPageHelpers extends Helpers{
@@ -43,7 +44,7 @@ public class SignInPageHelpers extends Helpers{
 	///////////////////////////////////////////////////////////////////////////
 	
 	public void navigateToLoginPage() {
-		URL = prop.getProperty("URL")+"Login?accesstype=YuJa%20Credentials";
+		URL = prop.getProperty("loginPageURL");
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
 	}
 	
@@ -84,7 +85,7 @@ public class SignInPageHelpers extends Helpers{
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public String getPageTitle() {
-		return driver.getTitle();
+		return Driver.getDriver().getTitle();
 	}
 	
 	private void fillInUserId(String username) {

@@ -26,10 +26,9 @@ public class Wrapper {
 	protected static Properties config, prop;
 	public static int Default_Wait_For_Page;
 	public static String Environment, Browser, Application_Name, URL, Scenario_Name, Test_Sheet_Path, refTestDataName;
-	public static WebDriver driver;
 
-	public Wrapper() {
-		
+	public void loadConfig() {
+		System.out.println("Loading the configuration property file");
 		//Loading the configuration properties file
 		config = new Properties();
 		try {
@@ -45,13 +44,18 @@ public class Wrapper {
 	}
 
 	public void loadObject() {
+		System.out.println("Loading objects");
 		prop = new Properties();
+		System.out.println("loading properties");
 		try {
-			prop.load(new FileInputStream(new File("./Credentials.properties")));
-			prop.load(new FileInputStream(new File("./applicationURL.properties")));
+			prop.load(new FileInputStream(new File("./credentials.properties")));
+			System.out.println("user details loaded");
+			prop.load(new FileInputStream(new File("./urls.properties")));
+			System.out.println("urls loaded");
 			prop.load(new FileInputStream(new File("./pageObjects.properties")));
+			System.out.println("page objects loaded");
 			prop.load(new FileInputStream(new File("./config.properties")));
-
+			System.out.println("cofig properties loaded");
 		} catch (FileNotFoundException e) {
 			System.err.println("'*.properties' multiple file load Error. Please check the file exist/name of the file");
 			e.printStackTrace();
@@ -62,6 +66,7 @@ public class Wrapper {
 	}
 
 	public void suiteVariables() {
+		System.out.println("Loading the suite variables");
 		// Assigning time out values
 		Default_Wait_For_Page = Integer.parseInt(config.getProperty("Default_Wait_For_Page"));
 		// Application Name
@@ -74,101 +79,10 @@ public class Wrapper {
 		URL = prop.getProperty(Environment + ".URL." + Application_Name);
 		// Test Case Sheet Path
 		Test_Sheet_Path = config.getProperty("Test_Sheet_Path");
-
 	}
-
-	public boolean launchBrowser(String browserName) {
-		boolean bReturn = false;
-
-		try {
-
-			switch (browserName.toUpperCase()) {
-			case "CHROME":
-				
-				System.out.println("Launching Chrome Browser");
-				String chrome = "./" + config.getProperty("Browser_Drivers_Path") + "/chromedriver.exe";
-				System.setProperty("webdriver.chrome.driver", chrome);
-				
-
-				// Cleaning the Chrome Memory
-				Runtime.getRuntime().exec("taskkill /F /IM ChromeDriver.exe");
-
-				// Setting up IE chrome options
-				ChromeOptions chromeOptions = new ChromeOptions();
-				chromeOptions.addArguments("--remote-allow-origins=*");
-				
-				// Creating the driver variable
-				Thread.sleep(2000);
-				Map<String, Object> prefs = new HashMap<String, Object>();
-				
-				String userDirectoryPath = Paths.get("").toAbsolutePath().toString();
-				String defaultDownloadDirectoryPath = userDirectoryPath + "\\src\\fileResources\\downloads";
-				
-				prefs.put("download.default_directory", defaultDownloadDirectoryPath);
-				chromeOptions.setExperimentalOption("prefs", prefs);
-				driver = new ChromeDriver(chromeOptions);
-				Thread.sleep(2000);
-				driver.manage().timeouts().implicitlyWait(Default_Wait_For_Page, TimeUnit.SECONDS);
-				bReturn = true;
-				break;
-
-			case "IE":
-
-				System.out.println("Launching IE Browser");
-				String IE = "./" + config.getProperty("Browser_Drivers_Path") + "/IEDriverServer.exe";
-				System.setProperty("webdriver.ie.driver", IE);
-
-				// Cleaning the iexplore memory
-				Runtime.getRuntime().exec("taskkill /F /IM IEDriverServer.exe");
-				Runtime.getRuntime().exec("taskkill /F /IM iexplore.exe");
-
-				// Setting up IE browser options
-				InternetExplorerOptions ieOptions = new InternetExplorerOptions();
-				ieOptions.introduceFlakinessByIgnoringSecurityDomains();
-				ieOptions.requireWindowFocus();
-				ieOptions.ignoreZoomSettings();
-
-				Thread.sleep(2000);
-				// Creating the driver variable
-				driver = new InternetExplorerDriver(ieOptions);
-				Thread.sleep(2000);
-
-				driver.manage().window().maximize();
-				driver.manage().timeouts().implicitlyWait(Default_Wait_For_Page, TimeUnit.SECONDS);
-
-				System.out.println(driver.getTitle());
-
-				WebElement zoomSettings = driver.findElement(By.tagName("html"));
-				zoomSettings.sendKeys(Keys.chord(Keys.CONTROL, "0"));
-
-				bReturn = true;
-				break;
-
-			case "FIREFOX":
-
-				System.out.println("Launching FireFox Browser");
-				String fireFox = "./" + config.getProperty("Browser_Drivers_Path") + "/geckodriver.exe";
-				System.setProperty("webdriver.gecko.driver", fireFox);
-
-				FirefoxOptions firefoxOptions = new FirefoxOptions();
-
-				// Creating the driver variable
-				driver = new FirefoxDriver(firefoxOptions);
-				driver.manage().timeouts().implicitlyWait(Default_Wait_For_Page, TimeUnit.SECONDS);
-
-				bReturn = true;
-				break;
-			}
-		} catch (Exception e) {
-			System.err.println("Browser driver initiation failed - Exception");
-			e.printStackTrace();
-		}
-		return bReturn;
-	}
-
-
-	// Clearing variables memory
+	
 	public void clearingMemory() {
+		System.out.println("Clearing attributes from memory");
 		prop.clear();
 		prop = null;
 		config.clear();
@@ -179,9 +93,7 @@ public class Wrapper {
 		Browser = "";
 		URL = "";
 		Test_Sheet_Path = "";
-
 		Scenario_Name = "";
-
 	}
 	
 }

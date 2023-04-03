@@ -12,6 +12,8 @@ import com.yuja.evp.modalhelpers.MediaDetailsModalHelperMethods;
 import com.yuja.evp.pagehelpers.AccessiblityPageHelpers;
 import com.yuja.evp.pagehelpers.MediaLibraryPageHelpers;
 import com.yuja.evp.pagehelpers.NavigationBarHelpers;
+import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
 
 import net.jodah.failsafe.internal.util.Assert;
 
@@ -59,7 +61,7 @@ public class AccessiblityPageTestMethods extends AccessiblityPageHelpers {
 		hoverOverElement(media);
 		clickElement(media, "More menu", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 10);
 		mediaDetailsModal.clickAccessiblity();
-		WebElement humancaptionButton=driver.findElement(By.id("humanCaptionButtonID"));
+		WebElement humancaptionButton=Driver.getDriver().findElement(By.id("humanCaptionButtonID"));
 		boolean originalIsEnabled = humancaptionButton.isEnabled();
 	    boolean afterIsEnabled = !originalIsEnabled;
 	    URL = "https://staging-demo.yuja.com/P/Institution/AccessibilityOptions/";
@@ -80,7 +82,7 @@ public class AccessiblityPageTestMethods extends AccessiblityPageHelpers {
 	              }
 	         }
 	         else {
-	        	Select rolesDropdown = new Select(driver.findElement(By.xpath("//div[@class=\"form-group\"]/select[@class=\"form-control\"]")));
+	        	Select rolesDropdown = new Select(Driver.getDriver().findElement(By.xpath("//div[@class=\"form-group\"]/select[@class=\"form-control\"]")));
 	 			rolesDropdown.selectByVisibleText("IT Manager");
 	 			clickElement("add Persmission button", By.xpath("//button[@title='Add Permission']"), 10);
 	 			savePermission();
@@ -93,10 +95,10 @@ public class AccessiblityPageTestMethods extends AccessiblityPageHelpers {
 	 		mediaDetailsModal.clickAccessiblity();
 	 		
 	         if(mediaDetailsModal.captionButtonEnabledStateIsAsExpected("human caption",afterIsEnabled, originalIsEnabled, 10, "humancaption")) {
-	        	 reportStep("All caption providers are available","PASS",false);
+	        	 Report.reportStep(Driver.getDriver(), "All caption providers are available","PASS",false);
 	         }
 	         else {
-	        	 reportStep("All caption providers are not present","FAIL", true);
+	        	 Report.reportStep(Driver.getDriver(), "All caption providers are not present","FAIL", true);
 	         }
 		}
 }

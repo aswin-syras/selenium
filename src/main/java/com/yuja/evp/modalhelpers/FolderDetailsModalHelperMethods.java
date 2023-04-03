@@ -6,6 +6,8 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
 import com.yuja.evp.utilities.Helpers;
 
 public class FolderDetailsModalHelperMethods extends Helpers{
@@ -72,12 +74,12 @@ public class FolderDetailsModalHelperMethods extends Helpers{
 			tagNames.add(tagName);
 		}
 		if(tagNames.contains("Tag") && oldTitle.equals(title) && oldDescription.equals(description)) {
-			reportStep("The folder with the title \"" + oldTitle + "\" failed to edit", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), "The folder with the title \"" + oldTitle + "\" failed to edit", "FAIL", true);
 		}
 		else {
-			reportStep("The folder with the title \"" + oldTitle + "\" is now edited and the new title is \"" + title + "\"", "PASS", false);
-			reportStep("Added descrption \"" + description + "\" and tags \"" + tagNames + "\"", "PASS", false);
-			reportStep("The folder with the title \"" + title + "\" has been deleted ", "PASS", false);
+			Report.reportStep(Driver.getDriver(), "The folder with the title \"" + oldTitle + "\" is now edited and the new title is \"" + title + "\"", "PASS", false);
+			Report.reportStep(Driver.getDriver(), "Added descrption \"" + description + "\" and tags \"" + tagNames + "\"", "PASS", false);
+			Report.reportStep(Driver.getDriver(), "The folder with the title \"" + title + "\" has been deleted ", "PASS", false);
 		}
 	}
 	

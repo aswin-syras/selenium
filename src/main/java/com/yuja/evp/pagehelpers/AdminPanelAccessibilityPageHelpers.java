@@ -2,6 +2,9 @@ package com.yuja.evp.pagehelpers;
 
 import org.openqa.selenium.By;
 
+import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
+
 import helperinterfaces.UICheck;
 
 public class AdminPanelAccessibilityPageHelpers extends AdminPanelGeneralPageHelpers implements UICheck {
@@ -9,11 +12,11 @@ public class AdminPanelAccessibilityPageHelpers extends AdminPanelGeneralPageHel
 	public void CheckPageUI() {
 		URL = prop.getProperty("URL")+"P/Institution/AccessibilityOptions/";
 		launchUrl(URL, "Test Automation Enterprise Video Platform");
-		String sectionTitle = driver.findElement(By.id("secondPartText")).getText();
+		String sectionTitle = Driver.getDriver().findElement(By.id("secondPartText")).getText();
 		boolean check  = waitForElement(By.id("accessibilityPanel"),10).isDisplayed();
 		if(check && sectionTitle.equals("Accessibility")) {
-			reportStep(sectionTitle + " Page loaded successfully", "PASS", false);
+			Report.reportStep(Driver.getDriver(), sectionTitle + " Page loaded successfully", "PASS", false);
 			System.out.println(sectionTitle);
-		} else reportStep(sectionTitle + "failed to load", "fail", true);	
+		} else Report.reportStep(Driver.getDriver(), sectionTitle + "failed to load", "fail", true);	
 	}
 }

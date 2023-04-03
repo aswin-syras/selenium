@@ -7,6 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import com.yuja.evp.pagehelpers.MediaLibraryPageHelpers;
 import com.yuja.evp.pagehelpers.NavigationBarHelpers;
+import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
 import com.yuja.evp.utilities.Helpers;
 import com.yuja.evp.utilities.Helpers;
 
@@ -47,7 +49,7 @@ public class MediaDetailsModalHelperMethods extends Helpers {
 	}
 	
 	public WebElement getActivityLogforQuizSync() {
-		WebElement log=driver.findElement(By.xpath("//div[@class='panel panel-default quizLogPanel']/div[2]/div"));
+		WebElement log = Driver.getDriver().findElement(By.xpath("//div[@class='panel panel-default quizLogPanel']/div[2]/div"));
 		return log;
 	}
 	
@@ -107,25 +109,25 @@ public class MediaDetailsModalHelperMethods extends Helpers {
 		mediaLibrary.navigateToChannel(publishCourseName);
 		boolean check = mediaExists(VideoReplaced);
 		if (check) {
-			reportStep("Video Replaced", "PASS", false);
+			Report.reportStep(Driver.getDriver(), "Video Replaced", "PASS", false);
 			WebElement mediaFile = getMedia(VideoReplaced);
 			hoverOverElement(mediaFile);
 			clickElement("Unpublish button",By.cssSelector("[data-automation=\"btnInVideoMenuUnpublish\"]"));
 			clickElement("Yes ",By.xpath("//*[@id=\"unlinkModalDialog\"]/div[1]/div/div/div[2]/div[2]/button[2]"));			
 			clickElement("My media ", By.xpath("//*[@id=\"di_sidebarFolderSection\"]/div[2]/div/div[1]"));
-			driver.navigate().refresh();
+			Driver.getDriver().navigate().refresh();
 			mediaLibrary.deleteMedia(replaceVideo);
-			driver.navigate().refresh();
+			Driver.getDriver().navigate().refresh();
 			boolean mediaDoesntExist = !mediaExists("testReplaceVideo");
 			System.out.println("mediaExist = " + mediaDoesntExist);
 			if (mediaDoesntExist) {
-				reportStep("Media was succesfully deleted", "PASS", false);
+				Report.reportStep(Driver.getDriver(), "Media was succesfully deleted", "PASS", false);
 			} else {
-				reportStep("Media was not succesfully deleted", "FAIL", true);
+				Report.reportStep(Driver.getDriver(), "Media was not succesfully deleted", "FAIL", true);
 			}
 		} else 
 		{
-			reportStep("Video not Replaced", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), "Video not Replaced", "FAIL", true);
 		}
 	}
 	
@@ -139,7 +141,7 @@ public class MediaDetailsModalHelperMethods extends Helpers {
 			WebElement captionButton;
 			for(int i = 0; !thisIsTrue && i < numberOfChecks; i++) {
 				clickElement("Media Details Close button", By.cssSelector("[data-automation=\"btnCancelMediaDetails\"]"));
-				driver.navigate().refresh();
+				Driver.getDriver().navigate().refresh();
 				mediaLibrary.accessMediaMoreMenu(mediaTitle);
 				clickElement("Accessibility tab", By.cssSelector("[data-automation=\"btnAccessibilityDetails\"]"));
                 captionButton = waitForElement(By.cssSelector(buttonTypes.get(typeOfButton)), 10);

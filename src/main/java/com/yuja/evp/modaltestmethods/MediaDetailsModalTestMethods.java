@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import com.yuja.evp.modalhelpers.MediaDetailsModalHelperMethods;
 import com.yuja.evp.pagehelpers.MediaLibraryPageHelpers;
 import com.yuja.evp.pagehelpers.NavigationBarHelpers;
+import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
 
 import net.jodah.failsafe.internal.util.Assert;
 
@@ -41,20 +43,20 @@ public class MediaDetailsModalTestMethods extends MediaDetailsModalHelperMethods
 		mediaLibrary.navigateToChannel(destinationChannelName);
 		boolean mediaIsPublished = mediaExists(mediaTitle);
 		if(mediaIsPublished) {
-			reportStep("Media with title " + mediaTitle + " was succesfully published " + destinationChannelName, "PASS", false);
+			Report.reportStep(Driver.getDriver(), "Media with title " + mediaTitle + " was succesfully published " + destinationChannelName, "PASS", false);
 		}
 		else {
-			reportStep("Media with title " + mediaTitle + " was not published " + destinationChannelName, "FAIL", true);
+			Report.reportStep(Driver.getDriver(), "Media with title " + mediaTitle + " was not published " + destinationChannelName, "FAIL", true);
 		}
 		//unpublishing the media
 		mediaLibrary.unpublishMedia(mediaTitle);
 		//check that media was unpublished
 		mediaIsPublished = mediaExists(mediaTitle);
 		if(!mediaIsPublished) {
-			reportStep("Media with title " + mediaTitle + " was succesfully unpublished " + destinationChannelName, "PASS", false);
+			Report.reportStep(Driver.getDriver(), "Media with title " + mediaTitle + " was succesfully unpublished " + destinationChannelName, "PASS", false);
 		}
 		else {
-			reportStep("Media with title " + mediaTitle + " was not unpublished " + destinationChannelName, "FAIL", true);
+			Report.reportStep(Driver.getDriver(), "Media with title " + mediaTitle + " was not unpublished " + destinationChannelName, "FAIL", true);
 		}
 	}
 	public void replaceMedia(String userName, String password, String replaceMedia, String VideoReplaced,String userID,String shareUserName, String shareUserPassword, String destinationChannelName) throws InterruptedException {
@@ -69,7 +71,7 @@ public class MediaDetailsModalTestMethods extends MediaDetailsModalHelperMethods
 			}
 			else
 			{
-				reportStep(replaceMedia + " media not fully proccessed", "FAIL", true);
+				Report.reportStep(Driver.getDriver(), replaceMedia + " media not fully proccessed", "FAIL", true);
 				Assert.state(processed, "Video failed to process");
 			}
 	}

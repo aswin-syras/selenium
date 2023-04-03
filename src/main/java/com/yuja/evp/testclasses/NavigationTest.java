@@ -11,6 +11,8 @@ import com.yuja.evp.pagehelpers.MediaChannelPageHelpers;
 import com.yuja.evp.pagehelpers.NavigationBarHelpers;
 import com.yuja.evp.pagehelpers.SignInPageHelpers;
 import com.yuja.evp.pagetestmethods.MediaLibraryPageTestMethods;
+import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
 
 public class NavigationTest extends BaseTest {
 	
@@ -33,7 +35,7 @@ public class NavigationTest extends BaseTest {
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			reportStep("@Method "+Scenario_Name +" exception to be handled", "Fail", true);
+			Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "Fail", true);
 		}	
 		
 	}
@@ -58,7 +60,7 @@ public class NavigationTest extends BaseTest {
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			reportStep("@Method "+Scenario_Name +" exception to be handled", "Fail", true);
+			Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "Fail", true);
 		}	
 		
 	}
@@ -83,7 +85,7 @@ public class NavigationTest extends BaseTest {
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			reportStep("@Method "+Scenario_Name +" exception to be handled", "Fail", true);
+			Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "Fail", true);
 		}		
 		
 	}
@@ -110,7 +112,7 @@ public class NavigationTest extends BaseTest {
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			reportStep("@Method "+Scenario_Name +" exception to be handled", "Fail", true);
+			Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "Fail", true);
 		}		
 		
 	}
@@ -136,7 +138,7 @@ public class NavigationTest extends BaseTest {
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			reportStep("@Method "+Scenario_Name +" exception to be handled", "Fail", true);
+			Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "Fail", true);
 		}		
 		
 	}	

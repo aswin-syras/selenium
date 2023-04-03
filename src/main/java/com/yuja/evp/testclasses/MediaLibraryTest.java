@@ -3,6 +3,8 @@ package com.yuja.evp.testclasses;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import com.yuja.evp.pagetestmethods.MediaLibraryPageTestMethods;
+import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
 
 public class MediaLibraryTest extends BaseTest{
 		
@@ -331,7 +333,7 @@ public class MediaLibraryTest extends BaseTest{
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 		}
 	  }
 	 
@@ -347,7 +349,7 @@ public class MediaLibraryTest extends BaseTest{
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 		}
 	  }
 	 
@@ -363,7 +365,7 @@ public class MediaLibraryTest extends BaseTest{
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 		}
 	  }
 	 

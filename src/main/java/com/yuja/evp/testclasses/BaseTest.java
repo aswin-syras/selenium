@@ -2,6 +2,7 @@ package com.yuja.evp.testclasses;
 
 import com.relevantcodes.extentreports.ExtentTest;
 import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
 import com.yuja.evp.utilities.Helpers;
 import com.yuja.evp.utilities.Wrapper;
 
@@ -18,17 +19,16 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.AfterSuite;
 
-public class BaseTest extends Report {
+public class BaseTest extends Wrapper {
 	
-	public String pw;
-
 	public ITestContext testContext;
+	public String testDescription;
 
 	@BeforeMethod(alwaysRun = true)
 	@Parameters({ "TestName" })
 	public void beforeMethod(String refTestSheetName, Method M, ITestContext context) {
 		
-		System.out.println("@BeforeMethod");
+		System.out.println("@BeforeMethod; Current thread: " + Thread.currentThread().getId());
 
 		// Sheet reference for test data
 		refTestDataName = refTestSheetName;
@@ -39,67 +39,60 @@ public class BaseTest extends Report {
 		testDescription = testRunning.description();
 
 		// Creation of Report Steps
-		ExtentTest test = startTestCase(Scenario_Name, testDescription);
+		ExtentTest test = Report.startTestCase(Scenario_Name, testDescription);
 		test.assignAuthor("EVP_Automated_Test");
 		test.assignCategory("Regression_Testing");
 		
-		launchBrowser(Browser);
-
+		Driver.setDriver(config, Browser);
 	}
 
 	@AfterMethod(alwaysRun = true)
 	public void afterMethod() {
-		// extentreport.reportend
 		System.out.println("@AfterMethod");
-		// Complete the test case
-		if (driver != null) {
-			driver.quit();
-		}
-		endTestcase();
+		Driver.closeBrowser();
+		Report.endTestcase();
 	}
 
 	@BeforeTest
 	public void beforeTest() {
 		System.out.println("@BeforeTest");
-
-		// XmlSuite suite = testContext.getSuite().getXmlSuite();
-		// System.out.println(testContext.getCurrentXmlTest().getName());
-		// Scenario_Name = testContext.getSuite().getName().toString();
-		// Get thread count
-		// int threads = suite.getThreadCount();
-		// System.out.println(suite.getCurrentXmlTest().getSuite().getFileName().length());
-
 	}
 
 	@AfterTest
 	public void afterTest() {
 		System.out.println("@AfterTest");
-		endTestcase();
 	}
 
 	@BeforeSuite
 	public void beforeSuite() {
-
-		System.out.println("Initiating Automation Suite...");
+		System.out.println("@BeforeSuite");
+		System.out.println("Initiating the automation test suite");
+		
+		try {
+			Runtime.getRuntime().exec("taskkill /F /IM ChromeDriver.exe");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		// Creating the Test Report
-		startResult();
+		Report.startResult();
+		
 		// Loading the Objects (Page Objects) and variables
+		loadConfig();
 		loadObject();
 		suiteVariables();
-		// Launching the Browser
-		//launchBrowser(Browser);
 	}
 
 	@AfterSuite
 	public void afterSuite() {
+		System.out.println("@AfterSuite");
 		System.out.println("Clearing variables and object memory");
-//		if (driver != null) {
-//			driver.quit();
-//		}
-		endResult();
-		System.out.println("...Exiting Automation Suite");
+
+		Report.endResult();
+		System.out.println("Exiting the automation test suite");
+		
 		// Displaying the Executed Test Result
-		testDisplayResult();
+		Report.testDisplayResult();
 		clearingMemory();
 	}
 

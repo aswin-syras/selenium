@@ -3,6 +3,8 @@ package com.yuja.evp.pagehelpers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import com.yuja.evp.utilities.Driver;
 import com.yuja.evp.utilities.Helpers;
 
 
@@ -59,7 +61,7 @@ public class HomePageHelpers extends Helpers{
 	}
 	
 	private String getPageTitle() {
-		return driver.getTitle();
+		return Driver.getDriver().getTitle();
 	}
 
 }

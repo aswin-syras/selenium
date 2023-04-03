@@ -13,6 +13,8 @@ import com.yuja.evp.pagehelpers.MediaChannelPageHelpers;
 import com.yuja.evp.pagehelpers.MyAccountPageHelpers;
 import com.yuja.evp.pagehelpers.NavigationBarHelpers;
 import com.yuja.evp.pagehelpers.QuizPageHelpers;
+import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
 
 public class QuizPageTestMethods extends QuizPageHelpers{
 	
@@ -29,7 +31,7 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 			navigationBar.userLogOut();
 			mediaLibrary.navigateToMyMediaUserLogin(studentUserName, studentPassword);
 			for(int i=0;i<5;i++) {
-				driver.navigate().refresh();
+				Driver.getDriver().navigate().refresh();
 				navigationBar.clickNotifications();
 				Thread.sleep(5000);
 				if( verifyElementExist("Quiz Notificaton",By.xpath("//div[@class='post']"))){
@@ -40,7 +42,7 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 			switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
 			clickPlaybutton();
 			Thread.sleep(5000);
-			driver.switchTo().defaultContent();
+			Driver.getDriver().switchTo().defaultContent();
 			StudentattendallquestionsCorrectly(sa, fitbans);
 			clickElement("go to media collection button",By.xpath("//button[@title='Exit Quiz']"),10);
 			Thread.sleep(3000);
@@ -59,32 +61,32 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 			myAccount.clickMyGrades();
 			gradebook.clickSelectCourse();
 			Thread.sleep(3000);
-			List <WebElement> element1= driver.findElements(By.xpath("//input[@class='select2-input']"));
+			List <WebElement> element1= Driver.getDriver().findElements(By.xpath("//input[@class='select2-input']"));
 			WebElement element2=element1.get(element1.size()-1);
 			typeKeys(courseName);
 			keyboardEnter();
 			Thread.sleep(3000);
 			gradebook.clickSelectQuiz();
 			Thread.sleep(3000);
-			List <WebElement> element3= driver.findElements(By.xpath("//input[@class='select2-input']"));
+			List <WebElement> element3= Driver.getDriver().findElements(By.xpath("//input[@class='select2-input']"));
 			WebElement element4=element3.get(element3.size()-1);
 			typeKeys(quizName);
 			keyboardEnter();
 			gradebook.clickGetGradebookReport();
 			Thread.sleep(3000);
 			
-			String question1correctness = driver.findElement(By.xpath("//table/tbody/tr[1]/td[3]")).getText();
-			String question2correctness = driver.findElement(By.xpath("//table/tbody/tr[2]/td[3]")).getText();
-			String question3correctness = driver.findElement(By.xpath("//table/tbody/tr[3]/td[3]")).getText();
-			String question4correctness = driver.findElement(By.xpath("//table/tbody/tr[4]/td[3]")).getText();
-			String question5correctness = driver.findElement(By.xpath("//table/tbody/tr[5]/td[3]")).getText();
-			String question6correctness = driver.findElement(By.xpath("//table/tbody/tr[6]/td[3]")).getText();
+			String question1correctness = Driver.getDriver().findElement(By.xpath("//table/tbody/tr[1]/td[3]")).getText();
+			String question2correctness = Driver.getDriver().findElement(By.xpath("//table/tbody/tr[2]/td[3]")).getText();
+			String question3correctness = Driver.getDriver().findElement(By.xpath("//table/tbody/tr[3]/td[3]")).getText();
+			String question4correctness = Driver.getDriver().findElement(By.xpath("//table/tbody/tr[4]/td[3]")).getText();
+			String question5correctness = Driver.getDriver().findElement(By.xpath("//table/tbody/tr[5]/td[3]")).getText();
+			String question6correctness = Driver.getDriver().findElement(By.xpath("//table/tbody/tr[6]/td[3]")).getText();
 			Thread.sleep(3000);
 			
 			if( question1correctness.equals("Correct") && question2correctness.equals("Correct") && question3correctness.equals("Unmarked") && question4correctness.equals("Correct") && question5correctness.equals("Unmarked") && question6correctness.equals("Correct") ) {
-				reportStep("The student grade is displayed correctly ", "PASS", false);
+				Report.reportStep(Driver.getDriver(), "The student grade is displayed correctly ", "PASS", false);
 			} else {
-				reportStep("The student grade is not displayed correctly", "FAIL", true);
+				Report.reportStep(Driver.getDriver(), "The student grade is not displayed correctly", "FAIL", true);
 			}
 			navigationBar.userLogOut();
 		}
@@ -104,10 +106,10 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 			mediaDetailsModal.clickCloseMoreMenu();
 			navigationBar.userLogOut();
 			waitForElement(By.id("loginBtn"), 20);
-			driver.navigate().to(directLink);
+			Driver.getDriver().navigate().to(directLink);
 			switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
 			clickPlaybutton();
-			driver.switchTo().defaultContent();
+			Driver.getDriver().switchTo().defaultContent();
 			StudentattendallquestionsCorrectly(sa, fitbans);
 			Thread.sleep(2000);
 			loginAsCreator(userName, password);
@@ -122,16 +124,16 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 			sendKeys("Search for quizzes", By.id("quiz-search-input"), quizName);
 			mediaDetailsModal.clickQuizLinksdrop();
 			clickElement("click on embed code",By.xpath("//input[@id='embedCodeInputBox']"),10);
-			//driver.findElement(By.xpath("//input[@id='embedCodeInputBox']")).click(); 
-			Actions action=new Actions(driver);
+			//Driver.getDriver().findElement(By.xpath("//input[@id='embedCodeInputBox']")).click(); 
+			Actions action=new Actions(Driver.getDriver());
 			action.keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL).build().perform();
 			action.keyDown(Keys.CONTROL).sendKeys("c").keyUp(Keys.CONTROL).build().perform();
 			mediaDetailsModal.clickCloseMoreMenu();
 			navigationBar.userLogOut();
 			waitForElement(By.id("loginBtn"), 20);
-			driver.navigate().to("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_intro");
+			Driver.getDriver().navigate().to("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_intro");
 			Thread.sleep(6000);
-			WebElement text= driver.findElement(By.xpath("//div[@class='CodeMirror-code']//child::pre[13]"));
+			WebElement text= Driver.getDriver().findElement(By.xpath("//div[@class='CodeMirror-code']//child::pre[13]"));
 			//text.click();
 			clickElement("click on text field",text);
 			action.keyDown(Keys.CONTROL).sendKeys("v").keyUp(Keys.CONTROL).build().perform();
@@ -139,14 +141,14 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 			clickElement("run button",By.xpath("//button[@id='runbtn']"),10);
 			Thread.sleep(4000);
 			switchToIframe("switch to iframe result", By.id("iframeResult"), 10);
-			//driver.switchTo().frame("iframeResult");
+			//Driver.getDriver().switchTo().frame("iframeResult");
 			Thread.sleep(4000);
-			WebElement frame = driver.findElement(By.xpath("//iframe[contains(@src,'"+prop.getProperty("URL")+"')]"));
-			driver.switchTo().frame(frame);
+			WebElement frame = Driver.getDriver().findElement(By.xpath("//iframe[contains(@src,'"+prop.getProperty("URL")+"')]"));
+			Driver.getDriver().switchTo().frame(frame);
 			Thread.sleep(4000);
 			switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
 			clickPlaybutton();
-			driver.switchTo().parentFrame();
+			Driver.getDriver().switchTo().parentFrame();
 			StudentattendallquestionsCorrectly(sa, fitbans);
 			Thread.sleep(2000);
 			loginAsCreator(userName, password);
@@ -161,12 +163,12 @@ public class QuizPageTestMethods extends QuizPageHelpers{
 			sendKeys("Search for quizzes", By.id("quiz-search-input"), quizName);
 			mediaDetailsModal.clickDeleteQuizButton();
 			clickElement("yes",By.xpath("//button[@title='Yes']"),10);
-			String x=driver.findElement(By.xpath("//div[@class='toast-message']")).getAttribute("innerHTML");
+			String x=Driver.getDriver().findElement(By.xpath("//div[@class='toast-message']")).getAttribute("innerHTML");
 			
 			if( x.equals("Your quiz has been deleted.") ){
-				reportStep("The quiz is  deleted sucessfully ", "PASS", false);
+				Report.reportStep(Driver.getDriver(), "The quiz is  deleted sucessfully ", "PASS", false);
 			} else {
-				reportStep("TThe quiz is not deleted sucessfully", "FAIL", true);
+				Report.reportStep(Driver.getDriver(), "TThe quiz is not deleted sucessfully", "FAIL", true);
 			}
 		}
 		

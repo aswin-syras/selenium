@@ -12,6 +12,8 @@ import com.yuja.evp.modalhelpers.AddMediaModalHelperMethods;
 import com.yuja.evp.pagehelpers.AdminPanelBrandingPageHelpers;
 import com.yuja.evp.pagehelpers.MediaPlayerHelpers;
 import com.yuja.evp.pagehelpers.NavigationBarHelpers;
+import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
 
 public class MediaPlayerSideBarTestMethods extends MediaPlayerHelpers{
 	
@@ -33,7 +35,7 @@ public class MediaPlayerSideBarTestMethods extends MediaPlayerHelpers{
 
 		// captions
 		clickElement("Caption button", By.xpath("//img[@title='Captions']"));
-		List<WebElement> op = driver.findElements(By.id("captionsContent"));
+		List<WebElement> op = Driver.getDriver().findElements(By.id("captionsContent"));
 		int size = op.size();
 		String captions; // Arraylist to store captions
 		ArrayList<String> captionList = new ArrayList<String>();
@@ -43,29 +45,29 @@ public class MediaPlayerSideBarTestMethods extends MediaPlayerHelpers{
 			captions = op.get(i).getText();
 			captionList.add(captions);
 		}
-		reportStep("Caption list \"" + captionList, "PASS", false);
+		Report.reportStep(Driver.getDriver(), "Caption list \"" + captionList, "PASS", false);
 
 		// Notes
 		clickElement("Note button", By.xpath("//img[@title='Notes']"));
-		driver.findElement(By.xpath("//textarea[@id='noteBox']")).click();
+		Driver.getDriver().findElement(By.xpath("//textarea[@id='noteBox']")).click();
 		String arraynotes[] = { "first note", "second note", "third note" };
 		int length = arraynotes.length;
 		for (int i = 0; i < length; i++) {
 			typeKeys(arraynotes[i]);
-			driver.findElement(By.xpath("//img[@id='noteButton']")).click();
-			driver.findElement(By.xpath("//textarea[@id='noteBox']")).click();
+			Driver.getDriver().findElement(By.xpath("//img[@id='noteButton']")).click();
+			Driver.getDriver().findElement(By.xpath("//textarea[@id='noteBox']")).click();
 		}
 		Thread.sleep(2000);
 
 		// Comments
 		clickElement("Comment button", By.xpath("//img[@title='Comments']"));
-		driver.findElement(By.xpath("//textarea[@id='commentBox']")).click();
+		Driver.getDriver().findElement(By.xpath("//textarea[@id='commentBox']")).click();
 		String arraycomments[] = { "first comment", "second comment", "third comment" };
 		int arraylength = arraycomments.length;
 		for (int i = 0; i < arraylength; i++) {
 			typeKeys(arraycomments[i]);
-			driver.findElement(By.xpath("//img[@id='commentButton']")).click();
-			driver.findElement(By.xpath("//textarea[@id='commentBox']")).click();
+			Driver.getDriver().findElement(By.xpath("//img[@id='commentButton']")).click();
+			Driver.getDriver().findElement(By.xpath("//textarea[@id='commentBox']")).click();
 		}
 
 		// Resources
@@ -73,9 +75,9 @@ public class MediaPlayerSideBarTestMethods extends MediaPlayerHelpers{
 		clickElement("Download caption file", By.xpath("//img[@id='downloadTranscriptButton']"));
 		Thread.sleep(3000);
 		if (captionFileExistsInSystem()) {
-			reportStep("File was succesfully downloaded and deleted", "PASS", false);
+			Report.reportStep(Driver.getDriver(), "File was succesfully downloaded and deleted", "PASS", false);
 		} else {
-			reportStep("File was not downloaded ", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), "File was not downloaded ", "FAIL", true);
 		}
 	}	
 	

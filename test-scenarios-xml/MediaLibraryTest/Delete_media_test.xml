@@ -7,7 +7,7 @@
   	<classes>
       <class name="com.yuja.evp.testclasses.MediaLibraryTest">
 	      <methods>
-	          <include name="Delete_media_manager_test" />
+	          <include name="Delete_media_test" />
 	      </methods>
         </class>
     </classes>

@@ -22,6 +22,8 @@ import com.yuja.evp.pagehelpers.MediaLibraryPageHelpers;
 import com.yuja.evp.pagehelpers.NavigationBarHelpers;
 import com.yuja.evp.pagehelpers.QuizPageHelpers;
 import com.yuja.evp.pagetestmethods.MediaLibraryPageTestMethods;
+import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
 import com.yuja.evp.utilities.Helpers;
 
 public class MoodlePage extends QuizPageHelpers {
@@ -64,7 +66,7 @@ public class MoodlePage extends QuizPageHelpers {
 	
 	public void navigateToCourse(String userName, String password){
 		navigateToLoginPage();
-		driver.manage().window().maximize();
+		Driver.getDriver().manage().window().maximize();
 		loginFast(userName, password);
 		waitForElement(By.xpath("//span[@class='site-name d-none d-md-inline']"), 10);
 		String URL = "https://tmoodle2.yuja.com/course/view.php?id=142";
@@ -86,7 +88,7 @@ public class MoodlePage extends QuizPageHelpers {
 	
 	public void createMoodleCourse(String adminUserName, String adminPassword, String courseName, String courseShortName) throws InterruptedException{
 		navigateToLoginPage();
-		driver.manage().window().maximize();
+		Driver.getDriver().manage().window().maximize();
 		loginFast(adminUserName, adminPassword);
 		waitForElement(By.xpath("//span[@class='site-name d-none d-md-inline']"), 10);
 		String URL = "https://tmoodle2.yuja.com/admin/search.php#linkcourses";
@@ -100,7 +102,7 @@ public class MoodlePage extends QuizPageHelpers {
 	
 	public String createMoodleUser(String adminUserName, String adminPassword,  String email, String newUsername, String newUserPassword) throws InterruptedException{
 		navigateToLoginPage();
-		driver.manage().window().maximize();
+		Driver.getDriver().manage().window().maximize();
 		loginFast(adminUserName, adminPassword);
 		waitForElement(By.xpath("//span[@class='site-name d-none d-md-inline']"), 10);
 		String URL = "https://tmoodle2.yuja.com/admin/search.php#linkusers";
@@ -108,7 +110,7 @@ public class MoodlePage extends QuizPageHelpers {
 		clickElement("add a new user button", By.xpath("//a[text()='Add a new user']"));
 		String newUserNameRandom=newUsername+getRandomInteger(1000);
 		sendKeys("Enter user name", By.xpath("//input[@name='username']"),newUserNameRandom);
-		WebElement passwordField=driver.findElement(By.xpath("//em[text()='Click to enter text']"));
+		WebElement passwordField=Driver.getDriver().findElement(By.xpath("//em[text()='Click to enter text']"));
 		clickElement("Enter password",passwordField);
 		typeKeys(newUserPassword);
 		sendKeys("Enter first name", By.xpath("//input[@name='firstname']"),newUserNameRandom);
@@ -138,7 +140,7 @@ public class MoodlePage extends QuizPageHelpers {
 		Thread.sleep(3000);
 		String quizNewName=createandPublishQuiz(mediaTitle,name,question, option1,  option2, possibleans1, possibleans2, hint,courseName);
 		String quizFinalName="'"+quizNewName+"'";
-		driver.switchTo().defaultContent();
+		Driver.getDriver().switchTo().defaultContent();
 		String URL = "https://tmoodle2.yuja.com/course/view.php?id=142";
 		launchUrl(URL, "Moodle automation course page");
 	        accessCIMMediaChooser();
@@ -150,9 +152,9 @@ public class MoodlePage extends QuizPageHelpers {
 	        switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
 	        clickPlaybutton();
 		Thread.sleep(5000);
-		driver.switchTo().parentFrame();
+		Driver.getDriver().switchTo().parentFrame();
 		StudentattendallquestionsCorrectly(sa, fitbans);
-		driver.switchTo().defaultContent();
+		Driver.getDriver().switchTo().defaultContent();
 		logout();
 		navigateToCourse(userName,password);
 		NavigateToLTI(embedMediaTitle);
@@ -179,7 +181,7 @@ public class MoodlePage extends QuizPageHelpers {
 		mediaDetailsModal.clickQuizzes();
 		String quizNewName=createPlaybackquiz(playbackQuizTitle,videoNameforPlaybackquiz);
 		String quizFinalName="'"+quizNewName+"'";
-		driver.switchTo().defaultContent();
+		Driver.getDriver().switchTo().defaultContent();
 		String URL = "https://tmoodle2.yuja.com/course/view.php?id=142";
 		launchUrl(URL, "Moodle automation course page");
 		accessCIMMediaChooser();
@@ -191,7 +193,7 @@ public class MoodlePage extends QuizPageHelpers {
 	        switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
 		clickPlaybutton();
 		Thread.sleep(48000);
-		driver.switchTo().defaultContent();
+		Driver.getDriver().switchTo().defaultContent();
 		logout();
 		navigateToCourse(userName,password);
 		NavigateToLTI(embedMediaTitle);
@@ -229,7 +231,7 @@ public class MoodlePage extends QuizPageHelpers {
 		mediaChooserBulkUploadMedia(mediaDirectoryPath);
 		List<String> mediaTitlelist=getMediaTitleArrayfromDirectory(mediaDirectoryPath);
 		System.out.println(mediaTitlelist);
-        Actions action = new Actions(driver);
+        Actions action = new Actions(Driver.getDriver());
 		action.sendKeys(Keys.ESCAPE).build().perform();
 	    Thread.sleep(4000);
 		String URL = "https://tmoodle2.yuja.com/course/view.php?id=142";
@@ -247,9 +249,9 @@ public class MoodlePage extends QuizPageHelpers {
 	    mediaLibrary.navigateToMyMediaUserLogin(userName, password);
 	    URL = prop.getProperty("URL")+"P/Institution/APIManagementServlet/";
         launchUrl(URL, "Test Automation Enterprise Video Platform");
-        Select integrationDropdown = new Select(driver.findElement(By.id("apiPicker")));
+        Select integrationDropdown = new Select(Driver.getDriver().findElement(By.id("apiPicker")));
         integrationDropdown.selectByValue("lti3");
-        WebElement checkBox=driver.findElement(By.xpath(provisionType.get(userOrcourse)));
+        WebElement checkBox=Driver.getDriver().findElement(By.xpath(provisionType.get(userOrcourse)));
         boolean autoProvisionCourseCheckboxSelected=checkBox.isSelected();
         System.out.println(autoProvisionCourseCheckboxSelected);
         if(autoProvisionCourseCheckboxSelected^enabledOrDisabled) {
@@ -257,7 +259,7 @@ public class MoodlePage extends QuizPageHelpers {
             clickElement("save",By.xpath("//form[@id=\"lti3SettingsGeneral\"]//button[@title=\"Save\"]") );
             clickElement("save confirm",By.xpath("//div[@class=\"modal-content\"]//button[@title=\"Confirm\"]") );}
             else {
-            	reportStep("The checkbox is setting was same as required","PASS",false);
+            	Report.reportStep(Driver.getDriver(), "The checkbox is setting was same as required","PASS",false);
             }	
         }
 	
@@ -265,15 +267,15 @@ public class MoodlePage extends QuizPageHelpers {
 		 mediaLibrary.navigateToMyMediaUserLogin(userName, password);
 		 URL =  prop.getProperty("URL")+"P/Institution/APIManagementServlet/";
 	     launchUrl(URL, "Test Automation Enterprise Video Platform");
-	     Select integrationDropdown = new Select(driver.findElement(By.id("apiPicker")));
+	     Select integrationDropdown = new Select(Driver.getDriver().findElement(By.id("apiPicker")));
 	     integrationDropdown.selectByValue("lti3");
-	     Select lmsDropdown = new Select(driver.findElement(By.id("LTI3LMSSelect")));
+	     Select lmsDropdown = new Select(Driver.getDriver().findElement(By.id("LTI3LMSSelect")));
 	     lmsDropdown.selectByVisibleText("Moodle");
-	     Select moodleAdminRole = new Select(driver.findElement(By.xpath("(//select[@id=\"moodleAdminRoleTo\"])[2]")));
+	     Select moodleAdminRole = new Select(Driver.getDriver().findElement(By.xpath("(//select[@id=\"moodleAdminRoleTo\"])[2]")));
 	     moodleAdminRole.selectByVisibleText(yujaRolefromAdmin);
-	     Select moodleTeacherRole = new Select(driver.findElement(By.xpath("(//select[@id=\"moodleTeacherRoleTo\"])[2]")));
+	     Select moodleTeacherRole = new Select(Driver.getDriver().findElement(By.xpath("(//select[@id=\"moodleTeacherRoleTo\"])[2]")));
 	     moodleTeacherRole.selectByVisibleText(yujaRolefromTeacher);
-	     Select moodleStudentRole = new Select(driver.findElement(By.xpath("(//select[@id=\"moodleStudentRoleTo\"])[2]")));
+	     Select moodleStudentRole = new Select(Driver.getDriver().findElement(By.xpath("(//select[@id=\"moodleStudentRoleTo\"])[2]")));
 	     moodleStudentRole.selectByVisibleText(yujaRolefromStudent);
 	     clickElement("save",By.xpath("//form[@id=\"lti3SettingsGeneral\"]//button[@title=\"Save\"]") );
          clickElement("save confirm",By.xpath("//div[@class=\"modal-content\"]//button[@title=\"Confirm\"]") );
@@ -286,18 +288,18 @@ public class MoodlePage extends QuizPageHelpers {
 		 
 		 if(lockOrUnlock=="lock") {
 			clickElement("usertype",By.xpath("//a[@data-automation=\"btnUserType\"]") );
-			Select userTypeDropdown = new Select(driver.findElement(By.xpath("//div[@class='editable-input']//select")));
+			Select userTypeDropdown = new Select(Driver.getDriver().findElement(By.xpath("//div[@class='editable-input']//select")));
 			userTypeDropdown.selectByVisibleText(userType);
 		    clickElement("save",By.xpath("//button[@class=\"btn btn-primary btn-sm editable-submit\"]") );
 			 
 			clickElement("lock",By.xpath("//a[@data-automation=\"btnLockUserType\"]") );
-			Select lockDropdown = new Select(driver.findElement(By.xpath("//div[@class='editable-input']//select")));
+			Select lockDropdown = new Select(Driver.getDriver().findElement(By.xpath("//div[@class='editable-input']//select")));
 			lockDropdown.selectByVisibleText("Locked");
 			clickElement("save",By.xpath("//button[@class=\"btn btn-primary btn-sm editable-submit\"]") );
 			}
 		 if(lockOrUnlock=="unlock") {
 			clickElement("lock",By.xpath("//a[@data-automation=\"btnLockUserType\"]") );
-			Select lockDropdown = new Select(driver.findElement(By.xpath("//div[@class='editable-input']//select")));
+			Select lockDropdown = new Select(Driver.getDriver().findElement(By.xpath("//div[@class='editable-input']//select")));
 			lockDropdown.selectByVisibleText("Not Locked");
 			clickElement("save",By.xpath("//button[@class=\"btn btn-primary btn-sm editable-submit\"]") );
 			}
@@ -308,11 +310,11 @@ public class MoodlePage extends QuizPageHelpers {
     public void setStartPageOptionAsMediaChannel() {
         URL = prop.getProperty("URL")+"P/Institution/MenuManagement/";
         launchUrl(URL, "Test Automation Enterprise Video Platform");
-        Select startPageOptionITManager = new Select(driver.findElement(By.id("select_defaultLandingPageIT")));
+        Select startPageOptionITManager = new Select(Driver.getDriver().findElement(By.id("select_defaultLandingPageIT")));
         startPageOptionITManager.selectByValue("mediaChannel");
-        Select startPageOptionInstructor = new Select(driver.findElement(By.id("select_defaultLandingPageInstructor")));
+        Select startPageOptionInstructor = new Select(Driver.getDriver().findElement(By.id("select_defaultLandingPageInstructor")));
         startPageOptionITManager.selectByValue("mediaChannel");
-        Select startPageOptionStudent = new Select(driver.findElement(By.id("select_defaultLandingPageStudent")));
+        Select startPageOptionStudent = new Select(Driver.getDriver().findElement(By.id("select_defaultLandingPageStudent")));
         startPageOptionITManager.selectByValue("mediaChannel");
         clickElement("save",By.xpath("//form[@id=\"saveSetupPrefences\"]//button[@id=\"setupPrefences_saveButton\"]"));
      }
@@ -322,15 +324,15 @@ public class MoodlePage extends QuizPageHelpers {
 		setAndResetAutomaticProvision(userName,password,"course",true);
 		setStartPageOptionAsMediaChannel();
 		createMoodleCourse(adminUserName, adminPassword,courseName,courseShortName);
-		String moodleCourseName=driver.findElement(By.xpath("//div[@class=\"page-header-headings\"]")).getText();
+		String moodleCourseName=Driver.getDriver().findElement(By.xpath("//div[@class=\"page-header-headings\"]")).getText();
 		addExternalTool(externalToolCustomName,externalToolVisibleName);
 		NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
-		String provisionedCourseName=driver.findElement(By.xpath("//li[@class='nav-item active']")).getAttribute("title");
+		String provisionedCourseName=Driver.getDriver().findElement(By.xpath("//li[@class='nav-item active']")).getAttribute("title");
 	
 		if(provisionedCourseName.contains(moodleCourseName)) {
-				reportStep("The moodle course is successfully autoprovisioned in yuja", "PASS", false);
+				Report.reportStep(Driver.getDriver(), "The moodle course is successfully autoprovisioned in yuja", "PASS", false);
 			} else {
-				reportStep("The moodle course is not successfully autoprovisioned in yuja", "FAIL", true);
+				Report.reportStep(Driver.getDriver(), "The moodle course is not successfully autoprovisioned in yuja", "FAIL", true);
 			}	
 		}
 		
@@ -348,12 +350,12 @@ public class MoodlePage extends QuizPageHelpers {
 		sendKeys("Enter manual course short name", By.xpath("//input[@id=\"classCode\"]"),courseShortName+getRandomInteger(1000));
 		clickElement("Create new course button", By.xpath("//button[@data-automation=\"btnCreateYourGroup\"]"));
 		waitForElement(By.xpath("//li[@class='nav-item active']"),10);
-		String provisionedCourseName=driver.findElement(By.xpath("//li[@class='nav-item active']")).getAttribute("title");
+		String provisionedCourseName=Driver.getDriver().findElement(By.xpath("//li[@class='nav-item active']")).getAttribute("title");
 		
        if(provisionedCourseName.contains(courseName)) {
-    	   reportStep("The moodle course is successfully manuallyprovisioned in yuja", "PASS", false);
+    	   Report.reportStep(Driver.getDriver(), "The moodle course is successfully manuallyprovisioned in yuja", "PASS", false);
 		} else {
-			reportStep("The moodle course is not successfully manuallyprovisioned in yuja", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), "The moodle course is not successfully manuallyprovisioned in yuja", "FAIL", true);
 		}	
        }
 	
@@ -370,12 +372,12 @@ public class MoodlePage extends QuizPageHelpers {
 		clickElement("choose the auto existing course", By.xpath("//select[@id=\"classSelectBox\"]//option[text()='aec - Mar 2023 - Auto Existing Course']"));
 		clickElement("Click OK button after selecting the existing course", By.xpath("//button[@title=\"OK\"]"));
 		waitForElement(By.xpath("//li[@class='nav-item active']"),15);
-		String provisionedCourseName=driver.findElement(By.xpath("//li[@class='nav-item active']")).getAttribute("title");
+		String provisionedCourseName=Driver.getDriver().findElement(By.xpath("//li[@class='nav-item active']")).getAttribute("title");
 		
        if(provisionedCourseName.contains("Auto Existing Course")) {
-    	   reportStep("The moodle course is successfully manuallyprovisioned  and connected to existing course in yuja", "PASS", false);
+    	   Report.reportStep(Driver.getDriver(), "The moodle course is successfully manuallyprovisioned  and connected to existing course in yuja", "PASS", false);
 		} else {
-			reportStep("The moodle course is not successfully manuallyprovisioned connected to existing course in yuja", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), "The moodle course is not successfully manuallyprovisioned connected to existing course in yuja", "FAIL", true);
 		}	
        }
 	
@@ -395,12 +397,12 @@ public class MoodlePage extends QuizPageHelpers {
 		sendKeys("Enter username", By.xpath("(//input[@class=\"form-control\" and contains(id,form_autocomplete_input-1677790244437)])[2]"),studentUserName);
 		clickElement("click from Dropdown", By.xpath("//ul[@class=\"form-autocomplete-suggestions\"]//li"));
 		
-		Select assignRoledropdown = new Select(driver.findElement(By.id("id_roletoassign")));
+		Select assignRoledropdown = new Select(Driver.getDriver().findElement(By.id("id_roletoassign")));
 		assignRoledropdown.selectByVisibleText(role);
 		clickElement("enroll selected users button", By.xpath("//button[text()=\"Enrol selected users and cohorts\"]"));
 		logout();
 		navigateToLoginPage();
-		driver.manage().window().maximize();
+		Driver.getDriver().manage().window().maximize();
 		loginFast(studentUserName, newUserPassword);
 		selectCourseFromSiteHome(courseName);
 		NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
@@ -408,7 +410,7 @@ public class MoodlePage extends QuizPageHelpers {
 		navbar.clickMyAccountButton();
 		navbar.clickMyAccountDropdownOption();
 		
-		String myaccountStudentName=driver.findElement(By.xpath("//input[@id='firstName']")).getAttribute("value");
+		String myaccountStudentName=Driver.getDriver().findElement(By.xpath("//input[@id='firstName']")).getAttribute("value");
 		navbar.clickCoursesAndGroups();
 		sendKeys("enter course name",By.xpath("//input[@class=\"group-management-inputbox form-control search-box\"]"),courseName);
 		clickElement("choose course after search",By.xpath("//ul[@id=\"courses-and-groups\"]//li"));
@@ -421,16 +423,16 @@ public class MoodlePage extends QuizPageHelpers {
 		    obtainedmemberFirstname=obtainedmembersplitFirstname[0];
 		    System.out.println(obtainedmemberFirstname);
 			if(obtainedmemberFirstname.equals(studentUserName) && obtainedmemberFirstname.equals(myaccountStudentName)){
-				reportStep("The moodle user is enrolled to  course in yuja", "PASS", false);
+				Report.reportStep(Driver.getDriver(), "The moodle user is enrolled to  course in yuja", "PASS", false);
 				break;
 				}
 		}
 	
 		if(obtainedmemberFirstname.equals(myaccountStudentName) && obtainedmemberFirstname.equals(studentUserName)) {
 			System.out.println(myaccountStudentName+" "+studentUserName + " "+obtainedmemberFirstname );
-			reportStep("The moodle user is successfully provisioned  and enrolled to  course in yuja", "PASS", false);
+			Report.reportStep(Driver.getDriver(), "The moodle user is successfully provisioned  and enrolled to  course in yuja", "PASS", false);
 			}else {
-			reportStep("The moodle user is  not successfully provisioned  and enrolled to  course in yuja", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), "The moodle user is  not successfully provisioned  and enrolled to  course in yuja", "FAIL", true);
 			}
 		}
 	// Method directly used in test class.
@@ -452,13 +454,13 @@ public class MoodlePage extends QuizPageHelpers {
 		sendKeys("Enter username", By.xpath("(//input[@class=\"form-control\" and contains(id,form_autocomplete_input-1677790244437)])[2]"),studentUserName);
 		clickElement("click from Dropdown", By.xpath("//ul[@class=\"form-autocomplete-suggestions\"]//li"));
 		
-		Select assignRoledropdown = new Select(driver.findElement(By.id("id_roletoassign")));
+		Select assignRoledropdown = new Select(Driver.getDriver().findElement(By.id("id_roletoassign")));
 		assignRoledropdown.selectByVisibleText(role);
 		clickElement("enroll selected users button", By.xpath("//button[text()=\"Enrol selected users and cohorts\"]"));
 		}
 		logout();
 		navigateToLoginPage();
-		driver.manage().window().maximize();
+		Driver.getDriver().manage().window().maximize();
 		loginFast(studentUserName, newUserPassword);
 		
 		for(String course:courseName) {
@@ -467,7 +469,7 @@ public class MoodlePage extends QuizPageHelpers {
 		waitForElement(By.xpath("//*[@id=\"bi_userInfoDropdown\"]"),15);
 		navbar.clickMyAccountButton();
 		navbar.clickMyAccountDropdownOption();
-		myaccountStudentName=driver.findElement(By.xpath("//input[@id='firstName']")).getAttribute("value");
+		myaccountStudentName=Driver.getDriver().findElement(By.xpath("//input[@id='firstName']")).getAttribute("value");
 		navbar.clickCoursesAndGroups();
 		sendKeys("enter course name",By.xpath("//input[@class=\"group-management-inputbox form-control search-box\"]"),course);
 		clickElement("choose course after search",By.xpath("//ul[@id=\"courses-and-groups\"]//li"));
@@ -480,11 +482,11 @@ public class MoodlePage extends QuizPageHelpers {
 		    obtainedmemberFirstname=obtainedmembersplitFirstname[0];
 		    System.out.println(obtainedmemberFirstname);
 			if(obtainedmemberFirstname.equals(studentUserName) && obtainedmemberFirstname.equals(myaccountStudentName)){
-				reportStep("The moodle user is enrolled to  course in yuja", "PASS", false);
+				Report.reportStep(Driver.getDriver(), "The moodle user is enrolled to  course in yuja", "PASS", false);
 				break;
 				}
 		    }
-		driver.switchTo().defaultContent();
+		Driver.getDriver().switchTo().defaultContent();
 		clickElement("Moodle Title", By.xpath("//a[@href='https://tmoodle2.yuja.com']"));
 		}
 		logout();
@@ -492,9 +494,9 @@ public class MoodlePage extends QuizPageHelpers {
 		roster.rosterButtons(myaccountStudentName);
 		List<WebElement> rowList=getElementList(By.xpath("//table[@id=\"rosterTable\"]//tr"));
 		if(rowList.size()==2) {
-			reportStep("A single moodle user is successfully provisioned when enrolled to multiple courses", "PASS", false);
+			Report.reportStep(Driver.getDriver(), "A single moodle user is successfully provisioned when enrolled to multiple courses", "PASS", false);
 		}else {
-		    reportStep("A single moodle user is successfully provisioned when enrolled to multiple courses", "FAIL", true);
+		    Report.reportStep(Driver.getDriver(), "A single moodle user is successfully provisioned when enrolled to multiple courses", "FAIL", true);
 			}
 		}
 //Method directly used in test class.
@@ -514,12 +516,12 @@ public class MoodlePage extends QuizPageHelpers {
 	   sendKeys("Enter username", By.xpath("(//input[@class=\"form-control\" and contains(id,form_autocomplete_input-1677790244437)])[2]"),studentUserName);
 	   clickElement("click from Dropdown", By.xpath("//ul[@class=\"form-autocomplete-suggestions\"]//li"));
 	
-	   Select assignRoledropdown = new Select(driver.findElement(By.id("id_roletoassign")));
+	   Select assignRoledropdown = new Select(Driver.getDriver().findElement(By.id("id_roletoassign")));
 	   assignRoledropdown.selectByVisibleText(role);
 	   clickElement("enroll selected users button", By.xpath("//button[text()=\"Enrol selected users and cohorts\"]"));
 	   logout();
 	   navigateToLoginPage();
-	   driver.manage().window().maximize();
+	   Driver.getDriver().manage().window().maximize();
 	   loginFast(studentUserName, newUserPassword);
 	   selectCourseFromSiteHome(courseName);
 	   NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
@@ -532,7 +534,7 @@ public class MoodlePage extends QuizPageHelpers {
 		   waitForElement(By.xpath("//*[@id=\"bi_userInfoDropdown\"]"),15);
 		   navbar.clickMyAccountButton();
 		   navbar.clickMyAccountDropdownOption();
-		   String myaccountStudentName=driver.findElement(By.xpath("//input[@id='firstName']")).getAttribute("value");
+		   String myaccountStudentName=Driver.getDriver().findElement(By.xpath("//input[@id='firstName']")).getAttribute("value");
 		   navbar.clickCoursesAndGroups();
 		   sendKeys("enter course name",By.xpath("//input[@class=\"group-management-inputbox form-control search-box\"]"),courseName);
 		   clickElement("choose course after search",By.xpath("//ul[@id=\"courses-and-groups\"]//li"));
@@ -545,15 +547,15 @@ public class MoodlePage extends QuizPageHelpers {
 			   obtainedmemberFirstname=obtainedmembersplitFirstname[0];
 			   System.out.println(obtainedmemberFirstname);
 			   if(obtainedmemberFirstname.equals(studentUserName) && obtainedmemberFirstname.equals(myaccountStudentName)){
-				   reportStep("The moodle user is enrolled to  course in yuja", "PASS", false);
+				   Report.reportStep(Driver.getDriver(), "The moodle user is enrolled to  course in yuja", "PASS", false);
 				   break;
 			   }
 			  }
 		   if(obtainedmemberFirstname.equals(myaccountStudentName) && obtainedmemberFirstname.equals(studentUserName)){
 			   System.out.println(myaccountStudentName+" "+studentUserName + " "+obtainedmemberFirstname );
-			   reportStep("The moodle user is successfully provisioned  and enrolled to  course in yuja", "PASS", false);
+			   Report.reportStep(Driver.getDriver(), "The moodle user is successfully provisioned  and enrolled to  course in yuja", "PASS", false);
 		   }else {
-			   reportStep("The moodle user is  not successfully provisioned  and enrolled to  course in yuja", "FAIL", true);
+			   Report.reportStep(Driver.getDriver(), "The moodle user is  not successfully provisioned  and enrolled to  course in yuja", "FAIL", true);
 		   }
 	   }
 	
@@ -566,14 +568,14 @@ public class MoodlePage extends QuizPageHelpers {
 		   waitForElement(By.xpath("//*[@id=\"bi_userInfoDropdown\"]"),15);
 		   navbar.clickMyAccountButton();
 		   navbar.clickMyAccountDropdownOption();
-		   String StudentName=driver.findElement(By.xpath("//input[@id=\"personalMeetingRoomInput\"]")).getAttribute("value");
+		   String StudentName=Driver.getDriver().findElement(By.xpath("//input[@id=\"personalMeetingRoomInput\"]")).getAttribute("value");
 		   String obtainedmembersplitFirstname[]=StudentName.split("/");
 		   String obtainedStudentUsername=obtainedmembersplitFirstname[2];
 		   System.out.println(obtainedStudentUsername);
 		   if(obtainedStudentUsername.equals(existingStudentUsername)){
-			   reportStep("The moodle user is successfully provisioned to existing user in yuja", "PASS", false);
+			   Report.reportStep(Driver.getDriver(), "The moodle user is successfully provisioned to existing user in yuja", "PASS", false);
 				}else {
-					reportStep("The moodle user is  not successfully provisioned to existing user in yuja", "FAIL", true);
+					Report.reportStep(Driver.getDriver(), "The moodle user is  not successfully provisioned to existing user in yuja", "FAIL", true);
 				}
 			}
 		}
@@ -603,13 +605,13 @@ public class MoodlePage extends QuizPageHelpers {
 				Thread.sleep(2000);
 				clickElement("save role button", By.xpath("//i[@title=\"Save changes\"]"));
 				Thread.sleep(2000);
-				reportStep("New moodle role is assigned to user", "PASS", false);
+				Report.reportStep(Driver.getDriver(), "New moodle role is assigned to user", "PASS", false);
 				break;
 				}
 			}
 	   logout();
 	   navigateToLoginPage();
-	   driver.manage().window().maximize();
+	   Driver.getDriver().manage().window().maximize();
 	   loginFast("rolemappinguser", "jamNOW123/");
 	   selectCourseFromSiteHome("AUTOMATION MOODLE COURSE");
 	   NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
@@ -629,17 +631,17 @@ public class MoodlePage extends QuizPageHelpers {
 		    obtainedmemberFirstname=obtainedmembersplitFirstname[0];
 		    System.out.println(obtainedmemberFirstname);
 			if(obtainedmemberFirstname.equals("rolemappinguser")){
-				reportStep("The moodle user role is correctly mapped to course in yuja", "PASS", false);
+				Report.reportStep(Driver.getDriver(), "The moodle user role is correctly mapped to course in yuja", "PASS", false);
 				break;
 				}
 		   }
 	
 		if(mainMenuListSize==expectedMainMenuListSize && obtainedmemberFirstname.equals("rolemappinguser")) {
-			reportStep("The moodle user is  enrolled to  course in yuja with correct system role and course role", "PASS", false);
+			Report.reportStep(Driver.getDriver(), "The moodle user is  enrolled to  course in yuja with correct system role and course role", "PASS", false);
 			}else {
-			reportStep("The moodle user is  not enrolled to  course in yuja with correct system role and course role", "FAIL", true);
+			Report.reportStep(Driver.getDriver(), "The moodle user is  not enrolled to  course in yuja with correct system role and course role", "FAIL", true);
 			}
-		driver.switchTo().defaultContent();
+		Driver.getDriver().switchTo().defaultContent();
 		logout();
 		}
 	   
@@ -796,7 +798,7 @@ public class MoodlePage extends QuizPageHelpers {
 		Thread.sleep(3000);
 		clickElement("External tool", By.xpath("//a[@title='Add a new External tool']"));
 		sendKeys("Enter external tool name", By.xpath("//input[@name='name']"),externalToolCustomName);
-		Select toolDropdown = new Select(driver.findElement(By.xpath("//select[@name='typeid']")));
+		Select toolDropdown = new Select(Driver.getDriver().findElement(By.xpath("//select[@name='typeid']")));
 		toolDropdown.selectByVisibleText(externalToolVisibleName);
 		clickElement("save and display button", By.xpath("//input[@name='submitbutton2']"));
 	}
@@ -884,7 +886,7 @@ public class MoodlePage extends QuizPageHelpers {
 			} catch(Exception e) {
 				System.out.println(e.getMessage());
 				e.printStackTrace();
-				reportStep("e.getMessage(): " + e.getMessage() + ", @Method "+Scenario_Name +" exception to be handled", "Fail", true);
+				Report.reportStep(Driver.getDriver(), "e.getMessage(): " + e.getMessage() + ", @Method "+Scenario_Name +" exception to be handled", "Fail", true);
 			}
 		}
 	}
@@ -928,7 +930,7 @@ public class MoodlePage extends QuizPageHelpers {
 			String mediaLibraryElementName = "";
 			int i = 0;
 			
-			reportStep("Fetching the folder with the name \"" + mediaTitle + "\"", "PASS", false);
+			Report.reportStep(Driver.getDriver(), "Fetching the folder with the name \"" + mediaTitle + "\"", "PASS", false);
 			
 			while(!mediaLibraryElementName.equals(mediaTitle) && i<listSize) {
 				mediaLibraryElement = mediaLibraryElementList.get(i++);
@@ -945,9 +947,9 @@ public class MoodlePage extends QuizPageHelpers {
 		String mediaLibraryElementName = mediaLibraryElement.findElement(By.className("choose-media-video-title")).getText();
 		Boolean mediaLibraryElementExists = mediaTitle.equals(mediaLibraryElementName);
 		if(mediaLibraryElementExists) {
-		reportStep("The media with the title \"" + mediaTitle + "\" exists", "PASS", false);
+		Report.reportStep(Driver.getDriver(), "The media with the title \"" + mediaTitle + "\" exists", "PASS", false);
 		} else {
-		reportStep("The media with the title \"" + mediaTitle + "\" does not exists", "FAIL", true);
+		Report.reportStep(Driver.getDriver(), "The media with the title \"" + mediaTitle + "\" does not exists", "FAIL", true);
 		}
 		return mediaLibraryElementExists;
 	}
