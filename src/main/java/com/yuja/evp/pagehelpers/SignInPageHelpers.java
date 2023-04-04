@@ -9,39 +9,6 @@ import com.yuja.evp.utilities.Helpers;
 public class SignInPageHelpers extends Helpers{
 	
 	public static String pageTitleExpected = "YuJa: Please Sign In";
-	//Test
-
-//	String sheetName="Login_Page";
-//	public HashMap<String,String> tdrow;
-//	ExcelUtils excelUtils = new ExcelUtils();
-	
-//	public void login() {
-//		
-//		//tdrow=excelUtils.testCaseRetrieve(refTestDataName,sheetName);		
-//		URL = prop.getProperty(Environment);
-//		launchUrl(URL, "Welcome to the YuJa Enterprise Video Platform");
-//		
-//		if (verifyElementExistReturn(By.xpath(prop.getProperty("LoginPage.Verify"))) == true)
-//		{
-//			
-//			//Entering the credentials and click sign in
-//			sendKeys("User ID", By.xpath(prop.getProperty("LoginPage.UserID.Text")), prop.getProperty("UserID"));
-//			sendKeys("Password", By.xpath(prop.getProperty("LoginPage.Password.Text")), prop.getProperty("Password"));
-//			clickElement("Sign In", By.xpath(prop.getProperty("LoginPage.SignIn.Button")));
-//			
-//			//Verify Page displayed 
-//			 
-//			verifyElementExist("Media Library Page is displayed #B", By.xpath(prop.getProperty("MediaLibrary.Verify").replace("&Value", "Media Library")));	
-//			//Clearing the Memory
-//			//tdrow.clear();
-//		}
-//		else
-//		{
-//			reportStep("User Logged in already", "Pass",false);
-//		}
-//	}
-	
-	///////////////////////////////////////////////////////////////////////////
 	
 	public void navigateToLoginPage() {
 		URL = prop.getProperty("loginPageURL");
