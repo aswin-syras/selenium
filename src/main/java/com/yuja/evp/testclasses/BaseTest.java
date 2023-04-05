@@ -28,7 +28,7 @@ public class BaseTest extends Wrapper {
 	@Parameters({ "TestName" })
 	public void beforeMethod(String refTestSheetName, Method M, ITestContext context) {
 		
-		System.out.println("@BeforeMethod; Current thread: " + Thread.currentThread().getId());
+		System.out.println("@BeforeMethod");
 
 		// Sheet reference for test data
 		refTestDataName = refTestSheetName;
