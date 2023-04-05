@@ -6,6 +6,8 @@ import org.testng.annotations.Test;
 import com.yuja.evp.pagehelpers.NavigationBarHelpers;
 import com.yuja.evp.pagehelpers.QuizPageHelpers;
 import com.yuja.evp.pagetestmethods.QuizPageTestMethods;
+import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
 
 public class QuizTest extends BaseTest {
 	
@@ -36,7 +38,7 @@ public class QuizTest extends BaseTest {
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+			Report.reportStep(Driver.getDriver(),"@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 		}
 	  }
 
@@ -50,7 +52,7 @@ public class QuizTest extends BaseTest {
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+			Report.reportStep(Driver.getDriver(),"@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 		}
 	  }
 
@@ -64,7 +66,7 @@ public class QuizTest extends BaseTest {
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+			Report.reportStep(Driver.getDriver(),"@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 		}
 	  }
 	
@@ -78,7 +80,7 @@ public class QuizTest extends BaseTest {
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+			Report.reportStep(Driver.getDriver(),"@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 		}
 	  }
 	
@@ -92,7 +94,7 @@ public class QuizTest extends BaseTest {
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+			Report.reportStep(Driver.getDriver(),"@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 		}
 	  }
 	
@@ -106,7 +108,7 @@ public class QuizTest extends BaseTest {
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+			Report.reportStep(Driver.getDriver(),"@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 		}
 	  }
 	

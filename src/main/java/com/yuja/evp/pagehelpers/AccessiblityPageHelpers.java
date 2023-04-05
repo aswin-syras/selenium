@@ -56,7 +56,7 @@ FolderDetailsModalHelperMethods foldermodal=new FolderDetailsModalHelperMethods(
         editButtonType.put("human caption", "button[data-automation='btnEditExternalCaptionUser']");
         editButtonType.put("auto caption", "button[data-automation='btnEditAutoCaptionUser']");
         WebElement editButton = waitForElement(By.cssSelector(editButtonType.get(typeOfButton)),10);
-        Actions action = new Actions(driver);
+        Actions action = new Actions(Driver.getDriver());
         action.moveToElement(editButton).click().perform();
         List<WebElement> closebuttons = getElementList(By.cssSelector("[class=\"media-modal-small-times-icon media-modal-close-btn share-access-icons\"]"));
         int activeButtons = closebuttons.size();
@@ -141,8 +141,7 @@ FolderDetailsModalHelperMethods foldermodal=new FolderDetailsModalHelperMethods(
 
 				Report.reportStep(Driver.getDriver(), autocaptionVideo + " media fully proccessed", "PASS", false);
 				medialibraryHelpers.accessMediaMoreMenu(autocaptionVideo);
-				reportStep(autocaptionVideo + " media fully proccessed", "PASS", false);
-			       medialibraryHelpers.accessMediaMoreMenu(autocaptionVideo);
+				
 
 				mediaDetailsModal.clickAccessiblity();
 				WebElement autocaptionButton=Driver.getDriver().findElement(By.id("autoCaptionButtonID"));
