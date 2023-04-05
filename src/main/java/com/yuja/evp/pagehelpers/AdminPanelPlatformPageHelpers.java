@@ -35,6 +35,11 @@ public class AdminPanelPlatformPageHelpers extends Helpers implements UICheck {
 			e.printStackTrace();
 		}
 	}
+	
+	public void navigateToAPITab() {
+		WebElement APITab = waitForElement(By.cssSelector("[title=\"API\"]"), 10);
+		clickElement("API Tab", APITab);
+	}
 
 	public void fillMetadataInfo(String metadataName, String metadataType, Boolean requirement) {
 		try {
