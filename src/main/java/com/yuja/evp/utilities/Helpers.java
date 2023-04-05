@@ -130,9 +130,8 @@ public class Helpers extends Wrapper {
 ///////////////////////////////////////////////////////////////////////////////
 
 	public void sendKeys(String fieldName, By identifier, String strValue) {
-		System.out.println(identifier);
+		//System.out.println(identifier);
 		WebElement element = waitForElement(identifier, 10);
-
 		try {
 			element.click();
 			flash(element);
@@ -207,7 +206,7 @@ public class Helpers extends Wrapper {
 	}
 
 	public void clickElement(String fieldName, By identifier, int timeout) {
-		System.out.println(identifier);
+		//System.out.println(identifier);
 		WebElement element = waitForElement(identifier, timeout);
 		flash(element);
 		try {
@@ -364,5 +363,9 @@ public class Helpers extends Wrapper {
 
 	public int getRandomInteger(int max) {
 		return getRandomInteger(0, max);
+	}
+	
+	public void refreshPage() {
+		Driver.getDriver().navigate().refresh();
 	}
 }
