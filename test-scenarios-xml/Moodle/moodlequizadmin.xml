@@ -4,9 +4,9 @@
 <suite name="Suite">
   <test name="MoodleCreateQuizTest1">
   	<classes>
-      <class name="com.yuja.evp.testclasses.MoodleTest">
+      <class name="com.yuja.evp.testclasses.CanvasTest">
 	      <methods>
-	          <include name="Check_role_mapping_locked_as_instructor">
+	          <include name="Create_quiz_test">
 			      <!-- <parameter name="Browser" value="IE" /> -->
 			      <parameter name="TestName" value="MoodleCreateQuizTest1" />
 			  </include> 

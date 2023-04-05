@@ -30,12 +30,12 @@ public class AccessiblityPageTestMethods extends AccessiblityPageHelpers {
 		addPermissionAutocaptionUsers(permissionBase,userType);
 		savePermission();
 		navigationBar.userLogOut();
-		checkUserCanSendAutocaptionrequest(userUsername,userPassword,autocaptionVideo);
+		checkUserCanSendAutocaptionrequest(userUsername,userPassword,autocaptionVideo,"captionfolder");
 		checkAdminPanelAccessiblityStatusTableforUser(adminUsername, adminPassword, userFullname);
 		deleteAllExistingPermissions("auto caption");
 	    savePermission();
 	    navigationBar.userLogOut();
-	    checkUserAutocaptionButtonDisabled(userUsername,userPassword,autocaptionVideo);
+	    checkUserAutocaptionButtonDisabled(userUsername,userPassword,autocaptionVideo,"captionfolder");
 	    }
 	
 	
@@ -46,12 +46,12 @@ public class AccessiblityPageTestMethods extends AccessiblityPageHelpers {
 		addPermissionHumancaptionUsers(permissionBase,userType,humanCaptionProviders,requireApproval);
 		savePermission();
 		navigationBar.userLogOut();
-		checkUserCanSeeHumancaptionproviders(userUsername,userPassword,humanCaptionProviders,humancaptionVideo);
+		checkUserCanSeeHumancaptionproviders(userUsername,userPassword,humanCaptionProviders,humancaptionVideo,"captionfolder");
 		navigateToAdminPanelAccessiblityPageUserLogin(adminUsername, adminPassword);
 		deleteAllExistingPermissions("human caption");
 	    savePermission();
 	    navigationBar.userLogOut();
-	    checkUserHumancaptionButtonDisabled(userUsername,userPassword,humancaptionVideo);
+	    checkUserHumancaptionButtonDisabled(userUsername,userPassword,humancaptionVideo,"captionfolder");
 	    }
  
 	

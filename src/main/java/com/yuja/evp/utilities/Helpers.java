@@ -276,12 +276,14 @@ public class Helpers extends Wrapper {
 				mediaLibraryElementName = mediaLibraryElement.findElement(By.className("titleText")).getText();
 				if (mediaLibraryElementName.equals(mediaTitle)) {
 					return mediaLibraryElement;
+					
 				}
 			}
 		}
 		return null;
 	}
-
+	
+		
 	public boolean mediaExists(String mediaTitle) {
 		WebElement mediaLibraryElement = getMedia(mediaTitle);
 		if (mediaLibraryElement != null) {

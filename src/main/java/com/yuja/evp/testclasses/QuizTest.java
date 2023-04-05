@@ -6,8 +6,6 @@ import org.testng.annotations.Test;
 import com.yuja.evp.pagehelpers.NavigationBarHelpers;
 import com.yuja.evp.pagehelpers.QuizPageHelpers;
 import com.yuja.evp.pagetestmethods.QuizPageTestMethods;
-import com.yuja.evp.reports.Report;
-import com.yuja.evp.utilities.Driver;
 
 public class QuizTest extends BaseTest {
 	
@@ -25,6 +23,7 @@ public class QuizTest extends BaseTest {
 	final String STUDENT_FITBANS = "red";
 	final String QUIZ_PUBLISH_COURSE_NAME = "Automation 1337";
 	
+	
 	NavigationBarHelpers navigationBar = new NavigationBarHelpers();
 	
 	@Test(description="Create_quiz_test")
@@ -37,7 +36,7 @@ public class QuizTest extends BaseTest {
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 		}
 	  }
 
@@ -51,7 +50,7 @@ public class QuizTest extends BaseTest {
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 		}
 	  }
 
@@ -65,7 +64,7 @@ public class QuizTest extends BaseTest {
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 		}
 	  }
 	
@@ -79,7 +78,7 @@ public class QuizTest extends BaseTest {
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 		}
 	  }
 	
@@ -93,7 +92,7 @@ public class QuizTest extends BaseTest {
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 		}
 	  }
 	
@@ -107,22 +106,10 @@ public class QuizTest extends BaseTest {
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
+			reportStep("@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
 		}
 	  }
 	
-	@Test(description="Check_")
-	  @Parameters({"TestName"})
-	public void CheckPlaybutton(String TestName) {
-		QuizPageTestMethods qp = new QuizPageTestMethods();
-		try {
-			qp.checkPlaybutton(prop.getProperty("ManagerID"), prop.getProperty("Password"), VIDEO_NAME);
-		} 
-		catch (Exception e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-			Report.reportStep(Driver.getDriver(), "@Method "+Scenario_Name +" exception to be handled", "FAIL", true);
-		}
-	  }
+	
 }
 

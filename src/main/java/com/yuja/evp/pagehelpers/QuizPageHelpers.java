@@ -115,6 +115,7 @@ public class QuizPageHelpers extends Helpers {
 	//Method to check quiz grade sync in LMS gradebook
 	
 	public void checkActivityLogforQuizSync(String mediaTitle,String studentFullName,String marks,String quizName) throws InterruptedException {
+	
 		mediaLibrary.accessMediaMoreMenu(mediaTitle);
 		mediaDetailsModal.clickQuizzes();
 		sendKeys("Search for quizzes", By.id("quiz-search-input"), quizName);
@@ -131,8 +132,8 @@ public class QuizPageHelpers extends Helpers {
 		}	
 	}
 	
-	public void updatePostInfo(String userName,String password, String mediaTitle, String quizName, String courseName) throws InterruptedException {
-		mediaLibrary.navigateToMyMediaUserLogin(userName, password);;
+	public void updatePostInfo(String userName,String password, String mediaTitle, String quizName,String courseName) throws InterruptedException {
+		mediaLibrary.navigateToMyMediaUserLogin(userName, password);
 		mediaLibrary.accessMediaMoreMenu(mediaTitle);
 		mediaDetailsModal.clickQuizzes();
 		sendKeys("Search for quizzes", By.id("quiz-search-input"), quizName);
@@ -141,6 +142,8 @@ public class QuizPageHelpers extends Helpers {
 		for(int i=0;i<courseList.size();i++) {
 			WebElement element=courseList.get(i);
 			String obtainedcourseName = element.getText();
+			 System.out.println(obtainedcourseName);
+			 System.out.println(courseName);
 			if(obtainedcourseName.contains(courseName)){
 				int rowposition=i+1;
 				int rowpos=rowposition+2;
@@ -152,7 +155,8 @@ public class QuizPageHelpers extends Helpers {
 			}
 		mediaDetailsModal.clickUpdatePostQuiz();
 		mediaDetailsModal.clickCloseMoreMenu();
-		}
+		
+	}
 	
 	public void loginAsCreator(String userName, String password) {
 		mediaLibrary.navigateToMyMediaUserLogin(userName, password);
@@ -312,7 +316,9 @@ public class QuizPageHelpers extends Helpers {
 	 public void  checkGradebookTestafterLoginforMultiple(String mediaTitle,String quizName, String courseName,String studentName,String marks ) throws InterruptedException {
 		 clickElement("Click Manage Media",By.xpath("//span[@id='topBarTabName3']"),10);
 		 Thread.sleep(5000);
-		 mediaLibrary.accessMediaMoreMenu(mediaTitle);
+		 WebElement media = getMedia(mediaTitle);
+		 hoverOverElement(media);
+		 clickElement(media, "More menu button from the video hover", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 30);
 		 mediaDetailsModal.clickQuizzes();
 		 sendKeys("Search for quizzes", By.id("quiz-search-input"), quizName);
 	   	 mediaDetailsModal.clickGradebookButton();
