@@ -25,7 +25,6 @@ public class Driver {
 				String chrome = "./" + config.getProperty("Browser_Drivers_Path") + "/chromedriver.exe";
 				System.setProperty("webdriver.chrome.driver", chrome);
 				System.out.println("Setting up driver...");
-				
 				RemoteWebDriver webDriver = new ChromeDriver(setChromeOptions());
 				drivers.set(webDriver);
 			}
@@ -56,8 +55,6 @@ public class Driver {
 		chromeCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 		chromeOptions.merge(chromeCapabilities);
 		
-		// Creating the driver variable
-		Thread.sleep(2000);
 		Map<String, Object> prefs = new HashMap<String, Object>();
 		String userDirectoryPath = Paths.get("").toAbsolutePath().toString();
 		String defaultDownloadDirectoryPath = userDirectoryPath + "\\src\\fileResources\\downloads";
