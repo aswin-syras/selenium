@@ -141,6 +141,13 @@
         		<include name="Moodle_upload_doc_as_instuctor_check_in_media_library_test" />
         	</methods>
         </class>   
+        
+        <class name="com.yuja.evp.testclasses.APITest">
+        	<methods>
+        		<include name="Get_users_api_test" />
+        	</methods>
+        </class>
+        
     </classes>
   </test>
   
