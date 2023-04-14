@@ -14,14 +14,19 @@ public class AdminPanelBrandingTestMethods extends AdminPanelBrandingPageHelpers
 	MediaPlayerHelpers player = new MediaPlayerHelpers();
 	
 	public void setTheDefaultTheme(String username, String password, String theme) throws InterruptedException {
-		medialibrary.navigateToMyMediaUserLogin(username, password);
-		checkTheme(theme);
-		medialibrary.navigateToMyMediaUserLogin(username, password);
-		medialibrary.navigateToMyMedia(username);
-		player.GotoHTMLPlayer("test");
-		WebElement sidebar = waitForElement(By.cssSelector("#playbar-sidebar-menuitem"), 1);
-		if (sidebar == null) {
-			Report.reportStep(Driver.getDriver(), "Theme didn't update", "FAIL", true);
-		} else { Report.reportStep(Driver.getDriver(), "Theme updated", "PASS", false);} 
+		try {
+			medialibrary.navigateToMyMediaUserLogin(username, password);
+			checkTheme(theme);
+			medialibrary.navigateToMyMediaUserLogin(username, password);
+			medialibrary.navigateToMyMedia(username);
+			player.GotoHTMLPlayer("test");
+			WebElement sidebar = waitForElement(By.cssSelector("#playbar-sidebar-menuitem"), 1);
+			if (sidebar == null) {
+				Report.reportStep(Driver.getDriver(), "Theme didn't update", "FAIL", true);
+			} else { Report.reportStep(Driver.getDriver(), "Theme updated", "PASS", false);} 
+			
+		} catch(Exception e){
+			Report.reportStep(Driver.getDriver(), "Test scenario did not complete all of its steps", "FAIL", false);
+		}
 	}
 }

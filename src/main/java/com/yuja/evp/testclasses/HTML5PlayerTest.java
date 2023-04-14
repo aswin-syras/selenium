@@ -4,6 +4,8 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.yuja.evp.pagetestmethods.MediaPlayerSideBarTestMethods;
+import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
 
 //Sidebar
 public class HTML5PlayerTest extends BaseTest {
@@ -19,6 +21,7 @@ public class HTML5PlayerTest extends BaseTest {
 			}catch(Exception e) {
 				System.out.println(e.getMessage());
 				e.printStackTrace();
+				Report.reportStep(Driver.getDriver(), "The test case did not complete all of its steps", "FAIL", false);
 			}
 		 }	
 		
@@ -32,6 +35,7 @@ public class HTML5PlayerTest extends BaseTest {
 			}catch(Exception e) {
 				System.out.println(e.getMessage());
 				e.printStackTrace();
+				Report.reportStep(Driver.getDriver(), "The test case did not complete all of its steps", "FAIL", false);
 			}
 		 }	
 		
@@ -45,6 +49,7 @@ public class HTML5PlayerTest extends BaseTest {
 			}catch(Exception e) {
 				System.out.println(e.getMessage());
 				e.printStackTrace();
+				Report.reportStep(Driver.getDriver(), "The test case did not complete all of its steps", "FAIL", false);
 			}
 		 }	
 		
@@ -58,6 +63,7 @@ public class HTML5PlayerTest extends BaseTest {
 			}catch(Exception e) {
 				System.out.println(e.getMessage());
 				e.printStackTrace();
+				Report.reportStep(Driver.getDriver(), "The test case did not complete all of its steps", "FAIL", false);
 			}
 		 }	
 		

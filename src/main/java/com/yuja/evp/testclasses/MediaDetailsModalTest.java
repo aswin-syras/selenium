@@ -4,6 +4,8 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.yuja.evp.modaltestmethods.MediaDetailsModalTestMethods;
+import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
 
 public class MediaDetailsModalTest extends BaseTest {
 
@@ -16,6 +18,7 @@ public class MediaDetailsModalTest extends BaseTest {
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
+			Report.reportStep(Driver.getDriver(), "The test case did not complete all of its steps", "FAIL", false);
 		}
 	 }	
 }

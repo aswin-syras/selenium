@@ -3,6 +3,8 @@ package com.yuja.evp.testclasses;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import com.yuja.evp.pagetestmethods.AdminPanelPlatformTestMethods;
+import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
 
 public class AdminPanelPlatformTest extends BaseTest{
 	final String TYPESTRING = "String";
@@ -19,9 +21,10 @@ public class AdminPanelPlatformTest extends BaseTest{
 		try {
 		AdminPanelPlatform.addandDeleteMetadata(TYPESTRING, NOTREQUIRED);
 		} catch (InterruptedException e) {
-		e.printStackTrace();
+			e.printStackTrace();
+			Report.reportStep(Driver.getDriver(), "Test scenario did not complete all of its steps", "FAIL", false);
 		}
-		}
+	}
 	
 	@Test(description="Add_and_delete_list_metadata_test")
 	@Parameters({"TestName"})
@@ -30,9 +33,10 @@ public class AdminPanelPlatformTest extends BaseTest{
 		try {
 		AdminPanelPlatform.addandDeleteMetadata(TYPELIST, NOTREQUIRED);
 		} catch (InterruptedException e) {
-		e.printStackTrace();
+			e.printStackTrace();
+			Report.reportStep(Driver.getDriver(), "Test scenario did not complete all of its steps", "FAIL", false);
 		}
-		}
+	}
 	
 	@Test(description="Add_and_delete_date_metadata_test")
 	@Parameters({"TestName"})
@@ -41,9 +45,10 @@ public class AdminPanelPlatformTest extends BaseTest{
 		try {
 		AdminPanelPlatform.addandDeleteMetadata(TYPEDATE,NOTREQUIRED);
 		} catch (InterruptedException e) {
-		e.printStackTrace();
+			e.printStackTrace();
+			Report.reportStep(Driver.getDriver(), "Test scenario did not complete all of its steps", "FAIL", false);
 		}
-		}
+	}
 	
 	@Test(description="Add_and_delete_time_metadata_test")
 	@Parameters({"TestName"})
@@ -52,9 +57,10 @@ public class AdminPanelPlatformTest extends BaseTest{
 		try {
 		AdminPanelPlatform.addandDeleteMetadata(TYPETIME,NOTREQUIRED);
 		} catch (InterruptedException e) {
-		e.printStackTrace();
+			e.printStackTrace();
+			Report.reportStep(Driver.getDriver(), "Test scenario did not complete all of its steps", "FAIL", false);
 		}
-		}
+	}
 	
 	@Test(description="Add_and_delete_required_string_metadata_test")
 	@Parameters({"TestName"})
@@ -63,9 +69,10 @@ public class AdminPanelPlatformTest extends BaseTest{
 		try {
 		AdminPanelPlatform.addandDeleteMetadata(TYPESTRING, REQUIRED);
 		} catch (InterruptedException e) {
-		e.printStackTrace();
+			e.printStackTrace();
+			Report.reportStep(Driver.getDriver(), "Test scenario did not complete all of its steps", "FAIL", false);
 		}
-		}
+	}
 	
 	@Test(description="Add_and_delete_required_list_metadata_test")
 	@Parameters({"TestName"})
@@ -74,9 +81,10 @@ public class AdminPanelPlatformTest extends BaseTest{
 		try {
 		AdminPanelPlatform.addandDeleteMetadata(TYPELIST, REQUIRED);
 		} catch (InterruptedException e) {
-		e.printStackTrace();
+			e.printStackTrace();
+			Report.reportStep(Driver.getDriver(), "Test scenario did not complete all of its steps", "FAIL", false);
 		}
-		}
+	}
 	
 	@Test(description="Add_and_delete_required_date_metadata_test")
 	@Parameters({"TestName"})
@@ -85,9 +93,10 @@ public class AdminPanelPlatformTest extends BaseTest{
 		try {
 		AdminPanelPlatform.addandDeleteMetadata(TYPEDATE,NOTREQUIRED);
 		} catch (InterruptedException e) {
-		e.printStackTrace();
+			e.printStackTrace();
+			Report.reportStep(Driver.getDriver(), "Test scenario did not complete all of its steps", "FAIL", false);
 		}
-		}
+	}
 	
 	@Test(description="Add_and_delete_required_time_metadata_test")
 	@Parameters({"TestName"})
@@ -96,7 +105,8 @@ public class AdminPanelPlatformTest extends BaseTest{
 		try {
 		AdminPanelPlatform.addandDeleteMetadata(TYPETIME,NOTREQUIRED);
 		} catch (InterruptedException e) {
-		e.printStackTrace();
+			e.printStackTrace();
+			Report.reportStep(Driver.getDriver(), "Test scenario did not complete all of its steps", "FAIL", false);
 		}
-		}
+	}
 }

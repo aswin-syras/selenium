@@ -20,6 +20,7 @@ import com.yuja.evp.pagehelpers.AdminPanelPlatformPageHelpers;
 import com.yuja.evp.pagehelpers.AdminPanelRosterPageHelpers;
 import com.yuja.evp.pagehelpers.AdminPanelRtmpStreamPageHelpers;
 import com.yuja.evp.pagehelpers.AdminPanelStorageQuotaPageHelpers;
+import com.yuja.evp.reports.Report;
 import com.yuja.evp.utilities.Driver;
 
 import helperinterfaces.UICheck;
@@ -77,8 +78,8 @@ public class AdminPanelGeneralTestMethods extends AdminPanelGeneralPageHelpers{
 				}
 			}
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
 			e.printStackTrace();
+			Report.reportStep(Driver.getDriver(), "Test scenario did not complete all of its steps", "FAIL", false);
 		}
 	}	
 }

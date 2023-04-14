@@ -58,8 +58,8 @@ public class APITestMethods extends APIPageHelpers {
 			}
 			
 		} catch(Exception e) {
-			System.out.println(e.getMessage());
 			e.printStackTrace();
+			Report.reportStep(Driver.getDriver(), "The test case did not complete all of its steps", "FAIL", false);
 		}
 	}
 	

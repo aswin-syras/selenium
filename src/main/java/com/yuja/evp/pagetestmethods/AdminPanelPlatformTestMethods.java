@@ -13,4 +13,5 @@ public class AdminPanelPlatformTestMethods extends AdminPanelPlatformPageHelpers
 		verifyMetadataAddedToAdminPanel(requirement);
 		deleteMetadata(metadataName,metadataType);
 	}
+	
 	}

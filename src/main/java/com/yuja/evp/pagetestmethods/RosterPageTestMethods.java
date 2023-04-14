@@ -1,6 +1,8 @@
 package com.yuja.evp.pagetestmethods;
 
 import com.yuja.evp.pagehelpers.AdminPanelRosterPageHelpers;
+import com.yuja.evp.reports.Report;
+import com.yuja.evp.utilities.Driver;
 
 public class RosterPageTestMethods extends AdminPanelRosterPageHelpers{
 	
@@ -12,12 +14,11 @@ public class RosterPageTestMethods extends AdminPanelRosterPageHelpers{
 			fillInUserInfo(newUserID, role);
 			deleteUser(newUserID);
 			Thread.sleep(100);
-			}				
-		catch(Exception e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();		
-			}
-			}
+			} catch(Exception e) {
+				e.printStackTrace();
+				Report.reportStep(Driver.getDriver(), "Test scenario did not complete all of its steps", "FAIL", false);
+		}
+	}
 	
 	public void actAsUser(String userName, String adminID, String adminPassword) {
 		try {
@@ -26,8 +27,8 @@ public class RosterPageTestMethods extends AdminPanelRosterPageHelpers{
 		    selectActAsUser(userName);			
 			}		
 		catch(Exception e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();			
+			e.printStackTrace();
+			Report.reportStep(Driver.getDriver(), "Test scenario did not complete all of its steps", "FAIL", false);			
 			}
 			}
 	
@@ -44,8 +45,8 @@ public class RosterPageTestMethods extends AdminPanelRosterPageHelpers{
 			deleteUser(newUserID);
 			}	
 		catch(Exception e) {
-				System.out.println(e.getMessage());
-				e.printStackTrace();			
+			e.printStackTrace();
+			Report.reportStep(Driver.getDriver(), "Test scenario did not complete all of its steps", "FAIL", false);		
 			}
 			}	
 		
@@ -62,8 +63,8 @@ public class RosterPageTestMethods extends AdminPanelRosterPageHelpers{
 			deleteUser(newUserID);
 			}	
 		catch(Exception e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();			
+			e.printStackTrace();
+			Report.reportStep(Driver.getDriver(), "Test scenario did not complete all of its steps", "FAIL", false);			
 			}
 			}	
 		
@@ -80,8 +81,8 @@ public class RosterPageTestMethods extends AdminPanelRosterPageHelpers{
 			deleteUser(newUserID);		
 			}	
 		catch(Exception e) {
-				System.out.println(e.getMessage());
-				e.printStackTrace();			
+			e.printStackTrace();
+			Report.reportStep(Driver.getDriver(), "Test scenario did not complete all of its steps", "FAIL", false);			
 			}
 			}	
 		
@@ -95,8 +96,8 @@ public class RosterPageTestMethods extends AdminPanelRosterPageHelpers{
 			deleteUserButton();	
 			}	
 		catch(Exception e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();			
+			e.printStackTrace();
+			Report.reportStep(Driver.getDriver(), "Test scenario did not complete all of its steps", "FAIL", false);			
 			}
 			}	
 			}
