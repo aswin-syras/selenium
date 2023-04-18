@@ -5,3 +5,4 @@
 *.html
 target/classes/META-INF/maven/com.yuja/evp-automated-test/pom.properties
 target/classes/META-INF/maven/com.yuja/evp-automated-test/pom.xml
+test-scenarios-xml/smokeTest/smoke_test.xml
