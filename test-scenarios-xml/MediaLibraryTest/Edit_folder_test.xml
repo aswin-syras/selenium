@@ -6,9 +6,9 @@
   	<classes>
       <class name="com.yuja.evp.testclasses.MediaLibraryTest">
 	      <methods>
-	          <include name="Edit_folder_test">
+	          <include name="Edit_folder_manager_test">
 			      <!-- <parameter name="Browser" value="IE" /> -->
-			      <parameter name="TestName" value="Edit_folder_test" />
+			      <parameter name="TestName" value="Edit_folder_manager_test" />
 			  </include> 
 	        </methods>
         </class>

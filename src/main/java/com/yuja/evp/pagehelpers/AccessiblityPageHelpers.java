@@ -8,10 +8,12 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
+import com.yuja.evp.modalhelpers.FolderDetailsModalHelperMethods;
 import com.yuja.evp.modalhelpers.MediaDetailsModalHelperMethods;
 
 import com.yuja.evp.pagetestmethods.MediaLibraryPageTestMethods;
@@ -28,6 +30,7 @@ MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 MediaDetailsModalHelperMethods mediaDetailsModal= new MediaDetailsModalHelperMethods();
 NavigationBarHelpers navigationBar = new NavigationBarHelpers();
 MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
+FolderDetailsModalHelperMethods foldermodal=new FolderDetailsModalHelperMethods();
 	
 	public void navigateToAdminPanelAccessiblityPageUserLogin(String userName, String password) throws InterruptedException{
 		signInPage.navigateToLoginPage();
@@ -44,8 +47,7 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 		Report.reportStep(Driver.getDriver(), defaultAutocaptionSetting + " is chosen from the dropdown ", "PASS", false);
 		clickElement("Click save button",By.xpath("//button[@id='singlebutton']"),10);
 		clickElement("Click toast close button",By.xpath("//button[@class=\"right-close-button btn dismisscolor inline-btn\"]"),10);
-		Driver.getDriver().navigate().refresh();
-		Thread.sleep(3000);
+
 	   }
 	
 	public void deleteAllExistingPermissions(String typeOfButton) throws InterruptedException {
@@ -54,10 +56,10 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
         editButtonType.put("human caption", "button[data-automation='btnEditExternalCaptionUser']");
         editButtonType.put("auto caption", "button[data-automation='btnEditAutoCaptionUser']");
         WebElement editButton = waitForElement(By.cssSelector(editButtonType.get(typeOfButton)),10);
-        clickElement("Clicking edit button", editButton);
+        Actions action = new Actions(Driver.getDriver());
+        action.moveToElement(editButton).click().perform();
         List<WebElement> closebuttons = getElementList(By.cssSelector("[class=\"media-modal-small-times-icon media-modal-close-btn share-access-icons\"]"));
         int activeButtons = closebuttons.size();
-        
         while(activeButtons > 0) {
             clickElement("clicking close icon", closebuttons.get(0));
             closebuttons = getElementList(By.cssSelector("[class=\"media-modal-small-times-icon media-modal-close-btn share-access-icons\"]"));
@@ -94,29 +96,33 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 		}
 	
 	
-	public void checkUserAutocaptionButtonDisabled(String userUsername, String userPassword, String autocaptionVideo) throws InterruptedException {
+	public void checkUserAutocaptionButtonDisabled(String userUsername, String userPassword, String autocaptionVideo, String newFolderName) throws InterruptedException {
 		 mediaLibrary.navigateToMyMediaUserLogin(userUsername, userPassword);
+		 mediaLibrary.createNewFolder(newFolderName);
+		 mediaLibrary.accessFolder(newFolderName);
 		 mediaLibrary.bulkMediaUpload("src\\fileResources\\humancaptionvideo");
 		 boolean processed = medialibraryHelpers.mediaIsProcessed(autocaptionVideo, 60, 3);
 			if(processed) {
+
 				Report.reportStep(Driver.getDriver(), autocaptionVideo + " media fully proccessed", "PASS", false);
-				// Driver.getDriver().navigate().refresh();
-				 WebElement media1=waitForElement(By.xpath("//div[@class=\"videoWrapper\"]"),10);
-				 hoverOverElement(media1);
-				 clickElement(media1, "More menu", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 10);
-				 mediaDetailsModal.clickAccessiblity();
+				medialibraryHelpers.accessMediaMoreMenu(autocaptionVideo);
+				mediaDetailsModal.clickAccessiblity();
 				 WebElement autocaptionButton=Driver.getDriver().findElement(By.id("autoCaptionButtonID"));
 				 boolean actualState=autocaptionButton.isEnabled();
-				 if(mediaDetailsModal.captionButtonEnabledStateIsAsExpected("auto caption",false, actualState, 10, "humancaption")) {
+				 if(mediaDetailsModal.captionButtonEnabledStateIsAsExpected("auto caption",false, actualState, 10, autocaptionVideo)) {
 		        	 Report.reportStep(Driver.getDriver(), "Autocaptioning is sucessfully disabled","PASS",false);
 		         }
 		         else {
 		        	 Report.reportStep(Driver.getDriver(), "Autocaptioning is not sucessfully disabled","FAIL", true);
 		         }
 		           mediaDetailsModal.clickCloseMoreMenu();
-		          // Driver.getDriver().navigate().refresh();
-				   mediaLibrary.deleteMedia(autocaptionVideo);
-				   navigationBar.userLogOut();
+		          mediaLibrary.navigateToMyMedia(userUsername);
+		         Thread.sleep(3000);
+		         mediaLibrary.accessFolderMoreMenu("captionfolder");
+		         foldermodal.deleteCurrentFolder();
+				 navigationBar.userLogOut();
+
+				
 			}
 			else {
 				Report.reportStep(Driver.getDriver(), autocaptionVideo + " media not fully proccessed", "FAIL", true);
@@ -124,26 +130,31 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 			}
 		}
 	
-    public void checkUserCanSendAutocaptionrequest(String userUsername, String userPassword, String autocaptionVideo) throws InterruptedException {
+    public void checkUserCanSendAutocaptionrequest(String userUsername, String userPassword, String autocaptionVideo, String newFolderName) throws InterruptedException {
 	    mediaLibrary.navigateToMyMediaUserLogin(userUsername, userPassword);
-	    mediaLibrary.bulkMediaUpload("src\\fileResources\\humancaptionvideo");
+	    mediaLibrary.createNewFolder(newFolderName);
+		mediaLibrary.accessFolder(newFolderName);
+		mediaLibrary.bulkMediaUpload("src\\fileResources\\humancaptionvideo");
+	   
 		 boolean processed = medialibraryHelpers.mediaIsProcessed(autocaptionVideo, 60, 3);
 			if(processed) {
+
 				Report.reportStep(Driver.getDriver(), autocaptionVideo + " media fully proccessed", "PASS", false);
-				//Driver.getDriver().navigate().refresh();
-				WebElement media=waitForElement(By.xpath("//div[@class=\"videoWrapper\"]"),10);
+				medialibraryHelpers.accessMediaMoreMenu(autocaptionVideo);
 				
-				hoverOverElement(media);
-				clickElement(media, "More menu", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 10);
+
 				mediaDetailsModal.clickAccessiblity();
 				WebElement autocaptionButton=Driver.getDriver().findElement(By.id("autoCaptionButtonID"));
 				boolean actualState=autocaptionButton.isEnabled();
 				System.out.println(actualState);
-				mediaDetailsModal.captionButtonEnabledStateIsAsExpected("auto caption",true, actualState, 10,autocaptionVideo );
+				mediaDetailsModal.captionButtonEnabledStateIsAsExpected("auto caption",true, actualState, 15,autocaptionVideo );
 				mediaDetailsModal.clickAutoCaptionButton();
 				clickElement("Send autocaption request button", By.id("sendAutoCaptionRequest"));
 				mediaDetailsModal.clickCloseMoreMenu();
-				mediaLibrary.deleteMedia(autocaptionVideo);
+				mediaLibrary.navigateToMyMedia(userUsername);
+				Thread.sleep(3000);
+		        mediaLibrary.accessFolderMoreMenu("captionfolder");
+				foldermodal.deleteCurrentFolder();
 				navigationBar.userLogOut();
 			}
 			else {
@@ -192,21 +203,22 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 		clickElement("add Persmission button", By.xpath("//button[@title='Add Permission']"), 10);
 	    }
     
-    public void checkUserCanSeeHumancaptionproviders(String userUsername, String userPassword,String humanCaptionProviders, String autocaptionVideo) throws InterruptedException {
+    public void checkUserCanSeeHumancaptionproviders(String userUsername, String userPassword,String humanCaptionProviders, String autocaptionVideo, String newFolderName) throws InterruptedException {
 	    mediaLibrary.navigateToMyMediaUserLogin(userUsername, userPassword);
-	    mediaLibrary.bulkMediaUpload("src\\fileResources\\humancaptionvideo");
+	    mediaLibrary.createNewFolder(newFolderName);
+		mediaLibrary.accessFolder(newFolderName);
+		mediaLibrary.bulkMediaUpload("src\\fileResources\\humancaptionvideo");
+	   
 		 boolean processed = medialibraryHelpers.mediaIsProcessed(autocaptionVideo, 60, 3);
 			if(processed) {
+
 				Report.reportStep(Driver.getDriver(), autocaptionVideo + " media fully proccessed", "PASS", false);
-				//Driver.getDriver().navigate().refresh();
-				WebElement media=Driver.getDriver().findElement(By.xpath("//div[@class=\"videoWrapper\"]"));
-				
-				hoverOverElement(media);
-				clickElement(media, "More menu", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 10);
+				medialibraryHelpers.accessMediaMoreMenu(autocaptionVideo);
+
 				mediaDetailsModal.clickAccessiblity();
 				WebElement humancaptionButton=Driver.getDriver().findElement(By.id("humanCaptionButtonID"));
 				boolean actualState=humancaptionButton.isEnabled();
-				mediaDetailsModal.captionButtonEnabledStateIsAsExpected("human caption",true, actualState, 10,autocaptionVideo );
+				mediaDetailsModal.captionButtonEnabledStateIsAsExpected("human caption",true, actualState, 15,autocaptionVideo );
 				mediaDetailsModal.clickHumanCaptionButton();
 				
 				if(humanCaptionProviders=="All Caption Providers") {
@@ -224,8 +236,10 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 		             if(captionProvidersArray.equals(expectedlist)) {
 						 Report.reportStep(Driver.getDriver(), "All caption providers are available","PASS",false);
 					   }
+
 					   else {
 						   Report.reportStep(Driver.getDriver(), "All caption providers are not present","FAIL", true);
+
 					   }
 				}
 				
@@ -330,8 +344,13 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 				
 				clickElement("humancaption modal close button", By.id("veryFastCloseFooterBtn_Todo"),10);
 				mediaDetailsModal.clickCloseMoreMenu();
-				//Driver.getDriver().navigate().refresh();
-				mediaLibrary.deleteMedia(autocaptionVideo);
+
+
+				mediaLibrary.navigateToMyMedia(userUsername);
+				Thread.sleep(3000);
+		        mediaLibrary.accessFolderMoreMenu("captionfolder");
+				foldermodal.deleteCurrentFolder();
+
 				navigationBar.userLogOut();
 			}
 			else {
@@ -341,22 +360,25 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 		
    }
     
-    public void checkUserHumancaptionButtonDisabled(String userUsername, String userPassword, String autocaptionVideo) throws InterruptedException {
+    public void checkUserHumancaptionButtonDisabled(String userUsername, String userPassword, String autocaptionVideo, String newFolderName) throws InterruptedException {
 		 mediaLibrary.navigateToMyMediaUserLogin(userUsername, userPassword);
-		 mediaLibrary.bulkMediaUpload("src\\fileResources\\humanCaptionVideo");
+		 mediaLibrary.createNewFolder(newFolderName);
+		 mediaLibrary.accessFolder(newFolderName);
+		 mediaLibrary.bulkMediaUpload("src\\fileResources\\humancaptionvideo");
+		 
 		 boolean processed = medialibraryHelpers.mediaIsProcessed(autocaptionVideo, 60, 3);
 			if(processed) {
+
 				Report.reportStep(Driver.getDriver(), autocaptionVideo + " media fully proccessed", "PASS", false);
 				Driver.getDriver().navigate().refresh();
-				 WebElement media1=waitForElement(By.xpath("//div[@class=\"videoWrapper\"]"),10);
-				 
-				 hoverOverElement(media1);
-				 clickElement(media1, "More menu", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 10);
+				 medialibraryHelpers.accessMediaMoreMenu(autocaptionVideo);
+
+
 				 mediaDetailsModal.clickAccessiblity();
 				 WebElement humancaptionButton=Driver.getDriver().findElement(By.id("humanCaptionButtonID"));
 				 boolean actualState=humancaptionButton.isEnabled();
 				 System.out.println(actualState);
-				 boolean captionEnabledState=mediaDetailsModal.captionButtonEnabledStateIsAsExpected("human caption",false, actualState, 10,autocaptionVideo );
+				 boolean captionEnabledState=mediaDetailsModal.captionButtonEnabledStateIsAsExpected("human caption",false, actualState, 15,autocaptionVideo );
 				 System.out.println(captionEnabledState);
 				   if (captionEnabledState == true) {
 						Report.reportStep(Driver.getDriver(), " humancaption button is not enabled ", "PASS", true);
@@ -365,11 +387,14 @@ MediaLibraryPageHelpers medialibraryHelpers=new MediaLibraryPageHelpers();
 						Report.reportStep(Driver.getDriver(), " humancaption button is enabled", "FAIL", false);
 					}
 				   mediaDetailsModal.clickCloseMoreMenu();
-				  // Driver.getDriver().navigate().refresh();
-				   mediaLibrary.deleteMedia(autocaptionVideo);
+
+				   mediaLibrary.navigateToMyMedia(userUsername);
+				   Thread.sleep(3000);
+			       mediaLibrary.accessFolderMoreMenu("captionfolder");
+				   foldermodal.deleteCurrentFolder();
+
 				   navigationBar.userLogOut();
-				
-			}
+				}
 			else {
 				Report.reportStep(Driver.getDriver(), autocaptionVideo + " media not fully proccessed", "FAIL", true);
 				Assert.state(processed, "Video failed to process");

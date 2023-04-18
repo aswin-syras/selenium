@@ -43,8 +43,8 @@ public class MoodlePage extends QuizPageHelpers {
 	}
 	
 	public void navigateToLoginPage() {
-		String URL = "https://tmoodle2.yuja.com/login/index.php";
-		launchUrl(URL, "Moodle login page");
+		String URL = prop.getProperty("LMS.Moodle")+"login/index.php";
+		launchUrl(URL, "LMS login page");
 	}
 	
 	public void loginFast(String username, String password) {
@@ -143,14 +143,14 @@ public class MoodlePage extends QuizPageHelpers {
 		Driver.getDriver().switchTo().defaultContent();
 		String URL = "https://tmoodle2.yuja.com/course/view.php?id=142";
 		launchUrl(URL, "Moodle automation course page");
-	        accessCIMMediaChooser();
-	        CIMMediaChooserQuizEmbed(quizNewName);
-	        logout();
-	        navigateToCourse(stuserName,stpassword);
-	        clickElement("click embed media title", By.xpath("//span[text()="+quizFinalName+"]"));
-	        switchToIframe("switch to lti frame", By.id("contentframe"), 10);
-	        switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
-	        clickPlaybutton();
+	    accessCIMMediaChooser();
+	    CIMMediaChooserQuizEmbed(quizNewName);
+	    logout();
+	    navigateToCourse(stuserName,stpassword);
+	    clickElement("click embed media title", By.xpath("//span[text()="+quizFinalName+"]"));
+	    switchToIframe("switch to lti frame", By.id("contentframe"), 10);
+	    switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
+	    clickPlaybutton();
 		Thread.sleep(5000);
 		Driver.getDriver().switchTo().parentFrame();
 		StudentattendallquestionsCorrectly(sa, fitbans);
@@ -185,12 +185,12 @@ public class MoodlePage extends QuizPageHelpers {
 		String URL = "https://tmoodle2.yuja.com/course/view.php?id=142";
 		launchUrl(URL, "Moodle automation course page");
 		accessCIMMediaChooser();
-	        CIMMediaChooserQuizEmbed(quizNewName);
+	    CIMMediaChooserQuizEmbed(quizNewName);
 		logout();
 		navigateToCourse(stuserName,stpassword);
 		clickElement("click embed media title", By.xpath("//span[text()="+quizFinalName+"]"));
 		switchToIframe("switch to lti frame", By.id("contentframe"), 10);
-	        switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
+	    switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
 		clickPlaybutton();
 		Thread.sleep(48000);
 		Driver.getDriver().switchTo().defaultContent();
@@ -749,9 +749,10 @@ public class MoodlePage extends QuizPageHelpers {
 		 media = mediaTitlelist.get(i);
 		 System.out.println(media);
 		 if(mediaExists(media)) {
-			 System.out.println("media " +media+ "exists");
-			// mediaLibrary.deleteMedia(media);
-		 }
+			 System.out.println("media " +media+ "exists");}
+			mediaLibrary.deleteMedia(media);
+			 
+		 
 	  }
 	}
 	
@@ -837,10 +838,11 @@ public class MoodlePage extends QuizPageHelpers {
 	
    //Methods for uploading media in media chooser
 
-	public Boolean mediaUploadedMediachooser(String mediaTitle, String mediaPath) {
+	public Boolean mediaUploadedMediachooser(String mediaTitle, String mediaPath) throws InterruptedException {
 		try {
 			System.out.println("inside media upload media chooser");
 			uploadMediaMC(mediaPath);
+			Thread.sleep(2000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -894,7 +896,7 @@ public class MoodlePage extends QuizPageHelpers {
 
 	//Get the array of media titles uploaded from directory 
 	
-   public ArrayList<String> getMediaTitleArrayfromDirectory(String mediaDirectoryPath) {
+   public ArrayList<String> getMediaTitleArrayfromDirectory(String mediaDirectoryPath) throws InterruptedException {
 	   
 	   File mediaDirectory = new File(mediaDirectoryPath);
 	   String[] mediaList = mediaDirectory.list();
@@ -910,6 +912,7 @@ public class MoodlePage extends QuizPageHelpers {
 			mediaTitlelistName = mediaList[i]; 
 			mediaTitle = mediaTitlelistName.substring(0, mediaTitlelistName.indexOf('.'));
 			mediaTitlelist1.add(mediaTitle);
+			
 		}
 	   
 	   return mediaTitlelist1;
@@ -919,6 +922,7 @@ public class MoodlePage extends QuizPageHelpers {
 	//get a media element from the media chooser			
 		
 	public WebElement getMediaMediaChooser(String mediaTitle) {
+		waitForElement(By.xpath("//div[text()='"+mediaTitle+"']"), 30);
 		List<WebElement> mediaLibraryElementList = getElementList( By.cssSelector("div[class=\"list-item list-item-large add-media-list-item media-item-container\"]"));
 		int listSize = mediaLibraryElementList.size();
 		System.out.println(listSize);
@@ -936,6 +940,7 @@ public class MoodlePage extends QuizPageHelpers {
 			while(!mediaLibraryElementName.equals(mediaTitle) && i<listSize) {
 				mediaLibraryElement = mediaLibraryElementList.get(i++);
 				mediaLibraryElementName = mediaLibraryElement.findElement(By.className("choose-media-video-title")).getText();
+				System.out.println(mediaLibraryElementName);
 			}
 			return mediaLibraryElement;
 		}
@@ -943,7 +948,7 @@ public class MoodlePage extends QuizPageHelpers {
 	
 	//Check a media exists in media chooser
 	
-	public boolean mediaExistsMediaChooser(String mediaTitle) {
+	public boolean mediaExistsMediaChooser(String mediaTitle) throws InterruptedException {
 		WebElement mediaLibraryElement =  getMediaMediaChooser(mediaTitle);
 		String mediaLibraryElementName = mediaLibraryElement.findElement(By.className("choose-media-video-title")).getText();
 		Boolean mediaLibraryElementExists = mediaTitle.equals(mediaLibraryElementName);
