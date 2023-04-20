@@ -28,18 +28,17 @@ public class MediaLibraryPageHelpers extends Helpers{
 	NavigationBarHelpers navigationBar = new NavigationBarHelpers();
 	
 	
+	public void navigateToMyMedia(String userName){
+		URL = prop.getProperty("URL")+"/P/VideoManagement/MediaLibrary/Users/"+userName+"/MyMediaCollections";
+		launchUrl(URL, "Test Automation Enterprise Video Platform");
+	}
+	
 	public void navigateToMyMediaUserLogin(String userName, String password){
 		signInPage.navigateToLoginPage();
 		Driver.getDriver().manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
-		URL = prop.getProperty("URL")+"/P/VideoManagement/MediaLibrary/Users/"+userName+"/MyMediaCollections";
-		launchUrl(URL, "Test Automation Enterprise Video Platform");
-	}
-	
-	public void navigateToMyMedia(String userName){
-		URL = prop.getProperty("URL")+"/P/VideoManagement/MediaLibrary/Users/"+userName+"/MyMediaCollections";
-		launchUrl(URL, "Test Automation Enterprise Video Platform");
+		navigateToMyMedia(userName);
 	}
 	
 	public void navigateToSharedWithMeUserLogin(String userName, String password){

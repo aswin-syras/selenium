@@ -226,11 +226,11 @@ public class Helpers extends Wrapper {
 	public List<WebElement> getElementList(By identifier) {
 
 		waitForElement(identifier, 10);
-		List<WebElement> videoElementList;
+		List<WebElement> elementList;
 
 		try {
-			videoElementList = Driver.getDriver().findElements(identifier);
-			return videoElementList;
+			elementList = Driver.getDriver().findElements(identifier);
+			return elementList;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
