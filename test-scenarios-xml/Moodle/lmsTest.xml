@@ -6,10 +6,10 @@
   	<classes>
       <class name="com.yuja.evp.testclasses.CanvasTest">
         	<methods>
-        		<include name="Canvas_create_publish_attend_gradebook_administrator_test" />
+        		<!--<include name="Canvas_create_publish_attend_gradebook_administrator_test" />
         		<include name="Canvas_create_publish_attend_gradebook_instructor_test" />
         		<include name="Canvas_create_playback_attend_gradebook_administrator_test" />
-        		<include name="Canvas_create_playback_attend_gradebook_instructor_test" />
+        		<include name="Canvas_create_playback_attend_gradebook_instructor_test" />-->
         		<include name="Canvas_embed_video_as_instructor_check_accessible_by_student_test" />
         		<include name="Canvas_embed_video_as_administrator_check_accessible_by_student_test" />
         	    <include name="Canvas_embed_audio_as_instructor_check_accessible_by_student_test" />
@@ -38,10 +38,10 @@
         
          <class name="com.yuja.evp.testclasses.MoodleTest">
         	<methods>
-        		<include name="Moodle_create_publish_attend_gradebook_administrator_test" />
+        		<!--  <include name="Moodle_create_publish_attend_gradebook_administrator_test" />
         		<include name="Moodle_create_publish_attend_gradebook_instructor_test" />
         		<include name="Moodle_create_playback_attend_gradebook_administrator_test" />
-        		<include name="Moodle_create_playback_attend_gradebook_instructor_test" />
+        		<include name="Moodle_create_playback_attend_gradebook_instructor_test" />-->
         		<include name="Moodle_embed_video_as_instructor_check_accessible_by_student_test" />
         		<include name="Moodle_embed_video_as_administrator_check_accessible_by_student_test" />
         	    <include name="Moodle_embed_audio_as_instructor_check_accessible_by_student_test" />

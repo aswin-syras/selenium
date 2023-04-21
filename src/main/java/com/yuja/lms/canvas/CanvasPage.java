@@ -387,6 +387,7 @@ public class CanvasPage extends QuizPageHelpers {
 	public void checkAutoprovisionOfUser(String adminUserName, String adminPassword, String userName, String password, String email, String newUsername, String newUserPassword, String courseName, String embedMediaTitle ) throws InterruptedException {
 		try {
 		mp.setAndResetAutomaticProvision(userName,password,"user",true);
+		navbar.userLogOut();
 		String studentUserName=createCanvasUser(adminUserName, adminPassword,email,newUsername,newUserPassword);
 		selectCourseFromDashboard(courseName);
 		clickElement("people", By.xpath("//a[@class='people']"));
@@ -442,6 +443,7 @@ public class CanvasPage extends QuizPageHelpers {
     public void checkAutoprovisionOfUserinMultipleCourses(String adminUserName, String adminPassword, String userName, String password, String email, String newUsername, String newUserPassword, String[] courseName, String embedmediatitle ) throws InterruptedException {
 		try {
     	mp.setAndResetAutomaticProvision(userName,password,"user",true);
+    	navbar.userLogOut();
 		String studentUserName=createCanvasUser(adminUserName, adminPassword,email,newUsername,newUserPassword);
 		String myaccountStudentName=null;
 		
@@ -509,6 +511,7 @@ public class CanvasPage extends QuizPageHelpers {
    public void checkManualprovisionOfUser(String adminUserName, String adminPassword, String userName, String password, String email, String newUsername, String newUserPassword, String courseName, String type, String existingStudentUsername, String embedmediatitle ) throws InterruptedException {
 	   try {
 	   mp.setAndResetAutomaticProvision(userName,password,"user",false);
+	   navbar.userLogOut();
 	   String studentUserName=createCanvasUser(adminUserName, adminPassword,email,newUsername,newUserPassword);
 	   selectCourseFromDashboard(courseName);
 	   clickElement("people", By.xpath("//a[@class='people']"));

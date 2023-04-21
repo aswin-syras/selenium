@@ -261,7 +261,6 @@ public class MoodlePage extends QuizPageHelpers {
             else {
             	Report.reportStep(Driver.getDriver(), "The checkbox is setting was same as required","PASS",false);
             }
-        navbar.userLogOut();
        }
 	
 	public void setRoleMapping(String userName, String password, String yujaRolefromAdmin, String yujaRolefromTeacher, String yujaRolefromStudent) throws InterruptedException {
@@ -319,6 +318,7 @@ public class MoodlePage extends QuizPageHelpers {
         Select startPageOptionStudent = new Select(Driver.getDriver().findElement(By.id("select_defaultLandingPageStudent")));
         startPageOptionITManager.selectByValue("mediaChannel");
         clickElement("save",By.xpath("//form[@id=\"saveSetupPrefences\"]//button[@id=\"setupPrefences_saveButton\"]"));
+        navbar.userLogOut();
      }
 	
 	// Method directly used in test class.
@@ -392,6 +392,7 @@ public class MoodlePage extends QuizPageHelpers {
 		CourseRoleType.put("GroupOwner", "//div[@data-aitomation=\"divGroupOwners\"]//div[@class=\"user-list-item\"]");
 		
 		setAndResetAutomaticProvision(userName,password,"user",true);
+		navbar.userLogOut();
 		String studentUserName=createMoodleUser(adminUserName, adminPassword,email,newUsername,newUserPassword);
 		selectCourseFromSiteHome(courseName);
 		
@@ -447,6 +448,7 @@ public class MoodlePage extends QuizPageHelpers {
 		CourseRoleType.put("GroupOwner", "//div[@data-aitomation=\"divGroupOwners\"]//div[@class=\"user-list-item\"]");
 		
 		setAndResetAutomaticProvision(userName,password,"user",true);
+		navbar.userLogOut();
 		String studentUserName=createMoodleUser(adminUserName, adminPassword,email,newUsername,newUserPassword);
 		String myaccountStudentName=null;
 		
@@ -511,6 +513,7 @@ public class MoodlePage extends QuizPageHelpers {
 	   CourseRoleType.put("GroupOwner", "//div[@data-aitomation=\"divGroupOwners\"]//div[@class=\"user-list-item\"]");
 	
 	   setAndResetAutomaticProvision(userName,password,"user",false);
+	   navbar.userLogOut();
 	   String studentUserName=createMoodleUser(adminUserName, adminPassword,email,newUsername,newUserPassword);
 	   selectCourseFromSiteHome(courseName);
 	
