@@ -260,7 +260,8 @@ public class MoodlePage extends QuizPageHelpers {
             clickElement("save confirm",By.xpath("//div[@class=\"modal-content\"]//button[@title=\"Confirm\"]") );}
             else {
             	Report.reportStep(Driver.getDriver(), "The checkbox is setting was same as required","PASS",false);
-            }	
+            }
+        navbar.userLogOut();
        }
 	
 	public void setRoleMapping(String userName, String password, String yujaRolefromAdmin, String yujaRolefromTeacher, String yujaRolefromStudent) throws InterruptedException {
@@ -281,10 +282,10 @@ public class MoodlePage extends QuizPageHelpers {
          clickElement("save confirm",By.xpath("//div[@class=\"modal-content\"]//button[@title=\"Confirm\"]") );
 	}
 	
-	public void setUserTypeToLockedorUnlocked(String lockOrUnlock,String userType) throws InterruptedException {
+	public void setUserTypeToLockedorUnlocked(String lockOrUnlock,String userType, String rolemappingusername) throws InterruptedException {
 		 URL = prop.getProperty("URL")+"/P/Institution/TypeRoster/";
 	     launchUrl(URL, "Test Automation Enterprise Video Platform");
-	     roster.rosterButtons("rolemappinguser");
+	     roster.rosterButtons(rolemappingusername);
 		 
 		 if(lockOrUnlock=="lock") {
 			clickElement("usertype",By.xpath("//a[@data-automation=\"btnUserType\"]") );
@@ -303,6 +304,7 @@ public class MoodlePage extends QuizPageHelpers {
 			lockDropdown.selectByVisibleText("Not Locked");
 			clickElement("save",By.xpath("//button[@class=\"btn btn-primary btn-sm editable-submit\"]") );
 			}
+		 navbar.userLogOut();
 	}
 	
     	
@@ -649,7 +651,7 @@ public class MoodlePage extends QuizPageHelpers {
 	   //Method directly used in test class
    
    
-	   public void roleMappingUserTypeUnlocked(String userName, String password, String adminUserName, String adminPassword, String userType) throws InterruptedException {
+	   public void roleMappingUserTypeUnlocked(String userName, String password, String adminUserName, String adminPassword, String userType, String rolemappingusername) throws InterruptedException {
 		   
 		   HashMap<String, RoleMappingObject> hm = new HashMap<String, RoleMappingObject>();
 
@@ -661,7 +663,7 @@ public class MoodlePage extends QuizPageHelpers {
 		   hm.put("Student",t3);
 		   
 		   setRoleMapping(userName, password, "IT Manager", "Student","Instructor");
-		   setUserTypeToLockedorUnlocked("unlock",userType);
+		   setUserTypeToLockedorUnlocked("unlock",userType,rolemappingusername);
 		   String key=null;
 		   getCheckRoleMapping(adminUserName, adminPassword, hm);		  
 		   for (Entry<String, RoleMappingObject> entry : hm.entrySet()) {
@@ -669,19 +671,19 @@ public class MoodlePage extends QuizPageHelpers {
 		   if(key=="Instructor1") {
 			   RoleMappingObject value = entry.setValue(t1);
 			   value.setNumberOfMainMenuOptions(3);
-			   value.setMoodleRole("Manager");
+			   value.setlmsRole("Manager");
 			   value.setCourseRole("GroupOwner");
 			  }
 		   if(key=="Instructor") {
 			   RoleMappingObject value = entry.setValue(t2);
 			   value.setNumberOfMainMenuOptions(3);
-			   value.setMoodleRole("Teacher");
+			   value.setlmsRole("Teacher");
 			   value.setCourseRole("GroupOwner");
 			   }
 		   if(key=="Student") {
 			   RoleMappingObject value = entry.setValue(t3);
 			   value.setNumberOfMainMenuOptions(2);
-			   value.setMoodleRole("Student");
+			   value.setlmsRole("Student");
 			   value.setCourseRole("GroupMember");
 			   }}
 		   
@@ -693,13 +695,13 @@ public class MoodlePage extends QuizPageHelpers {
 		   for (Entry<String, RoleMappingObject> entry : hm.entrySet()) {
 			    String key2 = entry.getKey();
 			    RoleMappingObject value = entry.getValue();
-			    checkRoleMapping(adminUserName, adminPassword,value.getNumberOfMainMenuOptions(),value.getMoodleRole(),value.getCourseRole() );
+			    checkRoleMapping(adminUserName, adminPassword,value.getNumberOfMainMenuOptions(),value.getlmsRole(),value.getCourseRole() );
 			    }
 	   }
 	   
 	 //Method directly used in test class
 		   
-      public void roleMappingUserTypeLocked(String userName, String password, String adminUserName, String adminPassword, String userType,int numberOfMainMenuOptions) throws InterruptedException {
+      public void roleMappingUserTypeLocked(String userName, String password, String adminUserName, String adminPassword, String userType,int numberOfMainMenuOptions, String rolemappingusername) throws InterruptedException {
 		   
 		   HashMap<String, RoleMappingObject> hm = new HashMap<String, RoleMappingObject>();
 
@@ -711,7 +713,7 @@ public class MoodlePage extends QuizPageHelpers {
 		   hm.put("Student",t3);
 		   
 		   setRoleMapping(userName, password, "IT Manager", "Student","Instructor");
-		   setUserTypeToLockedorUnlocked("lock",userType);
+		   setUserTypeToLockedorUnlocked("lock",userType,rolemappingusername);
 		   String key=null;
 		   getCheckRoleMapping(adminUserName, adminPassword, hm);		  
 		   for (Entry<String, RoleMappingObject> entry : hm.entrySet()) {
@@ -719,19 +721,19 @@ public class MoodlePage extends QuizPageHelpers {
 		   if(key=="Instructor1") {
 			   RoleMappingObject value = entry.setValue(t1);
 			   value.setNumberOfMainMenuOptions(numberOfMainMenuOptions);
-			   value.setMoodleRole("Manager");
+			   value.setlmsRole("Manager");
 			   value.setCourseRole("GroupOwner");
 			  }
 		   if(key=="Instructor") {
 			   RoleMappingObject value = entry.setValue(t2);
 			   value.setNumberOfMainMenuOptions(numberOfMainMenuOptions);
-			   value.setMoodleRole("Teacher");
+			   value.setlmsRole("Teacher");
 			   value.setCourseRole("GroupOwner");
 			   }
 		   if(key=="Student") {
 			   RoleMappingObject value = entry.setValue(t3);
 			   value.setNumberOfMainMenuOptions(numberOfMainMenuOptions);
-			   value.setMoodleRole("Student");
+			   value.setlmsRole("Student");
 			   value.setCourseRole("GroupMember");
 			   }}
 		   

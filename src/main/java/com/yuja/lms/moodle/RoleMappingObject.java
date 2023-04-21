@@ -3,14 +3,14 @@ package com.yuja.lms.moodle;
 public class RoleMappingObject {
 
 	private int numberOfMainMenuOptions;
-	private String moodleRole;
+	private String lmsRole;
 	private String courseRole;
 	
 	
-	public RoleMappingObject(int numberOfMainMenuOptions, String moodleRole, String courseRole) {
+	public RoleMappingObject(int numberOfMainMenuOptions, String lmsRole, String courseRole) {
 		super();
 		this.numberOfMainMenuOptions = numberOfMainMenuOptions;
-		this.moodleRole = moodleRole;
+		this.lmsRole = lmsRole;
 		this.courseRole = courseRole;
 	}
 	public int getNumberOfMainMenuOptions() {
@@ -19,11 +19,11 @@ public class RoleMappingObject {
 	public void setNumberOfMainMenuOptions(int numberOfMainMenuOptions) {
 		this.numberOfMainMenuOptions = numberOfMainMenuOptions;
 	}
-	public String getMoodleRole() {
-		return moodleRole;
+	public String getlmsRole() {
+		return lmsRole;
 	}
-	public void setMoodleRole(String moodleRole) {
-		this.moodleRole = moodleRole;
+	public void setlmsRole(String lmsRole) {
+		this.lmsRole = lmsRole;
 	}
 	public String getCourseRole() {
 		return courseRole;
