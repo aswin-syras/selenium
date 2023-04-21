@@ -116,9 +116,22 @@ public class APITestMethods extends APIPageHelpers {
 				throw new EndTestException();
 			}
 			
+			System.out.println("uploadLink = " + uploadLink);
+			
 			RestAssured.baseURI = uploadLink;
 			RequestSpecification httpRequest = RestAssured.given();
-			httpRequest.multiPart("file", new File(""), "text/html");
+			httpRequest.multiPart("file", new File("src\\fileResources\\apiTest\\epicStuffDOCXOffice.docx"), "text/html");
+			
+			Response response = httpRequest.request(Method.PUT);
+			
+			String statusLine = response.getStatusLine();
+			String message = response.asPrettyString();
+			
+			if(response.getStatusCode() == 200) {
+				Report.reportStep(Driver.getDriver(), "Status : " + statusLine + ". " + message, "PASS", false);
+			}else {
+				Report.reportStep(Driver.getDriver(), "Status : " + statusLine + ". " + message, "FAIL", false);
+			}
 			
 			
 		} catch(Exception e) {
