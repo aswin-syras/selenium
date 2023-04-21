@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Suite">
+<parameter name="TestName" value="TestValue" />
+  <test name="test">
+  	<classes>
+      <class name="com.yuja.evp.testclasses.APITest">
+	      <methods>
+	          <include name="Create_user_api_test" />
+	      </methods>
+        </class>
+    </classes>
+  </test>
+ 
+</suite> <!-- Suite -->

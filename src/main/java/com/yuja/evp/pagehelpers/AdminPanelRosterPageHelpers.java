@@ -15,13 +15,17 @@ import java.util.HashMap;
 	
 	private SignInPageHelpers signInPage = new SignInPageHelpers();
 	
+	public void navigateToAdminPanelRosterPage() {
+		URL =  prop.getProperty("URL")+"/P/Institution/TypeRoster/";
+		launchUrl(URL, "Test Automation Enterprise Video Platform");
+	}
+	
 	public void navigateToAdminPanelRosterPageUserLogin(String userName, String password){
 		signInPage.navigateToLoginPage();
 		Driver.getDriver().manage().window().maximize();
 		signInPage.loginFast(userName, password);
 		waitForElement(By.id("navbar-header"), 10);
-		URL =  prop.getProperty("URL")+"/P/Institution/TypeRoster/";
-		launchUrl(URL, "Test Automation Enterprise Video Platform");
+		navigateToAdminPanelRosterPage();
 	}
 	
 	public void clickCreateUserButton() {
@@ -48,10 +52,24 @@ import java.util.HashMap;
 		clickElement(element4, "Confirm", By.cssSelector("[title=\"No, do it later\"]"), 10);
 	}
 	
-	public void deleteUser(String userName) throws InterruptedException {
-		sendKeys("Search User", By.id("rosterSearchUserID"),userName);
+	public boolean userExists(String userId){
+		sendKeys("User search box", By.id("rosterSearchUserID"), userId);
 		clickElement("Search button", By.cssSelector("[data-automation=btnSearchUser]"));
-		clickElement("Click Checkbox", By.xpath("//input[@value= '" + userName +"']")); 
+		List<WebElement> userHandles = getElementList(By.cssSelector("[id=\"rosterContent\"] > table > tbody > tr > [data-automation=\"colUserId\"] > [data-automation=\"btnUseridShowActions\"]"));
+		int currentIndex = 0;
+		while(currentIndex < userHandles.size()) {
+			if(userHandles.get(currentIndex).getText().trim().equals(userId)) {
+				return true;
+			}
+			currentIndex++;
+		}
+		return false;
+	}
+	
+	public void deleteUser(String userId) throws InterruptedException {
+		sendKeys("Search User", By.id("rosterSearchUserID"),userId);
+		clickElement("Search button", By.cssSelector("[data-automation=btnSearchUser]"));
+		clickElement("Click Checkbox", By.xpath("//input[@value= '" + userId +"']")); 
 		clickElement("Delete Users button", By.id("btnDeleteUsers"));
 		List<WebElement> element3 = Driver.getDriver().findElements(By.className("modal-content"));	
 		WebElement element4= element3.get(element3.size()-1);
