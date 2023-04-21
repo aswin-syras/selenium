@@ -41,7 +41,7 @@ public class CanvasPage extends QuizPageHelpers {
 //	}
 	
 	public void navigateToLoginPage() {
-		String URL = "https://panotesting.instructure.com/login/canvas";
+		String URL =  prop.getProperty("LMS.Canvas")+"login/canvas";
 		launchUrl(URL, "LMS login page");
 	}
 	
@@ -62,7 +62,7 @@ public class CanvasPage extends QuizPageHelpers {
 		Driver.getDriver().manage().window().maximize();
 		loginFast(userName, password);
 		waitForElement(By.xpath("//a[@href='https://panotesting.instructure.com/']"), 10);
-		String URL = "https://panotesting.instructure.com/courses/817";
+		String URL = prop.getProperty("LMS.Canvas")+"courses/817";
 		launchUrl(URL, "Canvas automation course page");
 		Boolean assignmentexist=verifyElementExist("Assignments", By.xpath("//a[@href='/courses/817/assignments']"));
 		System.out.println(assignmentexist);
@@ -104,7 +104,7 @@ public class CanvasPage extends QuizPageHelpers {
 		navigateToLoginPage();
 		Driver.getDriver().manage().window().maximize();
 		loginFast(adminUserName, adminPassword);
-		String URL = "https://panotesting.instructure.com/accounts/1";
+		String URL = prop.getProperty("LMS.Canvas")+"accounts/1";
 		launchUrl(URL, "Canvas automation course creation page");
 		clickElement("Add a new course button", By.xpath("//button[@aria-label=\"Create new course\"]"));
 		sendKeys("Enter course name", By.xpath("(//input[@class='qBMHb_cwos qBMHb_ycrn qBMHb_EMjX'])[4]"),courseName+getRandomInteger(1000));
@@ -122,7 +122,7 @@ public class CanvasPage extends QuizPageHelpers {
 		navigateToLoginPage();
 		Driver.getDriver().manage().window().maximize();
 		loginFast(adminUserName, adminPassword);
-		String URL = "https://panotesting.instructure.com/accounts/1/users";
+		String URL = prop.getProperty("LMS.Canvas")+"accounts/1/users";
 		launchUrl(URL, "Canvas automation user creation page");
 		clickElement("add a new user button", By.xpath("//button[@aria-label='Add people']"));
 		String newUserNameRandom=newUsername+getRandomInteger(1000);
@@ -156,7 +156,7 @@ public class CanvasPage extends QuizPageHelpers {
 		String quizNewName=createandPublishQuiz(mediaTitle,name,question, option1,  option2, possibleans1, possibleans2, hint,courseName);
 		String quizFinalName="'"+quizNewName+"'";
 		Driver.getDriver().switchTo().defaultContent();
-		String URL = "https://panotesting.instructure.com/courses/817";
+		String URL = prop.getProperty("LMS.Canvas")+"courses/817";
 		launchUrl(URL, "Canvas automation course page");
 	    accessCIMMediaChooser(embedMediaTitle,quizNewName);
 	    CIMMediaChooserQuizEmbed(quizNewName);
@@ -202,7 +202,7 @@ public class CanvasPage extends QuizPageHelpers {
 		String quizNewName=createPlaybackquiz(playbackQuizTitle,videoNameforPlaybackquiz);
 		String quizFinalName="'"+quizNewName+"'";
 		Driver.getDriver().switchTo().defaultContent();
-		String URL = "https://panotesting.instructure.com/courses/817";
+		String URL = prop.getProperty("LMS.Canvas")+"courses/817";
 		launchUrl(URL, "Canvas automation course page");
 		accessCIMMediaChooser(embedMediaTitle,quizNewName);
 	    CIMMediaChooserQuizEmbed(quizNewName);
