@@ -55,7 +55,7 @@ public class MoodleTest extends BaseTest {
 	     String[] courseArrayforEnrollingUserforUserProvisioning={"USER PROVISIONING","USER PROVISIONING2","USER PROVISIONING3"};
 	     String userRoleinMoodleCourse="Manager"; //can be Teacher corresponding yuja role is GroupOwner or Student corresponding yuja role is GroupMember
 	     String userRoleinYujaCourse="GroupOwner";
-	     String rolemappingusername="rolemappinguser";
+	     String rolemappingusername="rolemappingusermoodle";
 	     String customToolName="TEST AUTOMATION STAGING 1.3";
 	     String moodleToolNameOnConfiguration="TEST AUTOMATION STAGING 1.3";
 	     String directoryPathForVideo="src\\fileResources\\lmsVideo";

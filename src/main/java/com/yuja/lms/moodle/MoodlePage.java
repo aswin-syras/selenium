@@ -602,7 +602,7 @@ public class MoodlePage extends QuizPageHelpers {
 			String obtainedmembersplitFirstname[]=obtainedmemberName.split(" ",2);
 			obtainedmoodlememberFirstname=obtainedmembersplitFirstname[0];
 		    System.out.println(obtainedmoodlememberFirstname);
-			if(obtainedmoodlememberFirstname.equals("rolemappinguser")) {
+			if(obtainedmoodlememberFirstname.equals("rolemappingusermoodle")) {
 				int rowposition=i+1;
 				clickElement("edit role button", By.xpath("(//span[@class=\"quickediticon visibleifjs\"])["+rowposition+"]"));
 				clickElement("close current role button", By.xpath("//span[@class=\"badge badge-info mb-3 mr-1\"]//span"));
@@ -618,7 +618,7 @@ public class MoodlePage extends QuizPageHelpers {
 	   logout();
 	   navigateToLoginPage();
 	   Driver.getDriver().manage().window().maximize();
-	   loginFast("rolemappinguser", "jamNOW123/");
+	   loginFast("rolemappingusermoodle", "jamNOW123/");
 	   selectCourseFromSiteHome("AUTOMATION MOODLE COURSE");
 	   NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
 	   waitForElement(By.xpath("//button[@title=\" Main Menu\"]"),15);
@@ -636,13 +636,13 @@ public class MoodlePage extends QuizPageHelpers {
 			String obtainedmembersplitFirstname[]=obtainedmemberName.split(" ",2);
 		    obtainedmemberFirstname=obtainedmembersplitFirstname[0];
 		    System.out.println(obtainedmemberFirstname);
-			if(obtainedmemberFirstname.equals("rolemappinguser")){
+			if(obtainedmemberFirstname.equals("rolemappingusermoodle")){
 				Report.reportStep(Driver.getDriver(), "The moodle user role is correctly mapped to course in yuja", "PASS", false);
 				break;
 				}
 		   }
 	
-		if(mainMenuListSize==expectedMainMenuListSize && obtainedmemberFirstname.equals("rolemappinguser")) {
+		if(mainMenuListSize==expectedMainMenuListSize && obtainedmemberFirstname.equals("rolemappingusermoodle")) {
 			Report.reportStep(Driver.getDriver(), "The moodle user is  enrolled to  course in yuja with correct system role and course role", "PASS", false);
 			}else {
 			Report.reportStep(Driver.getDriver(), "The moodle user is  not enrolled to  course in yuja with correct system role and course role", "FAIL", true);

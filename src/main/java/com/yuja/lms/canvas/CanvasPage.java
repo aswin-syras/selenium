@@ -678,7 +678,7 @@ public class CanvasPage extends QuizPageHelpers {
 			   key=entry.getKey();
 		   if(key=="role1") {
 			   RoleMappingObject value = entry.setValue(t1);
-			   value.setNumberOfMainMenuOptions(2);
+			   value.setNumberOfMainMenuOptions(3);
 			   value.setlmsRole("CustomCourseAdmin");
 			   value.setCourseRole("GroupOwner");
 			  }
@@ -718,6 +718,7 @@ public class CanvasPage extends QuizPageHelpers {
            getCheckRoleMapping(adminUserName, adminPassword, hm,embedmediatitle);
 		   } catch(Exception e) {
 				e.printStackTrace();
+				setRoleMapping(userName, password,  "IT Manager", "Instructor","Student","Instructor","Student","Student");
 				Report.reportStep(Driver.getDriver(), "The test case did not complete all of its steps", "FAIL", false);
 			}
 	   }
@@ -797,6 +798,7 @@ public class CanvasPage extends QuizPageHelpers {
            getCheckRoleMapping(adminUserName, adminPassword, hm,embedmediatitle);
 		   } catch(Exception e) {
 				e.printStackTrace();
+				setRoleMapping(userName, password,  "IT Manager", "Instructor","Student","Instructor","Student","Student");
 				Report.reportStep(Driver.getDriver(), "The test case did not complete all of its steps", "FAIL", false);
 			}
 	   } 
