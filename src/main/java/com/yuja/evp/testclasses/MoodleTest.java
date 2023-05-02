@@ -55,6 +55,7 @@ public class MoodleTest extends BaseTest {
 	     String[] courseArrayforEnrollingUserforUserProvisioning={"USER PROVISIONING","USER PROVISIONING2","USER PROVISIONING3"};
 	     String userRoleinMoodleCourse="Manager"; //can be Teacher corresponding yuja role is GroupOwner or Student corresponding yuja role is GroupMember
 	     String userRoleinYujaCourse="GroupOwner";
+	     String rolemappingusername="rolemappingusermoodle";
 	     String customToolName="TEST AUTOMATION STAGING 1.3";
 	     String moodleToolNameOnConfiguration="TEST AUTOMATION STAGING 1.3";
 	     String directoryPathForVideo="src\\fileResources\\lmsVideo";
@@ -403,7 +404,7 @@ public class MoodleTest extends BaseTest {
     	public void Check_role_mapping_unlocked(String TestName) {                                                                                                                                                                                                                                                                
       		MoodlePage mp = new MoodlePage();                                                                                                                                                                                                                                                                                 
       		try {                                                                                                                                                                                                                                                                                                             
-      			mp.roleMappingUserTypeUnlocked(prop.getProperty("ManagerID"), prop.getProperty("Password"),prop.getProperty("Moodle.adminusername"), prop.getProperty("Moodle.password"),"Student");
+      			mp.roleMappingUserTypeUnlocked(prop.getProperty("ManagerID"), prop.getProperty("Password"),prop.getProperty("Moodle.adminusername"), prop.getProperty("Moodle.password"),"Student",rolemappingusername);
       					       
       		}                                                                                                                                                                                                                                                                                                                 
       		catch (Exception e) {                                                                                                                                                                                                                                                                                             
@@ -417,7 +418,7 @@ public class MoodleTest extends BaseTest {
     	public void Check_role_mapping_locked_as_student(String TestName) {                                                                                                                                                                                                                                                                
       		MoodlePage mp = new MoodlePage();                                                                                                                                                                                                                                                                                 
       		try {                                                                                                                                                                                                                                                                                                             
-      			mp.roleMappingUserTypeLocked(prop.getProperty("ManagerID"), prop.getProperty("Password"),prop.getProperty("Moodle.adminusername"), prop.getProperty("Moodle.password"),"Student",2);
+      			mp.roleMappingUserTypeLocked(prop.getProperty("ManagerID"), prop.getProperty("Password"),prop.getProperty("Moodle.adminusername"), prop.getProperty("Moodle.password"),"Student",2,rolemappingusername);
       					       
       		}                                                                                                                                                                                                                                                                                                                 
       		catch (Exception e) {                                                                                                                                                                                                                                                                                             
@@ -431,7 +432,7 @@ public class MoodleTest extends BaseTest {
     	public void Check_role_mapping_locked_as_instructor(String TestName) {                                                                                                                                                                                                                                                                
       		MoodlePage mp = new MoodlePage();                                                                                                                                                                                                                                                                                 
       		try {                                                                                                                                                                                                                                                                                                             
-      			mp.roleMappingUserTypeLocked(prop.getProperty("ManagerID"), prop.getProperty("Password"),prop.getProperty("Moodle.adminusername"), prop.getProperty("Moodle.password"),"Instructor",3);
+      			mp.roleMappingUserTypeLocked(prop.getProperty("ManagerID"), prop.getProperty("Password"),prop.getProperty("Moodle.adminusername"), prop.getProperty("Moodle.password"),"Instructor",3,rolemappingusername);
       					       
       		}                                                                                                                                                                                                                                                                                                                 
       		catch (Exception e) {                                                                                                                                                                                                                                                                                             

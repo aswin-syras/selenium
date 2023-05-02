@@ -43,8 +43,8 @@ public class MoodlePage extends QuizPageHelpers {
 	}
 	
 	public void navigateToLoginPage() {
-		String URL = "https://tmoodle2.yuja.com/login/index.php";
-		launchUrl(URL, "Moodle login page");
+		String URL = prop.getProperty("LMS.Moodle")+"login/index.php";
+		launchUrl(URL, "LMS login page");
 	}
 	
 	public void loginFast(String username, String password) {
@@ -143,14 +143,14 @@ public class MoodlePage extends QuizPageHelpers {
 		Driver.getDriver().switchTo().defaultContent();
 		String URL = "https://tmoodle2.yuja.com/course/view.php?id=142";
 		launchUrl(URL, "Moodle automation course page");
-	        accessCIMMediaChooser();
-	        CIMMediaChooserQuizEmbed(quizNewName);
-	        logout();
-	        navigateToCourse(stuserName,stpassword);
-	        clickElement("click embed media title", By.xpath("//span[text()="+quizFinalName+"]"));
-	        switchToIframe("switch to lti frame", By.id("contentframe"), 10);
-	        switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
-	        clickPlaybutton();
+	    accessCIMMediaChooser();
+	    CIMMediaChooserQuizEmbed(quizNewName);
+	    logout();
+	    navigateToCourse(stuserName,stpassword);
+	    clickElement("click embed media title", By.xpath("//span[text()="+quizFinalName+"]"));
+	    switchToIframe("switch to lti frame", By.id("contentframe"), 10);
+	    switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
+	    clickPlaybutton();
 		Thread.sleep(5000);
 		Driver.getDriver().switchTo().parentFrame();
 		StudentattendallquestionsCorrectly(sa, fitbans);
@@ -185,12 +185,12 @@ public class MoodlePage extends QuizPageHelpers {
 		String URL = "https://tmoodle2.yuja.com/course/view.php?id=142";
 		launchUrl(URL, "Moodle automation course page");
 		accessCIMMediaChooser();
-	        CIMMediaChooserQuizEmbed(quizNewName);
+	    CIMMediaChooserQuizEmbed(quizNewName);
 		logout();
 		navigateToCourse(stuserName,stpassword);
 		clickElement("click embed media title", By.xpath("//span[text()="+quizFinalName+"]"));
 		switchToIframe("switch to lti frame", By.id("contentframe"), 10);
-	        switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
+	    switchToIframe("switch to video player frame", By.id("yujahtml5playerInVideoPoll"), 10);
 		clickPlaybutton();
 		Thread.sleep(48000);
 		Driver.getDriver().switchTo().defaultContent();
@@ -260,7 +260,7 @@ public class MoodlePage extends QuizPageHelpers {
             clickElement("save confirm",By.xpath("//div[@class=\"modal-content\"]//button[@title=\"Confirm\"]") );}
             else {
             	Report.reportStep(Driver.getDriver(), "The checkbox is setting was same as required","PASS",false);
-            }	
+            }
        }
 	
 	public void setRoleMapping(String userName, String password, String yujaRolefromAdmin, String yujaRolefromTeacher, String yujaRolefromStudent) throws InterruptedException {
@@ -281,10 +281,10 @@ public class MoodlePage extends QuizPageHelpers {
          clickElement("save confirm",By.xpath("//div[@class=\"modal-content\"]//button[@title=\"Confirm\"]") );
 	}
 	
-	public void setUserTypeToLockedorUnlocked(String lockOrUnlock,String userType) throws InterruptedException {
+	public void setUserTypeToLockedorUnlocked(String lockOrUnlock,String userType, String rolemappingusername) throws InterruptedException {
 		 URL = prop.getProperty("URL")+"/P/Institution/TypeRoster/";
 	     launchUrl(URL, "Test Automation Enterprise Video Platform");
-	     roster.rosterButtons("rolemappinguser");
+	     roster.rosterButtons(rolemappingusername);
 		 
 		 if(lockOrUnlock=="lock") {
 			clickElement("usertype",By.xpath("//a[@data-automation=\"btnUserType\"]") );
@@ -303,6 +303,7 @@ public class MoodlePage extends QuizPageHelpers {
 			lockDropdown.selectByVisibleText("Not Locked");
 			clickElement("save",By.xpath("//button[@class=\"btn btn-primary btn-sm editable-submit\"]") );
 			}
+		 navbar.userLogOut();
 	}
 	
     	
@@ -317,6 +318,7 @@ public class MoodlePage extends QuizPageHelpers {
         Select startPageOptionStudent = new Select(Driver.getDriver().findElement(By.id("select_defaultLandingPageStudent")));
         startPageOptionITManager.selectByValue("mediaChannel");
         clickElement("save",By.xpath("//form[@id=\"saveSetupPrefences\"]//button[@id=\"setupPrefences_saveButton\"]"));
+        navbar.userLogOut();
      }
 	
 	// Method directly used in test class.
@@ -390,6 +392,7 @@ public class MoodlePage extends QuizPageHelpers {
 		CourseRoleType.put("GroupOwner", "//div[@data-aitomation=\"divGroupOwners\"]//div[@class=\"user-list-item\"]");
 		
 		setAndResetAutomaticProvision(userName,password,"user",true);
+		navbar.userLogOut();
 		String studentUserName=createMoodleUser(adminUserName, adminPassword,email,newUsername,newUserPassword);
 		selectCourseFromSiteHome(courseName);
 		
@@ -445,6 +448,7 @@ public class MoodlePage extends QuizPageHelpers {
 		CourseRoleType.put("GroupOwner", "//div[@data-aitomation=\"divGroupOwners\"]//div[@class=\"user-list-item\"]");
 		
 		setAndResetAutomaticProvision(userName,password,"user",true);
+		navbar.userLogOut();
 		String studentUserName=createMoodleUser(adminUserName, adminPassword,email,newUsername,newUserPassword);
 		String myaccountStudentName=null;
 		
@@ -509,6 +513,7 @@ public class MoodlePage extends QuizPageHelpers {
 	   CourseRoleType.put("GroupOwner", "//div[@data-aitomation=\"divGroupOwners\"]//div[@class=\"user-list-item\"]");
 	
 	   setAndResetAutomaticProvision(userName,password,"user",false);
+	   navbar.userLogOut();
 	   String studentUserName=createMoodleUser(adminUserName, adminPassword,email,newUsername,newUserPassword);
 	   selectCourseFromSiteHome(courseName);
 	
@@ -597,7 +602,7 @@ public class MoodlePage extends QuizPageHelpers {
 			String obtainedmembersplitFirstname[]=obtainedmemberName.split(" ",2);
 			obtainedmoodlememberFirstname=obtainedmembersplitFirstname[0];
 		    System.out.println(obtainedmoodlememberFirstname);
-			if(obtainedmoodlememberFirstname.equals("rolemappinguser")) {
+			if(obtainedmoodlememberFirstname.equals("rolemappingusermoodle")) {
 				int rowposition=i+1;
 				clickElement("edit role button", By.xpath("(//span[@class=\"quickediticon visibleifjs\"])["+rowposition+"]"));
 				clickElement("close current role button", By.xpath("//span[@class=\"badge badge-info mb-3 mr-1\"]//span"));
@@ -613,7 +618,7 @@ public class MoodlePage extends QuizPageHelpers {
 	   logout();
 	   navigateToLoginPage();
 	   Driver.getDriver().manage().window().maximize();
-	   loginFast("rolemappinguser", "jamNOW123/");
+	   loginFast("rolemappingusermoodle", "jamNOW123/");
 	   selectCourseFromSiteHome("AUTOMATION MOODLE COURSE");
 	   NavigateToLTI("'TEST AUTOMATION STAGING 1.3'");
 	   waitForElement(By.xpath("//button[@title=\" Main Menu\"]"),15);
@@ -631,13 +636,13 @@ public class MoodlePage extends QuizPageHelpers {
 			String obtainedmembersplitFirstname[]=obtainedmemberName.split(" ",2);
 		    obtainedmemberFirstname=obtainedmembersplitFirstname[0];
 		    System.out.println(obtainedmemberFirstname);
-			if(obtainedmemberFirstname.equals("rolemappinguser")){
+			if(obtainedmemberFirstname.equals("rolemappingusermoodle")){
 				Report.reportStep(Driver.getDriver(), "The moodle user role is correctly mapped to course in yuja", "PASS", false);
 				break;
 				}
 		   }
 	
-		if(mainMenuListSize==expectedMainMenuListSize && obtainedmemberFirstname.equals("rolemappinguser")) {
+		if(mainMenuListSize==expectedMainMenuListSize && obtainedmemberFirstname.equals("rolemappingusermoodle")) {
 			Report.reportStep(Driver.getDriver(), "The moodle user is  enrolled to  course in yuja with correct system role and course role", "PASS", false);
 			}else {
 			Report.reportStep(Driver.getDriver(), "The moodle user is  not enrolled to  course in yuja with correct system role and course role", "FAIL", true);
@@ -649,7 +654,7 @@ public class MoodlePage extends QuizPageHelpers {
 	   //Method directly used in test class
    
    
-	   public void roleMappingUserTypeUnlocked(String userName, String password, String adminUserName, String adminPassword, String userType) throws InterruptedException {
+	   public void roleMappingUserTypeUnlocked(String userName, String password, String adminUserName, String adminPassword, String userType, String rolemappingusername) throws InterruptedException {
 		   
 		   HashMap<String, RoleMappingObject> hm = new HashMap<String, RoleMappingObject>();
 
@@ -661,7 +666,7 @@ public class MoodlePage extends QuizPageHelpers {
 		   hm.put("Student",t3);
 		   
 		   setRoleMapping(userName, password, "IT Manager", "Student","Instructor");
-		   setUserTypeToLockedorUnlocked("unlock",userType);
+		   setUserTypeToLockedorUnlocked("unlock",userType,rolemappingusername);
 		   String key=null;
 		   getCheckRoleMapping(adminUserName, adminPassword, hm);		  
 		   for (Entry<String, RoleMappingObject> entry : hm.entrySet()) {
@@ -669,19 +674,19 @@ public class MoodlePage extends QuizPageHelpers {
 		   if(key=="Instructor1") {
 			   RoleMappingObject value = entry.setValue(t1);
 			   value.setNumberOfMainMenuOptions(3);
-			   value.setMoodleRole("Manager");
+			   value.setlmsRole("Manager");
 			   value.setCourseRole("GroupOwner");
 			  }
 		   if(key=="Instructor") {
 			   RoleMappingObject value = entry.setValue(t2);
 			   value.setNumberOfMainMenuOptions(3);
-			   value.setMoodleRole("Teacher");
+			   value.setlmsRole("Teacher");
 			   value.setCourseRole("GroupOwner");
 			   }
 		   if(key=="Student") {
 			   RoleMappingObject value = entry.setValue(t3);
 			   value.setNumberOfMainMenuOptions(2);
-			   value.setMoodleRole("Student");
+			   value.setlmsRole("Student");
 			   value.setCourseRole("GroupMember");
 			   }}
 		   
@@ -693,13 +698,13 @@ public class MoodlePage extends QuizPageHelpers {
 		   for (Entry<String, RoleMappingObject> entry : hm.entrySet()) {
 			    String key2 = entry.getKey();
 			    RoleMappingObject value = entry.getValue();
-			    checkRoleMapping(adminUserName, adminPassword,value.getNumberOfMainMenuOptions(),value.getMoodleRole(),value.getCourseRole() );
+			    checkRoleMapping(adminUserName, adminPassword,value.getNumberOfMainMenuOptions(),value.getlmsRole(),value.getCourseRole() );
 			    }
 	   }
 	   
 	 //Method directly used in test class
 		   
-      public void roleMappingUserTypeLocked(String userName, String password, String adminUserName, String adminPassword, String userType,int numberOfMainMenuOptions) throws InterruptedException {
+      public void roleMappingUserTypeLocked(String userName, String password, String adminUserName, String adminPassword, String userType,int numberOfMainMenuOptions, String rolemappingusername) throws InterruptedException {
 		   
 		   HashMap<String, RoleMappingObject> hm = new HashMap<String, RoleMappingObject>();
 
@@ -711,7 +716,7 @@ public class MoodlePage extends QuizPageHelpers {
 		   hm.put("Student",t3);
 		   
 		   setRoleMapping(userName, password, "IT Manager", "Student","Instructor");
-		   setUserTypeToLockedorUnlocked("lock",userType);
+		   setUserTypeToLockedorUnlocked("lock",userType,rolemappingusername);
 		   String key=null;
 		   getCheckRoleMapping(adminUserName, adminPassword, hm);		  
 		   for (Entry<String, RoleMappingObject> entry : hm.entrySet()) {
@@ -719,19 +724,19 @@ public class MoodlePage extends QuizPageHelpers {
 		   if(key=="Instructor1") {
 			   RoleMappingObject value = entry.setValue(t1);
 			   value.setNumberOfMainMenuOptions(numberOfMainMenuOptions);
-			   value.setMoodleRole("Manager");
+			   value.setlmsRole("Manager");
 			   value.setCourseRole("GroupOwner");
 			  }
 		   if(key=="Instructor") {
 			   RoleMappingObject value = entry.setValue(t2);
 			   value.setNumberOfMainMenuOptions(numberOfMainMenuOptions);
-			   value.setMoodleRole("Teacher");
+			   value.setlmsRole("Teacher");
 			   value.setCourseRole("GroupOwner");
 			   }
 		   if(key=="Student") {
 			   RoleMappingObject value = entry.setValue(t3);
 			   value.setNumberOfMainMenuOptions(numberOfMainMenuOptions);
-			   value.setMoodleRole("Student");
+			   value.setlmsRole("Student");
 			   value.setCourseRole("GroupMember");
 			   }}
 		   
@@ -749,9 +754,10 @@ public class MoodlePage extends QuizPageHelpers {
 		 media = mediaTitlelist.get(i);
 		 System.out.println(media);
 		 if(mediaExists(media)) {
-			 System.out.println("media " +media+ "exists");
-			// mediaLibrary.deleteMedia(media);
-		 }
+			 System.out.println("media " +media+ "exists");}
+			mediaLibrary.deleteMedia(media);
+			 
+		 
 	  }
 	}
 	
@@ -837,10 +843,11 @@ public class MoodlePage extends QuizPageHelpers {
 	
    //Methods for uploading media in media chooser
 
-	public Boolean mediaUploadedMediachooser(String mediaTitle, String mediaPath) {
+	public Boolean mediaUploadedMediachooser(String mediaTitle, String mediaPath) throws InterruptedException {
 		try {
 			System.out.println("inside media upload media chooser");
 			uploadMediaMC(mediaPath);
+			Thread.sleep(2000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -894,7 +901,7 @@ public class MoodlePage extends QuizPageHelpers {
 
 	//Get the array of media titles uploaded from directory 
 	
-   public ArrayList<String> getMediaTitleArrayfromDirectory(String mediaDirectoryPath) {
+   public ArrayList<String> getMediaTitleArrayfromDirectory(String mediaDirectoryPath) throws InterruptedException {
 	   
 	   File mediaDirectory = new File(mediaDirectoryPath);
 	   String[] mediaList = mediaDirectory.list();
@@ -910,6 +917,7 @@ public class MoodlePage extends QuizPageHelpers {
 			mediaTitlelistName = mediaList[i]; 
 			mediaTitle = mediaTitlelistName.substring(0, mediaTitlelistName.indexOf('.'));
 			mediaTitlelist1.add(mediaTitle);
+			
 		}
 	   
 	   return mediaTitlelist1;
@@ -919,6 +927,7 @@ public class MoodlePage extends QuizPageHelpers {
 	//get a media element from the media chooser			
 		
 	public WebElement getMediaMediaChooser(String mediaTitle) {
+		waitForElement(By.xpath("//div[text()='"+mediaTitle+"']"), 30);
 		List<WebElement> mediaLibraryElementList = getElementList( By.cssSelector("div[class=\"list-item list-item-large add-media-list-item media-item-container\"]"));
 		int listSize = mediaLibraryElementList.size();
 		System.out.println(listSize);
@@ -936,6 +945,7 @@ public class MoodlePage extends QuizPageHelpers {
 			while(!mediaLibraryElementName.equals(mediaTitle) && i<listSize) {
 				mediaLibraryElement = mediaLibraryElementList.get(i++);
 				mediaLibraryElementName = mediaLibraryElement.findElement(By.className("choose-media-video-title")).getText();
+				System.out.println(mediaLibraryElementName);
 			}
 			return mediaLibraryElement;
 		}
@@ -943,7 +953,7 @@ public class MoodlePage extends QuizPageHelpers {
 	
 	//Check a media exists in media chooser
 	
-	public boolean mediaExistsMediaChooser(String mediaTitle) {
+	public boolean mediaExistsMediaChooser(String mediaTitle) throws InterruptedException {
 		WebElement mediaLibraryElement =  getMediaMediaChooser(mediaTitle);
 		String mediaLibraryElementName = mediaLibraryElement.findElement(By.className("choose-media-video-title")).getText();
 		Boolean mediaLibraryElementExists = mediaTitle.equals(mediaLibraryElementName);

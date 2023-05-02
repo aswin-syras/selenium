@@ -4,9 +4,9 @@
 <suite name="Suite">
   <test name="MoodleEmbedMedia4">
   	<classes>
-      <class name="com.yuja.evp.testclasses.MoodleTest">
+      <class name="com.yuja.evp.testclasses.CanvasTest">
 	      <methods>
-	          <include name="Moodle_check_autoprovisionofcourse">
+	          <include name="Check_role_mapping_locked_as_student">
 			      <!-- <parameter name="Browser" value="IE" /> -->
 			      <parameter name="TestName" value="MoodleEmbedMedia4" />
 			  </include> 

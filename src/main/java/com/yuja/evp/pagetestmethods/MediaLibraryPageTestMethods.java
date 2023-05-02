@@ -130,7 +130,8 @@ public class MediaLibraryPageTestMethods extends MediaLibraryPageHelpers {
 		bulkUnfavoriteSelectedMedia();
 		Thread.sleep(1000);
 		navigateToFavorites(userName);
-		
+		Driver.getDriver().navigate().refresh();
+		Thread.sleep(2000);
 		numberOfMediaItemsInFavoriteFolder = getElementList(By.cssSelector("[class='videoWrapper']")).size();
 		if(numberOfMediaItemsInFavoriteFolder == 0) {
 			Report.reportStep(Driver.getDriver(), "Bulk unfavorite succesful", "PASS", false);

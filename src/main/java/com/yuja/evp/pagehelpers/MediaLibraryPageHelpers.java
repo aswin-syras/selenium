@@ -201,17 +201,18 @@ public class MediaLibraryPageHelpers extends Helpers{
 		clickElement("Yes button", By.xpath("//*[@id=\"deleteModalDialog\"]/div[1]/div/div/div[2]/div[2]/button[2]"));
 	}
 	
-	protected void accessFolderMoreMenu(String folderName) {
+	protected void accessFolderMoreMenu(String folderName) throws InterruptedException {
+		Thread.sleep(3000);
 		WebElement folder = getFolder(folderName);
 		hoverOverElement(folder);
 		folder.findElement(By.cssSelector("[data-automation=\"btnReactMenuTrigger\"]")).click();
 		folder.findElement(By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]")).click();
 	}
 	 public void accessMediaMoreMenu(String mediaTitle) throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		WebElement media = getMedia(mediaTitle);
 		hoverOverElement(media);
-		Thread.sleep(2000);
+		//waitForElement(By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 30);
 		clickElement(media, "More menu button from the video hover", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 30);
 	}
 	
