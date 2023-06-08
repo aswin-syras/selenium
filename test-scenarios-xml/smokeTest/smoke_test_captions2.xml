@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <parameter name="TestName" value="TestValue" />
+  <test name="Create_new_folder_test">
+  	<classes>
+     <class name="com.yuja.evp.testclasses.QuizTest">
+        	<methods>
+        		<include name="Create_quiz_test" />
+        		<include name="Check_student_gradebook_test" />
+        		<include name="Check_instructor_gradebook_test" />
+        		<include name="Check_unauthenticated_user_quiz_test" />
+        		<include name="Check_Unauthenticated_user_embedded_quiz_test" />
+        		<include name="Check_delete_quiz_test" />
+        	</methods>
+        </class>
+    </classes>
+  </test>
+ 
+</suite> <!-- Suite -->
