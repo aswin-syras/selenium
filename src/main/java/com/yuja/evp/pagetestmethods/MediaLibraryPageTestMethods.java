@@ -181,18 +181,28 @@ public class MediaLibraryPageTestMethods extends MediaLibraryPageHelpers {
 	public void checkPublishandUnpublishMediaLibrary(String userName, String password, String mediaTitle, String destinationChannelName) throws InterruptedException {
 		//publishing the media
 		navigateToMyMediaUserLogin(userName, password);
-		boolean checkmedia = mediaExists(mediaTitle);
-		if(checkmedia) {
-			mediaLibrary.publishMediaFromMediaLibrary(mediaTitle, destinationChannelName);
-			//checking that the media was published
-			navigateToChannel(destinationChannelName);
-			boolean mediaIsPublished = mediaExists(mediaTitle);
-			if(mediaIsPublished) {
-				Report.reportStep(Driver.getDriver(), "Media with title " + mediaTitle + " was succesfully published " + destinationChannelName, "PASS", false);
-			}
-			else {
-				Report.reportStep(Driver.getDriver(), "Media with title " + mediaTitle + " was not published " + destinationChannelName, "FAIL", true);
-			}
+		navigateToChannel(destinationChannelName);
+		boolean mediaIsPublished = mediaExists(mediaTitle);
+		if(mediaIsPublished) {
+			mediaLibrary.unpublishMedia(mediaTitle);
+		}
+		clickElement("Manage Media button", By.cssSelector("[data-fullname=\"Manage Media\"]"));
+		Thread.sleep(2000);
+			boolean checkmedia = mediaExists(mediaTitle);
+			if(checkmedia) {
+				mediaLibrary.publishMediaFromMediaLibrary(mediaTitle, destinationChannelName);
+				//checking that the media was published
+				navigateToChannel(destinationChannelName);
+				 mediaIsPublished = mediaExists(mediaTitle);
+				if(mediaIsPublished) {
+					Report.reportStep(Driver.getDriver(), "Media with title " + mediaTitle + " was succesfully published " + destinationChannelName, "PASS", false);
+				}
+				else {
+					Report.reportStep(Driver.getDriver(), "Media with title " + mediaTitle + " was not published " + destinationChannelName, "FAIL", true);
+				}
+		
+		
+		
 			//unpublishing the media
 			mediaLibrary.unpublishMedia(mediaTitle);
 			//check that media was unpublished
@@ -208,7 +218,7 @@ public class MediaLibraryPageTestMethods extends MediaLibraryPageHelpers {
 		{
 			Report.reportStep(Driver.getDriver(), "No media with title " +mediaTitle,"FAIL",true);
 		}
-	}
+}
 
 	public void uploadMedia(String userName, String password, String newFolderName, String filesDirectoryPath) throws InterruptedException {
 		mediaLibrary.navigateToMyMediaUserLogin(userName, password);
