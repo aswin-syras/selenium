@@ -4,14 +4,39 @@
   <parameter name="TestName" value="TestValue" />
   <test name="Create_new_folder_test">
   	<classes>
-     <class name="com.yuja.evp.testclasses.QuizTest">
-        	<methods>
-        		<include name="Create_quiz_test" />
-        		<include name="Check_student_gradebook_test" />
-        		<include name="Check_instructor_gradebook_test" />
-        		<include name="Check_unauthenticated_user_quiz_test" />
-        		<include name="Check_Unauthenticated_user_embedded_quiz_test" />
-        		<include name="Check_delete_quiz_test" />
+     <class name="com.yuja.evp.testclasses.MediaLibraryTest">
+	      	<methods>
+	      		<include name="Video_upload_manager_test" />
+	      		<include name="Video_upload_instructor_test" />
+	      		<include name="Video_upload_student_test" />
+	          
+	          	<include name="Video_quality_upload_manager_test" />
+	          	<include name="Video_quality_upload_instructor_test" />
+	          	<include name="Video_quality_upload_student_test" />
+	          
+	          	<include name="Audio_upload_manager_test" />
+	          	<include name="Audio_upload_instructor_test" />
+	          	<include name="Audio_upload_student_test" />
+	          
+	          	<include name="Document_upload_manager_test" />
+	          	<include name="Document_upload_instructor_test" />
+	          	<include name="Document_upload_student_test" />
+	          	<include name="Create_delete_folder_manager_test" />
+	          	<include name="Create_delete_folder_instructor_test" />
+	          	<include name="Create_delete_folder_student_test" />
+	          	
+	          	<include name="Delete_media_manager_test" />
+	          	<include name="Delete_media_instructor_test" />
+	          	<include name="Delete_media_student_test" />
+	          
+	          	<include name="Bulkfavorite_manager_Succesful_test" />
+	          	<include name="Bulkfavorite_instructor_Succesful_test" />
+	          	<include name="Bulkfavorite_student_Succesful_test" />
+	          		          	
+	          	<include name="Publish_and_unpublish_media_Manager_test" />
+	          	<include name="Publish_and_unpublish_media_Instructor_test" />
+	      	
+	       
         	</methods>
         </class>
     </classes>

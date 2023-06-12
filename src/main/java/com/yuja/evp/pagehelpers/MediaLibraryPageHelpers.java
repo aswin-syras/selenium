@@ -162,6 +162,8 @@ public class MediaLibraryPageHelpers extends Helpers{
 	}
 	
 	public void deleteFolder(String folderName) throws InterruptedException {
+		clickElement("Manage Media button", By.cssSelector("[data-fullname=\"Manage Media\"]"));
+		Thread.sleep(2000);
 		WebElement folder = getFolder(folderName);
 		clickElement("folder", folder);
 		clickMoreActionsButton();
@@ -310,4 +312,5 @@ public class MediaLibraryPageHelpers extends Helpers{
 		WebElement ClickChannel = waitForElement(By.cssSelector(".Select-menu-outer"), 10);
 		clickElement(channelName, ClickChannel);
 	}
+	
 }

@@ -22,19 +22,6 @@
 	          	<include name="Document_upload_manager_test" />
 	          	<include name="Document_upload_instructor_test" />
 	          	<include name="Document_upload_student_test" />
-	          
-	          	<include name="Share_video_full_access_manager_test" />
-	          	<include name="Share_video_edit_access_manager_test" />
-	          	<include name="Share_video_read_only_manager_test" />
-	          
-	          	<include name="Share_video_full_access_instructor_test" />
-	          	<include name="Share_video_edit_access_instructor_test" />
-	          	<include name="Share_video_read_only_instructor_test" />
-	          
-	          	<include name="Share_video_full_access_student_test" />
-	          	<include name="Share_video_edit_access_student_test" />
-	          	<include name="Share_video_read_only_student_test" />
-	          
 	          	<include name="Create_delete_folder_manager_test" />
 	          	<include name="Create_delete_folder_instructor_test" />
 	          	<include name="Create_delete_folder_student_test" />
@@ -163,6 +150,22 @@
         		<include name="Check_delete_quiz_test" />
         	</methods>
         </class>
+          <class name="com.yuja.evp.testclasses.MediaLibraryTest">
+          <methods>
+                <include name="Share_video_full_access_manager_test" />
+	          	<include name="Share_video_edit_access_manager_test" />
+	          	<include name="Share_video_read_only_manager_test" />
+	          
+	          	<include name="Share_video_full_access_instructor_test" />
+	          	<include name="Share_video_edit_access_instructor_test" />
+	          	<include name="Share_video_read_only_instructor_test" />
+	          
+	          	<include name="Share_video_full_access_student_test" />
+	          	<include name="Share_video_edit_access_student_test" />
+	          	<include name="Share_video_read_only_student_test" />
+	          	</methods>
+	          	</class>
+	          
   	</classes>
   </test>
   

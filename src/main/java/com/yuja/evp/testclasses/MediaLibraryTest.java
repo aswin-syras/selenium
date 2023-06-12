@@ -14,6 +14,7 @@ public class MediaLibraryTest extends BaseTest{
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
 			mediaLibrary.uploadMedia(prop.getProperty("ManagerID"), prop.getProperty("Password"), "videoFolder", "src\\fileResources\\videoFiles\\videoType");
+			mediaLibrary.deleteFolder("videoFolder");
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -27,6 +28,7 @@ public class MediaLibraryTest extends BaseTest{
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
 			mediaLibrary.uploadMedia(prop.getProperty("InstructorID"), prop.getProperty("Password"), "videoFolder", "src\\fileResources\\videoFiles\\videoType");
+			mediaLibrary.deleteFolder("videoFolder");
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -40,6 +42,7 @@ public class MediaLibraryTest extends BaseTest{
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
 			mediaLibrary.uploadMedia(prop.getProperty("StudentID"), prop.getProperty("Password"), "videoFolder", "src\\fileResources\\videoFiles\\videoType");
+			mediaLibrary.deleteFolder("videoFolder");
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -53,6 +56,7 @@ public class MediaLibraryTest extends BaseTest{
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
 			mediaLibrary.uploadMedia(prop.getProperty("ManagerID"), prop.getProperty("Password"), "videoQualityFolder", "src\\fileResources\\videoFiles\\videoQuality");
+			mediaLibrary.deleteFolder("videoQualityFolder");
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -66,6 +70,7 @@ public class MediaLibraryTest extends BaseTest{
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
 			mediaLibrary.uploadMedia(prop.getProperty("InstructorID"), prop.getProperty("Password"), "videoQualityFolder", "src\\fileResources\\videoFiles\\videoQuality");
+			mediaLibrary.deleteFolder("videoQualityFolder");
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -79,6 +84,7 @@ public class MediaLibraryTest extends BaseTest{
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
 			mediaLibrary.uploadMedia(prop.getProperty("StudentID"), prop.getProperty("Password"), "videoQualityFolder", "src\\fileResources\\videoFiles\\videoQuality");
+			mediaLibrary.deleteFolder("videoQualityFolder");
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -92,6 +98,7 @@ public class MediaLibraryTest extends BaseTest{
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
 			mediaLibrary.uploadMedia(prop.getProperty("ManagerID"), prop.getProperty("Password"), "audioFolder", "src\\fileResources\\audioFiles");
+			mediaLibrary.deleteFolder("audioFolder");
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -105,6 +112,7 @@ public class MediaLibraryTest extends BaseTest{
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
 			mediaLibrary.uploadMedia(prop.getProperty("InstructorID"), prop.getProperty("Password"), "audioFolder", "src\\fileResources\\audioFiles");
+			mediaLibrary.deleteFolder("audioFolder");
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -118,6 +126,7 @@ public class MediaLibraryTest extends BaseTest{
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
 			mediaLibrary.uploadMedia(prop.getProperty("StudentID"), prop.getProperty("Password"), "audioFolder", "src\\fileResources\\audioFiles");
+			mediaLibrary.deleteFolder("audioFolder");
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -131,6 +140,7 @@ public class MediaLibraryTest extends BaseTest{
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
 			mediaLibrary.uploadMedia(prop.getProperty("ManagerID"), prop.getProperty("Password"), "documentFolder", "src\\fileResources\\documentFiles");
+			mediaLibrary.deleteFolder("documentFolder");
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -144,6 +154,7 @@ public class MediaLibraryTest extends BaseTest{
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
 			mediaLibrary.uploadMedia(prop.getProperty("InstructorID"), prop.getProperty("Password"), "documentFolder", "src\\fileResources\\documentFiles");
+			mediaLibrary.deleteFolder("documentFolder");
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -157,6 +168,7 @@ public class MediaLibraryTest extends BaseTest{
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
 			mediaLibrary.uploadMedia(prop.getProperty("StudentID"), prop.getProperty("Password"), "documentFolder", "src\\fileResources\\documentFiles");
+			mediaLibrary.deleteFolder("documentFolder");
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
