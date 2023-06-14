@@ -16,7 +16,7 @@ public class MoodleTest extends BaseTest {
 	     String LTILinkName="'TEST AUTOMATION STAGING 1.3'";        
 	     String videoName="videoforautomation";
 	     String videoNameinstructor="videoforautomationinstructor";
-	     String videoNameforPlaybackquiz="video for playback";
+	     String videoNameforPlaybackquiz="videoforplayback";
 	     String audioName="audioforautomation";
 	     String audioNameinstructor="audioforautomationinstrctor";
 	     String documentName="automationdocument";

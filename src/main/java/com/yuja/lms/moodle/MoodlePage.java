@@ -182,7 +182,7 @@ public class MoodlePage extends QuizPageHelpers {
 		String quizNewName=createPlaybackquiz(playbackQuizTitle,videoNameforPlaybackquiz);
 		String quizFinalName="'"+quizNewName+"'";
 		Driver.getDriver().switchTo().defaultContent();
-		String URL = "https://tmoodle2.yuja.com/course/view.php?id=142";
+		String URL = "https://tmoodle2.oneyuja.com/course/view.php?id=142";
 		launchUrl(URL, "Moodle automation course page");
 		accessCIMMediaChooser();
 	    CIMMediaChooserQuizEmbed(quizNewName);
