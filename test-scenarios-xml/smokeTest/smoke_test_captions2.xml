@@ -4,15 +4,12 @@
   <parameter name="TestName" value="TestValue" />
   <test name="Create_new_folder_test">
   	<classes>
-     <class name="com.yuja.evp.testclasses.MediaLibraryTest">
-	      	<methods>
-	      		
-	          
-	          
-	          	<include name="Publish_and_unpublish_media_Manager_test" />
-	          	<include name="Publish_and_unpublish_media_Instructor_test" />
-	      	
-	       
+   
+          <class name="com.yuja.evp.testclasses.HTML5PlayerTest">
+        	<methods>
+        		<include name="Sidebar_manager_test" />
+	      		<include name="Sidebar_instructor_test" />
+	      		<include name="Sidebar_student_test" />
         	</methods>
         </class>
     </classes>

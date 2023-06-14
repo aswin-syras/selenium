@@ -30,7 +30,7 @@ public class HTML5PlayerTest extends BaseTest {
 		  public void Sidebar_student_test(String testName) {
 			MediaPlayerSideBarTestMethods sidebarObj = new MediaPlayerSideBarTestMethods();
 			try {
-				sidebarObj.SidebarFunctionalityTest(prop.getProperty("ManagerID"), prop.getProperty("Password"), "test");
+				sidebarObj.SidebarFunctionalityTest(prop.getProperty("StudentID"), prop.getProperty("Password"), "test");
 				Thread.sleep(2000);
 			}catch(Exception e) {
 				System.out.println(e.getMessage());
@@ -44,7 +44,7 @@ public class HTML5PlayerTest extends BaseTest {
 		  public void Sidebar_instructor_test(String testName) {
 			MediaPlayerSideBarTestMethods sidebarObj = new MediaPlayerSideBarTestMethods();
 			try {
-				sidebarObj.SidebarFunctionalityTest(prop.getProperty("StudentID"), prop.getProperty("Password"), "test");
+				sidebarObj.SidebarFunctionalityTest(prop.getProperty("InstructorID"), prop.getProperty("Password"), "test");
 				Thread.sleep(2000);
 			}catch(Exception e) {
 				System.out.println(e.getMessage());

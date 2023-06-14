@@ -3,6 +3,7 @@ package com.yuja.evp.pagetestmethods;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.commons.lang3.math.NumberUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -28,9 +29,9 @@ public class MediaLibraryPageTestMethods extends MediaLibraryPageHelpers {
 	MediaDetailsModalHelperMethods mediaDetailsModal = new MediaDetailsModalHelperMethods();
 	
 	public void shareMediaTest(String shareAccessLevel, String mediaName, String sharerUserName, String sharerPassword, String recipientUserName, String recipientPassword, String recipientActualName) throws InterruptedException {
-		String[] fullAccessInformation = {"Full access option", "[title=\"Full control of the media including deletion rights\"]"};
-		String[] EditAccessInformation = {"Edit access option", "[title=\"Editing and publishing capabilities without deletion rights\"]"};
-		String[] readAccessInformation = {"Read only option", "[title=\"Ability to view and stream the content only\"]"};
+		String[] fullAccessInformation = {"Full access option", "[title=\"Full control of the media including deletion rights\"]","6"};
+		String[] EditAccessInformation = {"Edit access option", "[title=\"Editing and publishing capabilities without deletion rights\"]","5"};
+		String[] readAccessInformation = {"Read only option", "[title=\"Ability to view and stream the content only\"]","1"};
 		
 		HashMap<String, String[]> acessLevelInformation = new HashMap<String, String[]>();
 		acessLevelInformation.put("fullAccess", fullAccessInformation);
@@ -39,6 +40,7 @@ public class MediaLibraryPageTestMethods extends MediaLibraryPageHelpers {
 		
 		String fieldName = acessLevelInformation.get(shareAccessLevel)[0];
 		String cssSelector = acessLevelInformation.get(shareAccessLevel)[1];
+		String expectedMoreOptions = acessLevelInformation.get(shareAccessLevel)[2];
 		
 		navigateToMyMediaUserLogin(sharerUserName, sharerPassword);
 		
@@ -50,6 +52,14 @@ public class MediaLibraryPageTestMethods extends MediaLibraryPageHelpers {
 		clickElement(media, "More menu share option", By.cssSelector("[data-automation=\"btnInVideoMenuShare\"]"), 10);
 		
 		Thread.sleep(3000);
+		
+		List<WebElement> availableSharedUser= getElementList(By.xpath("//div[@class=\"media-modal-small-times-icon media-modal-close-btn share-access-icons\"]"));
+		if(availableSharedUser!=null) {
+			for(int i=0;i<availableSharedUser.size();i++) {
+				int index=i+1;
+				clickElement("delete Quiz", By.xpath("(//div[@class=\"media-modal-small-times-icon media-modal-close-btn share-access-icons\"])["+index+"]"));
+				}
+			}
 		
 		clickElement("Access dropdown", By.xpath("//*[@id=\"shareResourceModalDialog\"]/div[1]/div/div/div[2]/div[1]/div[1]/div[2]/div/form/div[2]/select"), 10);
 		clickElement(fieldName, By.cssSelector(cssSelector), 10);
@@ -80,11 +90,12 @@ public class MediaLibraryPageTestMethods extends MediaLibraryPageHelpers {
 			flash(video);
 			List<WebElement> moreMenuOptions = video.findElements(By.cssSelector("[role=\"menuitem\"]"));
 			int numberOfMoreMenuOptions = moreMenuOptions.size();
-			if(numberOfMoreMenuOptions == 6) {
-				Report.reportStep(Driver.getDriver(), "The media with the title \"" + mediaName + "\" was shared with full access", "PASS", false);
+			int moremenuoptions=NumberUtils.toInt(expectedMoreOptions);
+			if(numberOfMoreMenuOptions == moremenuoptions) {
+				Report.reportStep(Driver.getDriver(), "The media with the title \"" + mediaName + "\" was shared with "+shareAccessLevel+"", "PASS", false);
 			}
 			else {
-				Report.reportStep(Driver.getDriver(), "The media with the title \"" + mediaName + "\" was not shared with full access", "FAIL", true);
+				Report.reportStep(Driver.getDriver(), "The media with the title \"" + mediaName + "\" was not shared with "+shareAccessLevel+"", "FAIL", true);
 			}
 		}
 		else {
@@ -185,6 +196,7 @@ public class MediaLibraryPageTestMethods extends MediaLibraryPageHelpers {
 		boolean mediaIsPublished = mediaExists(mediaTitle);
 		if(mediaIsPublished) {
 			mediaLibrary.unpublishMedia(mediaTitle);
+			Thread.sleep(2000);
 		}
 		clickElement("Manage Media button", By.cssSelector("[data-fullname=\"Manage Media\"]"));
 		Thread.sleep(2000);
@@ -205,6 +217,7 @@ public class MediaLibraryPageTestMethods extends MediaLibraryPageHelpers {
 		
 			//unpublishing the media
 			mediaLibrary.unpublishMedia(mediaTitle);
+			Thread.sleep(2000);
 			//check that media was unpublished
 			mediaIsPublished = mediaExists(mediaTitle);
 			if(!mediaIsPublished) {

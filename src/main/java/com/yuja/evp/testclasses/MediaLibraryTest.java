@@ -321,7 +321,7 @@ public class MediaLibraryTest extends BaseTest{
 	  public void Share_video_full_access_student_test(String testName) {
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
-			mediaLibrary.shareMediaTest("fullAccess", "fullAccessSharedVideoStudent", prop.getProperty("StudentID"), prop.getProperty("Password"), prop.getProperty("InstructorID"), prop.getProperty("Password"), prop.getProperty("instructorName"));
+			mediaLibrary.shareMediaTest("fullAccess", "fullAccessSharedVideoStudent", prop.getProperty("StudentID"), prop.getProperty("Password"), prop.getProperty("ManagerID"), prop.getProperty("Password"), prop.getProperty("managerName"));
 			Thread.sleep(5000);
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -335,7 +335,7 @@ public class MediaLibraryTest extends BaseTest{
 	  public void Share_video_edit_access_student_test(String testName) {
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
-			mediaLibrary.shareMediaTest("editAccess", "editAccessSharedVideoStudent", prop.getProperty("StudentID"), prop.getProperty("Password"), prop.getProperty("InstructorID"), prop.getProperty("Password"), prop.getProperty("instructorName"));
+			mediaLibrary.shareMediaTest("editAccess", "editAccessSharedVideoStudent", prop.getProperty("StudentID"), prop.getProperty("Password"), prop.getProperty("ManagerID"), prop.getProperty("Password"), prop.getProperty("managerName"));
 			Thread.sleep(5000);
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -349,7 +349,7 @@ public class MediaLibraryTest extends BaseTest{
 	  public void Share_video_read_only_student_test(String testName) {
 		MediaLibraryPageTestMethods mediaLibrary = new MediaLibraryPageTestMethods();
 		try {
-			mediaLibrary.shareMediaTest("readAccess", "readAccessSharedVideoStudent", prop.getProperty("StudentID"), prop.getProperty("Password"), prop.getProperty("InstructorID"), prop.getProperty("Password"), prop.getProperty("instructorName"));
+			mediaLibrary.shareMediaTest("readAccess", "readAccessSharedVideoStudent", prop.getProperty("StudentID"), prop.getProperty("Password"), prop.getProperty("ManagerID"), prop.getProperty("Password"), prop.getProperty("managerName"));
 			Thread.sleep(5000);
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
