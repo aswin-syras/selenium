@@ -7,9 +7,9 @@
   	<classes>
       <class name="com.yuja.evp.testclasses.MediaLibraryTest">
 	      <methods>
-	         <!-- <include name="Video_upload_manager_test" /> -->
+	         <include name="Video_upload_manager_test" /> 
 	          <include name="Video_upload_student_test" />
-	         <!-- <include name="Video_upload_instructor_test" />-->
+	         <include name="Video_upload_instructor_test" />
 	        </methods>
         </class>
     </classes>
