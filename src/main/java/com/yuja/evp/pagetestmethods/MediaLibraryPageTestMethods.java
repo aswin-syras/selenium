@@ -153,7 +153,7 @@ public class MediaLibraryPageTestMethods extends MediaLibraryPageHelpers {
 		}
 		
 		navigateToMyMedia(userName);
-		deleteFolder(folderName);
+		deleteFolder(folderName,userName);
 	}
 	
 	public void replaceMedia(String userName, String password, String replaceVideo, String VideoReplaced,String shareUserID,String shareUserName, String shareUserPassword, String publishCourseName) throws InterruptedException {
@@ -246,7 +246,7 @@ public class MediaLibraryPageTestMethods extends MediaLibraryPageHelpers {
 		mediaLibrary.createNewFolder(newFolderName);
 		if(folderExists(newFolderName)) {
 			Report.reportStep(Driver.getDriver(), "folder was succesfully created", "PASS", false);
-			mediaLibrary.deleteFolder(newFolderName);
+			mediaLibrary.deleteFolder(newFolderName,userName);
 			if(!folderExists(newFolderName)) {
 				Report.reportStep(Driver.getDriver(), "folder was succesfully deleted", "PASS", false);
 			}

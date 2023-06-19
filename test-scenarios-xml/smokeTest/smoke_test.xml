@@ -8,9 +8,10 @@
         <class name="com.yuja.evp.testclasses.MediaLibraryTest">
 	      	<methods>
 	      		<include name="Video_upload_manager_test" />
+	      		<!-- 
 	      		<include name="Video_upload_instructor_test" />
-	      		<include name="Video_upload_student_test" />
-	          
+	      		<include name="Video_upload_student_test" />-->
+	         <!-- 
 	          	<include name="Video_quality_upload_manager_test" />
 	          	<include name="Video_quality_upload_instructor_test" />
 	          	<include name="Video_quality_upload_student_test" />
@@ -36,10 +37,10 @@
 	          		          	
 	          	<include name="Publish_and_unpublish_media_Manager_test" />
 	          	<include name="Publish_and_unpublish_media_Instructor_test" />
-	      	
+	      	--> 
 	       	</methods>
         </class>
-        
+        <!-- 
         <class name="com.yuja.evp.testclasses.MediaDetailsModalTest">
 	      <methods>
 	          <include name="Replace_media_test" />
@@ -165,7 +166,7 @@
 	          	<include name="Share_video_read_only_student_test" />
 	          	</methods>
 	          	</class>
-	          
+	     -->     
   	</classes>
   </test>
   

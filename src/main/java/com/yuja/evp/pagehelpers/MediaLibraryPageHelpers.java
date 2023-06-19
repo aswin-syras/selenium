@@ -162,9 +162,10 @@ public class MediaLibraryPageHelpers extends Helpers{
 		Thread.sleep(1000);
 	}
 	
-	public void deleteFolder(String folderName) throws InterruptedException {
-		clickElement("Manage Media button", By.cssSelector("[data-fullname=\"Manage Media\"]"));
-		Thread.sleep(2000);
+	public void deleteFolder(String folderName, String userName) throws InterruptedException {
+		//clickElement("Manage Media button", By.cssSelector("[data-fullname=\"Manage Media\"]"));
+		navigateToMyMedia(userName);
+		Thread.sleep(4000);
 		WebElement folder = getFolder(folderName);
 		clickElement("folder", folder);
 		clickMoreActionsButton();
@@ -184,6 +185,7 @@ public class MediaLibraryPageHelpers extends Helpers{
 	
 	public Boolean deleteFolderViaMoreMenu(String folderName) throws InterruptedException{
 		//fetch folder and open media details modal
+		
 		accessFolderMoreMenu(folderName);
 		
 		FolderDetailsModalHelperMethods modal = new FolderDetailsModalHelperMethods();
