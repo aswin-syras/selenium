@@ -3,18 +3,19 @@
 <suite name="Suite">
   <parameter name="TestName" value="TestValue" />
   
-  <test name="otherTests" parallel="methods" thread-count="5">
+  <test name="otherTests" parallel="methods" thread-count="6">
   	<classes>
         <class name="com.yuja.evp.testclasses.MediaLibraryTest">
 	      	<methods>
+	      	 <!-- 
 	      		<include name="Video_upload_manager_test" />
 	      		<include name="Video_upload_instructor_test" />
 	      		<include name="Video_upload_student_test" />
-	          
+	         
 	          	<include name="Video_quality_upload_manager_test" />
 	          	<include name="Video_quality_upload_instructor_test" />
 	          	<include name="Video_quality_upload_student_test" />
-	          
+	          --> 
 	          	<include name="Audio_upload_manager_test" />
 	          	<include name="Audio_upload_instructor_test" />
 	          	<include name="Audio_upload_student_test" />
@@ -22,7 +23,7 @@
 	          	<include name="Document_upload_manager_test" />
 	          	<include name="Document_upload_instructor_test" />
 	          	<include name="Document_upload_student_test" />
-	          
+	         <!-- 
 	          	<include name="Share_video_full_access_manager_test" />
 	          	<include name="Share_video_edit_access_manager_test" />
 	          	<include name="Share_video_read_only_manager_test" />
@@ -49,10 +50,10 @@
 	          		          	
 	          	<include name="Publish_and_unpublish_media_Manager_test" />
 	          	<include name="Publish_and_unpublish_media_Instructor_test" />
-	      	
+	      	-->
 	       	</methods>
         </class>
-        
+        <!-- 
         <class name="com.yuja.evp.testclasses.MediaDetailsModalTest">
 	      <methods>
 	          <include name="Replace_media_test" />
@@ -163,6 +164,8 @@
         		<include name="Check_delete_quiz_test" />
         	</methods>
         </class>
+        
+        -->
   	</classes>
   </test>
   

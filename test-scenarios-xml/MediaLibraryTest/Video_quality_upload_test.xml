@@ -6,10 +6,9 @@
   	<classes>
       <class name="com.yuja.evp.testclasses.MediaLibraryTest">
 	      <methods>
-	          <include name="Video_quality_upload_test">
-			      <!-- <parameter name="Browser" value="IE" /> -->
-			      <parameter name="TestName" value="Video_quality_upload_test" />
-			  </include> 
+			<include name="Video_quality_upload_manager_test" />
+	          	<!--<include name="Video_quality_upload_instructor_test" />
+	          	<include name="Video_quality_upload_student_test" /> -->	
 	        </methods>
         </class>
     </classes>

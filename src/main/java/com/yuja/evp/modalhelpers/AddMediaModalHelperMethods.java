@@ -14,12 +14,13 @@ public class AddMediaModalHelperMethods extends Helpers{
 	
 	private WebElement mediaUploadModal = null;
 	
-	public Boolean mediaUploaded(String mediaTitle, String mediaPath) {
-		try {
-			mediaUploaded = uploadMedia(mediaTitle, mediaPath);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public Boolean mediaUploaded(String mediaTitle, String mediaPath) 
+	{		
+			try {
+				mediaUploaded = uploadMedia(mediaTitle, mediaPath);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		return mediaUploaded;
 	}
 	
@@ -29,22 +30,25 @@ public class AddMediaModalHelperMethods extends Helpers{
 		System.out.println("Media Upload modal fetched");
 	}
 	
-	public boolean uploadMedia(String mediaTitle, String mediaPath) {
+	public boolean uploadMedia(String mediaTitle, String mediaPath) throws InterruptedException {
 		setMediaUploadModal();
 		mediaPath = Paths.get(mediaPath).toAbsolutePath().toString();
 		System.out.println("mediaPath = " + mediaPath);
 		System.out.println("Uploading media...");
-		sendKeysModal(mediaUploadModal, "uploading media", By.xpath("//*[@id=\"addItemModalDialog\"]/div[1]/div/div/div[2]/div/div/div/div[2]/div[1]/div/div/div[1]/div/input"), mediaPath);		
+		System.out.println("                    ");
+		sendKeysModal(mediaUploadModal, "uploading media", By.xpath("//*[@id=\"addItemModalDialog\"]/div[1]/div/div/div[2]/div/div/div/div[2]/div[1]/div/div/div[1]/div/input"), mediaPath);
 		WebElement hideProgressIcon = waitForElement(By.xpath("//*[@id=\"drag-and-drop-uploader\"]/div/div/div[2]/div/div[2]/div/div[1]/div/div[2]/div/button/img"), 60);
 		boolean mediaUploaded;
 		int count = 0;
+		Thread.sleep(3000);
 		if(hideProgressIcon != null) {
 			try {
 				while(count < 20) {
 					mediaUploaded = mediaExists(mediaTitle);
 					if(mediaUploaded) {
-						Thread.sleep(250);
+						Thread.sleep(500);
 						clickElement("Hide Progress icon", hideProgressIcon);
+						Thread.sleep(1500);
 						return mediaUploaded;
 					} else {
 						count++;

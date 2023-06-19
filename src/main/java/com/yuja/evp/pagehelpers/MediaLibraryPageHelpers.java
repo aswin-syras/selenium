@@ -103,6 +103,7 @@ public class MediaLibraryPageHelpers extends Helpers{
 					clickUploadButton();
 					
 					System.out.println("Attempting to upload " + media);
+					
 					if(modal.mediaUploaded(mediaTitle, mediaPath)) System.out.println(media + " upload success");
 					else throw new Exception(media + " upload fail");
 					Thread.sleep(1000);
