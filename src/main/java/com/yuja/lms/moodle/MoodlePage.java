@@ -69,12 +69,12 @@ public class MoodlePage extends QuizPageHelpers {
 		Driver.getDriver().manage().window().maximize();
 		loginFast(userName, password);
 		waitForElement(By.xpath("//span[@class='site-name d-none d-md-inline']"), 10);
-		String URL = "https://tmoodle2.yuja.com/course/view.php?id=142";
+		String URL = "https://tmoodle2.oneyuja.com/course/view.php?id=142";
 		launchUrl(URL, "Moodle automation course page");
 	}
 	
 	public void selectCourseFromSiteHome(String courseName) {
-		clickElement("site home", By.xpath("//a[@href=\"https://tmoodle2.yuja.com/?redirect=0\"]"));
+		clickElement("site home", By.xpath("//a[@href=\"https://tmoodle2.oneyuja.com/?redirect=0\"]"));
 		List<WebElement> courseList= getElementList(By.xpath("//a[@class='aalink']"));
 		for(int i=0;i<courseList.size();i++) {
 		WebElement element=courseList.get(i);
@@ -91,7 +91,7 @@ public class MoodlePage extends QuizPageHelpers {
 		Driver.getDriver().manage().window().maximize();
 		loginFast(adminUserName, adminPassword);
 		waitForElement(By.xpath("//span[@class='site-name d-none d-md-inline']"), 10);
-		String URL = "https://tmoodle2.yuja.com/admin/search.php#linkcourses";
+		String URL = "https://tmoodle2.oneyuja.com/admin/search.php#linkcourses";
 		launchUrl(URL, "Moodle automation course creation page");
 		clickElement("Add a new course button", By.xpath("//a[text()='Add a new course']"));
 		sendKeys("Enter course full name", By.xpath("//input[@name='fullname']"),courseName+getRandomInteger(1000));
@@ -105,7 +105,7 @@ public class MoodlePage extends QuizPageHelpers {
 		Driver.getDriver().manage().window().maximize();
 		loginFast(adminUserName, adminPassword);
 		waitForElement(By.xpath("//span[@class='site-name d-none d-md-inline']"), 10);
-		String URL = "https://tmoodle2.yuja.com/admin/search.php#linkusers";
+		String URL = "https://tmoodle2.oneyuja.com/admin/search.php#linkusers";
 		launchUrl(URL, "Moodle automation user creation page");
 		clickElement("add a new user button", By.xpath("//a[text()='Add a new user']"));
 		String newUserNameRandom=newUsername+getRandomInteger(1000);
@@ -141,7 +141,7 @@ public class MoodlePage extends QuizPageHelpers {
 		String quizNewName=createandPublishQuiz(mediaTitle,name,question, option1,  option2, possibleans1, possibleans2, hint,courseName);
 		String quizFinalName="'"+quizNewName+"'";
 		Driver.getDriver().switchTo().defaultContent();
-		String URL = "https://tmoodle2.yuja.com/course/view.php?id=142";
+		String URL = "https://tmoodle2.oneyuja.com/course/view.php?id=142";
 		launchUrl(URL, "Moodle automation course page");
 	    accessCIMMediaChooser();
 	    CIMMediaChooserQuizEmbed(quizNewName);
@@ -182,7 +182,7 @@ public class MoodlePage extends QuizPageHelpers {
 		String quizNewName=createPlaybackquiz(playbackQuizTitle,videoNameforPlaybackquiz);
 		String quizFinalName="'"+quizNewName+"'";
 		Driver.getDriver().switchTo().defaultContent();
-		String URL = "https://tmoodle2.yuja.com/course/view.php?id=142";
+		String URL = "https://tmoodle2.oneyuja.com/course/view.php?id=142";
 		launchUrl(URL, "Moodle automation course page");
 		accessCIMMediaChooser();
 	    CIMMediaChooserQuizEmbed(quizNewName);
@@ -234,7 +234,7 @@ public class MoodlePage extends QuizPageHelpers {
         Actions action = new Actions(Driver.getDriver());
 		action.sendKeys(Keys.ESCAPE).build().perform();
 	    Thread.sleep(4000);
-		String URL = "https://tmoodle2.yuja.com/course/view.php?id=142";
+		String URL = "https://tmoodle2.oneyuja.com/course/view.php?id=142";
 		launchUrl(URL, "Moodle automation course page");
 		NavigateToLTI(LTILinkName);
 		clickElement("Click Manage Media",By.xpath("//span[@id='topBarTabName3']"),10);
@@ -492,7 +492,7 @@ public class MoodlePage extends QuizPageHelpers {
 				}
 		    }
 		Driver.getDriver().switchTo().defaultContent();
-		clickElement("Moodle Title", By.xpath("//a[@href='https://tmoodle2.yuja.com']"));
+		clickElement("Moodle Title", By.xpath("//a[@href='https://tmoodle2.oneyuja.com']"));
 		}
 		logout();
 		roster.navigateToAdminPanelRosterPageUserLogin(userName,password);
@@ -793,7 +793,7 @@ public class MoodlePage extends QuizPageHelpers {
 		clickElement("Turn Editing on button", By.cssSelector("button[id^=\"single_button\"]"));
 		clickElement("add activity or resource button", By.cssSelector("span[class=\"section-modchooser-text\"]"));
 		Thread.sleep(3000);
-		clickElement("cim mediachooser button", By.xpath("//a[@href='https://tmoodle2.yuja.com/course/modedit.php?add=lti&return=0&course=142&sr&typeid=76&section=0&sr=0']"));
+		clickElement("cim mediachooser button", By.xpath("//a[@href='https://tmoodle2.oneyuja.com/course/modedit.php?add=lti&return=0&course=142&sr&typeid=76&section=0&sr=0']"));
 		clickElement("select content", By.cssSelector("button[name=\"selectcontent\"]"));
         Thread.sleep(3000);
 		switchToIframe("switch to mediachooser frame", By.id("contentitem-page-iframe"), 10);

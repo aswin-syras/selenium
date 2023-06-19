@@ -163,6 +163,8 @@ public class MediaLibraryPageHelpers extends Helpers{
 	}
 	
 	public void deleteFolder(String folderName) throws InterruptedException {
+		clickElement("Manage Media button", By.cssSelector("[data-fullname=\"Manage Media\"]"));
+		Thread.sleep(2000);
 		WebElement folder = getFolder(folderName);
 		clickElement("folder", folder);
 		clickMoreActionsButton();
@@ -302,7 +304,7 @@ public class MediaLibraryPageHelpers extends Helpers{
 	
 	public void navigateToChannel(String channelName) throws InterruptedException {
 		clickElement("Manage Media button", By.cssSelector("[data-fullname=\"Manage Media\"]"));
-		clickElement("All channels button", By.xpath("//*[@id=\"di_sidebarFolderSection\"]/div[9]/div/div[1]/div[2]"));
+		clickElement("All channels button", By.xpath("//span[contains(text(),'All Channels')]"));
 		clickElement("Select channels", By.cssSelector("[data-automation=\"btnMediaLibMenuSearchChannel\"]"));
 		WebElement ClickFindDialog = waitForElement(By.cssSelector(".Select-placeholder"), 10);
 		clickElement("Search channel button", ClickFindDialog);
@@ -311,4 +313,5 @@ public class MediaLibraryPageHelpers extends Helpers{
 		WebElement ClickChannel = waitForElement(By.cssSelector(".Select-menu-outer"), 10);
 		clickElement(channelName, ClickChannel);
 	}
+	
 }

@@ -8,7 +8,7 @@ public class RosterPageTestMethods extends AdminPanelRosterPageHelpers{
 	
 	public void createAndDeleteUser(String loginUserName, String adminPassword, String role) {
 		try {
-			String newUserID = "Testing" + role + "User" + getRandomInteger(100);
+			String newUserID = "Testing" + role + "User" + getRandomInteger(10000);
 			navigateToAdminPanelRosterPageUserLogin(loginUserName, adminPassword);
 			clickCreateUserButton();
 			fillInUserInfo(newUserID, role);
@@ -34,14 +34,14 @@ public class RosterPageTestMethods extends AdminPanelRosterPageHelpers{
 	
 	public void checkResetPasswordButton(String loginUserName, String adminPassword, String role) {
 		try {
-			String newUserID = "Testing" + role + "User" + getRandomInteger(100);
+			String newUserID = "Testing" + role + "User" + getRandomInteger(10000);
 			navigateToAdminPanelRosterPageUserLogin(loginUserName,adminPassword);
 			clickCreateUserButton();
 			fillInUserInfo(newUserID,role);
 			rosterButtons(newUserID);
 			resetPasswordButton();
-			URL = "https://staging-demo.yuja.com/P/Institution/TypeRoster/";
-			launchUrl(URL, "Xavier University Enterprise Video Platform");
+			URL = prop.getProperty("URL")+"/P/Institution/TypeRoster/";
+			launchUrl(URL, "Test Automation Enterprise Video Platform");
 			deleteUser(newUserID);
 			}	
 		catch(Exception e) {
@@ -52,14 +52,14 @@ public class RosterPageTestMethods extends AdminPanelRosterPageHelpers{
 		
 	public void checkAddToCourseButton(String loginUserName, String adminPassword, String role) {
 		try {
-			String newUserID = "Testing" + role + "User" + getRandomInteger(100);
+			String newUserID = "Testing" + role + "User" + getRandomInteger(10000);
 			navigateToAdminPanelRosterPageUserLogin(loginUserName,adminPassword);
 			clickCreateUserButton();
 			fillInUserInfo(newUserID,role);
 			rosterButtons(newUserID);
 			addToCourseButton();
-			URL = "https://staging-demo.yuja.com/P/Institution/TypeRoster/";
-			launchUrl(URL, "Xavier University Enterprise Video Platform");
+			URL = prop.getProperty("URL")+"/P/Institution/TypeRoster/";
+			launchUrl(URL, "Test Automation Enterprise Video Platform");
 			deleteUser(newUserID);
 			}	
 		catch(Exception e) {
@@ -70,14 +70,14 @@ public class RosterPageTestMethods extends AdminPanelRosterPageHelpers{
 		
 	public void checkMediaLibraryButton(String loginUserName, String adminPassword, String role) {
 		try {
-			String newUserID = "Testing" + role + "User" + getRandomInteger(100);
+			String newUserID = "Testing" + role + "User" + getRandomInteger(10000);
 			navigateToAdminPanelRosterPageUserLogin(loginUserName,adminPassword);
 			clickCreateUserButton();
 			fillInUserInfo(newUserID,role);
 			rosterButtons(newUserID);
 			mediaLibraryButton();
-			URL = "https://staging-demo.yuja.com/P/Institution/TypeRoster/";
-			launchUrl(URL, "Xavier University Enterprise Video Platform");
+			URL = prop.getProperty("URL")+"/P/Institution/TypeRoster/";
+			launchUrl(URL, "Test Automation Enterprise Video Platform");
 			deleteUser(newUserID);		
 			}	
 		catch(Exception e) {
@@ -88,7 +88,7 @@ public class RosterPageTestMethods extends AdminPanelRosterPageHelpers{
 		
 	public void checkDeleteUserButton(String loginUserName, String adminPassword, String role) {
 		try {
-			String newUserID = "Testing" + role + "User" + getRandomInteger(100);
+			String newUserID = "Testing" + role + "User" + getRandomInteger(10000);
 			navigateToAdminPanelRosterPageUserLogin(loginUserName,adminPassword);
 			clickCreateUserButton();
 			fillInUserInfo(newUserID,role);

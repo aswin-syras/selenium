@@ -146,7 +146,7 @@ public class QuizPageHelpers extends Helpers {
 			 System.out.println(courseName);
 			if(obtainedcourseName.contains(courseName)){
 				int rowposition=i+1;
-				int rowpos=rowposition+2;
+				int rowpos=rowposition*2;
 				clickElement("Click Update post date Dropdown",By.xpath("(//div[@class='postInfoIcon'])["+rowposition+"]"),10);
 				clickElement("Click Uncheck no close date checkbox",By.xpath("(//input[@type='checkbox'])["+rowpos+"]"),10);
 				sendKeys("Quiz close date", By.xpath("(//input[contains(@id,'publishPollEndDate')])["+rowposition+"]"), "1/5/23");

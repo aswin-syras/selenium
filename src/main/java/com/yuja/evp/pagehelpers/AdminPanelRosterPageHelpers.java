@@ -69,6 +69,7 @@ import java.util.HashMap;
 	public void deleteUser(String userId) throws InterruptedException {
 		sendKeys("Search User", By.id("rosterSearchUserID"),userId);
 		clickElement("Search button", By.cssSelector("[data-automation=btnSearchUser]"));
+		Thread.sleep(1000);
 		clickElement("Click Checkbox", By.xpath("//input[@value= '" + userId +"']")); 
 		clickElement("Delete Users button", By.id("btnDeleteUsers"));
 		List<WebElement> element3 = Driver.getDriver().findElements(By.className("modal-content"));	
