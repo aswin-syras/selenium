@@ -43,6 +43,7 @@ public class MediaLibraryPageTestMethods extends MediaLibraryPageHelpers {
 		String expectedMoreOptions = acessLevelInformation.get(shareAccessLevel)[2];
 		
 		navigateToMyMediaUserLogin(sharerUserName, sharerPassword);
+		Thread.sleep(2000);
 		
 		///////////////// the following block of code performs the sharing of media
 		
