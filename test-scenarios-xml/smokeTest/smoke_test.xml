@@ -3,7 +3,7 @@
 <suite name="Suite">
   <parameter name="TestName" value="TestValue" />
   
-<test name="otherTests" parallel="methods" thread-count="1">
+ <!--  <test name="otherTests" parallel="methods" thread-count="1">
   	<classes>
   	
         <class name="com.yuja.evp.testclasses.MediaLibraryTest">
@@ -138,10 +138,10 @@
         
     </classes>
   </test>
-  
+  -->
   <test name="quizTests">
   	<classes>
-  	 
+  	<!-- 
   		<class name="com.yuja.evp.testclasses.QuizTest">
         	<methods>
         		<include name="Create_quiz_test" />

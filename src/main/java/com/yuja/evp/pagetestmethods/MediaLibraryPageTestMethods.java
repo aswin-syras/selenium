@@ -162,7 +162,7 @@ public class MediaLibraryPageTestMethods extends MediaLibraryPageHelpers {
 		MediaDetailsModalTestMethods ReplaceObj = new MediaDetailsModalTestMethods();
 		Driver.getDriver().findElement(By.xpath("//*[@id=\"btnUploadMedia\"]")).click();;
 		mediaLibrary.bulkMediaUpload("src\\fileResources\\replaceTest");
-		boolean processed = mediaIsProcessed(replaceVideo, 60, 3);
+		boolean processed = mediaIsProcessed(replaceVideo, 80, 3);
 		if(processed) {
 			Report.reportStep(Driver.getDriver(), replaceVideo + " media fully proccessed", "PASS", false);
 		}

@@ -9,8 +9,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.yuja.evp.modalhelpers.AddMediaModalHelperMethods;
@@ -130,19 +131,25 @@ public class MediaLibraryPageHelpers extends Helpers{
             media = getMedia(mediaName);
             try {
                 Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-                WebElement processingThumbnail =  media.findElement(By.cssSelector("[class=\"hcenter vcenter\"] > img[src=\"/Dashboard/icons/defaultThumbnailProcessing.svg\"]"));
-                WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeoutInSeconds));
-                wait.until( (WebDriverWait) -> {return !processingThumbnail.isDisplayed(); } );
+                //WebElement processingThumbnail =  media.findElement(By.cssSelector("[class=\"hcenter vcenter\"] > img[src=\"/Dashboard/icons/defaultThumbnailProcessing.svg\"]"));
+                WebElement processingThumbnail =(WebElement)new WebDriverWait(Driver.getDriver(),10).until(ExpectedConditions.elementToBeClickable(By.cssSelector("[class=\"hcenter vcenter\"] > img[src=\"/Dashboard/icons/defaultThumbnailProcessing.svg\"]")));
+                WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeoutInSeconds)); 
+                System.out.println("Src attribute is: "+ processingThumbnail.getAttribute("src"));
+                //wait.until( (WebDriverWait) -> {return !processingThumbnail.isDisplayed(); } );
+                wait.until( ExpectedConditions.invisibilityOf(processingThumbnail)); //-> {return !processingThumbnail.isDisplayed(); } );
+                return processingThumbnail.isDisplayed();
             } catch(NoSuchElementException e) {
                 Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                 isProcessed = true;
             } catch(StaleElementReferenceException e) {
                 hoverOverElement(media);
                 WebElement favoriteIcon = media.findElement(By.cssSelector(".overlay > .overlaycontent > .favorite-thumb > img[src=\"/Dashboard/icons/favIcon.svg\"]"));
+                System.out.println("Src attribute is: "+ media.getAttribute("src"));
                 if(favoriteIcon != null) {
                     isProcessed = true;
                 } 
-            } catch(TimeoutException e) {
+            }	
+            catch(TimeoutException e) {
                 failCount++;
                 Driver.getDriver().navigate().refresh();
             }
@@ -150,7 +157,8 @@ public class MediaLibraryPageHelpers extends Helpers{
         Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return isProcessed;
      }
-    
+	//img[src=\"/Dashboard/icons/defaultThumbnailProcessing.svg\"]
+	//src=\"/Dashboard/icons/video-thumbnail-8.jpg"\
     public boolean mediaIsProcessed(String mediaName, int timeoutInSeconds) {
         return mediaIsProcessed(mediaName, timeoutInSeconds, 4);
      }
