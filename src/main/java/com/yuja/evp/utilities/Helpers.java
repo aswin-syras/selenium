@@ -325,6 +325,7 @@ public class Helpers extends Wrapper {
 
 	public void hoverOverElement(WebElement element) {
 		System.out.println("hovering over element...");
+		System.out.println(element);
 		Actions action = new Actions(Driver.getDriver());
 		action.moveToElement(element).perform();
 	}

@@ -137,21 +137,25 @@ public class MediaLibraryPageHelpers extends Helpers{
                 System.out.println("Src attribute is: "+ processingThumbnail.getAttribute("src"));
                 //wait.until( (WebDriverWait) -> {return !processingThumbnail.isDisplayed(); } );
                 wait.until( ExpectedConditions.invisibilityOf(processingThumbnail)); //-> {return !processingThumbnail.isDisplayed(); } );
-                return processingThumbnail.isDisplayed();
+                System.out.println("Display " +!processingThumbnail.isDisplayed());
+                return !processingThumbnail.isDisplayed();
             } catch(NoSuchElementException e) {
                 Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                 isProcessed = true;
             } catch(StaleElementReferenceException e) {
                 hoverOverElement(media);
                 WebElement favoriteIcon = media.findElement(By.cssSelector(".overlay > .overlaycontent > .favorite-thumb > img[src=\"/Dashboard/icons/favIcon.svg\"]"));
-                System.out.println("Src attribute is: "+ media.getAttribute("src"));
+                System.out.println("Src attribute is: "+ favoriteIcon.getAttribute("src"));
                 if(favoriteIcon != null) {
                     isProcessed = true;
-                } 
+                }        
             }	
             catch(TimeoutException e) {
                 failCount++;
                 Driver.getDriver().navigate().refresh();
+            }
+            catch(WebDriverException e) {
+            	isProcessed = true;
             }
         }
         Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -224,7 +228,11 @@ public class MediaLibraryPageHelpers extends Helpers{
 	 public void accessMediaMoreMenu(String mediaTitle) throws InterruptedException {
 		Thread.sleep(3000);
 		WebElement media = getMedia(mediaTitle);
+		System.out.println("inside accessMediaMoremenu");
+		System.out.println(media);
+		System.out.println("          ");
 		hoverOverElement(media);
+		System.out.println("inside accessMediaMoremenu");
 		//waitForElement(By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 30);
 		clickElement(media, "More menu button from the video hover", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 30);
 	}

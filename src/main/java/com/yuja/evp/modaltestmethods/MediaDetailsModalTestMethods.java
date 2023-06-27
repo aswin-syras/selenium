@@ -62,7 +62,8 @@ public class MediaDetailsModalTestMethods extends MediaDetailsModalHelperMethods
 	public void replaceMedia(String userName, String password, String replaceMedia, String VideoReplaced,String userID,String shareUserName, String shareUserPassword, String destinationChannelName) throws InterruptedException {
 			mediaLibrary.navigateToMyMediaUserLogin(userName, password);
 			mediaLibrary.bulkMediaUpload("src\\fileResources\\replaceTest");
-			boolean processed = mediaLibrary.mediaIsProcessed(replaceMedia, 60, 8);
+			boolean processed = mediaLibrary.mediaIsProcessed(replaceMedia, 60, 6);
+			System.out.println(processed);
 			if(processed) 
 			{	
 				publishMediaFromMediaDetails(replaceMedia,destinationChannelName);

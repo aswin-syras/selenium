@@ -68,6 +68,7 @@ public class MediaDetailsModalHelperMethods extends Helpers {
 
 
    public void publishMediaFromMediaDetails(String mediaTitle, String destinationChannelName) throws InterruptedException {
+	   System.out.println(mediaTitle);
 		mediaLibrary.accessMediaMoreMenu(mediaTitle);
 		clickElement("Action button",By.xpath("//*[@id=\"file-modal-tab\"]/div/div/button"));
 		clickElement("Publish button",By.xpath("//*[@id=\"file-modal-tab\"]/div/div/div/div[1]/button"));
