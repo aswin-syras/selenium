@@ -136,7 +136,7 @@ public class MediaLibraryPageHelpers extends Helpers{
                 WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeoutInSeconds)); 
                 System.out.println("Src attribute is: "+ processingThumbnail.getAttribute("src"));
                 //wait.until( (WebDriverWait) -> {return !processingThumbnail.isDisplayed(); } );
-                wait.until( ExpectedConditions.invisibilityOf(processingThumbnail)); //-> {return !processingThumbnail.isDisplayed(); } );
+                wait.until( ExpectedConditions.invisibilityOf(processingThumbnail));
                 System.out.println("Display " +!processingThumbnail.isDisplayed());
                 return !processingThumbnail.isDisplayed();
             } catch(NoSuchElementException e) {
@@ -175,7 +175,6 @@ public class MediaLibraryPageHelpers extends Helpers{
 	}
 	
 	public void deleteFolder(String folderName, String userName) throws InterruptedException {
-		//clickElement("Manage Media button", By.cssSelector("[data-fullname=\"Manage Media\"]"));
 		navigateToMyMedia(userName);
 		Thread.sleep(4000);
 		WebElement folder = getFolder(folderName);
@@ -233,7 +232,6 @@ public class MediaLibraryPageHelpers extends Helpers{
 		System.out.println("          ");
 		hoverOverElement(media);
 		System.out.println("inside accessMediaMoremenu");
-		//waitForElement(By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 30);
 		clickElement(media, "More menu button from the video hover", By.cssSelector("[data-automation=\"btnInVideoMenuMore\"]"), 30);
 	}
 	

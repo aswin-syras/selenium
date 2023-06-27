@@ -14,13 +14,12 @@ public class AddMediaModalHelperMethods extends Helpers{
 	
 	private WebElement mediaUploadModal = null;
 	
-	public Boolean mediaUploaded(String mediaTitle, String mediaPath) 
-	{		
-			try {
-				mediaUploaded = uploadMedia(mediaTitle, mediaPath);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+	public Boolean mediaUploaded(String mediaTitle, String mediaPath) {		
+		try {
+			mediaUploaded = uploadMedia(mediaTitle, mediaPath);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return mediaUploaded;
 	}
 	
