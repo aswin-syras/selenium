@@ -5,7 +5,6 @@
   
   <test name="otherTests" parallel="methods" thread-count="6">
   	<classes>
-  	
         <class name="com.yuja.evp.testclasses.MediaLibraryTest">
 	      	<methods>
 	      		<include name="Video_upload_manager_test" />
