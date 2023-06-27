@@ -3,7 +3,7 @@
 <suite name="Suite">
   <parameter name="TestName" value="TestValue" />
   
-  <test name="otherTests" parallel="methods" thread-count="1">
+  <test name="otherTests" parallel="methods" thread-count="6">
   	<classes>
   	
         <class name="com.yuja.evp.testclasses.MediaLibraryTest">
