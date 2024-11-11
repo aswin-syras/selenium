@@ -325,9 +325,9 @@ public class Helpers extends Wrapper {
 
 	public void hoverOverElement(WebElement element) {
 		System.out.println("hovering over element...");
-		System.out.println(element);
+		System.out.println("hover elemet : " + element);
 		Actions action = new Actions(Driver.getDriver());
-		action.moveToElement(element).perform();
+		action.moveToElement(element).build().perform();
 	}
 
 	//this method must be reworked, it assumes that the download folder will always be empty prior to it being called, which is not a reasonable assumption to make

@@ -137,12 +137,13 @@ public class MediaLibraryPageHelpers extends Helpers{
                 System.out.println("Src attribute is: "+ processingThumbnail.getAttribute("src"));
                 //wait.until( (WebDriverWait) -> {return !processingThumbnail.isDisplayed(); } );
                 wait.until( ExpectedConditions.invisibilityOf(processingThumbnail));
-                System.out.println("Display " +!processingThumbnail.isDisplayed());
-                return !processingThumbnail.isDisplayed();
+                System.out.println("------------------------**------------------------");
+                return processingThumbnail.isDisplayed();
             } catch(NoSuchElementException e) {
                 Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                 isProcessed = true;
             } catch(StaleElementReferenceException e) {
+            	System.out.println("inside stale element and media name" + media);
                 hoverOverElement(media);
                 WebElement favoriteIcon = media.findElement(By.cssSelector(".overlay > .overlaycontent > .favorite-thumb > img[src=\"/Dashboard/icons/favIcon.svg\"]"));
                 System.out.println("Src attribute is: "+ favoriteIcon.getAttribute("src"));
@@ -150,6 +151,9 @@ public class MediaLibraryPageHelpers extends Helpers{
                     isProcessed = true;
                 }        
             }	
+            catch(IllegalArgumentException e) {
+            	return false;
+            }
             catch(TimeoutException e) {
                 failCount++;
                 Driver.getDriver().navigate().refresh();
@@ -289,7 +293,9 @@ public class MediaLibraryPageHelpers extends Helpers{
 	}	
 	
 	public void publishMediaFromMediaLibrary(String mediaTitle, String destinationChannelName) throws InterruptedException {
+		System.out.println("Inside publishMediaFromMediaLibrary");
 		WebElement mediaFile = getMedia(mediaTitle);
+		System.out.println("media file name : " + mediaFile);
 		hoverOverElement(mediaFile);
 		clickElement(mediaFile,"Publish button from the video hover",By.cssSelector("[data-automation=\"btnInVideoMenuPublish\"]"), 20);
 		clickElement("publish video textbox",By.xpath("//*[@id=\"publishSearchBar\"]"));

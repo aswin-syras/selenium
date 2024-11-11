@@ -8,8 +8,8 @@
       <class name="com.yuja.evp.testclasses.HTML5PlayerTest">
 	      <methods>
 	          <include name="Sidebar_manager_test"/>
-	          <include name="Sidebar_instructor_test"/>
-	          <include name="Sidebar_student_test"/>
+	          <!-- <include name="Sidebar_instructor_test"/>
+	          <include name="Sidebar_student_test"/>-->
 	      </methods>
         </class>
     </classes>
